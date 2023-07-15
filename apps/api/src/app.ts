@@ -1,10 +1,12 @@
 import express from "express";
 import morgan from "morgan";
+import path from "path";
 import { PORT } from "./config";
 import authMiddleware from "./middlewares/auth.middleware";
 import roleMiddleware from "./middlewares/role.middleware";
 import accountRoutes from "./routes/account.routes";
 import authRoutes from "./routes/auth.routes";
+import cancellationRoutes from "./routes/cancellation.routes";
 import deanRoutes from "./routes/dean.routes";
 import peopleRoutes from "./routes/people.routes";
 import reportRoutes from "./routes/report.routes";
@@ -13,8 +15,6 @@ import scheduleRoutes from "./routes/schedule.routes";
 import sessionRoutes from "./routes/session.routes";
 import statisticRoutes from "./routes/statistic.routes";
 import userRoutes from "./routes/user.routes";
-import cancellationRoutes from "./routes/cancellation.routes";
-import path from "path";
 
 export class App {
     private app: express.Application;
