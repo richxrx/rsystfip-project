@@ -11,7 +11,7 @@ import UserRow from "./UserRow";
 export default function TableUsers(): React.JSX.Element {
     const dispatch = useAppDispatch();
 
-    const usersState: User[] = useAppSelector(({ admin }) => admin.users);
+    const usersState: Array<User> = useAppSelector(({ admin }) => admin.users);
 
     const { data, error } = useQuery<[], any>("users", userService.getUsers);
 

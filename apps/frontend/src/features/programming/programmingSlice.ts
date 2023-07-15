@@ -55,7 +55,7 @@ export interface Deans {
 
 export interface ProgrammingState {
     formData: FormData;
-    deans: Deans[];
+    deans: Array<Deans>;
 }
 
 export const validFormDataAction: IKeyBool = {
@@ -85,7 +85,7 @@ const programmingSlice = createSlice({
         ): ProgrammingState => updateFormDataByAction(state, action, formData),
         setDeans: (
             state,
-            { payload }: PayloadAction<Deans[]>
+            { payload }: PayloadAction<Array<Deans>>
         ): ProgrammingState => ({ ...state, deans: payload }),
         resetAllFormDataProgramming: (state): ProgrammingState => ({
             ...state,

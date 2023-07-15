@@ -16,7 +16,7 @@ import * as reportService from "../services/report.service";
 export default function ActionerReports(): React.JSX.Element {
     const dispatch = useAppDispatch();
 
-    const reportsOrigenState: Reports[] = useAppSelector(
+    const reportsOrigenState: Array<Reports> = useAppSelector(
         ({ reports }) => reports.reportsOrigen
     );
     const queryDataState: QueryData = useAppSelector(

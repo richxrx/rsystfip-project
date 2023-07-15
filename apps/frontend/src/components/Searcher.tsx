@@ -20,7 +20,7 @@ import TablePeople from "./TablePeople";
 export default function Searcher(): React.JSX.Element {
     const dispatch = useAppDispatch();
 
-    const peopleOrigenState: People[] = useAppSelector(
+    const peopleOrigenState: Array<People> = useAppSelector(
         ({ people }) => people.peopleOrigen
     );
     const findState: string = useAppSelector(({ people }) => people.find);

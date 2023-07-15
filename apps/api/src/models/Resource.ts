@@ -4,29 +4,29 @@ import { RowDataPacket } from "mysql2";
 import { connect } from "../db";
 import { ICategory } from "../interfaces/ICategory";
 
-export async function getCategories(): Promise<ICategory[] | null> {
+export async function getCategories(): Promise<Array<ICategory> | null> {
     const conn = connect();
     if (!conn) return null;
-    const [rows] = await conn.query<RowDataPacket[]>(
+    const [rows] = await conn.query<Array<RowDataPacket>>(
         "SELECT id, category FROM categories"
     );
-    return rows as ICategory[];
+    return rows as Array<ICategory>;
 }
 
-export async function getDocuments(): Promise<IDocument[] | null> {
+export async function getDocuments(): Promise<Array<IDocument> | null> {
     const conn = connect();
     if (!conn) return null;
-    const [rows] = await conn.query<RowDataPacket[]>(
+    const [rows] = await conn.query<Array<RowDataPacket>>(
         "SELECT id, description FROM documents"
     );
-    return rows as IDocument[];
+    return rows as Array<IDocument>;
 }
 
-export async function getFaculties(): Promise<IFaculty[] | null> {
+export async function getFaculties(): Promise<Array<IFaculty> | null> {
     const conn = connect();
     if (!conn) return null;
-    const [rows] = await conn.query<RowDataPacket[]>(
+    const [rows] = await conn.query<Array<RowDataPacket>>(
         "SELECT id, facultie FROM faculties"
     );
-    return rows as IFaculty[];
+    return rows as Array<IFaculty>;
 }

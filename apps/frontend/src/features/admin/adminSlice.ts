@@ -21,7 +21,7 @@ export interface FormData {
 }
 
 interface AdminState {
-    users: User[];
+    users: Array<User>;
     formData: FormData;
 }
 
@@ -44,7 +44,10 @@ const adminSlice = createSlice({
     name: "admin",
     initialState,
     reducers: {
-        setUsers: (state, { payload }: PayloadAction<User[]>): AdminState => ({
+        setUsers: (
+            state,
+            { payload }: PayloadAction<Array<User>>
+        ): AdminState => ({
             ...state,
             users: payload,
         }),

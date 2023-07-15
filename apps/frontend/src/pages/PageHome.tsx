@@ -7,7 +7,7 @@ import ProtectedElement from "../components/ProtectedElement";
 import UserLoggedInfo from "../components/UserLoggedInfo";
 
 interface IProps {
-    permissions: string[];
+    permissions: Array<string>;
 }
 
 export default function PageHome({ permissions }: IProps): React.JSX.Element {

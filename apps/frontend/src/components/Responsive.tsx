@@ -1,5 +1,5 @@
 interface IProps {
-    children: React.JSX.Element[];
+    children: Array<React.JSX.Element>;
 }
 
 export default function Responsive({ children }: IProps): React.JSX.Element {

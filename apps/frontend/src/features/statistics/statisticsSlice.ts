@@ -11,8 +11,8 @@ export interface QueryData {
 }
 
 export interface Data {
-    mostAgendatedOnRange: ICounts[];
-    mostAgendatedAllTime: ICounts[];
+    mostAgendatedOnRange: Array<ICounts>;
+    mostAgendatedAllTime: Array<ICounts>;
     queryData: QueryData;
 }
 
@@ -54,7 +54,7 @@ const statisticsSlice = createSlice({
             state,
             {
                 payload: [schedulingType, mostAgendatedOnRange],
-            }: PayloadAction<[string, ICounts[]]>
+            }: PayloadAction<[string, Array<ICounts>]>
         ): StatisticsState =>
             updateDataBySchedulingType(state, schedulingType, {
                 mostAgendatedOnRange,
@@ -63,7 +63,7 @@ const statisticsSlice = createSlice({
             state,
             {
                 payload: [schedulingType, mostAgendatedAllTime],
-            }: PayloadAction<[string, ICounts[]]>
+            }: PayloadAction<[string, Array<ICounts>]>
         ): StatisticsState =>
             updateDataBySchedulingType(state, schedulingType, {
                 mostAgendatedAllTime,

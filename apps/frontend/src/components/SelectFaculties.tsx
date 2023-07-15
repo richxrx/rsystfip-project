@@ -24,7 +24,7 @@ export default function SelectFaculties({
     const formDataState: FormDataState | undefined = useAppSelector(
         ({ programming: { formData } }) => formData[action]
     );
-    const facultiesState: IFacultie[] = useAppSelector(
+    const facultiesState: Array<IFacultie> = useAppSelector(
         ({ resources }) => resources.faculties
     );
 

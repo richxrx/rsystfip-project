@@ -23,7 +23,7 @@ export default function FormUserAdd(): React.JSX.Element {
     const formDataState: FormData = useAppSelector(
         ({ admin }) => admin.formData
     );
-    const documentsState: IDocument[] = useAppSelector(
+    const documentsState: Array<IDocument> = useAppSelector(
         ({ resources }) => resources.documents
     );
 

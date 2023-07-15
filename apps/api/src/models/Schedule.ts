@@ -1,4 +1,4 @@
-import { OkPacket, RowDataPacket } from "mysql2";
+import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { connect } from "../db";
 import { ICalendar } from "../interfaces/ICalendar";
 import { IPeople } from "../interfaces/IPeople";
@@ -9,7 +9,7 @@ export async function createSchedule(
 ): Promise<IScheduleData | null> {
     const conn = connect();
     if (!conn) return null;
-    const [result] = await conn.query<OkPacket>(
+    const [result] = await conn.query<ResultSetHeader>(
         "INSERT INTO scheduling SET ?",
         [scheduleData]
     );
@@ -21,20 +21,20 @@ export async function getSchedule(
 ): Promise<(IScheduleData & IPeople) | null> {
     const conn = connect();
     if (!conn) return null;
-    const [rows] = await conn.query<RowDataPacket[]>(
+    const [rows] = await conn.query<Array<RowDataPacket>>(
         "SELECT s.person_id, p.name, p.telephone AS tel, p.email, s.start_date, s.status FROM scheduling s INNER JOIN people p ON p.id = s.person_id WHERE s.person_id = ?",
         [id]
     );
     return rows[0] as IScheduleData & IPeople;
 }
 
-export async function getSchedules(): Promise<ICalendar[] | null> {
+export async function getSchedules(): Promise<Array<ICalendar> | null> {
     const conn = connect();
     if (!conn) return null;
-    const [rows] = await conn.query<RowDataPacket[]>(
+    const [rows] = await conn.query<Array<RowDataPacket>>(
         "SELECT s.person_id AS id, p.name AS title, s.start_date AS start, s.end_date AS end, s.color FROM scheduling s INNER JOIN people p ON p.id = s.person_id WHERE s.status = 'scheduled'"
     );
-    return rows as ICalendar[];
+    return rows as Array<ICalendar>;
 }
 
 export async function updateSchedule(
@@ -44,7 +44,7 @@ export async function updateSchedule(
 ): Promise<IScheduleData | null> {
     const conn = connect();
     if (!conn) return null;
-    const [result] = await conn.query<OkPacket>(
+    const [result] = await conn.query<ResultSetHeader>(
         "UPDATE scheduling SET ? WHERE person_id = ? AND start_date = ?",
         [cancellation, person_id, start_date]
     );

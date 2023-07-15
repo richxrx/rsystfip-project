@@ -21,10 +21,10 @@ export interface QueryData {
 
 interface ReportsState {
     pngBase64: string;
-    reports: Reports[];
-    reportsOrigen: Reports[];
-    reportsCountOnRange: ICounts[];
-    reportsCountAllTime: ICounts[];
+    reports: Array<Reports>;
+    reportsOrigen: Array<Reports>;
+    reportsCountOnRange: Array<ICounts>;
+    reportsCountAllTime: Array<ICounts>;
     queryData: QueryData;
 }
 
@@ -51,19 +51,19 @@ const reportsSlice = createSlice({
         ): ReportsState => ({ ...state, pngBase64: payload }),
         setReports: (
             state,
-            { payload }: PayloadAction<Reports[]>
+            { payload }: PayloadAction<Array<Reports>>
         ): ReportsState => ({ ...state, reports: payload }),
         setReportsOrigen: (
             state,
-            { payload }: PayloadAction<Reports[]>
+            { payload }: PayloadAction<Array<Reports>>
         ): ReportsState => ({ ...state, reportsOrigen: payload }),
         setReportsCountOnRange: (
             state,
-            { payload }: PayloadAction<ICounts[]>
+            { payload }: PayloadAction<Array<ICounts>>
         ): ReportsState => ({ ...state, reportsCountOnRange: payload }),
         setReportsCountAllTime: (
             state,
-            { payload }: PayloadAction<ICounts[]>
+            { payload }: PayloadAction<Array<ICounts>>
         ): ReportsState => ({ ...state, reportsCountAllTime: payload }),
         setQueryData: (
             state,

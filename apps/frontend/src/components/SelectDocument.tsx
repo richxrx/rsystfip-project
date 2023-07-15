@@ -19,7 +19,7 @@ export default function SelectDocument({
     action,
     handleChange,
 }: IProps): React.JSX.Element {
-    const documentsState: IDocument[] = useAppSelector(
+    const documentsState: Array<IDocument> = useAppSelector(
         ({ resources }) => resources.documents
     );
     const formDataState: FormDataState | undefined = useAppSelector(

@@ -55,7 +55,7 @@ export default function Statistics({
 }: IProps): React.JSX.Element {
     const [chartJS, setChartJS] = useState<ChartJS<
         keyof ChartTypeRegistry,
-        string[],
+        Array<string>,
         string
     > | null>(null);
 
@@ -69,7 +69,7 @@ export default function Statistics({
 
     const labelText = scheduling_type === "daily" ? "diario" : "programado";
 
-    const refreshChart = (labels: string[], data: string[]) => {
+    const refreshChart = (labels: Array<string>, data: Array<string>) => {
         if (chartJS) chartJS.destroy();
 
         const newChart: typeof chartJS = new ChartJS(
@@ -190,10 +190,10 @@ export default function Statistics({
 
                 if (data) {
                     if (i === 0) {
-                        const labels: string[] = data.map(
+                        const labels: Array<string> = data.map(
                             ({ category }: { category: string }) => category
                         );
-                        const dataset: string[] = data.map(
+                        const dataset: Array<string> = data.map(
                             ({
                                 scheduling_count,
                             }: {

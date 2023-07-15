@@ -6,8 +6,8 @@ export interface People extends IPeopleBase {
 }
 
 interface PeopleState {
-    people: People[];
-    peopleOrigen: People[];
+    people: Array<People>;
+    peopleOrigen: Array<People>;
     find: string;
 }
 
@@ -23,14 +23,14 @@ const peopleSlice = createSlice({
     reducers: {
         setPeople: (
             state,
-            { payload }: PayloadAction<People[]>
+            { payload }: PayloadAction<Array<People>>
         ): PeopleState => ({
             ...state,
             people: payload,
         }),
         setPeopleOrigen: (
             state,
-            { payload }: PayloadAction<People[]>
+            { payload }: PayloadAction<Array<People>>
         ): PeopleState => ({ ...state, peopleOrigen: payload }),
 
         setFind: (state, { payload }: PayloadAction<string>): PeopleState => ({

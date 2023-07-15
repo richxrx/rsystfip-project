@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export interface ICalendarState {
     changes: boolean;
-    calendarEvents: ICalendarEvents[];
+    calendarEvents: Array<ICalendarEvents>;
 }
 
 export interface ICalendarEvents {
@@ -24,7 +24,7 @@ const calendarSlice = createSlice({
     reducers: {
         setCalendarEvents: (
             state,
-            { payload }: PayloadAction<ICalendarEvents[]>
+            { payload }: PayloadAction<Array<ICalendarEvents>>
         ): ICalendarState => ({ ...state, calendarEvents: [...payload] }),
         registerAChange: (state): ICalendarState => ({
             ...state,

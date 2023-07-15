@@ -5,7 +5,9 @@ import { useAppSelector } from "../hooks";
 import PersonRow from "./PersonRow";
 
 export default function TablePeople(): React.JSX.Element {
-    const peopleState: People[] = useAppSelector(({ people }) => people.people);
+    const peopleState: Array<People> = useAppSelector(
+        ({ people }) => people.people
+    );
 
     return (
         <Table responsive hover borderless size="sm" className="text-center">

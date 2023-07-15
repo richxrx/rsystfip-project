@@ -4,7 +4,7 @@ import NavMenu from "./NavMenu";
 
 export interface srcUser {
     avatar: string;
-    permissions: string[];
+    permissions: Array<string>;
 }
 
 export default function NavBar({

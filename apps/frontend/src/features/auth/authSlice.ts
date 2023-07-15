@@ -9,7 +9,7 @@ interface User {
     role: string;
     name: string;
     email: string;
-    permissions: string[];
+    permissions: Array<string>;
 }
 
 export interface AuthState {

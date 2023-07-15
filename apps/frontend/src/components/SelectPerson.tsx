@@ -27,7 +27,7 @@ export default function SelectPerson({
     handleChange,
     facultieSelectRef,
 }: IProps): React.JSX.Element {
-    const categoriesState: ICategory[] = useAppSelector(
+    const categoriesState: Array<ICategory> = useAppSelector(
         ({ resources }) => resources.categories
     );
     const formDataState: FormDataState | undefined = useAppSelector(

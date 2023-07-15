@@ -5,7 +5,7 @@ export interface PeopleCancelled extends IPeopleBase {
     cancelled_asunt: string;
 }
 
-const initialState: PeopleCancelled[] = [];
+const initialState: Array<PeopleCancelled> = [];
 
 const cancelledPeopleSlice = createSlice({
     name: "cancelledPeople",
@@ -13,8 +13,8 @@ const cancelledPeopleSlice = createSlice({
     reducers: {
         setCancelledPeople: (
             _state,
-            { payload }: PayloadAction<PeopleCancelled[]>
-        ): PeopleCancelled[] => payload,
+            { payload }: PayloadAction<Array<PeopleCancelled>>
+        ): Array<PeopleCancelled> => payload,
     },
 });
 

@@ -5,7 +5,7 @@ import { useAppSelector } from "../hooks";
 import ReportRow from "./ReportRow";
 
 export default function TableReports(): React.JSX.Element {
-    const reportsState: Reports[] = useAppSelector(
+    const reportsState: Array<Reports> = useAppSelector(
         ({ reports }) => reports.reports
     );
     const queryDataState: QueryData = useAppSelector(

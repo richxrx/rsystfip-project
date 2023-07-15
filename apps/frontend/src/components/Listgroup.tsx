@@ -4,7 +4,7 @@ import { ICounts } from "../interfaces/ICounts";
 
 interface IProps {
     title: string;
-    data: ICounts[];
+    data: Array<ICounts>;
     end: string;
 }
 

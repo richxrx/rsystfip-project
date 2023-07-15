@@ -27,7 +27,7 @@ export default function DaterReports({
 }: IProps): React.JSX.Element {
     const dispatch = useAppDispatch();
 
-    const categoriesState: ICategory[] = useAppSelector(
+    const categoriesState: Array<ICategory> = useAppSelector(
         ({ resources }) => resources.categories
     );
     const queryDataState: QueryData = useAppSelector(

@@ -46,7 +46,7 @@ export default function FormSchedulePeople({
         ({ programming: { formData } }) => formData[action]
     );
 
-    const deansState: Deans[] = useAppSelector(
+    const deansState: Array<Deans> = useAppSelector(
         ({ programming }) => programming.deans
     );
 

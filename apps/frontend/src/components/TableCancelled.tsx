@@ -14,7 +14,7 @@ import CancelledRow from "./CancelledRow";
 export default function TableCancelled(): React.JSX.Element {
     const dispatch = useAppDispatch();
 
-    const cancelledPeopleState: PeopleCancelled[] = useAppSelector(
+    const cancelledPeopleState: Array<PeopleCancelled> = useAppSelector(
         ({ cancelledPeople }) => cancelledPeople
     );
 

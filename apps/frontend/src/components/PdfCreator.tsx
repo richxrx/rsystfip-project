@@ -17,17 +17,19 @@ export default function PdfCreator({
     const pngBase64State: string = useAppSelector(
         ({ reports }) => reports.pngBase64
     );
-    const reportsState: Reports[] = useAppSelector(
+    const reportsState: Array<Reports> = useAppSelector(
         ({ reports }) => reports.reports
     );
     const queryDataState: QueryData = useAppSelector(
         ({ reports }) => reports.queryData
     );
-    const peopleState: People[] = useAppSelector(({ people }) => people.people);
-    const reportsCountOnRangeState: ICounts[] = useAppSelector(
+    const peopleState: Array<People> = useAppSelector(
+        ({ people }) => people.people
+    );
+    const reportsCountOnRangeState: Array<ICounts> = useAppSelector(
         ({ reports }) => reports.reportsCountOnRange
     );
-    const reportsCountAllTimeState: ICounts[] = useAppSelector(
+    const reportsCountAllTimeState: Array<ICounts> = useAppSelector(
         ({ reports }) => reports.reportsCountAllTime
     );
 

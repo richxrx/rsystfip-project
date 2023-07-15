@@ -2,9 +2,9 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IDocument, ICategory, IFacultie } from "../../interfaces/IResources";
 
 interface ResourcesState {
-    categories: ICategory[];
-    documents: IDocument[];
-    faculties: IFacultie[];
+    categories: Array<ICategory>;
+    documents: Array<IDocument>;
+    faculties: Array<IFacultie>;
 }
 
 const initialState: ResourcesState = {
@@ -19,15 +19,15 @@ const resourcesSlice = createSlice({
     reducers: {
         setCategories: (
             state,
-            { payload }: PayloadAction<ICategory[]>
+            { payload }: PayloadAction<Array<ICategory>>
         ): ResourcesState => ({ ...state, categories: payload }),
         setDocuments: (
             state,
-            { payload }: PayloadAction<IDocument[]>
+            { payload }: PayloadAction<Array<IDocument>>
         ): ResourcesState => ({ ...state, documents: payload }),
         setFaculties: (
             state,
-            { payload }: PayloadAction<IFacultie[]>
+            { payload }: PayloadAction<Array<IFacultie>>
         ): ResourcesState => ({ ...state, faculties: payload }),
     },
 });

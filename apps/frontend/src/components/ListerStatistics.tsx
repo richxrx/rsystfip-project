@@ -7,10 +7,10 @@ import { IProps } from "./Statistics";
 export default function ListerStatistics({
     scheduling_type,
 }: IProps): React.JSX.Element {
-    const mostAgendatedOnRangeState: ICounts[] = useAppSelector(
+    const mostAgendatedOnRangeState: Array<ICounts> = useAppSelector(
         ({ statistics }) => statistics[scheduling_type].mostAgendatedOnRange
     );
-    const mostAgendatedAllTimeState: ICounts[] = useAppSelector(
+    const mostAgendatedAllTimeState: Array<ICounts> = useAppSelector(
         ({ statistics }) => statistics[scheduling_type].mostAgendatedAllTime
     );
     const queryDataState: QueryData = useAppSelector(
