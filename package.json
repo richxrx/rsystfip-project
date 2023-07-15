@@ -1,0 +1,27 @@
+{
+  "name": "rsystfip-project",
+  "version": "1.0.0",
+  "description": "Scheduling System RSystfip",
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "start": "node apps/api/dist/index.js"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "backend",
+    "front",
+    "interface",
+    "application",
+    "rsystfip"
+  ],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "turbo": "^1.10.7"
+  }
+}
