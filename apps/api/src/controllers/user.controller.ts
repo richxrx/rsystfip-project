@@ -5,74 +5,69 @@ import * as User from "../models/User";
 import { idSchema, userSchema } from "../validation/schemas";
 
 export async function getUser(req: Request, res: Response): Promise<Response> {
-    const { error, value } = idSchema.validate(req.params);
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = idSchema.validate(req.params);
+  if (error) return res.status(400).json({ error: error.message });
 
-    const userFound = await User.getUser(value.id);
-    if (!userFound) return res.status(404).json({ error: "User not found" });
+  const userFound = await User.getUser(value.id);
+  if (!userFound) return res.status(404).json({ error: "User not found" });
 
-    return res.status(200).json(userFound);
+  return res.status(200).json(userFound);
 }
 
 export async function getUsers(req: Request, res: Response): Promise<Response> {
-    const users = await User.getUsers();
-    if (!users) return res.status(500).json({ error: "Error getting users" });
-    if (users.length === 0)
-        return res.status(404).json({ error: "No users found" });
+  const users = await User.getUsers();
+  if (!users) return res.status(500).json({ error: "Error getting users" });
+  if (users.length === 0)
+    return res.status(404).json({ error: "No users found" });
 
-    return res.status(200).json(users);
+  return res.status(200).json(users);
 }
 
 export async function deleteUser(
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> {
-    const { error, value } = idSchema.validate(req.params);
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = idSchema.validate(req.params);
+  if (error) return res.status(400).json({ error: error.message });
 
-    const userDeleted = await User.deleteUser(value.id);
-    if (!userDeleted)
-        return res.status(500).json({ error: "Error deleting user" });
+  const userDeleted = await User.deleteUser(value.id);
+  if (!userDeleted)
+    return res.status(500).json({ error: "Error deleting user" });
 
-    return res
-        .status(200)
-        .json({ ok: "User deleted successfully", userDeleted });
+  return res.status(200).json({ ok: "User deleted successfully", userDeleted });
 }
 
 export async function createUser(
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> {
-    const { error, value } = userSchema.validate(req.body);
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = userSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.message });
 
-    const userExists = await User.getUser(
-        parseInt(value.role) - 1,
-        value.email
-    );
-    if (!userExists) {
-        const newUser: IUser = {
-            id: parseInt(value.role) - 1,
-            document_id: value.docType,
-            document_number: value.doc,
-            name: value.name,
-            lastname: value.lastname,
-            role: value.role,
-            tel: value.tel,
-            email: value.email,
-            password: await bcryptHelper.encryptPassword(value.password),
-        };
-        const userCreated = await User.createUser(newUser);
-        if (!userCreated)
-            return res.status(500).json({ error: "Error creating user" });
+  const userExists = await User.getUser(parseInt(value.role) - 1, value.email);
+  if (!userExists) {
+    const newUser: IUser = {
+      id: parseInt(value.role) - 1,
+      document_id: value.docType,
+      document_number: value.doc,
+      name: value.name,
+      lastname: value.lastname,
+      role: value.role,
+      tel: value.tel,
+      email: value.email,
+      password: await bcryptHelper.encryptPassword(value.password),
+    };
+    const userCreated = await User.createUser(newUser);
+    if (!userCreated)
+      return res.status(500).json({ error: "Error creating user" });
 
-        return res
-            .status(201)
-            .json({ ok: "User created successfully", userCreated });
-    }
+    return res
+      .status(201)
+      .json({ ok: "User created successfully", userCreated });
+  }
 
-    if (value.email === userExists.email)
-        return res.status(409).json({ error: "Email already registered" });
+  if (value.email === userExists.email)
+    return res.status(409).json({ error: "Email already registered" });
 
-    return res.status(409).json({ error: "User already exists" });
+  return res.status(409).json({ error: "User already exists" });
 }

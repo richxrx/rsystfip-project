@@ -3,63 +3,63 @@ import * as Statistic from "../models/Statistic";
 import { statisticfilterSchema, statusSchema } from "../validation/schemas";
 
 export async function getStatistics(
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> {
-    const { error, value } = statisticfilterSchema.validate({
-        ...req.params,
-        ...req.query,
-    });
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = statisticfilterSchema.validate({
+    ...req.params,
+    ...req.query,
+  });
+  if (error) return res.status(400).json({ error: error.message });
 
-    const statistics = await Statistic.getStatistics(
-        value.status,
-        value.start,
-        value.end
-    );
-    if (!statistics)
-        return res.status(500).json({ error: "Error getting statistics" });
-    if (statistics.length === 0)
-        return res.status(404).json({ error: "No statistics found" });
+  const statistics = await Statistic.getStatistics(
+    value.status,
+    value.start,
+    value.end
+  );
+  if (!statistics)
+    return res.status(500).json({ error: "Error getting statistics" });
+  if (statistics.length === 0)
+    return res.status(404).json({ error: "No statistics found" });
 
-    return res.status(200).json(statistics);
+  return res.status(200).json(statistics);
 }
 
 export async function getMostAgendatedOnRange(
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> {
-    const { error, value } = statisticfilterSchema.validate({
-        ...req.params,
-        ...req.query,
-    });
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = statisticfilterSchema.validate({
+    ...req.params,
+    ...req.query,
+  });
+  if (error) return res.status(400).json({ error: error.message });
 
-    const statistics = await Statistic.getMostAgendatedOnRange(
-        value.status,
-        value.start,
-        value.end
-    );
-    if (!statistics)
-        return res.status(500).json({ error: "Error getting statistics" });
-    if (statistics.length === 0)
-        return res.status(404).json({ error: "No statistics found" });
+  const statistics = await Statistic.getMostAgendatedOnRange(
+    value.status,
+    value.start,
+    value.end
+  );
+  if (!statistics)
+    return res.status(500).json({ error: "Error getting statistics" });
+  if (statistics.length === 0)
+    return res.status(404).json({ error: "No statistics found" });
 
-    return res.status(200).json(statistics);
+  return res.status(200).json(statistics);
 }
 
 export async function getMostAgendatedAllTime(
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> {
-    const { error, value } = statusSchema.validate(req.params);
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = statusSchema.validate(req.params);
+  if (error) return res.status(400).json({ error: error.message });
 
-    const statistics = await Statistic.getMostAgendatedAllTime(value.status);
-    if (!statistics)
-        return res.status(500).json({ error: "Error getting statistics" });
-    if (statistics.length === 0)
-        return res.status(404).json({ error: "No statistics found" });
+  const statistics = await Statistic.getMostAgendatedAllTime(value.status);
+  if (!statistics)
+    return res.status(500).json({ error: "Error getting statistics" });
+  if (statistics.length === 0)
+    return res.status(404).json({ error: "No statistics found" });
 
-    return res.status(200).json(statistics);
+  return res.status(200).json(statistics);
 }

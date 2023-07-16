@@ -5,41 +5,41 @@ import { IScheduleData } from "../interfaces/IScheduleData";
 import { IStatistic } from "../interfaces/IStatistic";
 
 export async function getStatistics(
-    status: IScheduleData["status"],
-    start: IScheduleData["start_date"],
-    end: IScheduleData["end_date"]
+  status: IScheduleData["status"],
+  start: IScheduleData["start_date"],
+  end: IScheduleData["end_date"]
 ): Promise<Array<IStatistic> | null> {
-    const conn = connect();
-    if (!conn) return null;
-    const [rows] = await conn.query<Array<RowDataPacket>>(
-        "SELECT SUM(CASE WHEN s.status = ? THEN 1 ELSE 0 END) AS scheduling_count, c.category FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.start_date >= ? AND s.start_date <= ? GROUP BY p.category_id",
-        [status, start, end]
-    );
-    return rows as Array<IStatistic>;
+  const conn = connect();
+  if (!conn) return null;
+  const [rows] = await conn.query<Array<RowDataPacket>>(
+    "SELECT SUM(CASE WHEN s.status = ? THEN 1 ELSE 0 END) AS scheduling_count, c.category FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.start_date >= ? AND s.start_date <= ? GROUP BY p.category_id",
+    [status, start, end]
+  );
+  return rows as Array<IStatistic>;
 }
 
 export async function getMostAgendatedOnRange(
-    status: IScheduleData["status"],
-    start: IScheduleData["start_date"],
-    end: IScheduleData["end_date"]
+  status: IScheduleData["status"],
+  start: IScheduleData["start_date"],
+  end: IScheduleData["end_date"]
 ): Promise<Array<ICount> | null> {
-    const conn = connect();
-    if (!conn) return null;
-    const [rows] = await conn.query<Array<RowDataPacket>>(
-        "SELECT c.category, COUNT(*) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.status = ? AND s.date_filter >= ? AND s.date_filter <= ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
-        [status, start, end]
-    );
-    return rows as Array<ICount>;
+  const conn = connect();
+  if (!conn) return null;
+  const [rows] = await conn.query<Array<RowDataPacket>>(
+    "SELECT c.category, COUNT(*) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.status = ? AND s.date_filter >= ? AND s.date_filter <= ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
+    [status, start, end]
+  );
+  return rows as Array<ICount>;
 }
 
 export async function getMostAgendatedAllTime(
-    status: IScheduleData["status"]
+  status: IScheduleData["status"]
 ): Promise<Array<ICount> | null> {
-    const conn = connect();
-    if (!conn) return null;
-    const [rows] = await conn.query<Array<RowDataPacket>>(
-        "SELECT c.category, COUNT(*) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.status = ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
-        [status]
-    );
-    return rows as Array<ICount>;
+  const conn = connect();
+  if (!conn) return null;
+  const [rows] = await conn.query<Array<RowDataPacket>>(
+    "SELECT c.category, COUNT(*) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.status = ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
+    [status]
+  );
+  return rows as Array<ICount>;
 }

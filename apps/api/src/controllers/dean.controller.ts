@@ -4,28 +4,27 @@ import * as Dean from "../models/Dean";
 import { deanSchema } from "../validation/schemas";
 
 export async function getDeans(req: Request, res: Response): Promise<Response> {
-    const deans = await Dean.getDeans();
-    if (!deans) return res.status(500).json({ error: "Error getting deans" });
-    if (deans.length === 0)
-        return res.status(404).json({ error: "No deans found" });
+  const deans = await Dean.getDeans();
+  if (!deans) return res.status(500).json({ error: "Error getting deans" });
+  if (deans.length === 0)
+    return res.status(404).json({ error: "No deans found" });
 
-    return res.status(200).json(deans);
+  return res.status(200).json(deans);
 }
 
 export async function createDean(
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<Response> {
-    const { error, value } = deanSchema.validate(req.body);
-    if (error) return res.status(400).json({ error: error.message });
+  const { error, value } = deanSchema.validate(req.body);
+  if (error) return res.status(400).json({ error: error.message });
 
-    const deanFound = await Dean.getDean(value._id);
-    if (deanFound)
-        return res.status(409).json({ error: "Dean already exists" });
+  const deanFound = await Dean.getDean(value._id);
+  if (deanFound) return res.status(409).json({ error: "Dean already exists" });
 
-    const deanCreated = await Dean.createDean(value as IDean);
-    if (!deanCreated)
-        return res.status(500).json({ error: "Error creating dean" });
+  const deanCreated = await Dean.createDean(value as IDean);
+  if (!deanCreated)
+    return res.status(500).json({ error: "Error creating dean" });
 
-    return res.status(201).json(deanCreated);
+  return res.status(201).json(deanCreated);
 }
