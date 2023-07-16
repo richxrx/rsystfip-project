@@ -23,5 +23,8 @@
   ],
   "devDependencies": {
     "turbo": "^1.10.7"
+  },
+  "dependencies": {
+    "react-top-loading-bar": "^2.3.1"
   }
 }
