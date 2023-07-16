@@ -4,7 +4,7 @@ import { IUser } from "../interfaces/IUser";
 
 export async function getUser(
   id?: IUser["id"],
-  email?: IUser["email"]
+  email?: string
 ): Promise<IUser | null> {
   const conn = connect();
   if (!conn) return null;

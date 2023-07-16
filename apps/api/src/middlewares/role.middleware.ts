@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import { IPayload } from "../interfaces/IPayload";
 
-export default function watchRole(...roles: Array<string>) {
+export default function watchRole(...allowedRoles: Array<string>) {
   return (req: Request, res: Response, next: NextFunction): Response | void => {
-    if (roles.includes((req.payloadUser as IPayload).role)) {
-      return next();
-    }
+    const rolesUser = req.payloadUser as IPayload;
+    const isAllowed = allowedRoles.includes(rolesUser.role);
+    if (isAllowed) return next();
 
     return res.status(401).json({ error: "Access denied" });
   };
