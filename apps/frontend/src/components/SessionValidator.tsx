@@ -9,34 +9,32 @@ import * as sessionService from "../services/session.service";
 import ContainerToast from "./ContainerToast";
 
 export default function SessionValidator(): React.JSX.Element {
-    const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-    const authState: AuthState = useAppSelector(({ auth }) => auth);
+  const authState: AuthState = useAppSelector(({ auth }) => auth);
 
-    const navigate: NavigateFunction = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
-    const sessionValidatorTimerRef = useRef<NodeJS.Timer | undefined>(
-        undefined
-    );
+  const sessionValidatorTimerRef = useRef<NodeJS.Timer | undefined>(undefined);
 
-    const { mutate } = useMutation(sessionService.verifySession, {
-        onError: (error: any) => {
-            notify(error.response.data.error, { type: "error" });
-            dispatch(resetUserAuthenticated());
-            navigate("/auth/login");
-        },
-    });
+  const { mutate } = useMutation(sessionService.verifySession, {
+    onError: (error: any) => {
+      notify(error.response.data.error, { type: "error" });
+      dispatch(resetUserAuthenticated());
+      navigate("/auth/login");
+    },
+  });
 
-    useEffect(() => {
-        api.defaults.headers.common["Authorization"] = authState.token;
+  useEffect(() => {
+    api.defaults.headers.common["Authorization"] = authState.token;
 
-        sessionValidatorTimerRef.current = setInterval(() => {
-            if (!authState.auth || !authState.token) return;
-            mutate(authState);
-        }, 30000);
+    sessionValidatorTimerRef.current = setInterval(() => {
+      if (!authState.auth || !authState.token) return;
+      mutate(authState);
+    }, 30000);
 
-        return () => clearInterval(sessionValidatorTimerRef.current);
-    }, [authState.auth]);
+    return () => clearInterval(sessionValidatorTimerRef.current);
+  }, [authState.auth]);
 
-    return <ContainerToast />;
+  return <ContainerToast />;
 }

@@ -7,34 +7,36 @@ import ProtectedElement from "../components/ProtectedElement";
 import UserLoggedInfo from "../components/UserLoggedInfo";
 
 interface IProps {
-    permissions: Array<string>;
+  permissions: Array<string>;
 }
 
-export default function PageHome({ permissions }: IProps): React.JSX.Element {
-    return (
-        <Row>
-            <Helmet>
-                <title>RSystfip | Home</title>
-            </Helmet>
-            <Col md={12}>
-                <UserLoggedInfo />
-                <ProtectedElement isAllowed={permissions.includes("add")}>
-                    <Link
-                        to="/people/add"
-                        className="btn btn-primary m-1"
-                        title="Agendamiento por día"
-                    >
-                        Diario <FaUserPlus className="mb-1" />
-                    </Link>
-                </ProtectedElement>
-                <Link
-                    to="/people/schedule"
-                    className="btn btn-primary m-1"
-                    title="Agendamiento programado"
-                >
-                    Programar <IoCalendarNumber className="mb-1" />
-                </Link>
-            </Col>
-        </Row>
-    );
+function PageHome({ permissions }: IProps): React.JSX.Element {
+  return (
+    <Row>
+      <Helmet>
+        <title>RSystfip | Home</title>
+      </Helmet>
+      <Col md={12}>
+        <UserLoggedInfo />
+        <ProtectedElement isAllowed={permissions.includes("add")}>
+          <Link
+            to="/people/add"
+            className="btn btn-primary m-1"
+            title="Agendamiento por día"
+          >
+            Diario <FaUserPlus className="mb-1" />
+          </Link>
+        </ProtectedElement>
+        <Link
+          to="/people/schedule"
+          className="btn btn-primary m-1"
+          title="Agendamiento programado"
+        >
+          Programar <IoCalendarNumber className="mb-1" />
+        </Link>
+      </Col>
+    </Row>
+  );
 }
+
+export default PageHome;
