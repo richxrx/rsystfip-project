@@ -29,6 +29,7 @@ import * as statisticService from "../services/statistic.service";
 import Ctx from "./Ctx";
 import DaterStatistics from "./DaterStatistics";
 import ListerStatistics from "./ListerStatistics";
+import { scheduleStatus } from "../features/programming/programmingSlice";
 
 ChartJS.register(
   ArcElement,
@@ -47,7 +48,7 @@ ChartJS.register(
 );
 
 export interface IProps {
-  scheduling_type: "daily" | "scheduled";
+  scheduling_type: scheduleStatus;
 }
 
 function Statistics({ scheduling_type }: IProps): React.JSX.Element {

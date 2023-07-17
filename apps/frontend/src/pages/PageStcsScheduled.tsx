@@ -1,6 +1,7 @@
 import { Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import Statistics from "../components/Statistics";
+import { scheduleStatus } from "../features/programming/programmingSlice";
 
 function PageStcsSchedule(): React.JSX.Element {
   return (
@@ -8,7 +9,7 @@ function PageStcsSchedule(): React.JSX.Element {
       <Helmet>
         <title>RSystfip | Statistics scheduled people</title>
       </Helmet>
-      <Statistics scheduling_type="scheduled" />
+      <Statistics scheduling_type={scheduleStatus.scheduled} />
     </Row>
   );
 }
