@@ -1,3 +1,4 @@
+import { scheduleStatus } from "../interfaces/IScheduleData";
 import Joi from "joi";
 
 const JoiDefaults = Joi.defaults((scheme) =>
@@ -18,12 +19,12 @@ export const idSchema = JoiDefaults.object({
 // Only backend
 export const filterSchema = JoiDefaults.object({
   start: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
   end: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
@@ -139,17 +140,17 @@ export const scheduleSchema = statusSchema.keys({
   person_id: Joi.string().min(1).max(11).required(),
   color: Joi.string().min(4).max(7).required(),
   date_filter: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
   start_date: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
   end_date: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
@@ -189,17 +190,17 @@ export const schedulerSchema = peopleSchema
   .keys({
     color: Joi.string().min(4).max(7).required(),
     date: Joi.when("status", {
-      is: "scheduled",
+      is: scheduleStatus.scheduled,
       then: Joi.string().required(),
       otherwise: Joi.optional(),
     }),
     start: Joi.when("status", {
-      is: "scheduled",
+      is: scheduleStatus.scheduled,
       then: Joi.string().required(),
       otherwise: Joi.optional(),
     }),
     end: Joi.when("status", {
-      is: "scheduled",
+      is: scheduleStatus.scheduled,
       then: Joi.string().required(),
       otherwise: Joi.optional(),
     }),

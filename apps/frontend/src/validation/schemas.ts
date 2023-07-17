@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { scheduleStatus } from "../features/programming/programmingSlice";
 
 const JoiDefaults = Joi.defaults((scheme) =>
   scheme.options({ abortEarly: false })
@@ -18,12 +19,12 @@ export const idSchema = JoiDefaults.object({
 // Only backend
 export const filterSchema = JoiDefaults.object({
   start: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
   end: Joi.when("status", {
-    is: "scheduled",
+    is: scheduleStatus.scheduled,
     then: Joi.string().required(),
     otherwise: Joi.optional(),
   }),
@@ -164,17 +165,17 @@ export const schedulerSchema = peopleSchema
   .keys({
     color: Joi.string().min(4).max(7).required(),
     date: Joi.when("status", {
-      is: "scheduled",
+      is: scheduleStatus.scheduled,
       then: Joi.string().required(),
       otherwise: Joi.optional(),
     }),
     start: Joi.when("status", {
-      is: "scheduled",
+      is: scheduleStatus.scheduled,
       then: Joi.string().required(),
       otherwise: Joi.optional(),
     }),
     end: Joi.when("status", {
-      is: "scheduled",
+      is: scheduleStatus.scheduled,
       then: Joi.string().required(),
       otherwise: Joi.optional(),
     }),

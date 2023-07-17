@@ -66,7 +66,8 @@ function Statistics({ scheduling_type }: IProps): React.JSX.Element {
     ({ statistics }) => statistics[scheduling_type].queryData
   );
 
-  const labelText = scheduling_type === "daily" ? "diario" : "programado";
+  const labelText =
+    scheduling_type === scheduleStatus.daily ? "diario" : "programado";
 
   const refreshChart = (labels: Array<string>, data: Array<string>) => {
     if (chartJS) chartJS.destroy();

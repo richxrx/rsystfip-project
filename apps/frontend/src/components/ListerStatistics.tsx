@@ -1,3 +1,4 @@
+import { scheduleStatus } from "../features/programming/programmingSlice";
 import { QueryData } from "../features/statistics/statisticsSlice";
 import { useAppSelector } from "../hooks";
 import { ICounts } from "../interfaces/ICounts";
@@ -16,7 +17,7 @@ function ListerStatistics({ scheduling_type }: IProps): React.JSX.Element {
   );
 
   const titleText: string =
-    scheduling_type === "daily" ? "diario" : "programado";
+    scheduling_type === scheduleStatus.daily ? "diario" : "programado";
 
   return (
     <>

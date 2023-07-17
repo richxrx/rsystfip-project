@@ -15,7 +15,7 @@ function PageManageUsers(): React.JSX.Element {
           <h1 className="h3 text-center">Administrar usuarios</h1>
           <Card.Body className="my-4">
             <Col md={12} className="my-5">
-              <Link to="add" className="btn btn-primary">
+              <Link to="/users/manage/add" className="btn btn-primary">
                 Registrar <FaUserPlus className="mb-1" />
               </Link>
             </Col>

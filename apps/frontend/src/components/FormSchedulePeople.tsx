@@ -26,8 +26,14 @@ import SelectFaculties from "./SelectFaculties";
 import SelectPerson from "./SelectPerson";
 import SmallCaption from "./SmallCaption";
 
+export enum propsAction {
+  add = "add",
+  edit = "edit",
+  schedule = "schedule",
+}
+
 interface IProps {
-  action: "add" | "edit" | "schedule";
+  action: propsAction;
   closeModalScheduling?: () => void;
 }
 
@@ -126,7 +132,10 @@ function FormSchedulePeople({
 
       dispatch(setFormData([action]));
 
-      if (formDataState.status === "scheduled" && closeModalScheduling) {
+      if (
+        formDataState.status === scheduleStatus.scheduled &&
+        closeModalScheduling
+      ) {
         dispatch(registerAChange());
         closeModalScheduling();
       }
@@ -144,13 +153,13 @@ function FormSchedulePeople({
     e.preventDefault();
 
     switch (action) {
-      case "edit":
+      case propsAction.edit:
         return editPerson();
 
-      case "schedule":
+      case propsAction.schedule:
         return schedulePerson(closeModalScheduling);
 
-      case "add":
+      case propsAction.add:
         dispatch(
           setFormData([
             action,
@@ -371,7 +380,7 @@ function FormSchedulePeople({
           </Form.FloatingLabel>
         </Col>
 
-        <ProtectedElement isAllowed={action === "schedule"}>
+        <ProtectedElement isAllowed={action === propsAction.schedule}>
           <Col md={12}>
             <Form.Control
               name="color"
@@ -385,9 +394,9 @@ function FormSchedulePeople({
 
         <SmallCaption />
 
-        <ProtectedElement isAllowed={action !== "schedule"}>
+        <ProtectedElement isAllowed={action !== propsAction.schedule}>
           <FooterFormPeople
-            isAllowed={action === "edit"}
+            isAllowed={action === propsAction.edit}
             isLoading={
               mutationEditPerson.isLoading ||
               mutationSavePeople.isLoading ||
@@ -397,7 +406,7 @@ function FormSchedulePeople({
           />
         </ProtectedElement>
 
-        <ProtectedElement isAllowed={action === "schedule"}>
+        <ProtectedElement isAllowed={action === propsAction.schedule}>
           <ModalFooter>
             <Button variant="light" onClick={closeModalScheduling}>
               Cerrar <GiReturnArrow className="mb-1" />

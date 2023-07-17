@@ -43,7 +43,7 @@ export async function cancellSchedule(
   if (!scheduleFound)
     return res.status(404).json({ error: "Schedule not found" });
 
-  if (scheduleFound.status === "cancelled")
+  if (scheduleFound.status === scheduleStatus.cancelled)
     return res.status(400).json({ error: "Schedule already cancelled" });
 
   const newScheduleCancelled: IScheduleData = {

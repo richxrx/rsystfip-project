@@ -21,6 +21,7 @@ import LoadCalendar from "./LoadCalendar";
 import ModalCancellPersonConfirmation from "./ModalCancellPersonConfirmation";
 import ModalSchedulePeopleForm from "./ModalSchedulePeopleForm";
 import Responsive from "./Responsive";
+import { propsAction } from "./FormSchedulePeople";
 
 interface IProps {
   right: string;
@@ -31,7 +32,7 @@ function FullCalendarScheduling({
   right,
   initialView,
 }: IProps): React.JSX.Element {
-  const action = "schedule";
+  const action = propsAction.schedule;
 
   const formDataState: FormDataState = useAppSelector(
     ({ programming }) => programming.formData.schedule
@@ -56,7 +57,7 @@ function FullCalendarScheduling({
   const loadEventsRef = useRef<HTMLDivElement>(null);
 
   const { data, error } = useQuery<[], any>(
-    ["schedule", calendarEventsState.changes],
+    [propsAction.schedule, calendarEventsState.changes],
     scheduleService.getEvents
   );
 

@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import FormSchedulePeople from "./FormSchedulePeople";
+import FormSchedulePeople, { propsAction } from "./FormSchedulePeople";
 
 interface IProps {
   stateModalScheduling: boolean;
@@ -23,7 +23,7 @@ function ModalSchedulePeopleForm({
 
       <Modal.Body>
         <FormSchedulePeople
-          action="schedule"
+          action={propsAction.schedule}
           closeModalScheduling={closeModalScheduling}
         />
       </Modal.Body>
