@@ -117,7 +117,7 @@ function FormSchedulePeople({
 
       if (value.person === "4") {
         await mutationSaveDean.mutateAsync({
-          _id: value.doc,
+          id: value.doc,
           dean: value.name,
           faculty_id: value.facultie,
         });
@@ -182,9 +182,9 @@ function FormSchedulePeople({
     if (!deansState || formDataState.person !== "4") return;
 
     for (let i = 0; i < deansState.length; i++) {
-      const { _id, dean, faculty_id } = deansState[i];
+      const { id, dean, faculty_id } = deansState[i];
 
-      if (_id === formDataState.doc) {
+      if (id === formDataState.doc) {
         dispatch(
           setFormData([
             action,

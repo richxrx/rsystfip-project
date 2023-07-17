@@ -48,7 +48,7 @@ export const formDataInitialState: FormDataState = {
 };
 
 export interface Deans {
-  _id: string;
+  id: string;
   dean: string;
   faculty_id: string;
 }

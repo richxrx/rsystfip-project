@@ -2,12 +2,12 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { connect } from "../db";
 import { IDean } from "../interfaces/IDean";
 
-export async function getDean(_id: IDean["_id"]): Promise<IDean | null> {
+export async function getDean(id: IDean["id"]): Promise<IDean | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT _id FROM deans WHERE _id = ?",
-    [_id]
+    "SELECT * FROM deans WHERE id = ?",
+    [id]
   );
   return rows[0] as IDean;
 }
@@ -15,9 +15,7 @@ export async function getDean(_id: IDean["_id"]): Promise<IDean | null> {
 export async function getDeans(): Promise<Array<IDean> | null> {
   const conn = connect();
   if (!conn) return null;
-  const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT _id, dean, faculty_id FROM deans"
-  );
+  const [rows] = await conn.query<Array<RowDataPacket>>("SELECT * FROM deans");
   return rows as Array<IDean>;
 }
 

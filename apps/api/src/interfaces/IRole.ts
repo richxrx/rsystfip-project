@@ -1,4 +1,4 @@
 export interface IRole {
-  _id: string;
+  id: string;
   permissions: string;
 }

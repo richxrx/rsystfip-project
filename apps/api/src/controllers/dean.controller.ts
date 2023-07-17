@@ -19,7 +19,7 @@ export async function createDean(
   const { error, value } = deanSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
-  const deanFound = await Dean.getDean(value._id);
+  const deanFound = await Dean.getDean(value.id);
   if (deanFound) return res.status(409).json({ error: "Dean already exists" });
 
   const deanCreated = await Dean.createDean(value as IDean);

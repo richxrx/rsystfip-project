@@ -39,7 +39,7 @@ export async function sendJwtForRecoverPassword(
     return res.status(404).json({ error: "Email isn't registered" });
 
   const token = Jwt.sign(
-    { _id: userFound.id, email: userFound.email },
+    { userId: userFound.id, email: userFound.email },
     SECRET_KEY || "secretkey",
     { expiresIn: 10 * 60 }
   );
@@ -101,7 +101,7 @@ export async function updatePasswordWithJwt(
       SECRET_KEY || "secretkey"
     ) as IPayload;
 
-    const userFound = await User.getUser(payload._id, payload.email);
+    const userFound = await User.getUser(payload.userId, payload.email);
     if (!userFound) return res.status(404).json({ error: "User not found" });
 
     const auth = await bcryptHelper.verifyPassword(

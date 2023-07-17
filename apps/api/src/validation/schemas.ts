@@ -100,7 +100,7 @@ export const forgetPswSchema = JoiDefaults.object({
 });
 
 export const deanSchema = JoiDefaults.object({
-  _id: Joi.string()
+  id: Joi.string()
     .regex(/^[0-9]+$/)
     .min(8)
     .max(10)

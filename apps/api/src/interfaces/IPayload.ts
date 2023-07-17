@@ -1,7 +1,5 @@
-import { IUser } from "./IUser";
-
 export interface IPayload {
-  _id: IUser["id"];
+  userId: number;
   email: string;
   role: string;
   permissions: Array<string>;

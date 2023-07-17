@@ -25,7 +25,7 @@ export async function auth(req: Request, res: Response): Promise<Response> {
   const permissions = (userFound.permissions as string).split(",");
   const token = Jwt.sign(
     {
-      _id: userFound.id,
+      userId: userFound.id,
       email: value.email,
       role: userFound.role,
       permissions,

@@ -1,5 +1,5 @@
 export interface IDean {
-  _id: number;
+  id: number;
   dean: string;
   faculty_id: number;
 }

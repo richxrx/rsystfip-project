@@ -9,7 +9,7 @@ export async function getUser(
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT u.id, u.name, u.email, u.password, u.role, r.permissions FROM users u INNER JOIN roles r ON u.role = r._id WHERE u.email = ? OR u.id = ?",
+    "SELECT u.id, u.name, u.email, u.password, u.role, r.permissions FROM users u INNER JOIN roles r ON u.role = r.id WHERE u.email = ? OR u.id = ?",
     [email, id]
   );
   return rows[0] as IUser;
