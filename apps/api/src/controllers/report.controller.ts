@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as Report from "../models/Report";
+import * as ReportService from "../services/Report.service";
 import { filterSchema } from "../validation/schemas";
 
 export async function getReports(
@@ -9,7 +9,7 @@ export async function getReports(
   const { error, value } = filterSchema.validate(req.query);
   if (error) return res.status(400).json({ error: error.message });
 
-  const reports = await Report.getReports(value.start, value.end);
+  const reports = await ReportService.getReports(value.start, value.end);
   if (!reports) return res.status(500).json({ error: "Error getting reports" });
 
   return res.status(200).json(reports);
@@ -22,7 +22,7 @@ export async function getReportCount(
   const { error, value } = filterSchema.validate(req.query);
   if (error) return res.status(400).json({ error: error.message });
 
-  const count = await Report.getReportCount(value.start, value.end);
+  const count = await ReportService.getReportCount(value.start, value.end);
   if (!count)
     return res.status(500).json({ error: "Error getting report count" });
 
@@ -33,7 +33,7 @@ export async function getReportCounts(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const counts = await Report.getReportCounts();
+  const counts = await ReportService.getReportCounts();
   if (!counts)
     return res.status(500).json({ error: "Error getting report counts" });
 

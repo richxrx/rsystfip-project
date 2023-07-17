@@ -5,7 +5,7 @@ import * as bcryptHelper from "../helpers/bcrypt.helper";
 import * as sgHelper from "../helpers/sg.helper";
 import { IPayload } from "../interfaces/IPayload";
 import { IUser } from "../interfaces/IUser";
-import * as User from "../models/User";
+import * as UserService from "../services/User.service";
 import {
   changePswSchema,
   emailItfipSchema,
@@ -34,7 +34,7 @@ export async function sendJwtForRecoverPassword(
   const { error, value } = emailItfipSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
-  const userFound = await User.getUser(undefined, value.email);
+  const userFound = await UserService.getUser(undefined, value.email);
   if (!userFound)
     return res.status(404).json({ error: "Email isn't registered" });
 
@@ -69,7 +69,7 @@ export async function updatePassword(
   });
   if (error) return res.status(400).json({ error: error.message });
 
-  const userFound = await User.getUser(value.id);
+  const userFound = await UserService.getUser(value.id);
   if (!userFound) return res.status(404).json({ error: "User not found" });
 
   const auth = await bcryptHelper.verifyPassword(
@@ -79,7 +79,7 @@ export async function updatePassword(
   if (!auth)
     return res.status(401).json({ error: "Current password incorrect" });
 
-  const passwordChanged = await User.updateUser(userFound.id, {
+  const passwordChanged = await UserService.updateUser(userFound.id, {
     password: await bcryptHelper.encryptPassword(value.new_password),
   } as IUser);
   if (!passwordChanged)
@@ -101,7 +101,7 @@ export async function updatePasswordWithJwt(
       SECRET_KEY || "secretkey"
     ) as IPayload;
 
-    const userFound = await User.getUser(payload.userId, payload.email);
+    const userFound = await UserService.getUser(payload.userId, payload.email);
     if (!userFound) return res.status(404).json({ error: "User not found" });
 
     const auth = await bcryptHelper.verifyPassword(
@@ -110,7 +110,7 @@ export async function updatePasswordWithJwt(
     );
     if (auth) return res.status(400).json({ error: "None password updated" });
 
-    const passwordChanged = await User.updateUser(userFound.id, {
+    const passwordChanged = await UserService.updateUser(userFound.id, {
       password: await bcryptHelper.encryptPassword(value.password),
     } as IUser);
     if (!passwordChanged)

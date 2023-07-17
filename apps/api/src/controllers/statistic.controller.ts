@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import * as Statistic from "../models/Statistic";
+import * as StatisticService from "../services/Statistic.service";
 import { statisticfilterSchema, statusSchema } from "../validation/schemas";
 
 export async function getStatistics(
@@ -12,7 +12,7 @@ export async function getStatistics(
   });
   if (error) return res.status(400).json({ error: error.message });
 
-  const statistics = await Statistic.getStatistics(
+  const statistics = await StatisticService.getStatistics(
     value.status,
     value.start,
     value.end
@@ -33,7 +33,7 @@ export async function getMostAgendatedOnRange(
   });
   if (error) return res.status(400).json({ error: error.message });
 
-  const statistics = await Statistic.getMostAgendatedOnRange(
+  const statistics = await StatisticService.getMostAgendatedOnRange(
     value.status,
     value.start,
     value.end
@@ -51,7 +51,9 @@ export async function getMostAgendatedAllTime(
   const { error, value } = statusSchema.validate(req.params);
   if (error) return res.status(400).json({ error: error.message });
 
-  const statistics = await Statistic.getMostAgendatedAllTime(value.status);
+  const statistics = await StatisticService.getMostAgendatedAllTime(
+    value.status
+  );
   if (!statistics)
     return res.status(500).json({ error: "Error getting statistics" });
 

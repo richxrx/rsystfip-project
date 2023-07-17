@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ICancelledSchedule } from "interfaces/ICancelledSchedule";
-import * as Cancellation from "../models/Cancellation";
+import * as CancellationService from "../services/Cancellation.service";
 import { cancellationSchema } from "../validation/schemas";
 
 export async function createCancellation(
@@ -10,7 +10,7 @@ export async function createCancellation(
   const { error, value } = cancellationSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
-  const cancellationCreated = await Cancellation.createCancellation(
+  const cancellationCreated = await CancellationService.createCancellation(
     value as ICancelledSchedule
   );
   if (!cancellationCreated)

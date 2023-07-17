@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
 import * as sgHelper from "../helpers/sg.helper";
 import { IScheduleData, scheduleStatus } from "../interfaces/IScheduleData";
-import * as Schedule from "../models/Schedule";
+import * as ScheduleService from "../services/Schedule.service";
 import { cancellSchema, scheduleSchema } from "../validation/schemas";
 
 export async function getSchedule(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const schedules = await Schedule.getSchedules();
+  const schedules = await ScheduleService.getSchedules();
   if (!schedules)
     return res.status(500).json({ error: "Error getting schedules" });
 
@@ -22,7 +22,9 @@ export async function createSchedule(
   const { error, value } = scheduleSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
-  const scheduleCreated = await Schedule.createSchedule(value as IScheduleData);
+  const scheduleCreated = await ScheduleService.createSchedule(
+    value as IScheduleData
+  );
   if (!scheduleCreated)
     return res.status(500).json({ error: "Error creating schedule" });
 
@@ -39,7 +41,7 @@ export async function cancellSchedule(
   });
   if (error) return res.status(400).json({ error: error.message });
 
-  const scheduleFound = await Schedule.getSchedule(value.id);
+  const scheduleFound = await ScheduleService.getSchedule(value.id);
   if (!scheduleFound)
     return res.status(404).json({ error: "Schedule not found" });
 
@@ -49,7 +51,7 @@ export async function cancellSchedule(
   const newScheduleCancelled: IScheduleData = {
     status: scheduleStatus.cancelled,
   };
-  const scheduleCancelled = await Schedule.updateSchedule(
+  const scheduleCancelled = await ScheduleService.updateSchedule(
     newScheduleCancelled,
     scheduleFound.person_id,
     scheduleFound.start_date

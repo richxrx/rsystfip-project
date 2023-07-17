@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import Jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config";
 import * as bcryptHelper from "../helpers/bcrypt.helper";
-import * as User from "../models/User";
+import * as UserService from "../services/User.service";
 import { authSchema } from "../validation/schemas";
 
 export async function auth(req: Request, res: Response): Promise<Response> {
   const { error, value } = authSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
-  const userFound = await User.getUser(
+  const userFound = await UserService.getUser(
     undefined,
     `${value.username}@itfip.edu.co`
   );
