@@ -19,8 +19,6 @@ export async function getStatistics(
   );
   if (!statistics)
     return res.status(500).json({ error: "Error getting statistics" });
-  if (statistics.length === 0)
-    return res.status(404).json({ error: "No statistics found" });
 
   return res.status(200).json(statistics);
 }
@@ -42,8 +40,6 @@ export async function getMostAgendatedOnRange(
   );
   if (!statistics)
     return res.status(500).json({ error: "Error getting statistics" });
-  if (statistics.length === 0)
-    return res.status(404).json({ error: "No statistics found" });
 
   return res.status(200).json(statistics);
 }
@@ -58,8 +54,6 @@ export async function getMostAgendatedAllTime(
   const statistics = await Statistic.getMostAgendatedAllTime(value.status);
   if (!statistics)
     return res.status(500).json({ error: "Error getting statistics" });
-  if (statistics.length === 0)
-    return res.status(404).json({ error: "No statistics found" });
 
   return res.status(200).json(statistics);
 }

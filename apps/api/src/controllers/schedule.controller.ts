@@ -11,8 +11,6 @@ export async function getSchedule(
   const schedules = await Schedule.getSchedules();
   if (!schedules)
     return res.status(500).json({ error: "Error getting schedules" });
-  if (schedules.length === 0)
-    return res.status(404).json({ error: "No events found" });
 
   return res.status(200).json(schedules);
 }

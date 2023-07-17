@@ -85,8 +85,6 @@ export async function getPeople(
 ): Promise<Response> {
   const people = await People.getPeople();
   if (!people) return res.status(500).json({ error: "Error getting people" });
-  if (people.length === 0)
-    return res.status(404).json({ error: "No people found" });
 
   return res.status(200).json(people);
 }
@@ -98,8 +96,6 @@ export async function getCancelledPeople(
   const peopleCancelled = await People.getCancelledPeople();
   if (!peopleCancelled)
     return res.status(500).json({ error: "Error getting cancelled people" });
-  if (peopleCancelled.length === 0)
-    return res.status(404).json({ error: "No people found" });
 
   return res.status(200).json(peopleCancelled);
 }
