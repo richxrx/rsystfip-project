@@ -66,6 +66,8 @@ export async function updatePerson(
     document_number: value.doc,
     category_id: value.person,
     facultie_id: value.facultie,
+    email: value.emailContact,
+    telephone: value.telContact,
     come_asunt: value.asunt,
   };
   const peopleEdited = await People.updatePerson(value.id, dataPerson);

@@ -135,20 +135,6 @@ export const userSchema = emailItfipSchema.keys({
     .messages({ "any.only": "Passwords does not match" }),
 });
 
-export const peopleEditSchema = idSchema.keys({
-  person: Joi.string().length(1).required(),
-  name: Joi.string().min(8).max(50).required(),
-  doctype: Joi.string().length(1).required(),
-  doc: Joi.string()
-    .regex(/^[0-9]+$/)
-    .min(8)
-    .max(10)
-    .required()
-    .messages({ "string.pattern.base": '"document" invalid' }),
-  facultie: Joi.string().length(1).required(),
-  asunt: Joi.string().min(10).max(150).required(),
-});
-
 export const scheduleSchema = statusSchema.keys({
   person_id: Joi.string().min(1).max(11).required(),
   color: Joi.string().min(4).max(7).required(),
@@ -169,7 +155,7 @@ export const scheduleSchema = statusSchema.keys({
   }),
 });
 
-export const schedulerSchema = statusSchema.keys({
+export const peopleSchema = JoiDefaults.object({
   person: Joi.string().length(1).required(),
   name: Joi.string().min(8).max(50).required(),
   doctype: Joi.string().length(1).required(),
@@ -179,44 +165,43 @@ export const schedulerSchema = statusSchema.keys({
     .max(10)
     .required()
     .messages({ "string.pattern.base": '"document" invalid' }),
-  emailContact: Joi.when("status", {
-    is: "scheduled",
-    then: Joi.string()
-      .min(10)
-      .max(30)
-      .email({
-        minDomainSegments: 2,
-        maxDomainSegments: 3,
-        tlds: { allow: false },
-      })
-      .required(),
-    otherwise: Joi.optional(),
-  }),
-  telContact: Joi.when("status", {
-    is: "scheduled",
-    then: Joi.string()
-      .regex(/^[0-9]+$/)
-      .length(10)
-      .messages({ "string.pattern.base": '"telephone" invalid' })
-      .required(),
-    otherwise: Joi.optional(),
-  }),
+  emailContact: Joi.string()
+    .min(10)
+    .max(30)
+    .email({
+      minDomainSegments: 2,
+      maxDomainSegments: 3,
+      tlds: { allow: false },
+    })
+    .required(),
+  telContact: Joi.string()
+    .regex(/^[0-9]+$/)
+    .length(10)
+    .messages({ "string.pattern.base": '"telephone" invalid' })
+    .required(),
   facultie: Joi.string().length(1).required(),
   asunt: Joi.string().min(10).max(150).required(),
-  color: Joi.string().min(4).max(7).required(),
-  date: Joi.when("status", {
-    is: "scheduled",
-    then: Joi.string().required(),
-    otherwise: Joi.optional(),
-  }),
-  start: Joi.when("status", {
-    is: "scheduled",
-    then: Joi.string().required(),
-    otherwise: Joi.optional(),
-  }),
-  end: Joi.when("status", {
-    is: "scheduled",
-    then: Joi.string().required(),
-    otherwise: Joi.optional(),
-  }),
 });
+
+export const peopleEditSchema = peopleSchema.concat(idSchema);
+
+export const schedulerSchema = peopleSchema
+  .keys({
+    color: Joi.string().min(4).max(7).required(),
+    date: Joi.when("status", {
+      is: "scheduled",
+      then: Joi.string().required(),
+      otherwise: Joi.optional(),
+    }),
+    start: Joi.when("status", {
+      is: "scheduled",
+      then: Joi.string().required(),
+      otherwise: Joi.optional(),
+    }),
+    end: Joi.when("status", {
+      is: "scheduled",
+      then: Joi.string().required(),
+      otherwise: Joi.optional(),
+    }),
+  })
+  .concat(statusSchema);

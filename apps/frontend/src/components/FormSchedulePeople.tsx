@@ -62,7 +62,6 @@ function FormSchedulePeople({
     onError: (error: any) =>
       notify(error.response.data.error, { type: "error" }),
   });
-
   const mutationSavePeople = useMutation(peopleService.savePeople);
   const mutationSchedule = useMutation(scheduleService.saveSchedule);
   const mutationSaveDean = useMutation(deanService.saveDean);
@@ -75,6 +74,8 @@ function FormSchedulePeople({
       doctype: formDataState.doctype,
       doc: formDataState.doc,
       facultie: formDataState.facultie,
+      emailContact: formDataState.emailContact,
+      telContact: formDataState.telContact,
       asunt: formDataState.asunt,
     });
     if (error) return notify(error.message, { type: "warning" });
@@ -162,7 +163,7 @@ function FormSchedulePeople({
     }
   };
 
-  const { data, error } = useQuery<any, any>(
+  const personData = useQuery<any, any>(
     ["personData", id],
     () => peopleService.getData(id as string),
     { enabled: !!id }
@@ -216,6 +217,7 @@ function FormSchedulePeople({
   }, [formDataState.doc]);
 
   useEffect(() => {
+    const { data, error } = personData;
     if (data)
       dispatch(
         setFormData([
@@ -228,11 +230,13 @@ function FormSchedulePeople({
             name: data.name,
             doc: data.document_number,
             asunt: data.come_asunt,
+            telContact: data.telephone,
+            emailContact: data.email,
           },
         ])
       );
     if (error) notify(error.response.data.error, { type: "error" });
-  }, [data, error]);
+  }, [personData.data, personData.error]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -294,53 +298,49 @@ function FormSchedulePeople({
           </Form.FloatingLabel>
         </Col>
 
-        <ProtectedElement isAllowed={action === "schedule"}>
-          <Col md={6}>
-            <Form.FloatingLabel label="Teléfono de contacto:">
-              <Form.Control
-                name="telContact"
-                className="border-0 bg-white"
-                onChange={handleChange}
-                value={formDataState.telContact}
-                type="number"
-                placeholder="Complete campo"
-                autoComplete="off"
-                spellCheck={false}
-                minLength={10}
-                maxLength={10}
-                disabled={
-                  formDataState.disabledAll ||
-                  formDataState.disabledAfterAutocomplete
-                }
-                required
-              />
-            </Form.FloatingLabel>
-          </Col>
-        </ProtectedElement>
+        <Col md={6}>
+          <Form.FloatingLabel label="Teléfono de contacto:">
+            <Form.Control
+              name="telContact"
+              className="border-0 bg-white"
+              onChange={handleChange}
+              value={formDataState.telContact}
+              type="number"
+              placeholder="Complete campo"
+              autoComplete="off"
+              spellCheck={false}
+              minLength={10}
+              maxLength={10}
+              disabled={
+                formDataState.disabledAll ||
+                formDataState.disabledAfterAutocomplete
+              }
+              required
+            />
+          </Form.FloatingLabel>
+        </Col>
 
-        <ProtectedElement isAllowed={action === "schedule"}>
-          <Col md={6}>
-            <Form.FloatingLabel label="Email de contacto:">
-              <Form.Control
-                name="emailContact"
-                className="border-0 bg-white"
-                onChange={handleChange}
-                value={formDataState.emailContact}
-                type="email"
-                placeholder="Complete campo"
-                autoComplete="off"
-                spellCheck={false}
-                minLength={10}
-                maxLength={30}
-                disabled={
-                  formDataState.disabledAll ||
-                  formDataState.disabledAfterAutocomplete
-                }
-                required
-              />
-            </Form.FloatingLabel>
-          </Col>
-        </ProtectedElement>
+        <Col md={6}>
+          <Form.FloatingLabel label="Email de contacto:">
+            <Form.Control
+              name="emailContact"
+              className="border-0 bg-white"
+              onChange={handleChange}
+              value={formDataState.emailContact}
+              type="email"
+              placeholder="Complete campo"
+              autoComplete="off"
+              spellCheck={false}
+              minLength={10}
+              maxLength={30}
+              disabled={
+                formDataState.disabledAll ||
+                formDataState.disabledAfterAutocomplete
+              }
+              required
+            />
+          </Form.FloatingLabel>
+        </Col>
 
         <Col md={12}>
           <SelectFaculties
