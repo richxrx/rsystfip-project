@@ -1,6 +1,6 @@
 import { ToastContainer, Bounce } from "react-toastify";
 
-export default function ContainerToast(): React.JSX.Element {
+function ContainerToast(): React.JSX.Element {
   return (
     <ToastContainer
       position={"top-right"}
@@ -17,3 +17,5 @@ export default function ContainerToast(): React.JSX.Element {
     />
   );
 }
+
+export default ContainerToast;

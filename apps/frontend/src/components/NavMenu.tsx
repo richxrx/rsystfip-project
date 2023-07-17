@@ -4,10 +4,7 @@ import NavLogoutDropdown from "./NavLogoutDropdown";
 import ProtectedElement from "./ProtectedElement";
 import { srcUser } from "./NavBar";
 
-export default function NavMenu({
-  avatar,
-  permissions,
-}: srcUser): React.JSX.Element {
+function NavMenu({ avatar, permissions }: srcUser): React.JSX.Element {
   return (
     <Navbar.Collapse id="rs-nav">
       <Nav className="me-auto">
@@ -124,3 +121,5 @@ export default function NavMenu({
     </Navbar.Collapse>
   );
 }
+
+export default NavMenu;

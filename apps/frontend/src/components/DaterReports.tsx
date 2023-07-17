@@ -22,9 +22,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-export default function DaterReports({
-  errorReports,
-}: IProps): React.JSX.Element {
+function DaterReports({ errorReports }: IProps): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const categoriesState: Array<ICategory> = useAppSelector(
@@ -103,3 +101,5 @@ export default function DaterReports({
     </Row>
   );
 }
+
+export default DaterReports;

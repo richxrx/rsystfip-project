@@ -4,7 +4,7 @@ import { QueryData, Reports } from "../features/reports/reportsSlice";
 import { useAppSelector } from "../hooks";
 import ReportRow from "./ReportRow";
 
-export default function TableReports(): React.JSX.Element {
+function TableReports(): React.JSX.Element {
   const reportsState: Array<Reports> = useAppSelector(
     ({ reports }) => reports.reports
   );
@@ -36,3 +36,5 @@ export default function TableReports(): React.JSX.Element {
     </Table>
   );
 }
+
+export default TableReports;

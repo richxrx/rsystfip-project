@@ -13,7 +13,7 @@ import TableReports from "./TableReports";
 import { useQuery } from "react-query";
 import * as reportService from "../services/report.service";
 
-export default function ActionerReports(): React.JSX.Element {
+function ActionerReports(): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const reportsOrigenState: Array<Reports> = useAppSelector(
@@ -60,3 +60,5 @@ export default function ActionerReports(): React.JSX.Element {
     </>
   );
 }
+
+export default ActionerReports;

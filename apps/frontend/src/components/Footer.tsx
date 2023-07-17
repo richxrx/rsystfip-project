@@ -2,7 +2,7 @@ import { Col, Container, Image, Nav } from "react-bootstrap";
 import { FaCodeBranch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function Footer(): React.JSX.Element {
+function Footer(): React.JSX.Element {
   return (
     <Container fluid className="py-4 my-4">
       <footer className="d-flex flex-wrap justify-content-between align-items-center">
@@ -60,3 +60,5 @@ export default function Footer(): React.JSX.Element {
     </Container>
   );
 }
+
+export default Footer;

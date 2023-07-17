@@ -11,7 +11,7 @@ interface IProps {
   user: User;
 }
 
-export default function UserRow({
+function UserRow({
   user: { id, email, role },
 }: IProps): React.JSX.Element | undefined {
   const { isSuccess, mutate } = useMutation(userService.deleteUser, {
@@ -55,3 +55,5 @@ export default function UserRow({
     </tr>
   );
 }
+
+export default UserRow;

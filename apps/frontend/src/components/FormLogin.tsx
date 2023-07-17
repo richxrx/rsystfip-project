@@ -13,7 +13,7 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { authSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-export default function FormLogin(): React.JSX.Element {
+function FormLogin(): React.JSX.Element {
   interface FormData {
     username: string;
     password: string;
@@ -118,3 +118,5 @@ export default function FormLogin(): React.JSX.Element {
     </Form>
   );
 }
+
+export default FormLogin;

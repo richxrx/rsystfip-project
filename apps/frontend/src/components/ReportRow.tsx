@@ -4,7 +4,7 @@ interface IProps {
   report: Reports;
 }
 
-export default function ReportRow({
+function ReportRow({
   report: { name, date, time, scheduling_count, daily_count, category },
 }: IProps): React.JSX.Element {
   return (
@@ -18,3 +18,5 @@ export default function ReportRow({
     </tr>
   );
 }
+
+export default ReportRow;

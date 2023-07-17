@@ -6,7 +6,7 @@ interface IProps {
   closeModalCancell: () => void;
 }
 
-export default function ModalCancellPersonConfirmation({
+function ModalCancellPersonConfirmation({
   stateModalCancell,
   closeModalCancell,
 }: IProps): React.JSX.Element {
@@ -27,3 +27,5 @@ export default function ModalCancellPersonConfirmation({
     </Modal>
   );
 }
+
+export default ModalCancellPersonConfirmation;

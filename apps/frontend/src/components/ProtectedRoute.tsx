@@ -5,7 +5,7 @@ interface IProps extends IPropsProtected {
   navigateTo?: string;
 }
 
-export default function ProtectedRoute({
+function ProtectedRoute({
   children,
   isAllowed,
   navigateTo = "/auth/login",
@@ -13,3 +13,5 @@ export default function ProtectedRoute({
   if (!isAllowed) return <Navigate to={navigateTo} />;
   return children || <Outlet />;
 }
+
+export default ProtectedRoute;

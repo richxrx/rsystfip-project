@@ -5,10 +5,7 @@ interface IProps {
   loading: boolean;
 }
 
-export default function Submitter({
-  children,
-  loading,
-}: IProps): React.JSX.Element {
+function Submitter({ children, loading }: IProps): React.JSX.Element {
   return (
     <Col md={6}>
       <Button className="my-2" disabled={loading} type="submit">
@@ -17,3 +14,5 @@ export default function Submitter({
     </Col>
   );
 }
+
+export default Submitter;

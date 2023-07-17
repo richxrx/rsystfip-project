@@ -19,7 +19,7 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { userSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-export default function FormUserAdd(): React.JSX.Element {
+function FormUserAdd(): React.JSX.Element {
   const formDataState: FormData = useAppSelector(({ admin }) => admin.formData);
   const documentsState: Array<IDocument> = useAppSelector(
     ({ resources }) => resources.documents
@@ -245,3 +245,5 @@ export default function FormUserAdd(): React.JSX.Element {
     </Form>
   );
 }
+
+export default FormUserAdd;

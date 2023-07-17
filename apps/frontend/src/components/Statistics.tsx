@@ -50,9 +50,7 @@ export interface IProps {
   scheduling_type: "daily" | "scheduled";
 }
 
-export default function Statistics({
-  scheduling_type,
-}: IProps): React.JSX.Element {
+function Statistics({ scheduling_type }: IProps): React.JSX.Element {
   const [chartJS, setChartJS] = useState<ChartJS<
     keyof ChartTypeRegistry,
     Array<string>,
@@ -227,3 +225,5 @@ export default function Statistics({
     </>
   );
 }
+
+export default Statistics;

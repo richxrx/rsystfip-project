@@ -7,7 +7,7 @@ import * as accountService from "../services/account.service";
 import FormChangePswForget from "./FormChangePswForget";
 import ResetTokenInvalid from "./ResetTokenInvalid";
 
-export default function RecoveryLinkPassword(): React.JSX.Element {
+function RecoveryLinkPassword(): React.JSX.Element {
   const { email, resetToken } = useParams<{
     email: string;
     resetToken: string;
@@ -49,3 +49,5 @@ export default function RecoveryLinkPassword(): React.JSX.Element {
     </Col>
   );
 }
+
+export default RecoveryLinkPassword;

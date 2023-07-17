@@ -18,9 +18,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-export default function FetcherReports({
-  errorReports,
-}: IProps): React.JSX.Element {
+function FetcherReports({ errorReports }: IProps): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
@@ -88,3 +86,5 @@ export default function FetcherReports({
 
   return <PdfCreator errorReports={errorReports} />;
 }
+
+export default FetcherReports;

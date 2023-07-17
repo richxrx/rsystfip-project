@@ -16,9 +16,7 @@ interface IProps {
   closeModalCancell: () => void;
 }
 
-export default function FormCancellPerson({
-  closeModalCancell,
-}: IProps): React.JSX.Element {
+function FormCancellPerson({ closeModalCancell }: IProps): React.JSX.Element {
   const [cancelled_asunt, setCancelled_asunt] = useState<string>("");
 
   const dispatch = useAppDispatch();
@@ -107,3 +105,5 @@ export default function FormCancellPerson({
     </Form>
   );
 }
+
+export default FormCancellPerson;

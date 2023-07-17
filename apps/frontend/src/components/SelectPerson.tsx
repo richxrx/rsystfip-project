@@ -22,7 +22,7 @@ interface IProps {
   facultieSelectRef: React.RefObject<HTMLSelectElement>;
 }
 
-export default function SelectPerson({
+function SelectPerson({
   action,
   handleChange,
   facultieSelectRef,
@@ -111,3 +111,5 @@ export default function SelectPerson({
     </FloatingLabel>
   );
 }
+
+export default SelectPerson;

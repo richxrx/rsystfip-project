@@ -8,7 +8,7 @@ import { notify } from "../libs/toast";
 import * as userService from "../services/user.service";
 import UserRow from "./UserRow";
 
-export default function TableUsers(): React.JSX.Element {
+function TableUsers(): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const usersState: Array<User> = useAppSelector(({ admin }) => admin.users);
@@ -37,3 +37,5 @@ export default function TableUsers(): React.JSX.Element {
     </Table>
   );
 }
+
+export default TableUsers;

@@ -9,7 +9,7 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { emailItfipSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-export default function FormRecoveryPsw(): React.JSX.Element {
+function FormRecoveryPsw(): React.JSX.Element {
   const [email, setEmail] = useState<string>("");
 
   const { mutate, isLoading } = useMutation(
@@ -70,3 +70,5 @@ export default function FormRecoveryPsw(): React.JSX.Element {
     </Form>
   );
 }
+
+export default FormRecoveryPsw;

@@ -8,11 +8,7 @@ interface IProps {
   end: string;
 }
 
-export default function Listgroup({
-  title,
-  data,
-  end,
-}: IProps): React.JSX.Element {
+function Listgroup({ title, data, end }: IProps): React.JSX.Element {
   return (
     <>
       <h5 className="text-center">{title}</h5>
@@ -33,3 +29,5 @@ export default function Listgroup({
     </>
   );
 }
+
+export default Listgroup;

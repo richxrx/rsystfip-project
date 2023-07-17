@@ -17,7 +17,7 @@ import * as peopleService from "../services/people.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import TablePeople from "./TablePeople";
 
-export default function Searcher(): React.JSX.Element {
+function Searcher(): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const peopleOrigenState: Array<People> = useAppSelector(
@@ -100,3 +100,5 @@ export default function Searcher(): React.JSX.Element {
     </>
   );
 }
+
+export default Searcher;

@@ -7,10 +7,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-export default function Downloader({
-  pdf,
-  errorReports,
-}: IProps): React.JSX.Element {
+function Downloader({ pdf, errorReports }: IProps): React.JSX.Element {
   return (
     <FloatingLabel label="Descargar:">
       <Button
@@ -29,3 +26,5 @@ export default function Downloader({
     </FloatingLabel>
   );
 }
+
+export default Downloader;

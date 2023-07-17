@@ -13,9 +13,7 @@ interface IProps {
   avatar: string;
 }
 
-export default function NavLogoutDropdown({
-  avatar,
-}: IProps): React.JSX.Element {
+function NavLogoutDropdown({ avatar }: IProps): React.JSX.Element {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
   const dispatch = useAppDispatch();
@@ -69,3 +67,5 @@ export default function NavLogoutDropdown({
     </Dropdown>
   );
 }
+
+export default NavLogoutDropdown;

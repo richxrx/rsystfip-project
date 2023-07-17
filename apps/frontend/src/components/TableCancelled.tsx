@@ -11,7 +11,7 @@ import { notify } from "../libs/toast";
 import * as peopleService from "../services/people.service";
 import CancelledRow from "./CancelledRow";
 
-export default function TableCancelled(): React.JSX.Element {
+function TableCancelled(): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const cancelledPeopleState: Array<PeopleCancelled> = useAppSelector(
@@ -49,3 +49,5 @@ export default function TableCancelled(): React.JSX.Element {
     </Table>
   );
 }
+
+export default TableCancelled;

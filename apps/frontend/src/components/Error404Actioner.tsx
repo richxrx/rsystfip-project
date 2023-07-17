@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-export default function Error404Actioner(): React.JSX.Element {
+function Error404Actioner(): React.JSX.Element {
   const navigate: NavigateFunction = useNavigate();
 
   return (
@@ -16,3 +16,5 @@ export default function Error404Actioner(): React.JSX.Element {
     </div>
   );
 }
+
+export default Error404Actioner;

@@ -1,7 +1,7 @@
 import { Card, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function HeaderLogin(): React.JSX.Element {
+function HeaderLogin(): React.JSX.Element {
   return (
     <Container className="text-center mt-2">
       <Link to="/">
@@ -27,3 +27,4 @@ export default function HeaderLogin(): React.JSX.Element {
     </Container>
   );
 }
+export default HeaderLogin;

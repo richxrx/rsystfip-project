@@ -7,10 +7,7 @@ export interface srcUser {
   permissions: Array<string>;
 }
 
-export default function NavBar({
-  avatar,
-  permissions,
-}: srcUser): React.JSX.Element {
+function NavBar({ avatar, permissions }: srcUser): React.JSX.Element {
   return (
     <Navbar expand="lg" bg="light" fixed="top">
       <Container fluid>
@@ -25,3 +22,5 @@ export default function NavBar({
     </Navbar>
   );
 }
+
+export default NavBar;

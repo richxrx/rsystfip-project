@@ -15,7 +15,7 @@ interface FormData {
   confirmPassword: string;
 }
 
-export default function FormChangePswForget(): React.JSX.Element {
+function FormChangePswForget(): React.JSX.Element {
   const formDataInitialState: FormData = {
     password: "",
     confirmPassword: "",
@@ -110,3 +110,5 @@ export default function FormChangePswForget(): React.JSX.Element {
     </Form>
   );
 }
+
+export default FormChangePswForget;

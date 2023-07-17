@@ -6,7 +6,7 @@ interface IProps {
   person: People;
 }
 
-export default function PersonRow({
+function PersonRow({
   person: {
     id,
     name,
@@ -40,3 +40,5 @@ export default function PersonRow({
     </tr>
   );
 }
+
+export default PersonRow;

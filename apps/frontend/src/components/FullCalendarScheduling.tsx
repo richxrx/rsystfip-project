@@ -26,7 +26,7 @@ interface IProps {
   initialView: string;
 }
 
-export default function FullCalendarScheduling({
+function FullCalendarScheduling({
   right,
   initialView,
 }: IProps): React.JSX.Element {
@@ -175,3 +175,5 @@ export default function FullCalendarScheduling({
     </Responsive>
   );
 }
+
+export default FullCalendarScheduling;

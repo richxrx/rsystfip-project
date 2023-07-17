@@ -32,7 +32,7 @@ interface IProps {
 
 export type actionFormSchedule = IProps["action"];
 
-export default function FormSchedulePeople({
+function FormSchedulePeople({
   action,
   closeModalScheduling,
 }: IProps): React.JSX.Element {
@@ -422,3 +422,5 @@ export default function FormSchedulePeople({
     </Form>
   );
 }
+
+export default FormSchedulePeople;

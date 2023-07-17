@@ -9,7 +9,7 @@ import { notify } from "../libs/toast";
 import * as userService from "../services/user.service";
 import FormChangePsw from "./FormChangePsw";
 
-export default function FetcherDataForChangePsw(): React.JSX.Element {
+function FetcherDataForChangePsw(): React.JSX.Element {
   const { role } = useParams<{ role: string }>();
 
   const dispatch = useAppDispatch();
@@ -38,3 +38,5 @@ export default function FetcherDataForChangePsw(): React.JSX.Element {
     </Col>
   );
 }
+
+export default FetcherDataForChangePsw;

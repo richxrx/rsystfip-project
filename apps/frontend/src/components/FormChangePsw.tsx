@@ -20,7 +20,7 @@ interface FormState {
   confirmPassword: string;
 }
 
-export default function FormChangePsw({ userId }: IProps): React.JSX.Element {
+function FormChangePsw({ userId }: IProps): React.JSX.Element {
   const formDataInitialState: FormState = {
     currentPassword: "",
     newPassword: "",
@@ -130,3 +130,5 @@ export default function FormChangePsw({ userId }: IProps): React.JSX.Element {
     </Form>
   );
 }
+
+export default FormChangePsw;

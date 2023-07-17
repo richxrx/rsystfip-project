@@ -10,10 +10,7 @@ interface IProps {
   isLoading: boolean;
 }
 
-export default function FooterFormPeople({
-  isAllowed,
-  isLoading,
-}: IProps): React.JSX.Element {
+function FooterFormPeople({ isAllowed, isLoading }: IProps): React.JSX.Element {
   const navigate: NavigateFunction = useNavigate();
 
   const handleClick = (e: THandleClick) => {
@@ -45,3 +42,5 @@ export default function FooterFormPeople({
     </Col>
   );
 }
+
+export default FooterFormPeople;

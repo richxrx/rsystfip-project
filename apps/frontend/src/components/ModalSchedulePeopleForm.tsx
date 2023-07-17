@@ -6,7 +6,7 @@ interface IProps {
   closeModalScheduling: () => void;
 }
 
-export default function ModalSchedulePeopleForm({
+function ModalSchedulePeopleForm({
   stateModalScheduling,
   closeModalScheduling,
 }: IProps): React.JSX.Element {
@@ -30,3 +30,5 @@ export default function ModalSchedulePeopleForm({
     </Modal>
   );
 }
+
+export default ModalSchedulePeopleForm;

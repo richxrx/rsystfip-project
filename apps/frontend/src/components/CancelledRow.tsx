@@ -5,7 +5,7 @@ interface IProps {
   person: PeopleCancelled;
 }
 
-export default function CancelledRow({
+function CancelledRow({
   index,
   person: {
     name,
@@ -30,3 +30,5 @@ export default function CancelledRow({
     </tr>
   );
 }
+
+export default CancelledRow;

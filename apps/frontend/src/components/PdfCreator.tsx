@@ -11,9 +11,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-export default function PdfCreator({
-  errorReports,
-}: IProps): React.JSX.Element {
+function PdfCreator({ errorReports }: IProps): React.JSX.Element {
   const pngBase64State: string = useAppSelector(
     ({ reports }) => reports.pngBase64
   );
@@ -231,3 +229,5 @@ export default function PdfCreator({
 
   return <Downloader pdf={pdf} errorReports={errorReports} />;
 }
+
+export default PdfCreator;

@@ -15,10 +15,7 @@ interface IProps {
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export default function SelectDocument({
-  action,
-  handleChange,
-}: IProps): React.JSX.Element {
+function SelectDocument({ action, handleChange }: IProps): React.JSX.Element {
   const documentsState: Array<IDocument> = useAppSelector(
     ({ resources }) => resources.documents
   );
@@ -60,3 +57,5 @@ export default function SelectDocument({
     </FloatingLabel>
   );
 }
+
+export default SelectDocument;

@@ -4,7 +4,7 @@ import { People } from "../features/people/peopleSlice";
 import { useAppSelector } from "../hooks";
 import PersonRow from "./PersonRow";
 
-export default function TablePeople(): React.JSX.Element {
+function TablePeople(): React.JSX.Element {
   const peopleState: Array<People> = useAppSelector(
     ({ people }) => people.people
   );
@@ -31,3 +31,5 @@ export default function TablePeople(): React.JSX.Element {
     </Table>
   );
 }
+
+export default TablePeople;

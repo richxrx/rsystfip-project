@@ -4,9 +4,7 @@ import { ICounts } from "../interfaces/ICounts";
 import Listgroup from "./Listgroup";
 import { IProps } from "./Statistics";
 
-export default function ListerStatistics({
-  scheduling_type,
-}: IProps): React.JSX.Element {
+function ListerStatistics({ scheduling_type }: IProps): React.JSX.Element {
   const mostAgendatedOnRangeState: Array<ICounts> = useAppSelector(
     ({ statistics }) => statistics[scheduling_type].mostAgendatedOnRange
   );
@@ -36,3 +34,5 @@ export default function ListerStatistics({
     </>
   );
 }
+
+export default ListerStatistics;

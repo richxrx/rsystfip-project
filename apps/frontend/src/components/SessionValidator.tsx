@@ -8,7 +8,7 @@ import api from "../services/api.service";
 import * as sessionService from "../services/session.service";
 import ContainerToast from "./ContainerToast";
 
-export default function SessionValidator(): React.JSX.Element {
+function SessionValidator(): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const authState: AuthState = useAppSelector(({ auth }) => auth);
@@ -38,3 +38,5 @@ export default function SessionValidator(): React.JSX.Element {
 
   return <ContainerToast />;
 }
+
+export default SessionValidator;
