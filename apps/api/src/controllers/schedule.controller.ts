@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import * as sgHelper from "../helpers/sg.helper";
-import { IScheduleData } from "../interfaces/IScheduleData";
+import { IScheduleData, scheduleStatus } from "../interfaces/IScheduleData";
 import * as Schedule from "../models/Schedule";
 import { cancellSchema, scheduleSchema } from "../validation/schemas";
 
@@ -46,7 +46,9 @@ export async function cancellSchedule(
   if (scheduleFound.status === "cancelled")
     return res.status(400).json({ error: "Schedule already cancelled" });
 
-  const newScheduleCancelled: IScheduleData = { status: "cancelled" };
+  const newScheduleCancelled: IScheduleData = {
+    status: scheduleStatus.cancelled,
+  };
   const scheduleCancelled = await Schedule.updateSchedule(
     newScheduleCancelled,
     scheduleFound.person_id,

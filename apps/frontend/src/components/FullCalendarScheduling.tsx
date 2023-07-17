@@ -11,6 +11,7 @@ import {
 } from "../features/calendar/calendarSlice";
 import {
   FormDataState,
+  scheduleStatus,
   setFormData,
 } from "../features/programming/programmingSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -136,7 +137,7 @@ function FullCalendarScheduling({
                   date: format(start, "yyyy-MM-dd HH:mm:ss"),
                   start: format(start, "yyyy-MM-dd HH:mm:ss"),
                   end: format(end, "yyyy-MM-dd HH:mm:ss"),
-                  status: "scheduled",
+                  status: scheduleStatus.scheduled,
                 },
               ])
             );

@@ -2,6 +2,12 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IKeyBool } from "../../interfaces/IKeyBool";
 import { updateFormDataByAction } from "./functions";
 
+export enum scheduleStatus {
+  daily = "daily",
+  scheduled = "scheduled",
+  cancelled = "cancelled",
+}
+
 export interface FormDataState {
   eventId?: string;
   person?: string;
@@ -16,7 +22,7 @@ export interface FormDataState {
   date?: string;
   start?: string;
   end?: string;
-  status?: "daily" | "scheduled" | "cancelled";
+  status?: scheduleStatus;
   disabledAll?: boolean;
   disabledAfterAutocomplete?: boolean;
 }
@@ -42,7 +48,7 @@ export const formDataInitialState: FormDataState = {
   date: "",
   start: "",
   end: "",
-  status: "daily",
+  status: scheduleStatus.daily,
   disabledAll: true,
   disabledAfterAutocomplete: false,
 };

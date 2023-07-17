@@ -8,6 +8,7 @@ import { registerAChange } from "../features/calendar/calendarSlice";
 import {
   Deans,
   FormDataState,
+  scheduleStatus,
   setFormData,
 } from "../features/programming/programmingSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -155,7 +156,7 @@ function FormSchedulePeople({
             action,
             {
               ...formDataState,
-              status: "daily",
+              status: scheduleStatus.daily,
             },
           ])
         );

@@ -14,7 +14,7 @@ export async function sendEmail(to: string, subject: string, html: string) {
   try {
     const [response] = await sgMail.send(msg);
     return { response: response.statusCode === 202 };
-  } catch (error: ResponseError | any) {
+  } catch (error: any) {
     console.error(error);
   }
 }
