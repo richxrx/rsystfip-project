@@ -119,7 +119,7 @@ function FormSchedulePeople({
         await mutationSaveDean.mutateAsync({
           _id: value.doc,
           dean: value.name,
-          facultie_id: value.facultie,
+          faculty_id: value.facultie,
         });
       }
 
@@ -182,7 +182,7 @@ function FormSchedulePeople({
     if (!deansState || formDataState.person !== "4") return;
 
     for (let i = 0; i < deansState.length; i++) {
-      const { _id, dean, facultie_id } = deansState[i];
+      const { _id, dean, faculty_id } = deansState[i];
 
       if (_id === formDataState.doc) {
         dispatch(
@@ -192,7 +192,7 @@ function FormSchedulePeople({
               ...formDataState,
               doctype: "1",
               name: dean,
-              facultie: facultie_id.toString(),
+              facultie: faculty_id.toString(),
               disabledAfterAutocomplete: true,
             },
           ])
@@ -226,7 +226,7 @@ function FormSchedulePeople({
             ...formDataState,
             person: data.category_id.toString(),
             doctype: data.document_id.toString(),
-            facultie: data.facultie_id.toString(),
+            facultie: data.faculty_id.toString(),
             name: data.name,
             doc: data.document_number,
             asunt: data.come_asunt,

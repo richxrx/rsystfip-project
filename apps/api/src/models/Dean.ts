@@ -16,7 +16,7 @@ export async function getDeans(): Promise<Array<IDean> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT _id, dean, facultie_id FROM deans"
+    "SELECT _id, dean, faculty_id FROM deans"
   );
   return rows as Array<IDean>;
 }

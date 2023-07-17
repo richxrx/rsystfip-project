@@ -21,7 +21,7 @@ export async function createPerson(
     category_id: value.person,
     telephone: value.telContact,
     email: value.emailContact,
-    facultie_id: value.facultie,
+    faculty_id: value.facultie,
     come_asunt: value.asunt,
   };
   const personCreated = await People.createPerson(newPerson);
@@ -65,7 +65,7 @@ export async function updatePerson(
     document_id: value.doctype,
     document_number: value.doc,
     category_id: value.person,
-    facultie_id: value.facultie,
+    faculty_id: value.facultie,
     email: value.emailContact,
     telephone: value.telContact,
     come_asunt: value.asunt,

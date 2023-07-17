@@ -50,7 +50,7 @@ export const formDataInitialState: FormDataState = {
 export interface Deans {
   _id: string;
   dean: string;
-  facultie_id: string;
+  faculty_id: string;
 }
 
 export interface ProgrammingState {

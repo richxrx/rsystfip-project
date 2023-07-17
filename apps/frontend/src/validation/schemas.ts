@@ -102,7 +102,7 @@ export const deanSchema = JoiDefaults.object({
     .required()
     .messages({ "string.pattern.base": '"document" invalid' }),
   dean: Joi.string().min(8).max(50).required(),
-  facultie_id: Joi.string().length(1).required(),
+  faculty_id: Joi.string().length(1).required(),
 });
 
 export const userSchema = emailItfipSchema.keys({

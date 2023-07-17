@@ -6,6 +6,6 @@ export interface IPeople {
   telephone?: string;
   email?: string;
   category_id: number;
-  facultie_id: number;
+  faculty_id: number;
   come_asunt: string;
 }
