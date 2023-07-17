@@ -8,4 +8,6 @@ export interface IPeopleBase extends IBase {
   description: string;
   document_number: string;
   facultie: string;
+  telephone: string;
+  email: string;
 }

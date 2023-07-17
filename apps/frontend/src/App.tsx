@@ -91,7 +91,6 @@ function App(): React.JSX.Element {
                   path="/people/view/:id/edit"
                   element={<PageEditPeople />}
                 />
-                <Route path="/help/asks/frecuently" element={<PageFaqs />} />
               </Route>
 
               <Route
@@ -192,6 +191,8 @@ function App(): React.JSX.Element {
                   </ProtectedRoute>
                 }
               />
+
+              <Route path="/help/asks/frecuently" element={<PageFaqs />} />
 
               <Route
                 path="/forget/my/password"

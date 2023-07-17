@@ -7,6 +7,6 @@ router.route("/").get(peopleCtrl.getPeople).post(peopleCtrl.createPerson);
 
 router.route("/cancelled").get(peopleCtrl.getCancelledPeople);
 
-router.route("/:id").get(peopleCtrl.getPerson).put(peopleCtrl.updatePerson);
+router.route("/:id").get(peopleCtrl.getPerson).patch(peopleCtrl.updatePerson);
 
 export default router;

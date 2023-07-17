@@ -15,6 +15,8 @@ function PersonRow({
     document_number,
     category,
     facultie,
+    telephone,
+    email,
     come_asunt,
   },
 }: IProps): React.JSX.Element {
@@ -27,6 +29,8 @@ function PersonRow({
       </td>
       <td>{category}</td>
       <td>{facultie}</td>
+      <td>{telephone}</td>
+      <td>{email}</td>
       <td>{come_asunt}</td>
       <td>
         <Link

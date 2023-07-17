@@ -19,7 +19,9 @@ function TablePeople(): React.JSX.Element {
           <th>Identifación</th>
           <th>Categoría</th>
           <th>Facultad</th>
-          <th>Asunto</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th>Asunto de visita a rectoría</th>
           <th>Acciones</th>
         </tr>
       </thead>

@@ -12,10 +12,10 @@ router
   .route("/verify-jwt-for-recover-password")
   .post(accountCtrl.verifyJwtForRecoverPassword);
 
-router.route("/update-password").put(accountCtrl.updatePasswordWithJwt);
+router.route("/update-password").patch(accountCtrl.updatePasswordWithJwt);
 
 router
   .route("/update-password/:id")
-  .put(authMiddleware(), accountCtrl.updatePassword);
+  .patch(authMiddleware(), accountCtrl.updatePassword);
 
 export default router;

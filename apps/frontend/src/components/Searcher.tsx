@@ -47,6 +47,7 @@ function Searcher(): React.JSX.Element {
       dispatch(setPeopleOrigen(data));
       if (findState === "") dispatch(setPeople(data));
       else filterPeople();
+      console.log(data);
     }
     if (error) notify(error.response.data.error, { type: "error" });
   }, [data, error]);

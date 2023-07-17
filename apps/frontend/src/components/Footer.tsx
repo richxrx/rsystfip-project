@@ -1,8 +1,12 @@
 import { Col, Container, Image, Nav } from "react-bootstrap";
 import { FaCodeBranch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthState } from "../features/auth/authSlice";
+import { useAppSelector } from "../hooks";
 
 function Footer(): React.JSX.Element {
+  const authState: AuthState = useAppSelector(({ auth }) => auth);
+
   return (
     <Container fluid className="py-4 my-4">
       <footer className="d-flex flex-wrap justify-content-between align-items-center">
@@ -24,7 +28,7 @@ function Footer(): React.JSX.Element {
           <Nav className="justify-content-end">
             <Nav.Item>
               <Link
-                to="/home/welcome"
+                to={!authState.auth ? "/" : "/home/welcome"}
                 className="nav-link px-2 text-body-secondary"
               >
                 Inicio
@@ -41,9 +45,9 @@ function Footer(): React.JSX.Element {
             </Nav.Item>
 
             <Nav.Item>
-              <Nav.Link href="#" className="px-2 text-body-secondary">
+              <Link to="#" className="nav-link px-2 text-body-secondary">
                 Acerca de
-              </Nav.Link>
+              </Link>
             </Nav.Item>
 
             <Nav.Item>

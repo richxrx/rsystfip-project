@@ -48,7 +48,7 @@ export async function getPeople(): Promise<Array<IPeople> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT p.id, p.name, d.document AS ty_doc, c.category, p.facultie_id, d.description, p.document_number, f.facultie, p.come_asunt FROM people p INNER JOIN documents d ON p.document_id = d.id INNER JOIN faculties f ON p.facultie_id = f.id INNER JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC"
+    "SELECT p.id, p.name, d.document AS ty_doc, c.category, p.facultie_id, d.description, p.document_number, f.facultie, p.telephone, p.email, p.come_asunt FROM people p INNER JOIN documents d ON p.document_id = d.id INNER JOIN faculties f ON p.facultie_id = f.id INNER JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC"
   );
   return rows as Array<IPeople>;
 }

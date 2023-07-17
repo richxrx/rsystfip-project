@@ -17,7 +17,7 @@ export const sendJwtForRecoverPsw = async (email: string) => {
 };
 
 export const changePassword = async (dataUser: any) => {
-  const { data } = await api.put(
+  const { data } = await api.patch(
     `/account/update-password/${dataUser.id}`,
     dataUser
   );
@@ -25,6 +25,6 @@ export const changePassword = async (dataUser: any) => {
 };
 
 export const changePasswordWithJwt = async (dataUser: string) => {
-  const { data } = await api.put(`/account/update-password`, dataUser);
+  const { data } = await api.patch(`/account/update-password`, dataUser);
   return data;
 };
