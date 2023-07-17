@@ -18,9 +18,7 @@ export async function getUser(
 export async function getUsers(): Promise<Array<IUser> | null> {
   const conn = connect();
   if (!conn) return null;
-  const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT id, name, lastname, tel, email, role FROM users"
-  );
+  const [rows] = await conn.query<Array<RowDataPacket>>("SELECT * FROM users");
   return rows as Array<IUser>;
 }
 
