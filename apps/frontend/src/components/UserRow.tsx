@@ -6,13 +6,14 @@ import { User } from "../features/admin/adminSlice";
 import { IUserBase } from "../interfaces/IUserBase";
 import { notify } from "../libs/toast";
 import * as userService from "../services/user.service";
+import { FiEdit3 } from "react-icons/fi";
 
 interface IProps {
   user: User;
 }
 
 function UserRow({
-  user: { id, email, role },
+  user: { id, email, name, lastname, role },
 }: IProps): React.JSX.Element | undefined {
   const { isSuccess, mutate } = useMutation(userService.deleteUser, {
     onSuccess: (data) =>
@@ -30,9 +31,7 @@ function UserRow({
 
   return (
     <tr>
-      <td>
-        {email} ({role.substring(0, 1).toUpperCase().concat(role.substring(1))})
-      </td>
+      <td>{`${email} (${role[0].toUpperCase().concat(role.slice(1))})`}</td>
 
       <td>
         <Link
@@ -40,7 +39,15 @@ function UserRow({
           className="btn btn-light m-1"
           title={`Change password for user ${email}`}
         >
-          <BiKey className="mb-1" />
+          <BiKey />
+        </Link>
+
+        <Link
+          to={`/users/manage/password/${id}/change`}
+          className="btn btn-light m-1"
+          title={`Edit data for user ${name} ${lastname}`}
+        >
+          <FiEdit3 />
         </Link>
 
         <Button
@@ -49,7 +56,7 @@ function UserRow({
           className={"m-1".concat(id !== 3 ? "" : " disabled")}
           title={`Delete user ${email} (Requires confirmation)`}
         >
-          <BiTrash className="mb-1" />
+          <BiTrash />
         </Button>
       </td>
     </tr>

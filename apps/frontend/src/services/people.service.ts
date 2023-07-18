@@ -16,7 +16,7 @@ export const getData = async (id: string) => {
 };
 
 export const editPeople = async (peopleData: any) => {
-  const { data } = await api.patch(`/people/${peopleData.id}`, peopleData);
+  const { data } = await api.put(`/people/${peopleData.id}`, peopleData);
   return data;
 };
 
