@@ -10,11 +10,13 @@ import cancellationRoutes from "./routes/cancellation.routes";
 import deanRoutes from "./routes/dean.routes";
 import peopleRoutes from "./routes/people.routes";
 import reportRoutes from "./routes/report.routes";
-import resourceRoutes from "./routes/resource.routes";
 import scheduleRoutes from "./routes/schedule.routes";
 import sessionRoutes from "./routes/session.routes";
 import statisticRoutes from "./routes/statistic.routes";
 import userRoutes from "./routes/user.routes";
+import categoryRoutes from "./routes/category.routes";
+import documentRoutes from "./routes/document.routes";
+import facultyRoutes from "./routes/faculty.routes";
 
 export class App {
   private app: express.Application;
@@ -62,10 +64,22 @@ export class App {
       cancellationRoutes
     );
     this.app.use(
-      "/api/resource",
+      "/api/categories",
       authMiddleware(),
       roleMiddleware("admin", "secretaria", "rector"),
-      resourceRoutes
+      categoryRoutes
+    );
+    this.app.use(
+      "/api/faculties",
+      authMiddleware(),
+      roleMiddleware("admin", "secretaria", "rector"),
+      facultyRoutes
+    );
+    this.app.use(
+      "/api/documents",
+      authMiddleware(),
+      roleMiddleware("admin", "secretaria", "rector"),
+      documentRoutes
     );
     this.app.use(
       "/api/deans",
