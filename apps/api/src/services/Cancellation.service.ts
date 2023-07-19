@@ -11,5 +11,6 @@ export async function createCancellation(
     "INSERT INTO cancelled SET ?",
     [cancellation]
   );
+  await conn.end();
   return result.affectedRows > 0 ? cancellation : null;
 }

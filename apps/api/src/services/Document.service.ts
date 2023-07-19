@@ -8,5 +8,6 @@ export async function getDocuments(): Promise<Array<IDocument> | null> {
   const [rows] = await conn.query<Array<RowDataPacket>>(
     "SELECT * FROM documents"
   );
+  await conn.end();
   return rows as Array<IDocument>;
 }

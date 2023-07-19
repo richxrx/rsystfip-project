@@ -8,5 +8,6 @@ export async function getCategories(): Promise<Array<ICategory> | null> {
   const [rows] = await conn.query<Array<RowDataPacket>>(
     "SELECT * FROM categories"
   );
+  await conn.end();
   return rows as Array<ICategory>;
 }

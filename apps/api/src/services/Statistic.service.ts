@@ -15,6 +15,7 @@ export async function getStatistics(
     "SELECT SUM(CASE WHEN s.status = ? THEN 1 ELSE 0 END) AS scheduling_count, c.category FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.start_date >= ? AND s.start_date <= ? GROUP BY p.category_id",
     [status, start, end]
   );
+  await conn.end();
   return rows as Array<IStatistic>;
 }
 
@@ -29,6 +30,7 @@ export async function getMostAgendatedOnRange(
     "SELECT c.category, COUNT(*) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.status = ? AND s.date_filter >= ? AND s.date_filter <= ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
     [status, start, end]
   );
+  await conn.end();
   return rows as Array<ICount>;
 }
 
@@ -41,5 +43,6 @@ export async function getMostAgendatedAllTime(
     "SELECT c.category, COUNT(*) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.status = ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
     [status]
   );
+  await conn.end();
   return rows as Array<ICount>;
 }

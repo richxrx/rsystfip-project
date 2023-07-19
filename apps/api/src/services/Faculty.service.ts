@@ -8,5 +8,6 @@ export async function getFaculties(): Promise<Array<IFaculty> | null> {
   const [rows] = await conn.query<Array<RowDataPacket>>(
     "SELECT * FROM faculties"
   );
+  await conn.end();
   return rows as Array<IFaculty>;
 }

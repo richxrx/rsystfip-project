@@ -13,6 +13,7 @@ export async function createSchedule(
     "INSERT INTO scheduling SET ?",
     [scheduleData]
   );
+  await conn.end();
   return result.affectedRows > 0 ? scheduleData : null;
 }
 
@@ -25,6 +26,7 @@ export async function getSchedule(
     "SELECT s.person_id, p.name, p.telephone AS tel, p.email, s.start_date, s.status FROM scheduling s INNER JOIN people p ON p.id = s.person_id WHERE s.person_id = ?",
     [id]
   );
+  await conn.end();
   return rows[0] as IScheduleData & IPeople;
 }
 
@@ -34,6 +36,7 @@ export async function getSchedules(): Promise<Array<ICalendar> | null> {
   const [rows] = await conn.query<Array<RowDataPacket>>(
     "SELECT s.person_id AS id, p.name AS title, s.start_date AS start, s.end_date AS end, s.color FROM scheduling s INNER JOIN people p ON p.id = s.person_id WHERE s.status = 'scheduled'"
   );
+  await conn.end();
   return rows as Array<ICalendar>;
 }
 
@@ -48,5 +51,6 @@ export async function updateSchedule(
     "UPDATE scheduling SET ? WHERE person_id = ? AND start_date = ?",
     [cancellation, person_id, start_date]
   );
+  await conn.end();
   return result.affectedRows > 0 ? cancellation : null;
 }
