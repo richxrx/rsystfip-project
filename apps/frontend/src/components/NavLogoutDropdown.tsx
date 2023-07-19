@@ -60,7 +60,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.JSX.Element {
           Cambiar contraseña
         </NavLink>
         <Dropdown.Divider />
-        <Button onClick={logout} className="dropdown-item text-bg-light">
+        <Button onClick={logout} className="dropdown-item text-bg-danger">
           Cerrar sesión <BiLogOutCircle />
         </Button>
       </Dropdown.Menu>

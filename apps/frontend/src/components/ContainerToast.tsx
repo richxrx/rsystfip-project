@@ -13,7 +13,7 @@ function ContainerToast(): React.JSX.Element {
       pauseOnFocusLoss={false}
       draggable={false}
       pauseOnHover={false}
-      theme="dark"
+      theme="light"
     />
   );
 }
