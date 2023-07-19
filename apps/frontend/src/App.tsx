@@ -201,7 +201,7 @@ function App(): React.JSX.Element {
               />
 
               <Route
-                path="/forget/my/password/:email/:resetToken"
+                path="/forget/my/password/:resetToken/recovery"
                 element={<PageLinkRecoveryPsw />}
               />
 

@@ -20,8 +20,8 @@ export async function verifyJwtForRecoverPassword(
   if (!jwt) return res.status(401).json("Unauthorized");
 
   try {
-    Jwt.verify(jwt, SECRET_KEY || "secretkey") as IPayload;
-    return res.status(200).json({ tokenIsValid: true });
+    const payload = Jwt.verify(jwt, SECRET_KEY || "secretkey") as IPayload;
+    return res.status(200).json({ tokenIsValid: true, email: payload.email });
   } catch (error: any) {
     return res.status(401).json({ error: error.message });
   }
@@ -41,21 +41,21 @@ export async function sendJwtForRecoverPassword(
   const token = Jwt.sign(
     { userId: userFound.id, email: userFound.email },
     SECRET_KEY || "secretkey",
-    { expiresIn: 10 * 60 }
+    { expiresIn: 3 * 60 }
   );
-  const resetPasswordLink = `${req.headers.origin}/${token}`;
-  const msg = `Estimado usuario, hemos recibido una solicitud de cambio de contraseña para su cuenta. Si no ha sido usted, por favor ignore este correo electrónico.<br>Si es así, por favor ingrese al siguiente link para restablecer su contraseña:<br>${resetPasswordLink}<br><strong>Este link expirará en 10 minutos.</strong><br><br>Saludos, <br>Equipo ITFIP - RSystfip`;
+  const resetPasswordLink = `${req.headers.origin}/forget/my/password/${token}/recovery`;
+  const msg = `Dear ${userFound.name}, we have received a request to change the password for your account. If it wasn't you, please ignore this email.<br>If it was you, please click on the following link to reset your password:<br>${resetPasswordLink}<br><strong>This link will expire in 3 minutes.</strong><br><br>Sincerely,<br>Team ITFIP - RSystfip`;
 
   const linkSended = await sgHelper.sendEmail(
     value.email,
-    "Solicitud de cambio de contraseña",
+    "Request of change password",
     msg
   );
   if (!linkSended?.response)
     return res.status(500).json({ error: "Error sending email" });
 
   return res.status(200).json({
-    ok: `${userFound.name}, we will send you an email with instructions to reset your password at ${value.email}. Expires in 10 minutes.`,
+    ok: `${userFound.name}, we will send you an email with instructions to reset your password at ${value.email}. Expires in 3 minutes.`,
   });
 }
 

@@ -1,13 +1,11 @@
 import api from "./api.service";
 
-export const verifyJwtForRecoverPsw = async (
-  email: string,
-  resetToken: string
-) =>
-  await api.post("/account/verify-jwt-for-recover-password", {
-    resetToken,
-    email,
+export const verifyJwtForRecoverPsw = async (resetToken: string) => {
+  const { data } = await api.get("/account/verify-jwt-for-recover-password", {
+    headers: { Authorization: resetToken },
   });
+  return data;
+};
 
 export const sendJwtForRecoverPsw = async (email: string) => {
   const { data } = await api.post("/account/send-jwt-for-recover-password", {

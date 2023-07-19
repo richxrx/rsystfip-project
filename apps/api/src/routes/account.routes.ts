@@ -10,7 +10,7 @@ router
 
 router
   .route("/verify-jwt-for-recover-password")
-  .post(accountCtrl.verifyJwtForRecoverPassword);
+  .get(accountCtrl.verifyJwtForRecoverPassword);
 
 router.route("/update-password").patch(accountCtrl.updatePasswordWithJwt);
 
