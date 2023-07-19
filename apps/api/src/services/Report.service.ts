@@ -11,7 +11,7 @@ export async function getReports(
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT p.name, s.start_date AS date, s.modification AS time, SUM(CASE WHEN s.status = 'scheduled' THEN 1 ELSE 0 END) AS scheduling_count, SUM(CASE WHEN s.status = 'daily' THEN 1 ELSE 0 END) AS daily_count, c.category, c.id AS id_person FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.date_filter >= ? AND s.date_filter <= ? GROUP BY s.person_id",
+    "SELECT p.name, s.start_date AS date, s.modification AS time, SUM(CASE WHEN s.status = 'scheduled' THEN 1 ELSE 0 END) AS scheduling_count, SUM(CASE WHEN s.status = 'daily' THEN 1 ELSE 0 END) AS daily_count, c.category, c.id AS id_person FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.date_filter >= '2023-07-01' AND s.date_filter <= '2023-07-31' GROUP BY s.person_id, s.start_date, s.modification",
     [start, end]
   );
   return rows as Array<IReport>;

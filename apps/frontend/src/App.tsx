@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
+import ContainerToast from "./components/ContainerToast";
 import Footer from "./components/Footer";
 import Loader from "./components/Loader";
 import ProtectedElement from "./components/ProtectedElement";
@@ -211,6 +212,7 @@ function App(): React.JSX.Element {
           <Footer />
         </BrowserRouter>
       </QueryClientProvider>
+      <ContainerToast />
     </Suspense>
   );
 }

@@ -6,9 +6,8 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { notify } from "../libs/toast";
 import api from "../services/api.service";
 import * as sessionService from "../services/session.service";
-import ContainerToast from "./ContainerToast";
 
-function SessionValidator(): React.JSX.Element {
+function SessionValidator(): undefined {
   const dispatch = useAppDispatch();
 
   const authState: AuthState = useAppSelector(({ auth }) => auth);
@@ -36,7 +35,7 @@ function SessionValidator(): React.JSX.Element {
     return () => clearInterval(sessionValidatorTimerRef.current);
   }, [authState.auth]);
 
-  return <ContainerToast />;
+  return undefined;
 }
 
 export default SessionValidator;
