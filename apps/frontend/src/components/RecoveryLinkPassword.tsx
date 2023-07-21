@@ -7,7 +7,7 @@ import * as accountService from "../services/account.service";
 import FormChangePswForget from "./FormChangePswForget";
 import ResetTokenInvalid from "./ResetTokenInvalid";
 
-function RecoveryLinkPassword(): React.JSX.Element {
+function RecoveryLinkPassword(): React.ReactNode {
   const { resetToken } = useParams<{ resetToken: string }>();
 
   const [dataUserVerified, setDataUserVerified] = useState({

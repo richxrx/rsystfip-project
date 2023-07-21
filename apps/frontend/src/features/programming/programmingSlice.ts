@@ -2,27 +2,27 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IKeyBool } from "../../interfaces/IKeyBool";
 import { updateFormDataByAction } from "./functions";
 
-export enum scheduleStatus {
+export enum AppointmentStatus {
   daily = "daily",
   scheduled = "scheduled",
   cancelled = "cancelled",
 }
 
 export interface FormDataState {
-  eventId?: string;
-  person?: string;
-  doc?: string;
-  doctype?: string;
-  name?: string;
-  telContact?: string;
-  emailContact?: string;
-  facultie?: string;
-  asunt?: string;
+  id: string;
+  category_id?: string;
+  document_number?: string;
+  document_id?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_number?: string;
+  email?: string;
+  faculty_id?: string;
+  visit_subject?: string;
   color?: string;
-  date?: string;
-  start?: string;
-  end?: string;
-  status?: scheduleStatus;
+  start_time?: string;
+  end_time?: string;
+  status?: AppointmentStatus;
   disabledAll?: boolean;
   disabledAfterAutocomplete?: boolean;
 }
@@ -35,27 +35,28 @@ interface FormData {
 }
 
 export const formDataInitialState: FormDataState = {
-  eventId: "",
-  person: "",
-  doc: "",
-  doctype: "",
-  name: "",
-  telContact: "",
-  emailContact: "",
-  facultie: "",
-  asunt: "",
+  id: "",
+  category_id: "",
+  document_number: "",
+  document_id: "",
+  first_name: "",
+  last_name: "",
+  phone_number: "",
+  email: "",
+  faculty_id: "",
+  visit_subject: "",
   color: "#388cdc",
-  date: "",
-  start: "",
-  end: "",
-  status: scheduleStatus.daily,
+  start_time: "",
+  end_time: "",
+  status: AppointmentStatus.daily,
   disabledAll: true,
   disabledAfterAutocomplete: false,
 };
 
 export interface Deans {
   id: string;
-  dean: string;
+  first_name: string;
+  last_name: string;
   faculty_id: string;
 }
 

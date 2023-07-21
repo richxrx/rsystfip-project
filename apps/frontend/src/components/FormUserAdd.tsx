@@ -7,7 +7,7 @@ import {
   FormData,
   resetFormDataAdmin,
   setFormData,
-} from "../features/admin/adminSlice";
+} from "../features/users/usersSlice";
 import { setDocuments } from "../features/resources/resourcesSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { IDocument } from "../interfaces/IResources";
@@ -19,8 +19,10 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { userSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-function FormUserAdd(): React.JSX.Element {
-  const formDataState: FormData = useAppSelector(({ admin }) => admin.formData);
+function FormUserAdd(): React.ReactNode {
+  const formDataState: FormData = useAppSelector(
+    ({ users: admin }) => admin.formData
+  );
   const documentsState: Array<IDocument> = useAppSelector(
     ({ resources }) => resources.documents
   );
@@ -73,10 +75,10 @@ function FormUserAdd(): React.JSX.Element {
         <Col md={4}>
           <Form.FloatingLabel label="Rol usuario:">
             <Form.Select
-              name="role"
+              name="role_id"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.role}
+              value={formDataState.role_id}
               required
             >
               <option value="">No seleccionado</option>
@@ -87,12 +89,12 @@ function FormUserAdd(): React.JSX.Element {
         </Col>
 
         <Col md={4}>
-          <Form.FloatingLabel label="Nombres:">
+          <Form.FloatingLabel label="Nombre:">
             <Form.Control
-              name="name"
+              name="first_name"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.name}
+              value={formDataState.first_name}
               type="text"
               placeholder="Name"
               autoComplete="off"
@@ -106,12 +108,12 @@ function FormUserAdd(): React.JSX.Element {
         </Col>
 
         <Col md={4}>
-          <Form.FloatingLabel label="Apellidos:">
+          <Form.FloatingLabel label="Apellido:">
             <Form.Control
-              name="lastname"
+              name="last_name"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.lastname}
+              value={formDataState.last_name}
               type="text"
               placeholder="Lastname"
               autoComplete="off"
@@ -123,34 +125,34 @@ function FormUserAdd(): React.JSX.Element {
           </Form.FloatingLabel>
         </Col>
 
-        <Col md={8}>
+        <Col md={6}>
           <Form.FloatingLabel label="Tipo de Documento:">
             <Form.Select
-              name="docType"
+              name="document_id"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.docType}
+              value={formDataState.document_id}
               required
             >
               <option value="">No seleccionado</option>
-              {documentsState.map(({ id, description }) => (
+              {documentsState.map(({ id, document_description }) => (
                 <option key={v4()} value={id}>
-                  {description}
+                  {document_description}
                 </option>
               ))}
             </Form.Select>
           </Form.FloatingLabel>
         </Col>
 
-        <Col md={4}>
-          <Form.FloatingLabel label="Documento:">
+        <Col md={6}>
+          <Form.FloatingLabel label="Número de documento:">
             <Form.Control
-              name="doc"
+              name="document_number"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.doc}
+              value={formDataState.document_number}
               type="number"
-              placeholder="Document"
+              placeholder="Document number"
               autoComplete="off"
               spellCheck={false}
               minLength={8}
@@ -160,7 +162,7 @@ function FormUserAdd(): React.JSX.Element {
           </Form.FloatingLabel>
         </Col>
 
-        <Col md={8}>
+        <Col md={6}>
           <Form.FloatingLabel label="Correo institucional:">
             <Form.Control
               name="email"
@@ -178,15 +180,15 @@ function FormUserAdd(): React.JSX.Element {
           </Form.FloatingLabel>
         </Col>
 
-        <Col md={4}>
+        <Col md={6}>
           <Form.FloatingLabel label="Celular:">
             <Form.Control
-              name="tel"
+              name="phone_number"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.tel}
+              value={formDataState.phone_number}
               type="number"
-              placeholder="Phone"
+              placeholder="Phone Number"
               autoComplete="off"
               spellCheck={false}
               minLength={10}
@@ -217,12 +219,12 @@ function FormUserAdd(): React.JSX.Element {
         <Col md={6}>
           <Form.FloatingLabel label="Confirmar contraseña:">
             <Form.Control
-              name="passwordConfirmation"
+              name="password_confirm"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.passwordConfirmation}
+              value={formDataState.password_confirm}
               type="password"
-              placeholder="Confirm password"
+              placeholder="Password confirm"
               autoComplete="off"
               spellCheck={false}
               minLength={8}

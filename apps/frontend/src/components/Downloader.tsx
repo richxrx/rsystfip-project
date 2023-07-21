@@ -7,7 +7,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-function Downloader({ pdf, errorReports }: IProps): React.JSX.Element {
+function Downloader({ pdf, errorReports }: IProps): React.ReactNode {
   return (
     <FloatingLabel label="Descargar:">
       <Button

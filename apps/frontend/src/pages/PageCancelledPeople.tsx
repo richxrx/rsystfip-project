@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import TableCancelled from "../components/TableCancelled";
 
-function PageCancelledPeople(): React.JSX.Element {
+function PageCancelledPeople(): React.ReactNode {
   return (
     <Row>
       <Helmet>

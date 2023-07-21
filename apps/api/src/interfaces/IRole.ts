@@ -1,4 +1,5 @@
 export interface IRole {
   id: string;
-  permissions: string;
+  role_name: string;
+  permissions: Array<string>;
 }

@@ -26,7 +26,7 @@ function SelectPerson({
   action,
   handleChange,
   facultieSelectRef,
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   const categoriesState: Array<ICategory> = useAppSelector(
     ({ resources }) => resources.categories
   );
@@ -63,7 +63,7 @@ function SelectPerson({
   );
 
   const inputsInteraction = async () => {
-    if (formDataState.person === UNSET_STATUS) return;
+    if (formDataState.category_id === UNSET_STATUS) return;
 
     dispatch(
       setFormData([
@@ -76,35 +76,35 @@ function SelectPerson({
       ])
     );
 
-    if (formDataState.person === "4") {
+    if (formDataState.category_id === "4") {
       await queries[0].refetch();
     }
 
     if (facultieSelectRef.current) {
       facultieSelectRef.current.className = "form-select border-0 bg-white";
       facultieSelectRef.current.disabled = false;
-      if (formDataState.person === "5")
+      if (formDataState.category_id === "5")
         facultieSelectRef.current.disabled = true;
     }
   };
 
   useEffect(() => {
     inputsInteraction();
-  }, [formDataState.person]);
+  }, [formDataState.category_id]);
 
   return (
     <FloatingLabel label="Persona a registrar:">
       <FormSelect
-        name="person"
+        name="category_id"
         className="border-0 bg-white"
         onChange={handleChange}
-        value={formDataState.person}
+        value={formDataState.category_id}
         required
       >
         <option value="">No seleccionado</option>
-        {categoriesState.map(({ id, category }) => (
+        {categoriesState.map(({ id, category_name }) => (
           <option key={v4()} value={id}>
-            {category}
+            {category_name}
           </option>
         ))}
       </FormSelect>

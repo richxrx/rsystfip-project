@@ -5,9 +5,9 @@ import { updateDataBySchedulingType } from "./functions";
 import { endOfMonth, format } from "date-fns";
 
 export interface QueryData {
-  start: string;
-  end: string;
-  chartType: string;
+  start_time: string;
+  end_time: string;
+  chart_type: string;
 }
 
 export interface Data {
@@ -19,7 +19,7 @@ export interface Data {
 export interface StatisticsState {
   daily: Data;
   scheduled: Data;
-  [shcheduling_type: string]: Data;
+  [scheduling_type: string]: Data;
 }
 
 export const validSchedulingTypes: IKeyBool = {
@@ -28,9 +28,9 @@ export const validSchedulingTypes: IKeyBool = {
 };
 
 const queryDataInitialState: QueryData = {
-  start: format(new Date(), "yyyy-MM-01"),
-  end: format(endOfMonth(new Date()), "yyyy-MM-dd"),
-  chartType: "bar",
+  start_time: format(new Date(), "yyyy-MM-01"),
+  end_time: format(endOfMonth(new Date()), "yyyy-MM-dd"),
+  chart_type: "bar",
 };
 
 const initialState: StatisticsState = {
@@ -53,30 +53,32 @@ const statisticsSlice = createSlice({
     setMostAgendatedOnRange(
       state,
       {
-        payload: [schedulingType, mostAgendatedOnRange],
+        payload: [appointmentStatus, mostAgendatedOnRange],
       }: PayloadAction<[string, Array<ICounts>]>
     ): StatisticsState {
-      return updateDataBySchedulingType(state, schedulingType, {
+      return updateDataBySchedulingType(state, appointmentStatus, {
         mostAgendatedOnRange,
       });
     },
     setMostAgendatedAllTime(
       state,
       {
-        payload: [schedulingType, mostAgendatedAllTime],
+        payload: [appointmentStatus, mostAgendatedAllTime],
       }: PayloadAction<[string, Array<ICounts>]>
     ): StatisticsState {
-      return updateDataBySchedulingType(state, schedulingType, {
+      return updateDataBySchedulingType(state, appointmentStatus, {
         mostAgendatedAllTime,
       });
     },
     setQueryData(
       state,
       {
-        payload: [schedulingType, queryData],
+        payload: [appointmentStatus, queryData],
       }: PayloadAction<[string, QueryData]>
     ): StatisticsState {
-      return updateDataBySchedulingType(state, schedulingType, { queryData });
+      return updateDataBySchedulingType(state, appointmentStatus, {
+        queryData,
+      });
     },
     resetQueryDataStatistics(state): StatisticsState {
       return {

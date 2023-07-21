@@ -2,12 +2,12 @@ import { Container, Image, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import NavMenu from "./NavMenu";
 
-export interface srcUser {
+interface IProps {
   avatar: string;
   permissions: Array<string>;
 }
 
-function NavBar({ avatar, permissions }: srcUser): React.JSX.Element {
+function NavBar({ avatar, permissions }: IProps): React.ReactNode {
   return (
     <Navbar expand="lg" bg="light" fixed="top">
       <Container fluid>

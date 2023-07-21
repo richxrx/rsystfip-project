@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import adminSlice from "../features/admin/adminSlice";
+import usersSlice from "../features/users/usersSlice";
 import authReducer from "../features/auth/authSlice";
 import calendarSlice from "../features/calendar/calendarSlice";
 import cancelledPeopleSlice from "../features/cancelledPeople/cancelledPeopleSlice";
@@ -14,7 +14,7 @@ export const store = configureStore({
   reducer: {
     auth: authReducer,
     people: peopleSlice,
-    admin: adminSlice,
+    users: usersSlice,
     cancelledPeople: cancelledPeopleSlice,
     reports: reportsSlice,
     statistics: statisticsSlice,

@@ -9,7 +9,7 @@ interface IProps {
 function ModalCancellPersonConfirmation({
   stateModalCancell,
   closeModalCancell,
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   return (
     <Modal
       show={stateModalCancell}

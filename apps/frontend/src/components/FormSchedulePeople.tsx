@@ -8,7 +8,7 @@ import { registerAChange } from "../features/calendar/calendarSlice";
 import {
   Deans,
   FormDataState,
-  scheduleStatus,
+  AppointmentStatus,
   setFormData,
 } from "../features/programming/programmingSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -42,7 +42,7 @@ export type actionFormSchedule = IProps["action"];
 function FormSchedulePeople({
   action,
   closeModalScheduling,
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   const { id } = useParams<{ id: string }>();
 
   const facultieSelectRef = useRef<HTMLSelectElement>(null);
@@ -76,14 +76,15 @@ function FormSchedulePeople({
   const editPerson = () => {
     const { error, value } = peopleEditSchema.validate({
       id,
-      person: formDataState.person,
-      name: formDataState.name,
-      doctype: formDataState.doctype,
-      doc: formDataState.doc,
-      facultie: formDataState.facultie,
-      emailContact: formDataState.emailContact,
-      telContact: formDataState.telContact,
-      asunt: formDataState.asunt,
+      category_id: formDataState.category_id,
+      first_name: formDataState.first_name,
+      last_name: formDataState.last_name,
+      document_id: formDataState.document_id,
+      document_number: formDataState.document_number,
+      faculty_id: formDataState.faculty_id,
+      email: formDataState.email,
+      phone_number: formDataState.phone_number,
+      visit_subject: formDataState.visit_subject,
     });
     if (error) return notify(error.message, { type: "warning" });
 
@@ -94,18 +95,18 @@ function FormSchedulePeople({
     closeModalScheduling?: IProps["closeModalScheduling"]
   ): Promise<void> => {
     const { error, value } = schedulerSchema.validate({
-      person: formDataState.person,
-      name: formDataState.name,
-      doctype: formDataState.doctype,
-      doc: formDataState.doc,
-      emailContact: formDataState.emailContact || undefined,
-      telContact: formDataState.telContact || undefined,
-      facultie: formDataState.facultie,
-      asunt: formDataState.asunt,
+      category_id: formDataState.category_id,
+      first_name: formDataState.first_name,
+      last_name: formDataState.last_name,
+      document_id: formDataState.document_id,
+      document_number: formDataState.document_number,
+      email: formDataState.email,
+      phone_number: formDataState.phone_number,
+      faculty_id: formDataState.faculty_id,
+      visit_subject: formDataState.visit_subject,
       color: formDataState.color,
-      date: formDataState.date,
-      start: formDataState.start,
-      end: formDataState.end,
+      start_time: formDataState.start_time,
+      end_time: formDataState.end_time,
       status: formDataState.status,
     });
     if (error) return notify(error.message, { type: "warning" });
@@ -115,25 +116,26 @@ function FormSchedulePeople({
 
       await mutationSchedule.mutateAsync({
         person_id: data.personCreated.id.toString(),
+        start_time: value.start_time || undefined,
+        end_time: value.end_time || undefined,
+        visit_subject: value.visit_subject,
         status: value.status,
         color: value.color,
-        date_filter: value.date || undefined,
-        start_date: value.start || undefined,
-        end_date: value.end || undefined,
       });
 
-      if (value.person === "4") {
+      if (value.category_id === "4") {
         await mutationSaveDean.mutateAsync({
-          id: value.doc,
-          dean: value.name,
-          faculty_id: value.facultie,
+          id: value.document_number,
+          first_name: value.first_name,
+          last_name: value.last_name,
+          faculty_id: value.faculty_id,
         });
       }
 
       dispatch(setFormData([action]));
 
       if (
-        formDataState.status === scheduleStatus.scheduled &&
+        formDataState.status === AppointmentStatus.scheduled &&
         closeModalScheduling
       ) {
         dispatch(registerAChange());
@@ -165,7 +167,7 @@ function FormSchedulePeople({
             action,
             {
               ...formDataState,
-              status: scheduleStatus.daily,
+              status: AppointmentStatus.daily,
             },
           ])
         );
@@ -189,42 +191,41 @@ function FormSchedulePeople({
   };
 
   const autocompleteDeansData = () => {
-    if (!deansState || formDataState.person !== "4") return;
+    if (!deansState || formDataState.category_id !== "4") return;
 
     for (let i = 0; i < deansState.length; i++) {
-      const { id, dean, faculty_id } = deansState[i];
+      const { id, first_name, last_name, faculty_id } = deansState[i];
 
-      if (id === formDataState.doc) {
-        dispatch(
-          setFormData([
-            action,
-            {
-              ...formDataState,
-              doctype: "1",
-              name: dean,
-              facultie: faculty_id.toString(),
-              disabledAfterAutocomplete: true,
-            },
-          ])
-        );
+      if (id !== formDataState.document_number) continue;
 
-        if (facultieSelectRef.current) {
-          facultieSelectRef.current.className =
-            "form-control border-0 bg-white";
-        }
+      dispatch(
+        setFormData([
+          action,
+          {
+            ...formDataState,
+            document_id: "1",
+            first_name,
+            last_name,
+            faculty_id: faculty_id.toString(),
+            disabledAfterAutocomplete: true,
+          },
+        ])
+      );
 
-        notify("Se han completado los datos", {
-          type: "info",
-          position: "top-left",
-        });
-        break;
+      if (facultieSelectRef.current) {
+        facultieSelectRef.current.className = "form-control border-0 bg-white";
       }
+
+      notify("Se han completado los datos", {
+        type: "info",
+        position: "top-left",
+      });
     }
   };
 
   useEffect(() => {
     autocompleteDeansData();
-  }, [formDataState.doc]);
+  }, [formDataState.document_number]);
 
   useEffect(() => {
     const { data, error } = personData;
@@ -234,14 +235,14 @@ function FormSchedulePeople({
           action,
           {
             ...formDataState,
-            person: data.category_id.toString(),
-            doctype: data.document_id.toString(),
-            facultie: data.faculty_id.toString(),
-            name: data.name,
-            doc: data.document_number,
-            asunt: data.come_asunt,
-            telContact: data.telephone,
-            emailContact: data.email,
+            category_id: data.category_id.toString(),
+            document_id: data.document_id.toString(),
+            faculty_id: data.faculty_id.toString(),
+            first_name: data.name,
+            document_number: data.document_number,
+            visit_subject: data.come_asunt,
+            phone_number: data.telephone,
+            email: data.email,
           },
         ])
       );
@@ -260,12 +261,24 @@ function FormSchedulePeople({
         </Col>
 
         <Col md={6}>
+          <SelectFaculties
+            action={action}
+            handleChange={handleChange}
+            facultieSelectRef={facultieSelectRef}
+          />
+        </Col>
+
+        <Col md={6}>
+          <SelectDocument action={action} handleChange={handleChange} />
+        </Col>
+
+        <Col md={6}>
           <Form.FloatingLabel label="Cédula:">
             <Form.Control
-              name="doc"
+              name="document_number"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.doc}
+              value={formDataState.document_number}
               type="number"
               placeholder="Complete campo"
               autoComplete="off"
@@ -283,22 +296,18 @@ function FormSchedulePeople({
         </Col>
 
         <Col md={6}>
-          <SelectDocument action={action} handleChange={handleChange} />
-        </Col>
-
-        <Col md={6}>
-          <Form.FloatingLabel label="Nombres y Apellidos:">
+          <Form.FloatingLabel label="Nombre:">
             <Form.Control
-              name="name"
+              name="first_name"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.name}
+              value={formDataState.first_name}
               type="text"
               placeholder="Complete campo"
               autoComplete="off"
               spellCheck={false}
-              minLength={8}
-              maxLength={50}
+              minLength={3}
+              maxLength={25}
               disabled={
                 formDataState.disabledAll ||
                 formDataState.disabledAfterAutocomplete
@@ -309,12 +318,34 @@ function FormSchedulePeople({
         </Col>
 
         <Col md={6}>
-          <Form.FloatingLabel label="Teléfono de contacto:">
+          <Form.FloatingLabel label="Apellido:">
             <Form.Control
-              name="telContact"
+              name="last_name"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.telContact}
+              value={formDataState.last_name}
+              type="text"
+              placeholder="Complete campo"
+              autoComplete="off"
+              spellCheck={false}
+              minLength={3}
+              maxLength={25}
+              disabled={
+                formDataState.disabledAll ||
+                formDataState.disabledAfterAutocomplete
+              }
+              required
+            />
+          </Form.FloatingLabel>
+        </Col>
+
+        <Col md={6}>
+          <Form.FloatingLabel label="Número de teléfono:">
+            <Form.Control
+              name="phone_number"
+              className="border-0 bg-white"
+              onChange={handleChange}
+              value={formDataState.phone_number}
               type="number"
               placeholder="Complete campo"
               autoComplete="off"
@@ -333,10 +364,10 @@ function FormSchedulePeople({
         <Col md={6}>
           <Form.FloatingLabel label="Email de contacto:">
             <Form.Control
-              name="emailContact"
+              name="email"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.emailContact}
+              value={formDataState.email}
               type="email"
               placeholder="Complete campo"
               autoComplete="off"
@@ -353,21 +384,13 @@ function FormSchedulePeople({
         </Col>
 
         <Col md={12}>
-          <SelectFaculties
-            action={action}
-            handleChange={handleChange}
-            facultieSelectRef={facultieSelectRef}
-          />
-        </Col>
-
-        <Col md={12}>
           <Form.FloatingLabel label="Asunto:">
             <Form.Control
               as="textarea"
-              name="asunt"
+              name="visit_subject"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.asunt}
+              value={formDataState.visit_subject}
               placeholder="Complete campo"
               autoComplete="off"
               spellCheck={false}

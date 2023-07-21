@@ -15,7 +15,7 @@ interface IProps {
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-function SelectDocument({ action, handleChange }: IProps): React.JSX.Element {
+function SelectDocument({ action, handleChange }: IProps): React.ReactNode {
   const documentsState: Array<IDocument> = useAppSelector(
     ({ resources }) => resources.documents
   );
@@ -38,19 +38,19 @@ function SelectDocument({ action, handleChange }: IProps): React.JSX.Element {
   return (
     <FloatingLabel label="Tipo de Documento:">
       <FormSelect
-        name="doctype"
+        name="document_id"
         className="border-0 bg-white"
         onChange={handleChange}
-        value={formDataState.doctype}
+        value={formDataState.document_id}
         disabled={
           formDataState.disabledAll || formDataState.disabledAfterAutocomplete
         }
         required
       >
         <option value="">No seleccionado</option>
-        {documentsState.map(({ id, description }) => (
+        {documentsState.map(({ id, document_description }) => (
           <option key={v4()} value={id}>
-            {description}
+            {document_description}
           </option>
         ))}
       </FormSelect>

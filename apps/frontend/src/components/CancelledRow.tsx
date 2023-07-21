@@ -8,25 +8,28 @@ interface IProps {
 function CancelledRow({
   index,
   person: {
-    name,
-    description,
-    ty_doc,
+    first_name,
+    last_name,
+    document_description,
+    document_name,
     document_number,
-    category,
-    facultie,
-    cancelled_asunt,
+    category_name,
+    faculty_name,
+    cancellation_subject,
   },
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   return (
     <tr>
       <td>{index + 1}</td>
-      <td>{name}</td>
-      <td title={description}>
-        {ty_doc} {document_number}
+      <td>
+        {first_name} {last_name}
       </td>
-      <td>{category}</td>
-      <td>{facultie}</td>
-      <td>{cancelled_asunt}</td>
+      <td title={document_description}>
+        {document_name} {document_number}
+      </td>
+      <td>{category_name}</td>
+      <td>{faculty_name}</td>
+      <td>{cancellation_subject}</td>
     </tr>
   );
 }

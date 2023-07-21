@@ -1,12 +1,9 @@
 import api from "./api.service";
 import { QueryData } from "../features/reports/reportsSlice";
 
-export const getReports = async (queryDataState: QueryData) => {
+export const getReports = async ({ start_time, end_time }: QueryData) => {
   const { data } = await api("/reports", {
-    params: {
-      start: queryDataState.startDate,
-      end: queryDataState.endDate,
-    },
+    params: { start_time, end_time },
   });
   return data;
 };
@@ -17,11 +14,11 @@ export const getReportsCountAlltime = async () => {
 };
 
 export const getReportsCountOnRange = async ({
-  startDate,
-  endDate,
+  start_time,
+  end_time,
 }: QueryData) => {
   const { data } = await api("/reports/count", {
-    params: { start: startDate, end: endDate },
+    params: { start_time, end_time },
   });
   return data;
 };

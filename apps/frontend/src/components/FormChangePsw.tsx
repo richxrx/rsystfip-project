@@ -14,20 +14,14 @@ interface IProps {
   userId: IUserBase["id"];
 }
 
-interface FormState {
-  currentPassword: string;
-  newPassword: string;
-  confirmPassword: string;
-}
-
-function FormChangePsw({ userId }: IProps): React.JSX.Element {
-  const formDataInitialState: FormState = {
+function FormChangePsw({ userId }: IProps): React.ReactNode {
+  const formDataInitialState = {
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
   };
 
-  const [formData, setFormData] = useState<FormState>(formDataInitialState);
+  const [formData, setFormData] = useState(formDataInitialState);
 
   const { mutate, isLoading } = useMutation(accountService.changePassword, {
     onSuccess: (data) => {

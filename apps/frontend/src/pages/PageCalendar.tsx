@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet";
 import FullCalendarScheduling from "../components/FullCalendarScheduling";
 
-function PageCalendar(): React.JSX.Element {
+function PageCalendar(): React.ReactNode {
   return (
     <>
       <Helmet>

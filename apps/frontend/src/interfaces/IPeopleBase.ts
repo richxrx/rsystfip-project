@@ -1,13 +1,14 @@
 import { IBase } from "./IResources";
 
 export interface IPeopleBase extends IBase {
-  name: string;
-  ty_doc: string;
-  category: string;
-  faculty_id: number;
-  description: string;
+  first_name: string;
+  last_name: string;
+  document_id: string;
+  category_name: string;
+  document_description: string;
+  document_name: string;
   document_number: string;
-  facultie: string;
-  telephone: string;
+  faculty_name: string;
+  phone_number: string;
   email: string;
 }

@@ -18,7 +18,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-function FetcherReports({ errorReports }: IProps): React.JSX.Element {
+function FetcherReports({ errorReports }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
@@ -39,8 +39,8 @@ function FetcherReports({ errorReports }: IProps): React.JSX.Element {
     {
       queryKey: [
         "reportsOnRange",
-        queryDataState.startDate,
-        queryDataState.endDate,
+        queryDataState.start_time,
+        queryDataState.end_time,
       ],
       queryFn: () => reportService.getReportsCountOnRange(queryDataState),
       refetchOnWindowFocus: false,

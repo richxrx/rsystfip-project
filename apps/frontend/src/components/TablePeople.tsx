@@ -4,7 +4,7 @@ import { People } from "../features/people/peopleSlice";
 import { useAppSelector } from "../hooks";
 import PersonRow from "./PersonRow";
 
-function TablePeople(): React.JSX.Element {
+function TablePeople(): React.ReactNode {
   const peopleState: Array<People> = useAppSelector(
     ({ people }) => people.people
   );

@@ -2,9 +2,13 @@ import { Nav, NavDropdown, Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import NavLogoutDropdown from "./NavLogoutDropdown";
 import ProtectedElement from "./ProtectedElement";
-import { srcUser } from "./NavBar";
 
-function NavMenu({ avatar, permissions }: srcUser): React.JSX.Element {
+interface IProps {
+  avatar: string;
+  permissions: Array<string>;
+}
+
+function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
   return (
     <Navbar.Collapse id="rs-nav">
       <Nav className="me-auto">

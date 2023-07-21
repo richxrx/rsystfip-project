@@ -1,7 +1,7 @@
 import { Card, Col } from "react-bootstrap";
 import FormRecoveryPsw from "./FormRecoveryPsw";
 
-function RecoveryPassword(): React.JSX.Element {
+function RecoveryPassword(): React.ReactNode {
   return (
     <Col md={4} className="mx-auto">
       <Card className="border-0 shadow-sm rounded-3 bg-white px-3 py-5 mt-3 mb-3">

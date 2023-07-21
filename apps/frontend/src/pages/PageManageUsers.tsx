@@ -4,7 +4,7 @@ import { FaUserPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import TableUsers from "../components/TableUsers";
 
-function PageManageUsers(): React.JSX.Element {
+function PageManageUsers(): React.ReactNode {
   return (
     <Row>
       <Helmet>

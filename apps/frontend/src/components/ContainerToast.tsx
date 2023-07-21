@@ -1,6 +1,6 @@
 import { ToastContainer, Bounce } from "react-toastify";
 
-function ContainerToast(): React.JSX.Element {
+function ContainerToast(): React.ReactNode {
   return (
     <ToastContainer
       position={"top-right"}
@@ -13,7 +13,8 @@ function ContainerToast(): React.JSX.Element {
       pauseOnFocusLoss={false}
       draggable={false}
       pauseOnHover={false}
-      theme="light"
+      limit={3}
+      theme="dark"
     />
   );
 }

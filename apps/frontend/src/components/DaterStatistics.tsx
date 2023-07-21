@@ -1,23 +1,27 @@
 import { Col, FloatingLabel, FormControl, FormSelect } from "react-bootstrap";
+import { AppointmentStatus } from "../features/programming/programmingSlice";
 import {
   QueryData,
   setQueryData,
 } from "../features/statistics/statisticsSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { THandleChangeITS } from "../types/THandleChanges";
-import { IProps } from "./Statistics";
 
-function DaterStatistics({ scheduling_type }: IProps): React.JSX.Element {
+interface IProps {
+  appointment_status: AppointmentStatus;
+}
+
+function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
-    ({ statistics }) => statistics[scheduling_type].queryData
+    ({ statistics }) => statistics[appointment_status].queryData
   );
 
   const handleChange = (e: THandleChangeITS) => {
     dispatch(
       setQueryData([
-        scheduling_type,
+        appointment_status,
         {
           ...queryDataState,
           [e.target.name]: e.target.value,
@@ -31,9 +35,9 @@ function DaterStatistics({ scheduling_type }: IProps): React.JSX.Element {
       <Col md={2}>
         <FloatingLabel label="Desde:">
           <FormControl
-            name="start"
+            name="start_time"
             onChange={handleChange}
-            value={queryDataState.start}
+            value={queryDataState.start_time}
             type="date"
           />
         </FloatingLabel>
@@ -42,9 +46,9 @@ function DaterStatistics({ scheduling_type }: IProps): React.JSX.Element {
       <Col md={2}>
         <FloatingLabel label="Hasta:">
           <FormControl
-            name="end"
+            name="end_time"
             onChange={handleChange}
-            value={queryDataState.end}
+            value={queryDataState.end_time}
             type="date"
           />
         </FloatingLabel>
@@ -53,9 +57,9 @@ function DaterStatistics({ scheduling_type }: IProps): React.JSX.Element {
       <Col md={2}>
         <FloatingLabel label="Gráfica:">
           <FormSelect
-            name="chartType"
+            name="chart_type"
             onChange={handleChange}
-            value={queryDataState.chartType}
+            value={queryDataState.chart_type}
           >
             <option value="bar">Barra Vertical</option>
             <option value="polarArea">Polar Area</option>

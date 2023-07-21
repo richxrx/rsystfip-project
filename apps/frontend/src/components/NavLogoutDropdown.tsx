@@ -1,7 +1,7 @@
 import { Button, Dropdown, Image } from "react-bootstrap";
 import { BiLogOutCircle } from "react-icons/bi";
 import { NavLink, NavigateFunction, useNavigate } from "react-router-dom";
-import { resetFormDataAdmin } from "../features/admin/adminSlice";
+import { resetFormDataAdmin } from "../features/users/usersSlice";
 import { AuthState, resetUserAuthenticated } from "../features/auth/authSlice";
 import { resetAllFormDataProgramming } from "../features/programming/programmingSlice";
 import { resetQueryDataReports } from "../features/reports/reportsSlice";
@@ -13,7 +13,7 @@ interface IProps {
   avatar: string;
 }
 
-function NavLogoutDropdown({ avatar }: IProps): React.JSX.Element {
+function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.JSX.Element {
   const logout = () => {
     if (
       !confirm(
-        `${authState.user.name} estás seguro(a)que deseas cerrar sesión?`
+        `${authState.userAuth.first_name} estás seguro(a)que deseas cerrar sesión?`
       )
     )
       return;
@@ -54,13 +54,13 @@ function NavLogoutDropdown({ avatar }: IProps): React.JSX.Element {
           FAQs
         </NavLink>
         <NavLink
-          to={`/users/manage/password/${authState.user.id}/change`}
+          to={`/users/manage/password/${authState.userAuth.id}/change`}
           className="dropdown-item"
         >
           Cambiar contraseña
         </NavLink>
         <Dropdown.Divider />
-        <Button onClick={logout} className="dropdown-item text-bg-danger">
+        <Button onClick={logout} className="dropdown-item">
           Cerrar sesión <BiLogOutCircle />
         </Button>
       </Dropdown.Menu>

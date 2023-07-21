@@ -9,7 +9,7 @@ import { notify } from "../libs/toast";
 import * as userService from "../services/user.service";
 import FormChangePsw from "./FormChangePsw";
 
-function FetcherDataForChangePsw(): React.JSX.Element {
+function FetcherDataForChangePsw(): React.ReactNode {
   const { role } = useParams<{ role: string }>();
 
   const dispatch = useAppDispatch();

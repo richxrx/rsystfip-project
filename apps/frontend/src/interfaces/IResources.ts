@@ -3,13 +3,14 @@ export interface IBase {
 }
 
 export interface ICategory extends IBase {
-  category: string;
+  category_name: string;
 }
 
 export interface IFacultie extends IBase {
-  facultie: string;
+  faculty_name: string;
 }
 
 export interface IDocument extends IBase {
-  description: string;
+  document_name: string;
+  document_description: string;
 }

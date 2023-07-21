@@ -10,18 +10,13 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { forgetPswSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-interface FormData {
-  password: string;
-  confirmPassword: string;
-}
-
-function FormChangePswForget(): React.JSX.Element {
-  const formDataInitialState: FormData = {
+function FormChangePswForget(): React.ReactNode {
+  const formDataInitialState = {
     password: "",
     confirmPassword: "",
   };
 
-  const [formData, setFormData] = useState<FormData>(formDataInitialState);
+  const [formData, setFormData] = useState(formDataInitialState);
 
   const { resetToken } = useParams<{ resetToken: string }>();
 

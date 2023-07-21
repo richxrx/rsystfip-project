@@ -15,10 +15,11 @@ export async function getUser(req: Request, res: Response): Promise<Response> {
 }
 
 export async function getUsers(req: Request, res: Response): Promise<Response> {
-  const users = await UserService.getUsers();
-  if (!users) return res.status(500).json({ error: "Error getting users" });
+  const usersFound = await UserService.getUsers();
+  if (!usersFound)
+    return res.status(500).json({ error: "Error getting users" });
 
-  return res.status(200).json(users);
+  return res.status(200).json(usersFound);
 }
 
 export async function deleteUser(
@@ -43,18 +44,18 @@ export async function createUser(
   if (error) return res.status(400).json({ error: error.message });
 
   const userExists = await UserService.getUser(
-    parseInt(value.role) - 1,
+    parseInt(value.role_id) - 1,
     value.email
   );
   if (!userExists) {
-    const newUser: IUser = {
-      id: parseInt(value.role) - 1,
-      document_id: value.docType,
-      document_number: value.doc,
-      name: value.name,
-      lastname: value.lastname,
-      role: value.role,
-      tel: value.tel,
+    const newUser: Partial<IUser> = {
+      id: parseInt(value.role_id) - 1,
+      document_id: value.document_id,
+      document_number: value.document_number,
+      first_name: value.first_name,
+      last_name: value.last_name,
+      role_id: value.role_id,
+      phone_number: value.phone_number,
       email: value.email,
       password: await bcryptHelper.encryptPassword(value.password),
     };

@@ -11,7 +11,7 @@ import {
 } from "../features/calendar/calendarSlice";
 import {
   FormDataState,
-  scheduleStatus,
+  AppointmentStatus,
   setFormData,
 } from "../features/programming/programmingSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -31,7 +31,7 @@ interface IProps {
 function FullCalendarScheduling({
   right,
   initialView,
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   const action = propsAction.schedule;
 
   const formDataState: FormDataState = useAppSelector(
@@ -44,9 +44,8 @@ function FullCalendarScheduling({
   const dispatch = useAppDispatch();
 
   // Modal states
-  const [stateModalCancell, setStateModalCancell] = useState<boolean>(false);
-  const [stateModalScheduling, setStateModalScheduling] =
-    useState<boolean>(false);
+  const [stateModalCancell, setStateModalCancell] = useState(false);
+  const [stateModalScheduling, setStateModalScheduling] = useState(false);
 
   // Modal methods
   const closeModalCancell = (): void => setStateModalCancell(false);
@@ -104,12 +103,12 @@ function FullCalendarScheduling({
           weekNumberCalculation="ISO"
           selectable
           selectMirror
-          select={({ view: { calendar, type }, start, end }) => {
-            if ("dayGridMonth" === type) return;
+          select={({ view, start, end }) => {
+            if ("dayGridMonth" === view.type) return;
 
             const now = new Date();
             if (start < now) {
-              calendar.unselect();
+              view.calendar.unselect();
               return notify(
                 "No se puede agendar en una fecha que ya ha pasado.",
                 { type: "warning" }
@@ -122,7 +121,7 @@ function FullCalendarScheduling({
               end.getHours() === 0
             ) {
               // The selection is out of allow range, cancel
-              calendar.unselect();
+              view.calendar.unselect();
               return notify("Agendamientos no disponible en ese horario.", {
                 type: "warning",
               });
@@ -135,15 +134,14 @@ function FullCalendarScheduling({
                 action,
                 {
                   ...formDataState,
-                  date: format(start, "yyyy-MM-dd HH:mm:ss"),
-                  start: format(start, "yyyy-MM-dd HH:mm:ss"),
-                  end: format(end, "yyyy-MM-dd HH:mm:ss"),
-                  status: scheduleStatus.scheduled,
+                  start_time: format(start, "yyyy-MM-dd HH:mm:ss"),
+                  end_time: format(end, "yyyy-MM-dd HH:mm:ss"),
+                  status: AppointmentStatus.scheduled,
                 },
               ])
             );
           }}
-          eventClick={({ event: { id, start } }) => {
+          eventClick={({ event }) => {
             showModalCancell();
 
             dispatch(
@@ -151,8 +149,7 @@ function FullCalendarScheduling({
                 action,
                 {
                   ...formDataState,
-                  eventId: id,
-                  date: format(start as Date, "yyyy-MM-dd HH:mm:ss"),
+                  id: event.id,
                 },
               ])
             );
@@ -173,7 +170,9 @@ function FullCalendarScheduling({
           plugins={globalPlugins}
         />
       </Container>
-      <p className="text-center mt-2">Scheduled scheduling month to month.</p>
+      <p className="text-center mt-2">
+        Appointments are only available from 6am to 9pm.
+      </p>
     </Responsive>
   );
 }

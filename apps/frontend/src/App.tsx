@@ -33,11 +33,13 @@ const PageStcsScheduled = lazy(() => import("./pages/PageStcsScheduled"));
 
 const queryClient = new QueryClient();
 
-function App(): React.JSX.Element {
+function App(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
-  const avatar = authState.auth ? `/img/${authState.user.role}/avatar.png` : "";
-  const permissions = authState.user.permissions;
+  const avatar = authState.auth
+    ? `/img/${authState.userAuth.role_name}/avatar.png`
+    : "";
+  const permissions = authState.userAuth.permissions;
 
   return (
     <Suspense fallback={<Loader />}>

@@ -2,16 +2,18 @@ import { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { v4 } from "uuid";
-import { User, setUsers } from "../features/admin/adminSlice";
+import { User, setUsers } from "../features/users/usersSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { notify } from "../libs/toast";
 import * as userService from "../services/user.service";
 import UserRow from "./UserRow";
 
-function TableUsers(): React.JSX.Element {
+function TableUsers(): React.ReactNode {
   const dispatch = useAppDispatch();
 
-  const usersState: Array<User> = useAppSelector(({ admin }) => admin.users);
+  const usersState: Array<User> = useAppSelector(
+    ({ users: admin }) => admin.users
+  );
 
   const { data, error } = useQuery<[], any>("users", userService.getUsers);
 

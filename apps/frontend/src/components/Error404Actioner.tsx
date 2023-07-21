@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-function Error404Actioner(): React.JSX.Element {
+function Error404Actioner(): React.ReactNode {
   const navigate: NavigateFunction = useNavigate();
 
   return (

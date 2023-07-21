@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { scheduleStatus } from "../features/programming/programmingSlice";
+import { AppointmentStatus } from "../features/programming/programmingSlice";
 
 const JoiDefaults = Joi.defaults((scheme) =>
   scheme.options({ abortEarly: false })
@@ -14,25 +14,6 @@ export const statusSchema = JoiDefaults.object({
 
 export const idSchema = JoiDefaults.object({
   id: Joi.string().min(1).max(11).required(),
-});
-
-// Only backend
-export const filterSchema = JoiDefaults.object({
-  start: Joi.when("status", {
-    is: scheduleStatus.scheduled,
-    then: Joi.string().required(),
-    otherwise: Joi.optional(),
-  }),
-  end: Joi.when("status", {
-    is: scheduleStatus.scheduled,
-    then: Joi.string().required(),
-    otherwise: Joi.optional(),
-  }),
-});
-
-export const statisticfilterSchema = statusSchema.keys({
-  start: Joi.string().required(),
-  end: Joi.string().required(),
 });
 
 export const emailItfipSchema = JoiDefaults.object({
@@ -57,9 +38,9 @@ export const authSchema = JoiDefaults.object({
   password: Joi.string().min(8).max(30).required(),
 });
 
-export const cancellSchema = idSchema.keys({
-  date: Joi.string().required(),
-  cancelled_asunt: Joi.string().min(10).max(150).required(),
+export const cancellSchema = JoiDefaults.object({
+  person_id: Joi.string().min(1).max(11).required(),
+  cancellation_subject: Joi.string().min(10).max(150).required(),
 });
 
 export const changePswSchema = idSchema.keys({
@@ -102,28 +83,29 @@ export const deanSchema = JoiDefaults.object({
     .max(10)
     .required()
     .messages({ "string.pattern.base": '"document" invalid' }),
-  dean: Joi.string().min(8).max(50).required(),
+  first_name: Joi.string().min(3).max(25).required(),
+  last_name: Joi.string().min(3).max(25).required(),
   faculty_id: Joi.string().length(1).required(),
 });
 
 export const userSchema = emailItfipSchema.keys({
-  role: Joi.string().length(1).required(),
-  name: Joi.string().min(3).max(25).required(),
-  lastname: Joi.string().min(3).max(25).required(),
-  docType: Joi.string().length(1).required(),
-  doc: Joi.string()
+  role_id: Joi.string().length(1).required(),
+  first_name: Joi.string().min(3).max(25).required(),
+  last_name: Joi.string().min(3).max(25).required(),
+  document_id: Joi.string().length(1).required(),
+  document_number: Joi.string()
     .regex(/^[0-9]+$/)
     .min(8)
     .max(10)
     .required()
     .messages({ "string.pattern.base": '"document" invalid' }),
-  tel: Joi.string()
+  phone_number: Joi.string()
     .regex(/^[0-9]+$/)
     .length(10)
     .required()
     .messages({ "string.pattern.base": '"telephone" invalid' }),
   password: Joi.string().min(8).max(30).required(),
-  passwordConfirmation: Joi.string()
+  password_confirm: Joi.string()
     .valid(Joi.ref("password"))
     .min(8)
     .max(30)
@@ -132,16 +114,17 @@ export const userSchema = emailItfipSchema.keys({
 });
 
 export const peopleSchema = JoiDefaults.object({
-  person: Joi.string().length(1).required(),
-  name: Joi.string().min(8).max(50).required(),
-  doctype: Joi.string().length(1).required(),
-  doc: Joi.string()
+  category_id: Joi.string().length(1).required(),
+  first_name: Joi.string().min(3).max(25).required(),
+  last_name: Joi.string().min(3).max(25).required(),
+  document_id: Joi.string().length(1).required(),
+  document_number: Joi.string()
     .regex(/^[0-9]+$/)
     .min(8)
     .max(10)
     .required()
     .messages({ "string.pattern.base": '"document" invalid' }),
-  emailContact: Joi.string()
+  email: Joi.string()
     .min(10)
     .max(30)
     .email({
@@ -150,34 +133,29 @@ export const peopleSchema = JoiDefaults.object({
       tlds: { allow: false },
     })
     .required(),
-  telContact: Joi.string()
+  phone_number: Joi.string()
     .regex(/^[0-9]+$/)
     .length(10)
     .messages({ "string.pattern.base": '"telephone" invalid' })
     .required(),
-  facultie: Joi.string().length(1).required(),
-  asunt: Joi.string().min(10).max(150).required(),
+  faculty_id: Joi.string().length(1).required(),
 });
 
 export const peopleEditSchema = peopleSchema.concat(idSchema);
 
 export const schedulerSchema = peopleSchema
   .keys({
+    start_time: Joi.when("status", {
+      is: AppointmentStatus.scheduled,
+      then: Joi.string().required(),
+      otherwise: Joi.optional(),
+    }),
+    end_time: Joi.when("status", {
+      is: AppointmentStatus.scheduled,
+      then: Joi.string().required(),
+      otherwise: Joi.optional(),
+    }),
+    visit_subject: Joi.string().min(10).max(150).required(),
     color: Joi.string().min(4).max(7).required(),
-    date: Joi.when("status", {
-      is: scheduleStatus.scheduled,
-      then: Joi.string().required(),
-      otherwise: Joi.optional(),
-    }),
-    start: Joi.when("status", {
-      is: scheduleStatus.scheduled,
-      then: Joi.string().required(),
-      otherwise: Joi.optional(),
-    }),
-    end: Joi.when("status", {
-      is: scheduleStatus.scheduled,
-      then: Joi.string().required(),
-      otherwise: Joi.optional(),
-    }),
   })
   .concat(statusSchema);

@@ -4,19 +4,22 @@ import { ICounts } from "../../interfaces/ICounts";
 import { endOfMonth, format } from "date-fns";
 
 export interface Reports {
-  name: string;
-  date: string;
-  time: string;
+  category_id: number;
+  first_name: string;
+  last_name: string;
+  created_at: string;
+  updated_at: string;
+  start_time: string;
+  end_time: string;
   scheduling_count: string;
   daily_count: string;
-  category: string;
-  id_person: number;
+  category_name: string;
 }
 
 export interface QueryData {
-  startDate: string;
-  endDate: string;
-  category: string;
+  start_time: string;
+  end_time: string;
+  category_id: string;
 }
 
 interface ReportsState {
@@ -35,9 +38,9 @@ const initialState: ReportsState = {
   reportsCountOnRange: [],
   reportsCountAllTime: [],
   queryData: {
-    startDate: format(new Date(), "yyyy-MM-01"),
-    endDate: format(endOfMonth(new Date()), "yyyy-MM-dd"),
-    category: UNSET_STATUS,
+    start_time: format(new Date(), "yyyy-MM-01"),
+    end_time: format(endOfMonth(new Date()), "yyyy-MM-dd"),
+    category_id: UNSET_STATUS,
   },
 };
 

@@ -2,22 +2,22 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUserBase } from "../../interfaces/IUserBase";
 
 export interface User extends IUserBase {
-  name: string;
-  lastname: string;
-  tel: string;
-  role: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  role_name: string;
 }
 
 export interface FormData {
-  role: string;
-  name: string;
-  lastname: string;
-  docType: string;
-  doc: string;
+  role_id: string;
+  first_name: string;
+  last_name: string;
+  document_id: string;
+  document_number: string;
   email: string;
-  tel: string;
+  phone_number: string;
   password: string;
-  passwordConfirmation: string;
+  password_confirm: string;
 }
 
 interface AdminState {
@@ -28,15 +28,15 @@ interface AdminState {
 const initialState: AdminState = {
   users: [],
   formData: {
-    role: "",
-    name: "",
-    lastname: "",
-    docType: "",
-    doc: "",
+    role_id: "",
+    first_name: "",
+    last_name: "",
+    document_id: "",
+    document_number: "",
     email: "",
-    tel: "",
+    phone_number: "",
     password: "",
-    passwordConfirmation: "",
+    password_confirm: "",
   },
 };
 

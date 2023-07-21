@@ -1,9 +1,12 @@
 export interface IReport {
-  name: string;
-  date: string;
-  time: string;
+  category_id: number;
+  first_name: string;
+  last_name: string;
+  created_at: string;
+  updated_at: string;
+  start_time: string;
+  end_time: string;
   scheduling_count: string;
   daily_count: string;
-  category: string;
-  id_person: number;
+  category_name: string;
 }

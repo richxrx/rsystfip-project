@@ -4,6 +4,8 @@ import { SECRET_KEY } from "../config";
 import * as bcryptHelper from "../helpers/bcrypt.helper";
 import * as UserService from "../services/User.service";
 import { authSchema } from "../validation/schemas";
+import { IUser } from "interfaces/IUser";
+import { IPayload } from "interfaces/IPayload";
 
 export async function auth(req: Request, res: Response): Promise<Response> {
   const { error, value } = authSchema.validate(req.body);
@@ -22,20 +24,18 @@ export async function auth(req: Request, res: Response): Promise<Response> {
   if (!passwordVerified)
     return res.status(401).json({ error: "Bad credentials" });
 
-  const permissions = (userFound.permissions as string).split(",");
-  const token = Jwt.sign(
-    {
-      userId: userFound.id,
-      email: value.email,
-      role: userFound.role,
-      permissions,
-    },
-    SECRET_KEY || "secretkey",
-    { expiresIn: 7 * 24 * 60 * 60 }
-  );
+  const payload: Partial<IPayload> = {
+    userId: userFound.id,
+    email: value.email,
+    role_name: userFound.role_name,
+    permissions: userFound.permissions,
+  };
+  const token = Jwt.sign(payload, SECRET_KEY || "secretkey", {
+    expiresIn: 7 * 24 * 60 * 60,
+  });
 
-  return res
-    .status(200)
-    .setHeader("Authorization", token)
-    .json({ auth: true, user: { ...userFound, permissions } });
+  return res.status(200).setHeader("Authorization", token).json({
+    auth: true,
+    userAuth: userFound,
+  });
 }

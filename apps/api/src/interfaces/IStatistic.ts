@@ -1,4 +1,4 @@
 export interface IStatistic {
-  category: string;
+  category_name: string;
   scheduling_count: number;
 }

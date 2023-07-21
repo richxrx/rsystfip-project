@@ -14,8 +14,8 @@ export async function getStatistics(
 
   const statistics = await StatisticService.getStatistics(
     value.status,
-    value.start,
-    value.end
+    value.start_time,
+    value.end_time
   );
   if (!statistics)
     return res.status(500).json({ error: "Error getting statistics" });
@@ -35,8 +35,8 @@ export async function getMostAgendatedOnRange(
 
   const statistics = await StatisticService.getMostAgendatedOnRange(
     value.status,
-    value.start,
-    value.end
+    value.start_time,
+    value.end_time
   );
   if (!statistics)
     return res.status(500).json({ error: "Error getting statistics" });

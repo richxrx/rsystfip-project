@@ -5,16 +5,33 @@ interface IProps {
 }
 
 function ReportRow({
-  report: { name, date, time, scheduling_count, daily_count, category },
-}: IProps): React.JSX.Element {
+  report: {
+    first_name,
+    last_name,
+    created_at,
+    updated_at,
+    start_time,
+    end_time,
+    scheduling_count,
+    daily_count,
+    category_name,
+  },
+}: IProps): React.ReactNode {
   return (
     <tr>
-      <td>{name}</td>
-      <td>{date}</td>
-      <td>{time}</td>
+      <td>
+        {first_name} {last_name}
+      </td>
+      <td>{new Date(created_at).toLocaleString()}</td>
+      <td>{new Date(updated_at).toLocaleString()}</td>
+      <td>
+        {new Date(start_time).toLocaleString()}
+        {" - "}
+        {new Date(end_time).toLocaleString()}
+      </td>
       <td>{scheduling_count}</td>
       <td>{daily_count}</td>
-      <td>{category}</td>
+      <td>{category_name}</td>
     </tr>
   );
 }

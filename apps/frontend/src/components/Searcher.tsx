@@ -17,7 +17,7 @@ import * as peopleService from "../services/people.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import TablePeople from "./TablePeople";
 
-function Searcher(): React.JSX.Element {
+function Searcher(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const peopleOrigenState: Array<People> = useAppSelector(
@@ -34,8 +34,9 @@ function Searcher(): React.JSX.Element {
     dispatch(
       setPeople(
         peopleOrigenState.filter(
-          ({ name, document_number }) =>
-            name.toLowerCase().startsWith(findState) ||
+          ({ first_name, last_name, document_number }) =>
+            first_name.toLowerCase().startsWith(findState) ||
+            last_name.toLowerCase().startsWith(findState) ||
             document_number.startsWith(findState)
         )
       )

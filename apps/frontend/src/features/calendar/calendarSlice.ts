@@ -6,11 +6,11 @@ export interface ICalendarState {
 }
 
 export interface ICalendarEvents {
-  id?: number;
-  title?: string;
-  start?: string;
-  end?: string;
-  color?: string;
+  id: number;
+  title: string;
+  start: string;
+  end: string;
+  color: string;
 }
 
 const initialState: ICalendarState = {

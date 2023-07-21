@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import Searcher from "../components/Searcher";
 
-function PageAgendatedPeople(): React.JSX.Element {
+function PageAgendatedPeople(): React.ReactNode {
   return (
     <Row>
       <Helmet>

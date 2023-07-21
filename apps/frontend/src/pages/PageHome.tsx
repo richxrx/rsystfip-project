@@ -10,7 +10,7 @@ interface IProps {
   permissions: Array<string>;
 }
 
-function PageHome({ permissions }: IProps): React.JSX.Element {
+function PageHome({ permissions }: IProps): React.ReactNode {
   return (
     <Row>
       <Helmet>

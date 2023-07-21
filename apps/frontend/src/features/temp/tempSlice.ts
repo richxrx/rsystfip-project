@@ -13,7 +13,7 @@ const initialState: TempState = {
 };
 
 const tempSlice = createSlice({
-  name: "extras",
+  name: "temp",
   initialState,
   reducers: {
     setTempDataForChangePsw: function (

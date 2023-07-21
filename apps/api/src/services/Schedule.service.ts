@@ -2,15 +2,15 @@ import { ResultSetHeader, RowDataPacket } from "mysql2";
 import { connect } from "../db";
 import { ICalendar } from "../interfaces/ICalendar";
 import { IPeople } from "../interfaces/IPeople";
-import { IScheduleData } from "../interfaces/IScheduleData";
+import { IAppointment } from "../interfaces/IAppointment";
 
 export async function createSchedule(
-  scheduleData: IScheduleData
-): Promise<IScheduleData | null> {
+  scheduleData: IAppointment
+): Promise<IAppointment | null> {
   const conn = connect();
   if (!conn) return null;
   const [result] = await conn.query<ResultSetHeader>(
-    "INSERT INTO scheduling SET ?",
+    "INSERT INTO Appointments SET ?",
     [scheduleData]
   );
   await conn.end();
@@ -18,38 +18,38 @@ export async function createSchedule(
 }
 
 export async function getSchedule(
-  id: IScheduleData["person_id"]
-): Promise<(IScheduleData & IPeople) | null> {
+  id: IAppointment["id"]
+): Promise<(IAppointment & IPeople) | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT s.person_id, p.name, p.telephone AS tel, p.email, s.start_date, s.status FROM scheduling s INNER JOIN people p ON p.id = s.person_id WHERE s.person_id = ?",
+    "SELECT A.id, A.person_id, P.first_name, P.last_name, P.phone_number, P.email, A.start_time, A.end_time, A.status FROM Appointments A INNER JOIN People P ON P.id = A.person_id WHERE A.id = ?",
     [id]
   );
   await conn.end();
-  return rows[0] as IScheduleData & IPeople;
+  return rows[0] as IAppointment & IPeople;
 }
 
 export async function getSchedules(): Promise<Array<ICalendar> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT s.person_id AS id, p.name AS title, s.start_date AS start, s.end_date AS end, s.color FROM scheduling s INNER JOIN people p ON p.id = s.person_id WHERE s.status = 'scheduled'"
+    "SELECT A.id, CONCAT(first_name, ' ', last_name) AS title, A.start_time AS start, A.end_time AS end, A.color FROM Appointments A INNER JOIN People P ON P.id = A.person_id WHERE A.status = 'scheduled'"
   );
   await conn.end();
   return rows as Array<ICalendar>;
 }
 
 export async function updateSchedule(
-  cancellation: IScheduleData,
-  person_id: IScheduleData["person_id"],
-  start_date: IScheduleData["start_date"]
-): Promise<IScheduleData | null> {
+  cancellation: Partial<IAppointment>,
+  person_id: IAppointment["person_id"],
+  start_time: IAppointment["start_time"]
+): Promise<Partial<IAppointment> | null> {
   const conn = connect();
   if (!conn) return null;
   const [result] = await conn.query<ResultSetHeader>(
-    "UPDATE scheduling SET ? WHERE person_id = ? AND start_date = ?",
-    [cancellation, person_id, start_date]
+    "UPDATE Appointments SET ? WHERE person_id = ? AND start_time = ?",
+    [cancellation, person_id, start_time]
   );
   await conn.end();
   return result.affectedRows > 0 ? cancellation : null;

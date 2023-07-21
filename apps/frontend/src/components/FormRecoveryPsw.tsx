@@ -9,8 +9,8 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { emailItfipSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-function FormRecoveryPsw(): React.JSX.Element {
-  const [email, setEmail] = useState<string>("");
+function FormRecoveryPsw(): React.ReactNode {
+  const [email, setEmail] = useState("");
 
   const { mutate, isLoading } = useMutation(
     accountService.sendJwtForRecoverPsw,

@@ -2,30 +2,32 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AUTH_KEY } from "../../constants";
 import { ObjsHasSameStructure } from "../../libs/utils";
 
-interface User {
+interface UserAuth {
   iat: number;
   exp: number;
   id: number;
-  role: string;
-  name: string;
+  role_name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   permissions: Array<string>;
 }
 
 export interface AuthState {
   auth: boolean;
-  user: User;
+  userAuth: UserAuth;
   token: string;
 }
 
 const initialState: AuthState = {
   auth: false,
-  user: {
+  userAuth: {
     iat: 0,
     exp: 0,
     id: 0,
-    role: "",
-    name: "",
+    role_name: "",
+    first_name: "",
+    last_name: "",
     email: "",
     permissions: [],
   },
@@ -33,7 +35,7 @@ const initialState: AuthState = {
 };
 
 const userSessionSaved: AuthState = JSON.parse(
-  window.localStorage.getItem(AUTH_KEY) || "{}"
+  window.localStorage.getItem(AUTH_KEY) || JSON.stringify({})
 );
 
 const authSlice = createSlice({

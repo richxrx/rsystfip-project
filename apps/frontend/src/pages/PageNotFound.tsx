@@ -2,7 +2,7 @@ import { Col, Container, Image, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import Error404Actioner from "../components/Error404Actioner";
 
-function PageNotFound(): React.JSX.Element {
+function PageNotFound(): React.ReactNode {
   return (
     <Container className="px-4 py-5 my-5 text-center">
       <Helmet>

@@ -1,12 +1,13 @@
 export interface IUser {
   id: number;
-  name: string;
-  lastname: string;
+  first_name: string;
+  last_name: string;
   document_id: number;
   document_number: string;
-  tel: string;
+  phone_number: string;
   email: string;
   password?: string;
-  role: string;
-  permissions?: string;
+  role_id: number;
+  role_name: string;
+  permissions: Array<string>;
 }

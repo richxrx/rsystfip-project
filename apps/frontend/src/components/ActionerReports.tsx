@@ -13,7 +13,7 @@ import TableReports from "./TableReports";
 import { useQuery } from "react-query";
 import * as reportService from "../services/report.service";
 
-function ActionerReports(): React.JSX.Element {
+function ActionerReports(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const reportsOrigenState: Array<Reports> = useAppSelector(
@@ -24,17 +24,17 @@ function ActionerReports(): React.JSX.Element {
   );
 
   const { data, error, isError } = useQuery<[], any>(
-    ["reports", queryDataState.startDate, queryDataState.endDate],
+    ["reports", queryDataState.start_time, queryDataState.end_time],
     () => reportService.getReports(queryDataState)
   );
 
   const filterReports = (dataToFilter = reportsOrigenState) => {
     dispatch(
       setReports(
-        queryDataState.category !== UNSET_STATUS
+        queryDataState.category_id !== UNSET_STATUS
           ? dataToFilter.filter(
-              ({ id_person }) =>
-                id_person.toString() === queryDataState.category
+              ({ category_id }) =>
+                category_id.toString() === queryDataState.category_id
             )
           : dataToFilter
       )
@@ -51,7 +51,7 @@ function ActionerReports(): React.JSX.Element {
 
   useEffect(() => {
     filterReports();
-  }, [queryDataState.category]);
+  }, [queryDataState.category_id]);
 
   return (
     <>

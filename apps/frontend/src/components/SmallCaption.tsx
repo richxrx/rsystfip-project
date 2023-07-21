@@ -1,4 +1,4 @@
-function SmallCaption(): React.JSX.Element {
+function SmallCaption(): React.ReactNode {
   return (
     <figcaption className="blockquote-footer">
       <cite>Please verify that data to send are correct.</cite>

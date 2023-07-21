@@ -38,13 +38,15 @@ export async function sendJwtForRecoverPassword(
   if (!userFound)
     return res.status(404).json({ error: "Email isn't registered" });
 
-  const token = Jwt.sign(
-    { userId: userFound.id, email: userFound.email },
-    SECRET_KEY || "secretkey",
-    { expiresIn: 3 * 60 }
-  );
+  const payload: Partial<IPayload> = {
+    userId: userFound.id,
+    email: userFound.email,
+  };
+  const token = Jwt.sign(payload, SECRET_KEY || "secretkey", {
+    expiresIn: 3 * 60,
+  });
   const resetPasswordLink = `${req.headers.origin}/forget/my/password/${token}/recovery`;
-  const msg = `Dear ${userFound.name}, we have received a request to change the password for your account. If it wasn't you, please ignore this email.<br>If it was you, please click on the following link to reset your password:<br>${resetPasswordLink}<br><strong>This link will expire in 3 minutes.</strong><br><br>Sincerely,<br>Team ITFIP - RSystfip`;
+  const msg = `Dear ${userFound.first_name} ${userFound.last_name}, we have received a request to change the password for your account. If it wasn't you, please ignore this email.<br>If it was you, please click on the following link to reset your password:<br>${resetPasswordLink}<br><strong>This link will expire in 3 minutes.</strong><br><br>Sincerely,<br>Team ITFIP - RSystfip`;
 
   const linkSended = await sgHelper.sendEmail(
     value.email,
@@ -55,7 +57,7 @@ export async function sendJwtForRecoverPassword(
     return res.status(500).json({ error: "Error sending email" });
 
   return res.status(200).json({
-    ok: `${userFound.name}, we will send you an email with instructions to reset your password at ${value.email}. Expires in 3 minutes.`,
+    ok: `${userFound.first_name} ${userFound.last_name}, we will send you an email with instructions to reset your password at ${value.email}. Expires in 3 minutes.`,
   });
 }
 

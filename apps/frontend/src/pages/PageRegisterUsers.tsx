@@ -2,7 +2,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import FormUserAdd from "../components/FormUserAdd";
 
-function PageRegisterUsers(): React.JSX.Element {
+function PageRegisterUsers(): React.ReactNode {
   return (
     <Row>
       <Helmet>

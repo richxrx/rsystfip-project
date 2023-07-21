@@ -9,34 +9,37 @@ interface IProps {
 function PersonRow({
   person: {
     id,
-    name,
-    description,
-    ty_doc,
+    first_name,
+    last_name,
+    document_description,
+    document_name,
     document_number,
-    category,
-    facultie,
-    telephone,
+    category_name,
+    faculty_name,
+    phone_number,
     email,
-    come_asunt,
+    visit_subject,
   },
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   return (
     <tr>
       <td>{id}</td>
-      <td>{name}</td>
-      <td title={description}>
-        {ty_doc} {document_number}
+      <td>
+        {first_name} {last_name}
       </td>
-      <td>{category}</td>
-      <td>{facultie}</td>
-      <td>{telephone}</td>
+      <td title={document_description}>
+        {document_name} {document_number}
+      </td>
+      <td>{category_name}</td>
+      <td>{faculty_name}</td>
+      <td>{phone_number}</td>
       <td>{email}</td>
-      <td>{come_asunt}</td>
+      <td>{visit_subject}</td>
       <td>
         <Link
           to={`/people/view/${id}/edit`}
           className="btn btn-link link-fc"
-          title={`Edit personal data for person ${name}`}
+          title={`Edit personal data for person ${first_name} ${last_name}`}
         >
           <FiEdit3 />
         </Link>

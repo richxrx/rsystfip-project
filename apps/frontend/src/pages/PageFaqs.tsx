@@ -1,7 +1,7 @@
 import { Accordion, Col, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 
-function PageFaqs(): React.JSX.Element {
+function PageFaqs(): React.ReactNode {
   return (
     <Row>
       <Helmet>

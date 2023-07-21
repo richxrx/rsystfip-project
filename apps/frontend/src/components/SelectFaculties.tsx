@@ -20,7 +20,7 @@ function SelectFaculties({
   action,
   handleChange,
   facultieSelectRef,
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   const formDataState: FormDataState | undefined = useAppSelector(
     ({ programming: { formData } }) => formData[action]
   );
@@ -43,10 +43,10 @@ function SelectFaculties({
   return (
     <FloatingLabel label="Facultad:">
       <FormSelect
-        name="facultie"
+        name="faculty_id"
         className="border-0 bg-white"
         onChange={handleChange}
-        value={formDataState.facultie}
+        value={formDataState.faculty_id}
         ref={facultieSelectRef}
         disabled={
           formDataState.disabledAll || formDataState.disabledAfterAutocomplete
@@ -54,9 +54,9 @@ function SelectFaculties({
         required
       >
         <option value="">No seleccionado</option>
-        {facultiesState.map(({ id, facultie }) => (
+        {facultiesState.map(({ id, faculty_name }) => (
           <option key={v4()} value={id}>
-            {facultie}
+            {faculty_name}
           </option>
         ))}
       </FormSelect>

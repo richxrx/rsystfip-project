@@ -1,11 +1,11 @@
 import { Button, Col } from "react-bootstrap";
 
 interface IProps {
-  children: React.JSX.Element;
+  children: React.ReactNode;
   loading: boolean;
 }
 
-function Submitter({ children, loading }: IProps): React.JSX.Element {
+function Submitter({ children, loading }: IProps): React.ReactNode {
   return (
     <Col md={6}>
       <Button className="my-2" disabled={loading} type="submit">

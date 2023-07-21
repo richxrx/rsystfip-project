@@ -2,31 +2,31 @@ import { RowDataPacket } from "mysql2";
 import { connect } from "../db";
 import { ICount } from "../interfaces/ICount";
 import { IReport } from "../interfaces/IReport";
-import { IScheduleData } from "../interfaces/IScheduleData";
+import { IAppointment } from "../interfaces/IAppointment";
 
 export async function getReports(
-  start: IScheduleData["start_date"],
-  end: IScheduleData["end_date"]
+  start_time: IAppointment["start_time"],
+  end_time: IAppointment["end_time"]
 ): Promise<Array<IReport> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT p.name, s.start_date AS date, s.modification AS time, SUM(CASE WHEN s.status = 'scheduled' THEN 1 ELSE 0 END) AS scheduling_count, SUM(CASE WHEN s.status = 'daily' THEN 1 ELSE 0 END) AS daily_count, c.category, c.id AS id_person FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.date_filter >= '2023-07-01' AND s.date_filter <= '2023-07-31' GROUP BY s.person_id, s.start_date, s.modification",
-    [start, end]
+    "SELECT P.first_name, P.last_name, A.created_at, A.updated_at, A.start_time, A.end_time, SUM(CASE WHEN A.status = 'scheduled' THEN 1 ELSE 0 END) AS scheduling_count, SUM(CASE WHEN A.status = 'daily' THEN 1 ELSE 0 END) AS daily_count, C.category_name, P.category_id FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id WHERE A.start_time >= ? AND A.start_time <= ? GROUP BY A.person_id, A.created_at, A.updated_at, A.start_time, A.end_time",
+    [start_time, end_time]
   );
   await conn.end();
   return rows as Array<IReport>;
 }
 
 export async function getReportCount(
-  start: IScheduleData["start_date"],
-  end: IScheduleData["end_date"]
+  start_time: IAppointment["start_time"],
+  end_time: IAppointment["end_time"]
 ): Promise<Array<ICount> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT c.category, COUNT(s.person_id) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id WHERE s.date_filter >= ? AND s.date_filter <= ? GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10",
-    [start, end]
+    "SELECT C.category_name, COUNT(A.person_id) AS counts FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id WHERE A.start_time >= ? AND A.start_time <= ? GROUP BY P.category_id, C.category_name ORDER BY counts DESC LIMIT 10",
+    [start_time, end_time]
   );
   await conn.end();
   return rows as Array<ICount>;
@@ -36,7 +36,7 @@ export async function getReportCounts(): Promise<Array<ICount> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT c.category, COUNT(s.person_id) AS counts FROM scheduling s INNER JOIN people p ON p.id = s.person_id INNER JOIN categories c ON c.id = p.category_id GROUP BY p.category_id, c.category ORDER BY counts DESC LIMIT 10"
+    "SELECT C.category_name, COUNT(A.person_id) AS counts FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id GROUP BY P.category_id, C.category_name ORDER BY counts DESC LIMIT 10"
   );
   await conn.end();
   return rows as Array<ICount>;

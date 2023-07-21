@@ -22,7 +22,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-function DaterReports({ errorReports }: IProps): React.JSX.Element {
+function DaterReports({ errorReports }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const categoriesState: Array<ICategory> = useAppSelector(
@@ -56,10 +56,10 @@ function DaterReports({ errorReports }: IProps): React.JSX.Element {
       <Col md={2}>
         <FloatingLabel label="Desde:">
           <FormControl
-            name="startDate"
+            name="start_time"
             className="border-0 bg-white"
             onChange={handleChange}
-            value={queryDataState.startDate}
+            value={queryDataState.start_time}
             type="date"
           />
         </FloatingLabel>
@@ -68,10 +68,10 @@ function DaterReports({ errorReports }: IProps): React.JSX.Element {
       <Col md={2}>
         <FloatingLabel label="Hasta:">
           <FormControl
-            name="endDate"
+            name="end_time"
             className="border-0 bg-white"
             onChange={handleChange}
-            value={queryDataState.endDate}
+            value={queryDataState.end_time}
             type="date"
           />
         </FloatingLabel>
@@ -80,15 +80,15 @@ function DaterReports({ errorReports }: IProps): React.JSX.Element {
       <Col md={2}>
         <FloatingLabel label="Persona:">
           <FormSelect
-            name="category"
+            name="category_id"
             className="border-0 bg-white"
             onChange={handleChange}
-            value={queryDataState.category}
+            value={queryDataState.category_id}
           >
             <option value={UNSET_STATUS}>Todos</option>
-            {categoriesState.map(({ id, category }) => (
+            {categoriesState.map(({ id, category_name }) => (
               <option key={v4()} value={id}>
-                {category}
+                {category_name}
               </option>
             ))}
           </FormSelect>

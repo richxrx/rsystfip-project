@@ -13,17 +13,14 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import { authSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
-function FormLogin(): React.JSX.Element {
-  interface FormData {
-    username: string;
-    password: string;
-  }
-
-  const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const [formData, setFormData] = useState<FormData>({
+function FormLogin(): React.ReactNode {
+  const formDataInitialState = {
     username: "",
     password: "",
-  });
+  };
+
+  const [formData, setFormData] = useState(formDataInitialState);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();

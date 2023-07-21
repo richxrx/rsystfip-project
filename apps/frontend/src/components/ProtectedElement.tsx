@@ -1,9 +1,12 @@
-import { IPropsProtected } from "../interfaces/IPropsProtected";
+interface IProps {
+  children?: React.ReactNode;
+  isAllowed: boolean;
+}
 
 function ProtectedElement({
   children,
   isAllowed,
-}: IPropsProtected): React.JSX.Element | undefined {
+}: IProps): React.ReactNode | undefined {
   return isAllowed ? children : undefined;
 }
 

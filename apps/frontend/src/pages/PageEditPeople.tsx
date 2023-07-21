@@ -4,7 +4,7 @@ import FormSchedulePeople, {
   propsAction,
 } from "../components/FormSchedulePeople";
 
-function PageEditPeople(): React.JSX.Element {
+function PageEditPeople(): React.ReactNode {
   return (
     <Row>
       <Helmet>

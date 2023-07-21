@@ -1,11 +1,11 @@
 export interface IPeople {
   id?: number;
-  name: string;
+  first_name: string;
+  last_name: string;
   document_id: number;
   document_number: string;
-  telephone?: string;
-  email?: string;
+  phone_number: string;
+  email: string;
   category_id: number;
   faculty_id: number;
-  come_asunt: string;
 }

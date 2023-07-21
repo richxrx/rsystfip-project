@@ -10,7 +10,7 @@ interface IProps {
   isLoading: boolean;
 }
 
-function FooterFormPeople({ isAllowed, isLoading }: IProps): React.JSX.Element {
+function FooterFormPeople({ isAllowed, isLoading }: IProps): React.ReactNode {
   const navigate: NavigateFunction = useNavigate();
 
   const handleClick = (e: THandleClick) => {

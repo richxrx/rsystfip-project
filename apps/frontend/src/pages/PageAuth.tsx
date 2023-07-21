@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import FormLogin from "../components/FormLogin";
 import HeaderLogin from "../components/HeaderLogin";
 
-function PageAuth(): React.JSX.Element {
+function PageAuth(): React.ReactNode {
   return (
     <Row>
       <Helmet>

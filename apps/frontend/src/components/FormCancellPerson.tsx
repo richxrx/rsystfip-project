@@ -16,8 +16,8 @@ interface IProps {
   closeModalCancell: () => void;
 }
 
-function FormCancellPerson({ closeModalCancell }: IProps): React.JSX.Element {
-  const [cancelled_asunt, setCancelled_asunt] = useState<string>("");
+function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
+  const [cancellationSubject, setCancellationSubject] = useState("");
 
   const dispatch = useAppDispatch();
 
@@ -34,22 +34,23 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.JSX.Element {
     e.preventDefault();
 
     const { error, value } = cancellSchema.validate({
-      id: formDataState.eventId,
-      date: formDataState.date,
-      cancelled_asunt,
+      person_id: formDataState.id,
+      cancellation_subject: cancellationSubject,
     });
     if (error) return notify(error.message, { type: "warning" });
 
     try {
       const data = await mutationCancellation.mutateAsync(value);
-      await mutationSchedule.mutateAsync(value);
+
+      // person_id is same to formData.id
+      await mutationSchedule.mutateAsync(value.person_id);
 
       dispatch(registerAChange());
       notify(data.ok, {
         type: "success",
         position: "top-left",
       });
-      setCancelled_asunt("");
+      setCancellationSubject("");
       closeModalCancell();
     } catch (error: any) {
       notify(error.response.data.error, { type: "error" });
@@ -57,7 +58,7 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.JSX.Element {
   };
 
   const handleChange = (e: THandleChangeI) =>
-    setCancelled_asunt(e.target.value);
+    setCancellationSubject(e.target.value);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -66,10 +67,10 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.JSX.Element {
           <Form.FloatingLabel label="Asunto cancelamiento:">
             <Form.Control
               as="textarea"
-              name="cancelled_asunt"
+              name="cancellation_subject"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={cancelled_asunt}
+              value={cancellationSubject}
               placeholder="Complete campo"
               autoComplete="off"
               spellCheck={false}

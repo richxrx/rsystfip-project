@@ -6,15 +6,15 @@ import {
 
 export function updateDataBySchedulingType(
   state: StatisticsState,
-  schedulingType: string,
+  appointmentStatus: string,
   updateData: Partial<Data>
 ): StatisticsState {
-  if (!(schedulingType in validSchedulingTypes)) return state;
+  if (!(appointmentStatus in validSchedulingTypes)) return state;
 
   return {
     ...state,
-    [schedulingType]: {
-      ...state[schedulingType],
+    [appointmentStatus]: {
+      ...state[appointmentStatus],
       ...updateData,
     },
   };

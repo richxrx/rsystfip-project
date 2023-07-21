@@ -18,6 +18,7 @@ import ChartDataLabels, { Context } from "chartjs-plugin-datalabels";
 import { useEffect, useRef, useState } from "react";
 import { Col } from "react-bootstrap";
 import { UseQueryResult, useQueries } from "react-query";
+import { AppointmentStatus } from "../features/programming/programmingSlice";
 import {
   QueryData,
   setMostAgendatedAllTime,
@@ -29,7 +30,6 @@ import * as statisticService from "../services/statistic.service";
 import Ctx from "./Ctx";
 import DaterStatistics from "./DaterStatistics";
 import ListerStatistics from "./ListerStatistics";
-import { scheduleStatus } from "../features/programming/programmingSlice";
 
 ChartJS.register(
   ArcElement,
@@ -47,11 +47,11 @@ ChartJS.register(
   Tooltip
 );
 
-export interface IProps {
-  scheduling_type: scheduleStatus;
+interface IProps {
+  appointment_status: AppointmentStatus;
 }
 
-function Statistics({ scheduling_type }: IProps): React.JSX.Element {
+function Statistics({ appointment_status }: IProps): React.ReactNode {
   const [chartJS, setChartJS] = useState<ChartJS<
     keyof ChartTypeRegistry,
     Array<string>,
@@ -63,81 +63,78 @@ function Statistics({ scheduling_type }: IProps): React.JSX.Element {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
-    ({ statistics }) => statistics[scheduling_type].queryData
+    ({ statistics }) => statistics[appointment_status].queryData
   );
 
   const labelText =
-    scheduling_type === scheduleStatus.daily ? "diario" : "programado";
+    appointment_status === AppointmentStatus.daily ? "diario" : "programado";
 
   const refreshChart = (labels: Array<string>, data: Array<string>) => {
     if (chartJS) chartJS.destroy();
 
-    const newChart: typeof chartJS = new ChartJS(
-      ctxRef.current as HTMLCanvasElement,
-      {
-        type: queryDataState.chartType as keyof ChartTypeRegistry,
-        data: {
-          labels,
-          datasets: [
-            {
-              label: `Agendamiento ${labelText} - Cantidad persona(s)`,
-              data,
-              backgroundColor: [
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-                "rgba(255, 205, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(201, 203, 207, 0.2)",
-              ],
-              borderColor: [
-                "rgb(54, 162, 235)",
-                "rgb(255, 99, 132)",
-                "rgb(255, 159, 64)",
-                "rgb(255, 205, 86)",
-                "rgb(75, 192, 192)",
-                "rgb(153, 102, 255)",
-                "rgb(201, 203, 207)",
-              ],
-              borderWidth: 1,
-              hoverOffset: 4,
-              tension: 0.1,
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          animations: {
-            tension: {
-              duration: 1000,
-              easing: "linear",
-              from: 1,
-              to: 0,
-              loop: true,
-            },
+    const newChart = new ChartJS(ctxRef.current as HTMLCanvasElement, {
+      type: queryDataState.chart_type as keyof ChartTypeRegistry,
+      data: {
+        labels,
+        datasets: [
+          {
+            label: `Agendamiento ${labelText} - Cantidad persona(s)`,
+            data,
+            backgroundColor: [
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(255, 159, 64, 0.2)",
+              "rgba(255, 205, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+              "rgba(201, 203, 207, 0.2)",
+            ],
+            borderColor: [
+              "rgb(54, 162, 235)",
+              "rgb(255, 99, 132)",
+              "rgb(255, 159, 64)",
+              "rgb(255, 205, 86)",
+              "rgb(75, 192, 192)",
+              "rgb(153, 102, 255)",
+              "rgb(201, 203, 207)",
+            ],
+            borderWidth: 1,
+            hoverOffset: 4,
+            tension: 0.1,
           },
-          scales: {
-            x: { beginAtZero: true },
-            y: { beginAtZero: true },
-          },
-          plugins: {
-            datalabels: {
-              formatter: (value: number, ctx: Context): string => {
-                let sum = 0;
-                const data = ctx.dataset.data;
-                data.forEach((n) => (sum += Number(n)));
-                const percent = Math.round((value / sum) * 100);
-                return (isNaN(percent) ? 0 : percent).toString().concat("%");
-              },
-              labels: { title: { font: { size: 20 } } },
-              align: "end",
-            },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animations: {
+          tension: {
+            duration: 1000,
+            easing: "linear",
+            from: 1,
+            to: 0,
+            loop: true,
           },
         },
-      }
-    );
+        scales: {
+          x: { beginAtZero: true },
+          y: { beginAtZero: true },
+        },
+        plugins: {
+          datalabels: {
+            formatter: (value: number, ctx: Context): string => {
+              let sum = 0;
+              const data = ctx.dataset.data;
+              data.forEach((n) => (sum += Number(n)));
+              const percent = Math.round((value / sum) * 100);
+              return (isNaN(percent) ? 0 : percent).toString().concat("%");
+            },
+            labels: { title: { font: { size: 20 } } },
+            align: "end",
+          },
+        },
+      },
+    });
 
     setChartJS(newChart);
   };
@@ -146,34 +143,35 @@ function Statistics({ scheduling_type }: IProps): React.JSX.Element {
     {
       queryKey: [
         "statistics",
-        queryDataState.start,
-        queryDataState.end,
-        queryDataState.chartType,
+        queryDataState.start_time,
+        queryDataState.end_time,
+        queryDataState.chart_type,
       ],
       queryFn: () =>
-        statisticService.getStatistics(scheduling_type, queryDataState),
+        statisticService.getStatistics(appointment_status, queryDataState),
     },
     {
       queryKey: [
         "statisticsOnRange",
-        queryDataState.start,
-        queryDataState.end,
-        queryDataState.chartType,
+        queryDataState.start_time,
+        queryDataState.end_time,
+        queryDataState.chart_type,
       ],
       queryFn: () =>
         statisticService.getMostAgendatedOnRange(
-          scheduling_type,
+          appointment_status,
           queryDataState
         ),
     },
     {
       queryKey: [
         "statisticsAllTime",
-        queryDataState.start,
-        queryDataState.end,
-        queryDataState.chartType,
+        queryDataState.start_time,
+        queryDataState.end_time,
+        queryDataState.chart_type,
       ],
-      queryFn: () => statisticService.getMostAgendatedAllTime(scheduling_type),
+      queryFn: () =>
+        statisticService.getMostAgendatedAllTime(appointment_status),
     },
   ]);
 
@@ -185,7 +183,7 @@ function Statistics({ scheduling_type }: IProps): React.JSX.Element {
         if (data) {
           if (i === 0) {
             const labels: Array<string> = data.map(
-              ({ category }: { category: string }) => category
+              ({ category_name }: { category_name: string }) => category_name
             );
             const dataset: Array<string> = data.map(
               ({ scheduling_count }: { scheduling_count: string }) =>
@@ -194,10 +192,10 @@ function Statistics({ scheduling_type }: IProps): React.JSX.Element {
             refreshChart(labels, dataset);
           }
           if (i === 1) {
-            dispatch(setMostAgendatedOnRange([scheduling_type, data]));
+            dispatch(setMostAgendatedOnRange([appointment_status, data]));
           }
           if (i === 2) {
-            dispatch(setMostAgendatedAllTime([scheduling_type, data]));
+            dispatch(setMostAgendatedAllTime([appointment_status, data]));
           }
         }
 
@@ -215,14 +213,14 @@ function Statistics({ scheduling_type }: IProps): React.JSX.Element {
         <h1 className="h3">Estadísticas de agendamiento {labelText}</h1>
       </Col>
 
-      <DaterStatistics scheduling_type={scheduling_type} />
+      <DaterStatistics appointment_status={appointment_status} />
 
       <Col md={12} className="my-5">
         <Ctx ctxRef={ctxRef} />
       </Col>
 
       <Col md={12}>
-        <ListerStatistics scheduling_type={scheduling_type} />
+        <ListerStatistics appointment_status={appointment_status} />
       </Col>
     </>
   );

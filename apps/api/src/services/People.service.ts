@@ -6,7 +6,7 @@ export async function createPerson(person: IPeople): Promise<IPeople | null> {
   const conn = connect();
   if (!conn) return null;
   const [result] = await conn.query<ResultSetHeader>(
-    "INSERT INTO people SET ?",
+    "INSERT INTO People SET ?",
     [person]
   );
   await conn.end();
@@ -17,7 +17,7 @@ export async function getPerson(id: IPeople["id"]): Promise<IPeople | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT * FROM people WHERE id = ?",
+    "SELECT * FROM People WHERE id = ?",
     [id]
   );
   await conn.end();
@@ -31,7 +31,7 @@ export async function updatePerson(
   const conn = connect();
   if (!conn) return null;
   const [result] = await conn.query<ResultSetHeader>(
-    "UPDATE people SET ? WHERE id = ?",
+    "UPDATE People SET ? WHERE id = ?",
     [person, id]
   );
   await conn.end();
@@ -42,7 +42,7 @@ export async function getPeople(): Promise<Array<IPeople> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT p.id, p.name, d.document AS ty_doc, c.category, p.faculty_id, d.description, p.document_number, f.facultie, p.telephone, p.email, p.come_asunt FROM people p INNER JOIN documents d ON p.document_id = d.id INNER JOIN faculties f ON p.faculty_id = f.id INNER JOIN categories c ON p.category_id = c.id ORDER BY p.id DESC"
+    "SELECT A.id, P.first_name, P.last_name, D.document_name, C.category_name, P.faculty_id, D.document_description, P.document_number, F.faculty_name, P.phone_number, P.email, A.visit_subject FROM People P INNER JOIN Appointments A ON P.id = A.person_id INNER JOIN Documents D ON P.document_id = D.id INNER JOIN Faculties F ON P.faculty_id = F.id INNER JOIN Categories C ON P.category_id = C.id ORDER BY P.id DESC"
   );
   await conn.end();
   return rows as Array<IPeople>;
@@ -52,7 +52,7 @@ export async function getCancelledPeople(): Promise<Array<IPeople> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT p.id, p.name, d.document AS ty_doc, c.category, p.faculty_id, d.description, p.document_number, f.facultie, l.cancelled_asunt FROM people p INNER JOIN documents d ON p.document_id = d.id INNER JOIN faculties f ON p.faculty_id = f.id INNER JOIN categories c ON p.category_id = c.id INNER JOIN cancelled l ON p.id = l.person_id INNER JOIN scheduling s ON s.person_id = l.person_id WHERE s.status = 'cancelled' ORDER BY p.id DESC"
+    "SELECT P.id, P.first_name, P.last_name, D.document_name, C.category_name, P.faculty_id, D.document_description, P.document_number, F.faculty_name, CA.cancellation_subject FROM People P INNER JOIN Documents D ON P.document_id = D.id INNER JOIN Faculties F ON P.faculty_id = F.id INNER JOIN Categories C ON P.category_id = C.id INNER JOIN CanceledAppointments CA ON P.id = CA.person_id INNER JOIN Appointments A ON A.person_id = CA.person_id WHERE A.status = 'cancelled' ORDER BY P.id DESC"
   );
   await conn.end();
   return rows as Array<IPeople>;

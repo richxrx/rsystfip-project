@@ -1,7 +1,7 @@
 import { Card, Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-function HeaderLogin(): React.JSX.Element {
+function HeaderLogin(): React.ReactNode {
   return (
     <Container className="text-center mt-2">
       <Link to="/">

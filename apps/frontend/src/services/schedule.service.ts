@@ -5,11 +5,8 @@ export const getEvents = async () => {
   return data;
 };
 
-export const cancellSchedule = async (scheduleData: any) => {
-  const { data } = await api.patch(
-    `/schedule/${scheduleData.id}`,
-    scheduleData
-  );
+export const cancellSchedule = async (id: number) => {
+  const { data } = await api.patch(`/schedule/${id}`, {});
   return data;
 };
 

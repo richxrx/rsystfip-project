@@ -2,7 +2,7 @@ import { Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import FetcherDataForChangePsw from "../components/FetcherDataForChangePsw";
 
-function PageChangePassword(): React.JSX.Element {
+function PageChangePassword(): React.ReactNode {
   return (
     <Row>
       <Helmet>

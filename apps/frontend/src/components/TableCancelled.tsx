@@ -11,7 +11,7 @@ import { notify } from "../libs/toast";
 import * as peopleService from "../services/people.service";
 import CancelledRow from "./CancelledRow";
 
-function TableCancelled(): React.JSX.Element {
+function TableCancelled(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const cancelledPeopleState: Array<PeopleCancelled> = useAppSelector(
@@ -34,11 +34,11 @@ function TableCancelled(): React.JSX.Element {
       <thead>
         <tr>
           <th>No.</th>
-          <th>Nombres</th>
+          <th>Nombre Completo</th>
           <th>Identifación</th>
           <th>Categoría</th>
           <th>Facultad</th>
-          <th>Motivo</th>
+          <th>Motivo cancelación</th>
         </tr>
       </thead>
       <tbody>

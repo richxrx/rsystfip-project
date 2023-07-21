@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPeopleBase } from "../../interfaces/IPeopleBase";
 
 export interface PeopleCancelled extends IPeopleBase {
-  cancelled_asunt: string;
+  cancellation_subject: string;
 }
 
 const initialState: Array<PeopleCancelled> = [];

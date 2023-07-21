@@ -4,7 +4,7 @@ import { QueryData, Reports } from "../features/reports/reportsSlice";
 import { useAppSelector } from "../hooks";
 import ReportRow from "./ReportRow";
 
-function TableReports(): React.JSX.Element {
+function TableReports(): React.ReactNode {
   const reportsState: Array<Reports> = useAppSelector(
     ({ reports }) => reports.reports
   );
@@ -15,14 +15,15 @@ function TableReports(): React.JSX.Element {
   return (
     <Table responsive hover borderless size="sm" className="text-center">
       <caption>
-        Data about people schedule between {queryDataState.startDate} and{" "}
-        {queryDataState.endDate}.
+        Data about people schedule between {queryDataState.start_time} and{" "}
+        {queryDataState.end_time}.
       </caption>
       <thead>
         <tr>
           <th>Nombres</th>
-          <th>Fecha</th>
-          <th>Últ. Modificación</th>
+          <th>Creado en</th>
+          <th>Actualizado en</th>
+          <th>Agendamiento Inicio - Fin</th>
           <th>Agendamiento Programado</th>
           <th>Agendamiento Diario</th>
           <th>Tipo Persona</th>

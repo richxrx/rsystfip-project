@@ -37,22 +37,24 @@ function footer(currentPage: number, pageCount: number): Content {
 
 const styles: StyleDictionary = {
   header: {
-    fontSize: 18,
+    fontSize: 10,
     bold: true,
+    italics: true,
     margin: [0, 0, 0, 10],
   },
   subheader: {
-    fontSize: 16,
+    fontSize: 8,
     bold: true,
     margin: [0, 10, 0, 5],
   },
   tableHeader: {
     bold: true,
-    fontSize: 13,
+    italics: true,
+    fontSize: 10,
     color: "black",
   },
-  grayColor: {
-    fillColor: "#f9f9f9",
+  defaultPage: {
+    fontSize: 10,
   },
 };
 

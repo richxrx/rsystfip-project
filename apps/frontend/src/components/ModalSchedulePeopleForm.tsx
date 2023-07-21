@@ -9,7 +9,7 @@ interface IProps {
 function ModalSchedulePeopleForm({
   stateModalScheduling,
   closeModalScheduling,
-}: IProps): React.JSX.Element {
+}: IProps): React.ReactNode {
   return (
     <Modal
       show={stateModalScheduling}

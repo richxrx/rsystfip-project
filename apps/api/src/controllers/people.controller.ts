@@ -15,14 +15,14 @@ export async function createPerson(
   if (error) return res.status(400).json({ error: error.message });
 
   const newPerson: IPeople = {
-    name: value.name,
-    document_id: value.doctype,
-    document_number: value.doc,
-    category_id: value.person,
-    telephone: value.telContact,
-    email: value.emailContact,
-    faculty_id: value.facultie,
-    come_asunt: value.asunt,
+    first_name: value.first_name,
+    last_name: value.last_name,
+    document_id: value.document_id,
+    document_number: value.document_number,
+    phone_number: value.phone_number,
+    email: value.email,
+    category_id: value.category_id,
+    faculty_id: value.faculty_id,
   };
   const personCreated = await PeopleService.createPerson(newPerson);
   if (!personCreated)
@@ -61,14 +61,14 @@ export async function updatePerson(
   if (!personFound) return res.status(404).json({ error: "Person not found" });
 
   const dataPerson: IPeople = {
-    name: value.name,
+    first_name: value.first_name,
+    last_name: value.last_name,
     document_id: value.doctype,
     document_number: value.doc,
     category_id: value.person,
     faculty_id: value.facultie,
     email: value.emailContact,
-    telephone: value.telContact,
-    come_asunt: value.asunt,
+    phone_number: value.telContact,
   };
   const peopleEdited = await PeopleService.updatePerson(value.id, dataPerson);
   if (!peopleEdited)
@@ -83,10 +83,11 @@ export async function getPeople(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const people = await PeopleService.getPeople();
-  if (!people) return res.status(500).json({ error: "Error getting people" });
+  const peopleFound = await PeopleService.getPeople();
+  if (!peopleFound)
+    return res.status(500).json({ error: "Error getting people" });
 
-  return res.status(200).json(people);
+  return res.status(200).json(peopleFound);
 }
 
 export async function getCancelledPeople(

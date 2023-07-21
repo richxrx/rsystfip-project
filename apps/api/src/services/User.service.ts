@@ -9,7 +9,7 @@ export async function getUser(
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT u.id, u.name, u.email, u.password, u.role, r.permissions FROM users u INNER JOIN roles r ON u.role = r.id WHERE u.email = ? OR u.id = ?",
+    "SELECT U.id, U.first_name, U.last_name, U.email, U.password, R.role_name, R.permissions FROM Users U INNER JOIN Roles R ON U.role_id = R.id WHERE U.email = ? OR U.id = ?",
     [email, id]
   );
   await conn.end();
@@ -19,16 +19,20 @@ export async function getUser(
 export async function getUsers(): Promise<Array<IUser> | null> {
   const conn = connect();
   if (!conn) return null;
-  const [rows] = await conn.query<Array<RowDataPacket>>("SELECT * FROM users");
+  const [rows] = await conn.query<Array<RowDataPacket>>(
+    "SELECT U.id, U.first_name, U.last_name, U.document_number, D.document_name, U.phone_number, U.email, U.role_id, U.authorized, R.role_name FROM Users U INNER JOIN Roles R ON U.role_id = R.id INNER JOIN Documents D ON U.document_id = D.id"
+  );
   await conn.end();
   return rows as Array<IUser>;
 }
 
-export async function createUser(user: IUser): Promise<IUser | null> {
+export async function createUser(
+  user: Partial<IUser>
+): Promise<Partial<IUser> | null> {
   const conn = connect();
   if (!conn) return null;
   const [result] = await conn.query<ResultSetHeader>(
-    "INSERT INTO users SET ?",
+    "INSERT INTO Users SET ?",
     [user]
   );
   await conn.end();
@@ -40,7 +44,7 @@ export async function deleteUser(id: IUser["id"]): Promise<boolean> {
   const conn = connect();
   if (!conn) return false;
   const [result] = await conn.query<ResultSetHeader>(
-    "DELETE FROM users WHERE id = ?",
+    "DELETE FROM Users WHERE id = ?",
     [id]
   );
   await conn.end();
@@ -54,7 +58,7 @@ export async function updateUser(
   const conn = connect();
   if (!conn) return null;
   const [result] = await conn.query<ResultSetHeader>(
-    "UPDATE users SET ? WHERE id = ?",
+    "UPDATE Users SET ? WHERE id = ?",
     [user, id]
   );
   await conn.end();

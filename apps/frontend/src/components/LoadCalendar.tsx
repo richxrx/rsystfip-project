@@ -4,7 +4,7 @@ interface IProps {
   loadEventsRef: React.RefObject<HTMLDivElement>;
 }
 
-function LoadCalendar({ loadEventsRef }: IProps): React.JSX.Element {
+function LoadCalendar({ loadEventsRef }: IProps): React.ReactNode {
   return (
     <div className="load-events" ref={loadEventsRef}>
       Cargando <Spinner size="sm" />

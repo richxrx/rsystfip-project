@@ -1,6 +1,6 @@
 import * as pdfMake from "pdfmake/build/pdfmake";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
-import { createHeader, footer, myFonts, styles } from "../extras/pdfmake";
+import { createHeader, footer, myFonts, styles } from "../pdf/pdfmake";
 import { People } from "../features/people/peopleSlice";
 import { QueryData, Reports } from "../features/reports/reportsSlice";
 import { useAppSelector } from "../hooks";
@@ -11,7 +11,7 @@ interface IProps {
   errorReports: boolean;
 }
 
-function PdfCreator({ errorReports }: IProps): React.JSX.Element {
+function PdfCreator({ errorReports }: IProps): React.ReactNode {
   const pngBase64State: string = useAppSelector(
     ({ reports }) => reports.pngBase64
   );
@@ -35,8 +35,8 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
     pageMargins: [28, 90],
     header: createHeader(
       pngBase64State,
-      queryDataState.startDate,
-      queryDataState.endDate
+      queryDataState.start_time,
+      queryDataState.end_time
     ),
     footer,
     content: [
@@ -48,6 +48,7 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
       },
       peopleState.length !== 0
         ? {
+            style: "defaultPage",
             layout: "lightHorizontalLines",
             alignment: "center",
             table: {
@@ -55,25 +56,41 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
               headerRows: 1,
               body: [
                 [
-                  { text: "No.", style: "tableHeader" },
+                  {
+                    text: "No.",
+                    style: "tableHeader",
+                  },
                   {
                     text: "Nombre completo",
                     style: "tableHeader",
                   },
-                  { text: "Categoría", style: "tableHeader" },
-                  { text: "Facultad", style: "tableHeader" },
+                  {
+                    text: "Categoría",
+                    style: "tableHeader",
+                  },
+                  {
+                    text: "Facultad",
+                    style: "tableHeader",
+                  },
                   {
                     text: "Asunto visita rectoría",
                     style: "tableHeader",
                   },
                 ],
                 ...peopleState.map(
-                  ({ id, name, category, facultie, come_asunt }) => [
+                  ({
                     id,
-                    name,
-                    category,
-                    facultie,
-                    come_asunt,
+                    first_name,
+                    last_name,
+                    category_name,
+                    faculty_name,
+                    visit_subject,
+                  }) => [
+                    id,
+                    `${first_name} ${last_name}`,
+                    category_name,
+                    faculty_name,
+                    visit_subject,
                   ]
                 ),
               ],
@@ -89,6 +106,7 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
       },
       reportsState.length !== 0
         ? {
+            style: "defaultPage",
             layout: "lightHorizontalLines",
             alignment: "center",
             table: {
@@ -118,12 +136,19 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
                   },
                 ],
                 ...reportsState.map(
-                  ({ name, date, scheduling_count, daily_count, category }) => [
-                    name,
-                    date,
+                  ({
+                    first_name,
+                    last_name,
+                    start_time,
                     scheduling_count,
                     daily_count,
-                    category,
+                    category_name,
+                  }) => [
+                    `${first_name} ${last_name}`,
+                    new Date(start_time).toLocaleString(),
+                    scheduling_count,
+                    daily_count,
+                    category_name,
                   ]
                 ),
               ],
@@ -164,7 +189,7 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
                 layout: "headerLineOnly",
                 alignment: "center",
                 marginBottom: 30,
-                style: "grayColor",
+                style: "defaultPage",
                 table: {
                   dontBreakRows: true,
                   headerRows: 1,
@@ -179,10 +204,9 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
                         style: "tableHeader",
                       },
                     ],
-                    ...reportsCountOnRangeState.map(({ category, counts }) => [
-                      category,
-                      counts,
-                    ]),
+                    ...reportsCountOnRangeState.map(
+                      ({ category_name, counts }) => [category_name, counts]
+                    ),
                   ],
                 },
               }
@@ -192,7 +216,7 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
                 layout: "headerLineOnly",
                 alignment: "center",
                 marginBottom: 30,
-                style: "grayColor",
+                style: "defaultPage",
                 table: {
                   dontBreakRows: true,
                   headerRows: 1,
@@ -207,10 +231,9 @@ function PdfCreator({ errorReports }: IProps): React.JSX.Element {
                         style: "tableHeader",
                       },
                     ],
-                    ...reportsCountAllTimeState.map(({ category, counts }) => [
-                      category,
-                      counts,
-                    ]),
+                    ...reportsCountAllTimeState.map(
+                      ({ category_name, counts }) => [category_name, counts]
+                    ),
                   ],
                 },
               }

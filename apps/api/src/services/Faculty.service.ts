@@ -6,7 +6,7 @@ export async function getFaculties(): Promise<Array<IFaculty> | null> {
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT * FROM faculties"
+    "SELECT * FROM Faculties"
   );
   await conn.end();
   return rows as Array<IFaculty>;

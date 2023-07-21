@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AuthState } from "../features/auth/authSlice";
 import { useAppSelector } from "../hooks";
 
-function Footer(): React.JSX.Element {
+function Footer(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
   return (
