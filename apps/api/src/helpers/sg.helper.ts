@@ -1,4 +1,4 @@
-import sgMail, { MailDataRequired, ResponseError } from "@sendgrid/mail";
+import sgMail, { MailDataRequired } from "@sendgrid/mail";
 import { EMAIL_SENDER, SENDGRID_API_KEY } from "../config";
 
 export async function sendEmail(to: string, subject: string, html: string) {
