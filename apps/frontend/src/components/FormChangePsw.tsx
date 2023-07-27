@@ -7,7 +7,6 @@ import { notify } from "../libs/toast";
 import * as accountService from "../services/account.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
-import { changePswSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
 interface IProps {
@@ -38,15 +37,14 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
 
-    const { error, value } = changePswSchema.validate({
+    const payload = {
       id: userId.toString(),
       current_password: formData.currentPassword,
       new_password: formData.newPassword,
       new_password_confirm: formData.confirmPassword,
-    });
-    if (error) return notify(error.message, { type: "warning" });
+    };
 
-    mutate(value);
+    mutate(payload);
   };
 
   const handleChange = (e: THandleChangeI) => {

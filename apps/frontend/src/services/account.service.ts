@@ -22,7 +22,7 @@ export const changePassword = async (dataUser: any) => {
   return data;
 };
 
-export const changePasswordWithJwt = async (dataUser: string) => {
+export const changePasswordWithJwt = async (dataUser: any) => {
   const { data } = await api.patch(`/account/update-password`, dataUser);
   return data;
 };

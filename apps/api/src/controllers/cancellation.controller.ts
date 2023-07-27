@@ -18,5 +18,5 @@ export async function createCancellation(
 
   return res
     .status(200)
-    .json({ ok: "Schedule cancelled successfully", cancellationCreated });
+    .json({ ok: "Cancellation in progress", cancellationCreated });
 }

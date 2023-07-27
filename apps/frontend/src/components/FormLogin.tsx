@@ -10,7 +10,6 @@ import { notify } from "../libs/toast";
 import * as authService from "../services/auth.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
-import { authSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
 function FormLogin(): React.ReactNode {
@@ -50,10 +49,9 @@ function FormLogin(): React.ReactNode {
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
 
-    const { error, value } = authSchema.validate(formData);
-    if (error) return notify(error.message, { type: "warning" });
+    const payload = formData;
 
-    mutate(value);
+    mutate(payload);
   };
 
   return (

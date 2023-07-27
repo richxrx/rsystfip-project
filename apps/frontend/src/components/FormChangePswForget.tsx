@@ -7,7 +7,6 @@ import { notify } from "../libs/toast";
 import * as accountService from "../services/account.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
-import { forgetPswSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
 function FormChangePswForget(): React.ReactNode {
@@ -38,14 +37,13 @@ function FormChangePswForget(): React.ReactNode {
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
 
-    const { error, value } = forgetPswSchema.validate({
+    const payload = {
       resetToken,
       password: formData.password,
       password_confirm: formData.confirmPassword,
-    });
-    if (error) return notify(error.message, { type: "warning" });
+    };
 
-    mutate(value);
+    mutate(payload);
   };
 
   const handleChange = (e: THandleChangeI) => {

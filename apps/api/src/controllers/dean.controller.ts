@@ -24,5 +24,5 @@ export async function createDean(
   if (!deanCreated)
     return res.status(500).json({ error: "Error creating dean" });
 
-  return res.status(201).json(deanCreated);
+  return res.status(201).json({ ok: "Dean created successfully", deanCreated });
 }

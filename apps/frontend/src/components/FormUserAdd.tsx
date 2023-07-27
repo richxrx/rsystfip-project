@@ -3,12 +3,12 @@ import { Col, Form, Row, Spinner } from "react-bootstrap";
 import { FaUserPlus } from "react-icons/fa";
 import { useMutation, useQuery } from "react-query";
 import { v4 } from "uuid";
+import { setDocuments } from "../features/resources/resourcesSlice";
 import {
   FormData,
   resetFormDataAdmin,
   setFormData,
 } from "../features/users/usersSlice";
-import { setDocuments } from "../features/resources/resourcesSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { IDocument } from "../interfaces/IResources";
 import { notify } from "../libs/toast";
@@ -16,7 +16,6 @@ import * as documentService from "../services/document.service";
 import * as userService from "../services/user.service";
 import { THandleChangeITS } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
-import { userSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
 function FormUserAdd(): React.ReactNode {
@@ -53,10 +52,9 @@ function FormUserAdd(): React.ReactNode {
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
 
-    const { error, value } = userSchema.validate(formDataState);
-    if (error) return notify(error.message, { type: "warning" });
+    const payload = formDataState;
 
-    mutate(value);
+    mutate(payload);
   };
 
   const { data, error } = useQuery<[], any>(

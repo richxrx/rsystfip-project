@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { Button, Col, Form, ModalFooter, Row, Spinner } from "react-bootstrap";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import { useMutation } from "react-query";
 import { registerAChange } from "../features/calendar/calendarSlice";
 import { FormDataState } from "../features/programming/programmingSlice";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { notify } from "../libs/toast";
-import { THandleChangeI } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
-import { cancellSchema } from "../validation/schemas";
-import { useMutation } from "react-query";
 import * as cancellationService from "../services/cancellation.service";
 import * as scheduleService from "../services/schedule.service";
+import { THandleChangeI } from "../types/THandleChanges";
+import { THandleSubmit } from "../types/THandleSubmits";
 
 interface IProps {
   closeModalCancell: () => void;
@@ -33,23 +32,28 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
   const handleSubmit = async (e: THandleSubmit): Promise<void> => {
     e.preventDefault();
 
-    const { error, value } = cancellSchema.validate({
+    const payload = {
       person_id: formDataState.id,
       cancellation_subject: cancellationSubject,
-    });
-    if (error) return notify(error.message, { type: "warning" });
+    };
 
     try {
-      const data = await mutationCancellation.mutateAsync(value);
+      const resCancellation = await mutationCancellation.mutateAsync(payload);
+      notify(resCancellation.ok, {
+        type: "info",
+        position: "top-left",
+      });
 
       // person_id is same to formData.id
-      await mutationSchedule.mutateAsync(value.person_id);
-
-      dispatch(registerAChange());
-      notify(data.ok, {
+      const resSchedule = await mutationSchedule.mutateAsync(
+        parseInt(payload.person_id)
+      );
+      notify(resSchedule.ok, {
         type: "success",
         position: "top-left",
       });
+
+      dispatch(registerAChange());
       setCancellationSubject("");
       closeModalCancell();
     } catch (error: any) {

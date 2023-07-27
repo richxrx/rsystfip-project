@@ -28,7 +28,9 @@ export async function createSchedule(
   if (!scheduleCreated)
     return res.status(500).json({ error: "Error creating schedule" });
 
-  return res.status(201).json(scheduleCreated);
+  return res
+    .status(201)
+    .json({ ok: "Appointment created successfully", scheduleCreated });
 }
 
 export async function cancellSchedule(
@@ -66,5 +68,7 @@ export async function cancellSchedule(
   if (!msgSended?.response)
     return res.status(500).json({ error: "Error reporting the cancellation" });
 
-  return res.status(200).json(scheduleCancelled);
+  return res
+    .status(200)
+    .json({ ok: "Schedule cancelled successfully", scheduleCancelled });
 }

@@ -18,7 +18,6 @@ import * as peopleService from "../services/people.service";
 import * as scheduleService from "../services/schedule.service";
 import { THandleChangeITS } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
-import { peopleEditSchema, schedulerSchema } from "../validation/schemas";
 import FooterFormPeople from "./FooterFormPeople";
 import ProtectedElement from "./ProtectedElement";
 import SelectDocument from "./SelectDocument";
@@ -74,7 +73,7 @@ function FormSchedulePeople({
   const mutationSaveDean = useMutation(deanService.saveDean);
 
   const editPerson = () => {
-    const { error, value } = peopleEditSchema.validate({
+    const payload = {
       id,
       category_id: formDataState.category_id,
       first_name: formDataState.first_name,
@@ -85,16 +84,15 @@ function FormSchedulePeople({
       email: formDataState.email,
       phone_number: formDataState.phone_number,
       visit_subject: formDataState.visit_subject,
-    });
-    if (error) return notify(error.message, { type: "warning" });
+    };
 
-    mutationEditPerson.mutate(value);
+    mutationEditPerson.mutate(payload);
   };
 
   const schedulePerson = async (
     closeModalScheduling?: IProps["closeModalScheduling"]
   ): Promise<void> => {
-    const { error, value } = schedulerSchema.validate({
+    const payload = {
       category_id: formDataState.category_id,
       first_name: formDataState.first_name,
       last_name: formDataState.last_name,
@@ -108,44 +106,53 @@ function FormSchedulePeople({
       start_time: formDataState.start_time,
       end_time: formDataState.end_time,
       status: formDataState.status,
-    });
-    if (error) return notify(error.message, { type: "warning" });
+    };
 
     try {
-      const data = await mutationSavePeople.mutateAsync(value);
-
-      await mutationSchedule.mutateAsync({
-        person_id: data.personCreated.id.toString(),
-        start_time: value.start_time || undefined,
-        end_time: value.end_time || undefined,
-        visit_subject: value.visit_subject,
-        status: value.status,
-        color: value.color,
+      const resSavePeople = await mutationSavePeople.mutateAsync(payload);
+      notify(resSavePeople.ok, {
+        type: "info",
+        position: "top-left",
       });
 
-      if (value.category_id === "4") {
-        await mutationSaveDean.mutateAsync({
-          id: value.document_number,
-          first_name: value.first_name,
-          last_name: value.last_name,
-          faculty_id: value.faculty_id,
+      if (payload.category_id === "4") {
+        const resDean = await mutationSaveDean.mutateAsync({
+          id: payload.document_number,
+          first_name: payload.first_name,
+          last_name: payload.last_name,
+          faculty_id: payload.faculty_id,
+        });
+        notify(resDean.ok, {
+          type: "info",
+          position: "top-left",
         });
       }
 
-      dispatch(setFormData([action]));
-
-      if (
-        formDataState.status === AppointmentStatus.scheduled &&
-        closeModalScheduling
-      ) {
-        dispatch(registerAChange());
-        closeModalScheduling();
-      }
-
-      notify(data.ok, {
+      const resSchedule = await mutationSchedule.mutateAsync({
+        person_id: resSavePeople.personCreated.id.toString(),
+        start_time: payload.start_time || undefined,
+        end_time: payload.end_time || undefined,
+        visit_subject: payload.visit_subject,
+        status: payload.status,
+        color: payload.color,
+      });
+      notify(resSchedule.ok, {
         type: "success",
         position: "top-left",
       });
+
+      // Do the dispatch at redux state
+      dispatch(setFormData([action]));
+
+      // Finish the function if status isn't scheduled
+      if (
+        formDataState.status !== AppointmentStatus.scheduled ||
+        !closeModalScheduling
+      )
+        return;
+
+      dispatch(registerAChange());
+      closeModalScheduling();
     } catch (error: any) {
       notify(error.response.data.error, { type: "error" });
     }

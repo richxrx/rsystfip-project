@@ -6,7 +6,6 @@ import { notify } from "../libs/toast";
 import * as accountService from "../services/account.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
-import { emailItfipSchema } from "../validation/schemas";
 import Submitter from "./Submitter";
 
 function FormRecoveryPsw(): React.ReactNode {
@@ -27,10 +26,9 @@ function FormRecoveryPsw(): React.ReactNode {
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
 
-    const { error, value } = emailItfipSchema.validate({ email });
-    if (error) return notify(error.message, { type: "warning" });
+    const payload = { email };
 
-    mutate(value.email);
+    mutate(payload.email);
   };
 
   const handleChange = (e: THandleChangeI) => setEmail(e.target.value);

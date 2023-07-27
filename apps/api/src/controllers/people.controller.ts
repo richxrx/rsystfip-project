@@ -28,10 +28,9 @@ export async function createPerson(
   if (!personCreated)
     return res.status(500).json({ error: "Error creating person" });
 
-  return res.status(201).json({
-    ok: "Person created successfully",
-    personCreated: { ...personCreated },
-  });
+  return res
+    .status(201)
+    .json({ ok: "Person created successfully", personCreated });
 }
 
 export async function getPerson(
