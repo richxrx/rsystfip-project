@@ -14,8 +14,11 @@ function FormRecoveryPsw(): React.ReactNode {
   const { mutate, isLoading } = useMutation(
     accountService.sendJwtForRecoverPsw,
     {
-      onSuccess: (data) => {
-        notify(data.ok, { type: "success" });
+      onSuccess: () => {
+        notify(
+          `We will send you an email with instructions to reset your password. The link sended expires in 3 minutes.`,
+          { type: "success" }
+        );
         setEmail("");
       },
       onError: (error: any) =>

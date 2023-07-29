@@ -1,8 +1,7 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import Jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config";
 import * as bcryptHelper from "../helpers/bcrypt.helper";
-import * as sgHelper from "../helpers/sg.helper";
 import { IPayload } from "../interfaces/IPayload";
 import { IUser } from "../interfaces/IUser";
 import * as UserService from "../services/User.service";
@@ -29,8 +28,9 @@ export async function verifyJwtForRecoverPassword(
 
 export async function sendJwtForRecoverPassword(
   req: Request,
-  res: Response
-): Promise<Response> {
+  res: Response,
+  next: NextFunction
+): Promise<Response | undefined> {
   const { error, value } = emailItfipSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
@@ -49,17 +49,11 @@ export async function sendJwtForRecoverPassword(
   const resetPasswordLink = `${req.headers.origin}/forget/my/password/${token}/recovery`;
   const msg = `Dear ${userFound.first_name} ${userFound.last_name}, we have received a request to change the password for your account. If it wasn't you, please ignore this email.<br>If it was you, please click on the following link to reset your password:<br>${resetPasswordLink}<br><strong>This link will expire in 3 minutes.</strong><br><br>Sincerely,<br>Team ITFIP - RSystfip`;
 
-  const linkSended = await sgHelper.sendEmail(
-    value.email,
-    "Request of change password",
-    msg
-  );
-  if (!linkSended?.response)
-    return res.status(500).json({ error: "Error sending email" });
+  req.body.email = value.email;
+  req.body.subject = "Request of change password";
+  req.body.html = msg;
 
-  return res.status(200).json({
-    ok: `${userFound.first_name} ${userFound.last_name}, we will send you an email with instructions to reset your password at ${value.email}. Expires in 3 minutes.`,
-  });
+  next();
 }
 
 export async function updatePassword(
