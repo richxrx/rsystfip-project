@@ -31,9 +31,9 @@ function UserRow({
 
   return (
     <tr>
-      <td>{`${email} (${role_name[0]
-        .toUpperCase()
-        .concat(role_name.slice(1))})`}</td>
+      <td>
+        {email} ({role_name[0].toUpperCase().concat(role_name.slice(1))})
+      </td>
 
       <td>
         <Link

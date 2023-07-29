@@ -46,7 +46,7 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
 
       // person_id is same to formData.id
       const resSchedule = await mutationSchedule.mutateAsync(
-        parseInt(payload.person_id)
+        +payload.person_id
       );
       notify(resSchedule.ok, {
         type: "success",

@@ -43,13 +43,10 @@ export async function createUser(
   const { error, value } = userSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
 
-  const userExists = await UserService.getUser(
-    parseInt(value.role_id) - 1,
-    value.email
-  );
+  const userExists = await UserService.getUser(+value.role_id - 1, value.email);
   if (!userExists) {
     const newUser: Partial<IUser> = {
-      id: parseInt(value.role_id) - 1,
+      id: +value.role_id - 1,
       document_id: value.document_id,
       document_number: value.document_number,
       first_name: value.first_name,
