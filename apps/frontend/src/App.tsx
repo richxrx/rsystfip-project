@@ -37,7 +37,7 @@ function App(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
   const avatar = authState.auth
-    ? `/img/${authState.userAuth.role_name}/avatar.png`
+    ? `/img/${authState.userAuth.role_name}.png`
     : "";
   const permissions = authState.userAuth.permissions;
 

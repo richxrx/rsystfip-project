@@ -15,12 +15,7 @@ function HeaderLogin(): React.ReactNode {
             <strong>ITFIP</strong>
           </Card.Text>
           <Link to="https://www.itfip.edu.co">
-            <Image
-              src="/img/admin/avatar.png"
-              height="55"
-              width="55"
-              alt="itfip"
-            />
+            <Image src="/img/admin.png" height="55" width="55" alt="itfip" />
           </Link>
         </Card.Body>
       </Card>
