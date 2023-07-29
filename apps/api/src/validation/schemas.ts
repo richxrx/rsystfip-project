@@ -52,6 +52,23 @@ export const emailItfipSchema = JoiDefaults.object({
     }),
 });
 
+export const emailSchema = JoiDefaults.object({
+  email: Joi.string()
+    .min(10)
+    .max(30)
+    .email({
+      minDomainSegments: 2,
+      maxDomainSegments: 3,
+      tlds: { allow: false },
+    })
+    .required(),
+});
+
+export const sendEmailSchema = emailSchema.keys({
+  subject: Joi.string().min(5).max(50).required(),
+  html: JoiDefaults.string().min(10).required(),
+});
+
 export const authSchema = JoiDefaults.object({
   username: Joi.string().min(5).max(255).required(),
   password: Joi.string().min(8).max(30).required(),
@@ -132,7 +149,7 @@ export const userSchema = emailItfipSchema.keys({
     .messages({ "any.only": "Passwords does not match" }),
 });
 
-export const peopleSchema = JoiDefaults.object({
+export const peopleSchema = emailSchema.keys({
   category_id: Joi.string().length(1).required(),
   first_name: Joi.string().min(3).max(25).required(),
   last_name: Joi.string().min(3).max(25).required(),
@@ -143,15 +160,6 @@ export const peopleSchema = JoiDefaults.object({
     .max(10)
     .required()
     .messages({ "string.pattern.base": '"document" invalid' }),
-  email: Joi.string()
-    .min(10)
-    .max(30)
-    .email({
-      minDomainSegments: 2,
-      maxDomainSegments: 3,
-      tlds: { allow: false },
-    })
-    .required(),
   phone_number: Joi.string()
     .regex(/^[0-9]+$/)
     .length(10)

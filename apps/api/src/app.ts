@@ -17,6 +17,7 @@ import userRoutes from "./routes/user.routes";
 import categoryRoutes from "./routes/category.routes";
 import documentRoutes from "./routes/document.routes";
 import facultyRoutes from "./routes/faculty.routes";
+import sgRoutes from "./routes/sendgrid.routes";
 
 export class App {
   private app: express.Application;
@@ -42,6 +43,7 @@ export class App {
 
   routes() {
     this.app.use("/api/auth", authRoutes);
+    this.app.use("/api/sendgrid", sgRoutes);
     this.app.use("/api/session", sessionRoutes);
     this.app.use("/api/account", accountRoutes);
     this.app.use("/api/users", authMiddleware(), userRoutes);

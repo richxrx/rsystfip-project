@@ -49,11 +49,11 @@ function FormSchedulePeople({
   const dispatch = useAppDispatch();
 
   const formDataState: FormDataState = useAppSelector(
-    ({ programming: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action]
   );
 
   const deansState: Array<Deans> = useAppSelector(
-    ({ programming }) => programming.deans
+    ({ appointments }) => appointments.deans
   );
 
   const mutationEditPerson = useMutation(peopleService.editPeople, {
@@ -233,10 +233,6 @@ function FormSchedulePeople({
       });
     }
   };
-
-  useEffect(() => {
-    dispatch(setFormData([action]));
-  }, []);
 
   useEffect(() => {
     autocompleteDeansData();

@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as cancellationService from "../services/cancellation.service";
 import * as scheduleService from "../services/schedule.service";
+import * as sgService from "../services/sendgrid.service";
 import { THandleChangeI } from "../types/THandleChanges";
 import { THandleSubmit } from "../types/THandleSubmits";
 
@@ -21,12 +22,13 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const formDataState: FormDataState = useAppSelector(
-    ({ programming }) => programming.formData.schedule
+    ({ appointments }) => appointments.formData.schedule
   );
 
   const mutationCancellation = useMutation(
     cancellationService.createCancellation
   );
+  const mutationSendEmail = useMutation(sgService.sendEmail);
   const mutationSchedule = useMutation(scheduleService.cancellSchedule);
 
   const handleSubmit = async (e: THandleSubmit): Promise<void> => {
@@ -38,17 +40,28 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
     };
 
     try {
+      // person_id is same to formData.id
+      const resSchedule = await mutationSchedule.mutateAsync(
+        +payload.person_id
+      );
+      notify(resSchedule.ok, {
+        type: "info",
+        position: "top-left",
+      });
+
       const resCancellation = await mutationCancellation.mutateAsync(payload);
       notify(resCancellation.ok, {
         type: "info",
         position: "top-left",
       });
 
-      // person_id is same to formData.id
-      const resSchedule = await mutationSchedule.mutateAsync(
-        +payload.person_id
-      );
-      notify(resSchedule.ok, {
+      const sgPayload = {
+        email: resSchedule.scheduleCancelled.email,
+        subject: "Schedule cancelled",
+        html: `<strong>${resSchedule.scheduleCancelled.first_name} ${resSchedule.scheduleCancelled.last_name}</strong>, your schedule cite for the day <code>${resSchedule.scheduleCancelled.start_time} has been cancelled. The reason of cancellation is: <code>${payload.cancellation_subject}</code>.</br><img src='https://repositorio.itfip.edu.co/themes/Mirage2/images/logo_wh.png'>`,
+      };
+      const resSendgrid = await mutationSendEmail.mutateAsync(sgPayload);
+      notify(resSendgrid.ok, {
         type: "success",
         position: "top-left",
       });
@@ -93,11 +106,17 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
           <Button
             variant="danger"
             disabled={
-              mutationCancellation.isLoading || mutationSchedule.isLoading
+              mutationCancellation.isLoading ||
+              mutationSchedule.isLoading ||
+              mutationSendEmail.isLoading
             }
             type="submit"
           >
-            {!(mutationCancellation.isLoading || mutationSchedule.isLoading) ? (
+            {!(
+              mutationCancellation.isLoading ||
+              mutationSchedule.isLoading ||
+              mutationSendEmail.isLoading
+            ) ? (
               <>
                 Sí, cancelar <FaCheck className="mb-1" />
               </>

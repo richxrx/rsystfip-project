@@ -45,6 +45,7 @@ export async function sendJwtForRecoverPassword(
   const token = Jwt.sign(payload, SECRET_KEY || "secretkey", {
     expiresIn: 3 * 60,
   });
+
   const resetPasswordLink = `${req.headers.origin}/forget/my/password/${token}/recovery`;
   const msg = `Dear ${userFound.first_name} ${userFound.last_name}, we have received a request to change the password for your account. If it wasn't you, please ignore this email.<br>If it was you, please click on the following link to reset your password:<br>${resetPasswordLink}<br><strong>This link will expire in 3 minutes.</strong><br><br>Sincerely,<br>Team ITFIP - RSystfip`;
 

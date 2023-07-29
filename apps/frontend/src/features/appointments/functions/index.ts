@@ -1,15 +1,15 @@
 import {
   FormDataState,
-  ProgrammingState,
+  AppointmentState,
   formDataInitialState,
   validFormDataAction,
 } from "../appointmentsSlice";
 
 export function updateFormDataByAction(
-  state: ProgrammingState,
+  state: AppointmentState,
   action: string,
   formData?: FormDataState
-): ProgrammingState {
+): AppointmentState {
   if (!(action in validFormDataAction)) return state;
 
   return {

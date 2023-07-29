@@ -11,9 +11,7 @@ import UserRow from "./UserRow";
 function TableUsers(): React.ReactNode {
   const dispatch = useAppDispatch();
 
-  const usersState: Array<User> = useAppSelector(
-    ({ users: admin }) => admin.users
-  );
+  const usersState: Array<User> = useAppSelector(({ users }) => users.users);
 
   const { data, error } = useQuery<[], any>("users", userService.getUsers);
 

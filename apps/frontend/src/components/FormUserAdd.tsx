@@ -19,9 +19,7 @@ import { THandleSubmit } from "../types/THandleSubmits";
 import Submitter from "./Submitter";
 
 function FormUserAdd(): React.ReactNode {
-  const formDataState: FormData = useAppSelector(
-    ({ users: admin }) => admin.formData
-  );
+  const formDataState: FormData = useAppSelector(({ users }) => users.formData);
   const documentsState: Array<IDocument> = useAppSelector(
     ({ resources }) => resources.documents
   );

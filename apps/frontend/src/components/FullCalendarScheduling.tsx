@@ -35,7 +35,7 @@ function FullCalendarScheduling({
   const action = propsAction.schedule;
 
   const formDataState: FormDataState = useAppSelector(
-    ({ programming }) => programming.formData.schedule
+    ({ appointments }) => appointments.formData.schedule
   );
   const calendarEventsState: ICalendarState = useAppSelector(
     ({ calendar }) => calendar

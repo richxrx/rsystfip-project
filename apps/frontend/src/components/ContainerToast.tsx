@@ -13,7 +13,7 @@ function ContainerToast(): React.ReactNode {
       pauseOnFocusLoss={false}
       draggable={false}
       pauseOnHover={false}
-      limit={3}
+      limit={4}
       theme="dark"
     />
   );

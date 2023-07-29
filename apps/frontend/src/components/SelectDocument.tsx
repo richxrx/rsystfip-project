@@ -20,7 +20,7 @@ function SelectDocument({ action, handleChange }: IProps): React.ReactNode {
     ({ resources }) => resources.documents
   );
   const formDataState: FormDataState | undefined = useAppSelector(
-    ({ programming: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action]
   );
 
   const dispatch = useAppDispatch();

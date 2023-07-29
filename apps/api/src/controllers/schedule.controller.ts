@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import * as sgHelper from "../helpers/sg.helper";
-import { IAppointment, AppointmentStatus } from "../interfaces/IAppointment";
+import { AppointmentStatus, IAppointment } from "../interfaces/IAppointment";
 import * as ScheduleService from "../services/Schedule.service";
 import { idSchema, scheduleSchema } from "../validation/schemas";
 
@@ -58,17 +57,8 @@ export async function cancellSchedule(
   if (!scheduleCancelled)
     return res.status(500).json({ error: "Schedule not cancelled" });
 
-  const msg = `<strong>${scheduleFound.first_name} ${scheduleFound.last_name}</strong>, your schedule cite for the day <code>${scheduleFound.start_time} has been cancelled. The reason of cancellation is: <code>${value.cancellation_subject}</code>.</br><img src='https://repositorio.itfip.edu.co/themes/Mirage2/images/logo_wh.png'>`;
-
-  const msgSended = await sgHelper.sendEmail(
-    scheduleFound.email as string,
-    "Schedule cancelled",
-    msg
-  );
-  if (!msgSended?.response)
-    return res.status(500).json({ error: "Error reporting the cancellation" });
-
-  return res
-    .status(200)
-    .json({ ok: "Schedule cancelled successfully", scheduleCancelled });
+  return res.status(200).json({
+    ok: "Cancellation schedule pending...",
+    scheduleCancelled: { ...scheduleFound, ...scheduleCancelled },
+  });
 }

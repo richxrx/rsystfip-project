@@ -16,7 +16,8 @@ export async function createCancellation(
   if (!cancellationCreated)
     return res.status(500).json({ error: "Error creating cancellation" });
 
-  return res
-    .status(200)
-    .json({ ok: "Cancellation in progress", cancellationCreated });
+  return res.status(200).json({
+    ok: "Cancellation in progress. Sending email...",
+    cancellationCreated,
+  });
 }

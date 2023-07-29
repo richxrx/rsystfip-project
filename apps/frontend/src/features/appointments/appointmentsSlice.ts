@@ -60,7 +60,7 @@ export interface Deans {
   faculty_id: string;
 }
 
-export interface ProgrammingState {
+export interface AppointmentState {
   formData: FormData;
   deans: Array<Deans>;
 }
@@ -71,7 +71,7 @@ export const validFormDataAction: IKeyBool = {
   schedule: true,
 };
 
-const initialState: ProgrammingState = {
+const initialState: AppointmentState = {
   formData: {
     add: formDataInitialState,
     edit: formDataInitialState,
@@ -87,16 +87,16 @@ const appointmentsSlice = createSlice({
     setFormData(
       state,
       { payload: [action, formData] }: PayloadAction<[string, FormDataState?]>
-    ): ProgrammingState {
+    ): AppointmentState {
       return updateFormDataByAction(state, action, formData);
     },
     setDeans(
       state,
       { payload }: PayloadAction<Array<Deans>>
-    ): ProgrammingState {
+    ): AppointmentState {
       return { ...state, deans: payload };
     },
-    resetAllFormDataProgramming(state): ProgrammingState {
+    resetAllFormDataProgramming(state): AppointmentState {
       return { ...state, formData: { ...initialState.formData } };
     },
   },

@@ -31,7 +31,7 @@ function SelectPerson({
     ({ resources }) => resources.categories
   );
   const formDataState: FormDataState | undefined = useAppSelector(
-    ({ programming: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action]
   );
 
   const dispatch = useAppDispatch();

@@ -15,7 +15,7 @@ function TableCancelled(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const cancelledPeopleState: Array<PeopleCancellation> = useAppSelector(
-    ({ cancelledPeople }) => cancelledPeople
+    ({ cancellation }) => cancellation
   );
 
   const { data, error } = useQuery<[], any>(
