@@ -18,13 +18,13 @@ import ChartDataLabels, { Context } from "chartjs-plugin-datalabels";
 import { useEffect, useRef, useState } from "react";
 import { Col } from "react-bootstrap";
 import { UseQueryResult, useQueries } from "react-query";
-import { AppointmentStatus } from "../features/programming/programmingSlice";
+import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
 import {
   QueryData,
   setMostAgendatedAllTime,
   setMostAgendatedOnRange,
 } from "../features/statistics/statisticsSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as statisticService from "../services/statistic.service";
 import Ctx from "./Ctx";

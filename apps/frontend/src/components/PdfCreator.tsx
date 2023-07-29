@@ -1,9 +1,9 @@
 import * as pdfMake from "pdfmake/build/pdfmake";
 import { TDocumentDefinitions } from "pdfmake/interfaces";
-import { createHeader, footer, myFonts, styles } from "../pdf/pdfmake";
+import { createHeader, footer, myFonts, styles } from "../utils/pdfmake";
 import { People } from "../features/people/peopleSlice";
 import { QueryData, Reports } from "../features/reports/reportsSlice";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../app/hooks";
 import { ICounts } from "../interfaces/ICounts";
 import Downloader from "./Downloader";
 

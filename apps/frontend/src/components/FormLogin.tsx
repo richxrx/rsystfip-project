@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { AUTH_KEY } from "../constants";
 import { AuthState, setAuthenticatedUser } from "../features/auth/authSlice";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as authService from "../services/auth.service";
 import { THandleChangeI } from "../types/THandleChanges";

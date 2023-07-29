@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { v4 } from "uuid";
 import { People } from "../features/people/peopleSlice";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../app/hooks";
 import PersonRow from "./PersonRow";
 
 function TablePeople(): React.ReactNode {

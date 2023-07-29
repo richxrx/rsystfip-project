@@ -10,8 +10,8 @@ import {
   FormDataState,
   AppointmentStatus,
   setFormData,
-} from "../features/programming/programmingSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+} from "../features/appointments/appointmentsSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as deanService from "../services/dean.service";
 import * as peopleService from "../services/people.service";

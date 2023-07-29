@@ -2,7 +2,7 @@ import { Col, Container, Image, Nav } from "react-bootstrap";
 import { FaCodeBranch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthState } from "../features/auth/authSlice";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../app/hooks";
 
 function Footer(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);

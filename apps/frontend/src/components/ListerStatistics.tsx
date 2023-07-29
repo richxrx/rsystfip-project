@@ -1,6 +1,6 @@
-import { AppointmentStatus } from "../features/programming/programmingSlice";
+import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
 import { QueryData } from "../features/statistics/statisticsSlice";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../app/hooks";
 import { ICounts } from "../interfaces/ICounts";
 import Listgroup from "./Listgroup";
 

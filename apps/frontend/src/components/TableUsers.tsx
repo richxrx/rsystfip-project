@@ -3,7 +3,7 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { v4 } from "uuid";
 import { User, setUsers } from "../features/users/usersSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as userService from "../services/user.service";
 import UserRow from "./UserRow";

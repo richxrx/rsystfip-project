@@ -3,11 +3,11 @@ import { BiLogOutCircle } from "react-icons/bi";
 import { NavLink, NavigateFunction, useNavigate } from "react-router-dom";
 import { resetFormDataAdmin } from "../features/users/usersSlice";
 import { AuthState, resetUserAuthenticated } from "../features/auth/authSlice";
-import { resetAllFormDataProgramming } from "../features/programming/programmingSlice";
+import { resetAllFormDataProgramming } from "../features/appointments/appointmentsSlice";
 import { resetQueryDataReports } from "../features/reports/reportsSlice";
 import { resetQueryDataStatistics } from "../features/statistics/statisticsSlice";
 import { destroyTemporals } from "../features/temp/tempSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 
 interface IProps {
   avatar: string;

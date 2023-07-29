@@ -1,10 +1,10 @@
 import { Col, FloatingLabel, FormControl, FormSelect } from "react-bootstrap";
-import { AppointmentStatus } from "../features/programming/programmingSlice";
+import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
 import {
   QueryData,
   setQueryData,
 } from "../features/statistics/statisticsSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { THandleChangeITS } from "../types/THandleChanges";
 
 interface IProps {

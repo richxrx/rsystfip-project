@@ -6,7 +6,7 @@ import {
   setReports,
   setReportsOrigen,
 } from "../features/reports/reportsSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import DaterReports from "./DaterReports";
 import TableReports from "./TableReports";

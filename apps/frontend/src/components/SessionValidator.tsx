@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useMutation } from "react-query";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { AuthState, resetUserAuthenticated } from "../features/auth/authSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import api from "../services/api.service";
 import * as sessionService from "../services/session.service";

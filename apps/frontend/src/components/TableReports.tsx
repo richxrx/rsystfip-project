@@ -1,7 +1,7 @@
 import { Table } from "react-bootstrap";
 import { v4 } from "uuid";
 import { QueryData, Reports } from "../features/reports/reportsSlice";
-import { useAppSelector } from "../hooks";
+import { useAppSelector } from "../app/hooks";
 import ReportRow from "./ReportRow";
 
 function TableReports(): React.ReactNode {

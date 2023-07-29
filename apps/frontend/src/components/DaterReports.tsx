@@ -11,7 +11,7 @@ import { v4 } from "uuid";
 import { UNSET_STATUS } from "../constants";
 import { QueryData, setQueryData } from "../features/reports/reportsSlice";
 import { setCategories } from "../features/resources/resourcesSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { ICategory } from "../interfaces/IResources";
 import { notify } from "../libs/toast";
 import * as categoryService from "../services/category.service";

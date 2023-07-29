@@ -80,8 +80,8 @@ const initialState: ProgrammingState = {
   deans: [],
 };
 
-const programmingSlice = createSlice({
-  name: "programming",
+const appointmentsSlice = createSlice({
+  name: "appointments",
   initialState,
   reducers: {
     setFormData(
@@ -103,6 +103,6 @@ const programmingSlice = createSlice({
 });
 
 export const { setFormData, setDeans, resetAllFormDataProgramming } =
-  programmingSlice.actions;
+  appointmentsSlice.actions;
 
-export default programmingSlice.reducer;
+export default appointmentsSlice.reducer;

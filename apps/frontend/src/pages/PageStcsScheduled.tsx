@@ -1,7 +1,7 @@
 import { Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import Statistics from "../components/Statistics";
-import { AppointmentStatus } from "../features/programming/programmingSlice";
+import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
 
 function PageStcsSchedule(): React.ReactNode {
   return (

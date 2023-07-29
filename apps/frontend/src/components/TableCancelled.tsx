@@ -3,10 +3,10 @@ import { Table } from "react-bootstrap";
 import { useQuery } from "react-query";
 import { v4 } from "uuid";
 import {
-  PeopleCancelled,
+  PeopleCancellation,
   setCancelledPeople,
-} from "../features/cancelledPeople/cancelledPeopleSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+} from "../features/cancellations/cancellationsSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as peopleService from "../services/people.service";
 import CancelledRow from "./CancelledRow";
@@ -14,7 +14,7 @@ import CancelledRow from "./CancelledRow";
 function TableCancelled(): React.ReactNode {
   const dispatch = useAppDispatch();
 
-  const cancelledPeopleState: Array<PeopleCancelled> = useAppSelector(
+  const cancelledPeopleState: Array<PeopleCancellation> = useAppSelector(
     ({ cancelledPeople }) => cancelledPeople
   );
 

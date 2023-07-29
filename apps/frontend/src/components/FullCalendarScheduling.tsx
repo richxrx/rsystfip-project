@@ -13,8 +13,8 @@ import {
   FormDataState,
   AppointmentStatus,
   setFormData,
-} from "../features/programming/programmingSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+} from "../features/appointments/appointmentsSlice";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as scheduleService from "../services/schedule.service";
 import LoadCalendar from "./LoadCalendar";

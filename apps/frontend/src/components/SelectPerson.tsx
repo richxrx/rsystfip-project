@@ -7,9 +7,9 @@ import {
   FormDataState,
   setDeans,
   setFormData,
-} from "../features/programming/programmingSlice";
+} from "../features/appointments/appointmentsSlice";
 import { setCategories } from "../features/resources/resourcesSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { ICategory } from "../interfaces/IResources";
 import { notify } from "../libs/toast";
 import * as categoryService from "../services/category.service";

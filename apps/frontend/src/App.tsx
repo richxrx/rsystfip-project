@@ -9,7 +9,7 @@ import Loader from "./components/Loader";
 import ProtectedElement from "./components/ProtectedElement";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthState } from "./features/auth/authSlice";
-import { useAppSelector } from "./hooks";
+import { useAppSelector } from "./app/hooks";
 import PageAuth from "./pages/PageAuth";
 const SessionValidator = lazy(() => import("./components/SessionValidator"));
 const NavBar = lazy(() => import("./components/NavBar"));

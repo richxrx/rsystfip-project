@@ -3,7 +3,7 @@ import {
   ProgrammingState,
   formDataInitialState,
   validFormDataAction,
-} from "../programmingSlice";
+} from "../appointmentsSlice";
 
 export function updateFormDataByAction(
   state: ProgrammingState,

@@ -11,7 +11,7 @@ import {
   setPeople,
   setPeopleOrigen,
 } from "../features/people/peopleSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as peopleService from "../services/people.service";
 import { THandleChangeI } from "../types/THandleChanges";

@@ -9,7 +9,7 @@ import {
   resetFormDataAdmin,
   setFormData,
 } from "../features/users/usersSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { IDocument } from "../interfaces/IResources";
 import { notify } from "../libs/toast";
 import * as documentService from "../services/document.service";

@@ -2,9 +2,9 @@ import { configureStore } from "@reduxjs/toolkit";
 import usersSlice from "../features/users/usersSlice";
 import authReducer from "../features/auth/authSlice";
 import calendarSlice from "../features/calendar/calendarSlice";
-import cancelledPeopleSlice from "../features/cancelledPeople/cancelledPeopleSlice";
+import cancellationsSlice from "../features/cancellations/cancellationsSlice";
 import peopleSlice from "../features/people/peopleSlice";
-import programmingSlice from "../features/programming/programmingSlice";
+import appointmentsSlice from "../features/appointments/appointmentsSlice";
 import reportsSlice from "../features/reports/reportsSlice";
 import resourcesSlice from "../features/resources/resourcesSlice";
 import statisticsSlice from "../features/statistics/statisticsSlice";
@@ -15,11 +15,11 @@ export const store = configureStore({
     auth: authReducer,
     people: peopleSlice,
     users: usersSlice,
-    cancelledPeople: cancelledPeopleSlice,
+    cancelledPeople: cancellationsSlice,
     reports: reportsSlice,
     statistics: statisticsSlice,
     resources: resourcesSlice,
-    programming: programmingSlice,
+    programming: appointmentsSlice,
     calendar: calendarSlice,
     temp: tempSlice,
   },

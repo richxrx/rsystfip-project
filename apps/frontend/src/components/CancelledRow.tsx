@@ -1,8 +1,8 @@
-import { PeopleCancelled } from "../features/cancelledPeople/cancelledPeopleSlice";
+import { PeopleCancellation } from "../features/cancellations/cancellationsSlice";
 
 interface IProps {
   index: number;
-  person: PeopleCancelled;
+  person: PeopleCancellation;
 }
 
 function CancelledRow({

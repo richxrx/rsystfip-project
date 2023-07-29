@@ -7,7 +7,7 @@ import {
   setReportsCountAllTime,
   setReportsCountOnRange,
 } from "../features/reports/reportsSlice";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { notify } from "../libs/toast";
 import * as peopleService from "../services/people.service";
 import * as reportService from "../services/report.service";
