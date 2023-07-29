@@ -83,7 +83,6 @@ function FormSchedulePeople({
       faculty_id: formDataState.faculty_id,
       email: formDataState.email,
       phone_number: formDataState.phone_number,
-      visit_subject: formDataState.visit_subject,
     };
 
     mutationEditPerson.mutate(payload);
@@ -198,7 +197,12 @@ function FormSchedulePeople({
   };
 
   const autocompleteDeansData = () => {
-    if (!deansState || formDataState.category_id !== "4") return;
+    if (
+      !deansState ||
+      formDataState.category_id !== "4" ||
+      action === propsAction.edit
+    )
+      return;
 
     for (let i = 0; i < deansState.length; i++) {
       const { id, first_name, last_name, faculty_id } = deansState[i];
@@ -223,12 +227,16 @@ function FormSchedulePeople({
         facultieSelectRef.current.className = "form-control border-0 bg-white";
       }
 
-      notify("Se han completado los datos", {
+      notify("The data deans has been auto-completed", {
         type: "info",
         position: "top-left",
       });
     }
   };
+
+  useEffect(() => {
+    dispatch(setFormData([action]));
+  }, []);
 
   useEffect(() => {
     autocompleteDeansData();
@@ -245,10 +253,10 @@ function FormSchedulePeople({
             category_id: data.category_id.toString(),
             document_id: data.document_id.toString(),
             faculty_id: data.faculty_id.toString(),
-            first_name: data.name,
+            first_name: data.first_name,
+            last_name: data.last_name,
             document_number: data.document_number,
-            visit_subject: data.come_asunt,
-            phone_number: data.telephone,
+            phone_number: data.phone_number,
             email: data.email,
           },
         ])
@@ -390,25 +398,27 @@ function FormSchedulePeople({
           </Form.FloatingLabel>
         </Col>
 
-        <Col md={12}>
-          <Form.FloatingLabel label="Asunto:">
-            <Form.Control
-              as="textarea"
-              name="visit_subject"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.visit_subject}
-              placeholder="Complete campo"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={10}
-              maxLength={150}
-              style={{ height: "100px" }}
-              disabled={formDataState.disabledAll}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <ProtectedElement isAllowed={action !== propsAction.edit}>
+          <Col md={12}>
+            <Form.FloatingLabel label="Asunto:">
+              <Form.Control
+                as="textarea"
+                name="visit_subject"
+                className="border-0 bg-white"
+                onChange={handleChange}
+                value={formDataState.visit_subject}
+                placeholder="Complete campo"
+                autoComplete="off"
+                spellCheck={false}
+                minLength={10}
+                maxLength={150}
+                style={{ height: "100px" }}
+                disabled={formDataState.disabledAll}
+                required
+              />
+            </Form.FloatingLabel>
+          </Col>
+        </ProtectedElement>
 
         <ProtectedElement isAllowed={action === propsAction.schedule}>
           <Col md={12}>

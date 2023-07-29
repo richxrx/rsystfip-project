@@ -27,7 +27,7 @@ export async function getMostAgendatedOnRange(
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT C.category_name, COUNT(*) AS counts FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id WHERE A.status = ? AND A.start_time >= ? AND A.start_time <= ? GROUP BY P.category_id, C.category_name ORDER BY counts DESC LIMIT 10",
+    "SELECT C.category_name, COUNT(A.person_id) AS counts FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id WHERE A.status = ? AND A.start_time >= ? AND A.start_time <= ? GROUP BY P.category_id, C.category_name ORDER BY counts DESC LIMIT 10",
     [status, start_time, end_time]
   );
   await conn.end();
@@ -40,7 +40,7 @@ export async function getMostAgendatedAllTime(
   const conn = connect();
   if (!conn) return null;
   const [rows] = await conn.query<Array<RowDataPacket>>(
-    "SELECT C.category_name, COUNT(*) AS counts FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id WHERE A.status = ? GROUP BY P.category_id, C.category_name ORDER BY counts DESC LIMIT 10",
+    "SELECT C.category_name, COUNT(A.person_id) AS counts FROM Appointments A INNER JOIN People P ON P.id = A.person_id INNER JOIN Categories C ON C.id = P.category_id WHERE A.status = ? GROUP BY P.category_id, C.category_name ORDER BY counts DESC LIMIT 10",
     [status]
   );
   await conn.end();

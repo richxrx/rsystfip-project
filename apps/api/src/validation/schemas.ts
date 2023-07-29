@@ -122,7 +122,7 @@ export const userSchema = emailItfipSchema.keys({
     .regex(/^[0-9]+$/)
     .length(10)
     .required()
-    .messages({ "string.pattern.base": '"telephone" invalid' }),
+    .messages({ "string.pattern.base": '"phone_number" invalid' }),
   password: Joi.string().min(8).max(30).required(),
   password_confirm: Joi.string()
     .valid(Joi.ref("password"))
@@ -155,7 +155,7 @@ export const peopleSchema = JoiDefaults.object({
   phone_number: Joi.string()
     .regex(/^[0-9]+$/)
     .length(10)
-    .messages({ "string.pattern.base": '"telephone" invalid' })
+    .messages({ "string.pattern.base": '"phone_number" invalid' })
     .required(),
   faculty_id: Joi.string().length(1).required(),
 });

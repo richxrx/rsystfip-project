@@ -62,12 +62,12 @@ export async function updatePerson(
   const dataPerson: IPeople = {
     first_name: value.first_name,
     last_name: value.last_name,
-    document_id: value.doctype,
-    document_number: value.doc,
-    category_id: value.person,
-    faculty_id: value.facultie,
-    email: value.emailContact,
-    phone_number: value.telContact,
+    document_id: value.document_id,
+    document_number: value.document_number,
+    category_id: value.category_id,
+    faculty_id: value.faculty_id,
+    email: value.email,
+    phone_number: value.phone_number,
   };
   const peopleEdited = await PeopleService.updatePerson(value.id, dataPerson);
   if (!peopleEdited)
