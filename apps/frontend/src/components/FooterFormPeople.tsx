@@ -1,9 +1,9 @@
-import { Button, Col, Spinner } from "react-bootstrap";
-import { FaUserPlus } from "react-icons/fa";
-import { GiReturnArrow } from "react-icons/gi";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { THandleClick } from "../types/THandleClicks";
-import ProtectedElement from "./ProtectedElement";
+import { Button, Col, Spinner } from 'react-bootstrap';
+import { FaUserPlus } from 'react-icons/fa';
+import { GiReturnArrow } from 'react-icons/gi';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { THandleClick } from '../types/THandleClicks';
+import ProtectedElement from './ProtectedElement';
 
 interface IProps {
   isAllowed: boolean;

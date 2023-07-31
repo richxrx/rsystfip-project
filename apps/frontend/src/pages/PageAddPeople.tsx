@@ -1,8 +1,8 @@
-import { Card, Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
+import { Card, Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 import FormSchedulePeople, {
   propsAction,
-} from "../components/FormSchedulePeople";
+} from '../components/FormSchedulePeople';
 
 function PageAddPeople(): React.ReactNode {
   return (

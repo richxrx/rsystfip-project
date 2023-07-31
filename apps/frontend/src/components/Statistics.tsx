@@ -13,23 +13,23 @@ import {
   PolarAreaController,
   RadialLinearScale,
   Tooltip,
-} from "chart.js";
-import ChartDataLabels, { Context } from "chartjs-plugin-datalabels";
-import { useEffect, useRef, useState } from "react";
-import { Col } from "react-bootstrap";
-import { UseQueryResult, useQueries } from "react-query";
-import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
+} from 'chart.js';
+import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
+import { useEffect, useRef, useState } from 'react';
+import { Col } from 'react-bootstrap';
+import { UseQueryResult, useQueries } from 'react-query';
+import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
 import {
   QueryData,
   setMostAgendatedAllTime,
   setMostAgendatedOnRange,
-} from "../features/statistics/statisticsSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as statisticService from "../services/statistic.service";
-import Ctx from "./Ctx";
-import DaterStatistics from "./DaterStatistics";
-import ListerStatistics from "./ListerStatistics";
+} from '../features/statistics/statisticsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as statisticService from '../services/statistic.service';
+import Ctx from './Ctx';
+import DaterStatistics from './DaterStatistics';
+import ListerStatistics from './ListerStatistics';
 
 ChartJS.register(
   ArcElement,
@@ -44,7 +44,7 @@ ChartJS.register(
   PointElement,
   PolarAreaController,
   RadialLinearScale,
-  Tooltip
+  Tooltip,
 );
 
 interface IProps {
@@ -63,11 +63,11 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
-    ({ statistics }) => statistics[appointment_status].queryData
+    ({ statistics }) => statistics[appointment_status].queryData,
   );
 
   const labelText =
-    appointment_status === AppointmentStatus.daily ? "diario" : "programado";
+    appointment_status === AppointmentStatus.daily ? 'diario' : 'programado';
 
   const refreshChart = (labels: Array<string>, data: Array<string>) => {
     if (chartJS) chartJS.destroy();
@@ -81,22 +81,22 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
             label: `Agendamiento ${labelText} - Cantidad persona(s)`,
             data,
             backgroundColor: [
-              "rgba(54, 162, 235, 0.2)",
-              "rgba(255, 99, 132, 0.2)",
-              "rgba(255, 159, 64, 0.2)",
-              "rgba(255, 205, 86, 0.2)",
-              "rgba(75, 192, 192, 0.2)",
-              "rgba(153, 102, 255, 0.2)",
-              "rgba(201, 203, 207, 0.2)",
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)',
             ],
             borderColor: [
-              "rgb(54, 162, 235)",
-              "rgb(255, 99, 132)",
-              "rgb(255, 159, 64)",
-              "rgb(255, 205, 86)",
-              "rgb(75, 192, 192)",
-              "rgb(153, 102, 255)",
-              "rgb(201, 203, 207)",
+              'rgb(54, 162, 235)',
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)',
             ],
             borderWidth: 1,
             hoverOffset: 4,
@@ -110,7 +110,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
         animations: {
           tension: {
             duration: 1000,
-            easing: "linear",
+            easing: 'linear',
             from: 1,
             to: 0,
             loop: true,
@@ -127,10 +127,10 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
               const data = ctx.dataset.data;
               data.forEach((n) => (sum += Number(n)));
               const percent = Math.round((value / sum) * 100);
-              return (isNaN(percent) ? 0 : percent).toString().concat("%");
+              return (isNaN(percent) ? 0 : percent).toString().concat('%');
             },
             labels: { title: { font: { size: 20 } } },
-            align: "end",
+            align: 'end',
           },
         },
       },
@@ -142,7 +142,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
   const queries = useQueries([
     {
       queryKey: [
-        "statistics",
+        'statistics',
         queryDataState.start_time,
         queryDataState.end_time,
         queryDataState.chart_type,
@@ -152,7 +152,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
     },
     {
       queryKey: [
-        "statisticsOnRange",
+        'statisticsOnRange',
         queryDataState.start_time,
         queryDataState.end_time,
         queryDataState.chart_type,
@@ -160,12 +160,12 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
       queryFn: () =>
         statisticService.getMostAgendatedOnRange(
           appointment_status,
-          queryDataState
+          queryDataState,
         ),
     },
     {
       queryKey: [
-        "statisticsAllTime",
+        'statisticsAllTime',
         queryDataState.start_time,
         queryDataState.end_time,
         queryDataState.chart_type,
@@ -183,11 +183,11 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
         if (data) {
           if (i === 0) {
             const labels: Array<string> = data.map(
-              ({ category_name }: { category_name: string }) => category_name
+              ({ category_name }: { category_name: string }) => category_name,
             );
             const dataset: Array<string> = data.map(
               ({ scheduling_count }: { scheduling_count: string }) =>
-                scheduling_count
+                scheduling_count,
             );
             refreshChart(labels, dataset);
           }
@@ -200,11 +200,11 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
         }
 
         if (error) {
-          notify(error.response.data.error, { type: "error" });
+          notify(error.response.data.error, { type: 'error' });
         }
       }
     },
-    queries.flatMap(({ data, error }) => [data, error])
+    queries.flatMap(({ data, error }) => [data, error]),
   );
 
   return (

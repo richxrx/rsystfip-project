@@ -1,8 +1,8 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ICounts } from "../../interfaces/ICounts";
-import { IKeyBool } from "../../interfaces/IKeyBool";
-import { updateDataBySchedulingType } from "./functions";
-import { endOfMonth, format } from "date-fns";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { ICounts } from '../../interfaces/ICounts';
+import { IKeyBool } from '../../interfaces/IKeyBool';
+import { updateDataBySchedulingType } from './functions';
+import { endOfMonth, format } from 'date-fns';
 
 export interface QueryData {
   start_time: string;
@@ -28,9 +28,9 @@ export const validSchedulingTypes: IKeyBool = {
 };
 
 const queryDataInitialState: QueryData = {
-  start_time: format(new Date(), "yyyy-MM-01"),
-  end_time: format(endOfMonth(new Date()), "yyyy-MM-dd"),
-  chart_type: "bar",
+  start_time: format(new Date(), 'yyyy-MM-01'),
+  end_time: format(endOfMonth(new Date()), 'yyyy-MM-dd'),
+  chart_type: 'bar',
 };
 
 const initialState: StatisticsState = {
@@ -47,14 +47,14 @@ const initialState: StatisticsState = {
 };
 
 const statisticsSlice = createSlice({
-  name: "statistics",
+  name: 'statistics',
   initialState,
   reducers: {
     setMostAgendatedOnRange(
       state,
       {
         payload: [appointmentStatus, mostAgendatedOnRange],
-      }: PayloadAction<[string, Array<ICounts>]>
+      }: PayloadAction<[string, Array<ICounts>]>,
     ): StatisticsState {
       return updateDataBySchedulingType(state, appointmentStatus, {
         mostAgendatedOnRange,
@@ -64,7 +64,7 @@ const statisticsSlice = createSlice({
       state,
       {
         payload: [appointmentStatus, mostAgendatedAllTime],
-      }: PayloadAction<[string, Array<ICounts>]>
+      }: PayloadAction<[string, Array<ICounts>]>,
     ): StatisticsState {
       return updateDataBySchedulingType(state, appointmentStatus, {
         mostAgendatedAllTime,
@@ -74,7 +74,7 @@ const statisticsSlice = createSlice({
       state,
       {
         payload: [appointmentStatus, queryData],
-      }: PayloadAction<[string, QueryData]>
+      }: PayloadAction<[string, QueryData]>,
     ): StatisticsState {
       return updateDataBySchedulingType(state, appointmentStatus, {
         queryData,

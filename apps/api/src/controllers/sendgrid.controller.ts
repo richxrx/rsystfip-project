@@ -1,10 +1,10 @@
-import { Response, Request } from "express";
-import * as sgHelper from "../helpers/sg.helper";
-import { sendEmailSchema } from "../validation/schemas";
+import { Response, Request } from 'express';
+import * as sgHelper from '../helpers/sg.helper';
+import { sendEmailSchema } from '../validation/schemas';
 
 export async function sendEmail(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
   const { error, value } = sendEmailSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });

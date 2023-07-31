@@ -1,5 +1,5 @@
-import { Card, Col } from "react-bootstrap";
-import FormRecoveryPsw from "./FormRecoveryPsw";
+import { Card, Col } from 'react-bootstrap';
+import FormRecoveryPsw from './FormRecoveryPsw';
 
 function RecoveryPassword(): React.ReactNode {
   return (

@@ -1,4 +1,4 @@
-import { PeopleCancellation } from "../features/cancellations/cancellationsSlice";
+import { PeopleCancellation } from '../features/cancellations/cancellationsSlice';
 
 interface IProps {
   index: number;

@@ -1,3 +1,3 @@
-import { MouseEvent } from "react";
+import { MouseEvent } from 'react';
 
 export type THandleClick = MouseEvent<HTMLButtonElement>;

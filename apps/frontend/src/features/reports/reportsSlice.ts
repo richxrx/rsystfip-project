@@ -1,7 +1,7 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { UNSET_STATUS } from "../../constants";
-import { ICounts } from "../../interfaces/ICounts";
-import { endOfMonth, format } from "date-fns";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { UNSET_STATUS } from '../../constants';
+import { ICounts } from '../../interfaces/ICounts';
+import { endOfMonth, format } from 'date-fns';
 
 export interface Reports {
   category_id: number;
@@ -32,49 +32,49 @@ interface ReportsState {
 }
 
 const initialState: ReportsState = {
-  pngBase64: "",
+  pngBase64: '',
   reports: [],
   reportsOrigen: [],
   reportsCountOnRange: [],
   reportsCountAllTime: [],
   queryData: {
-    start_time: format(new Date(), "yyyy-MM-01"),
-    end_time: format(endOfMonth(new Date()), "yyyy-MM-dd"),
+    start_time: format(new Date(), 'yyyy-MM-01'),
+    end_time: format(endOfMonth(new Date()), 'yyyy-MM-dd'),
     category_id: UNSET_STATUS,
   },
 };
 
 const reportsSlice = createSlice({
-  name: "reports",
+  name: 'reports',
   initialState,
   reducers: {
     setPngBase64(
       state,
-      { payload }: PayloadAction<ReportsState["pngBase64"]>
+      { payload }: PayloadAction<ReportsState['pngBase64']>,
     ): ReportsState {
       return { ...state, pngBase64: payload };
     },
     setReports(
       state,
-      { payload }: PayloadAction<Array<Reports>>
+      { payload }: PayloadAction<Array<Reports>>,
     ): ReportsState {
       return { ...state, reports: payload };
     },
     setReportsOrigen(
       state,
-      { payload }: PayloadAction<Array<Reports>>
+      { payload }: PayloadAction<Array<Reports>>,
     ): ReportsState {
       return { ...state, reportsOrigen: payload };
     },
     setReportsCountOnRange(
       state,
-      { payload }: PayloadAction<Array<ICounts>>
+      { payload }: PayloadAction<Array<ICounts>>,
     ): ReportsState {
       return { ...state, reportsCountOnRange: payload };
     },
     setReportsCountAllTime(
       state,
-      { payload }: PayloadAction<Array<ICounts>>
+      { payload }: PayloadAction<Array<ICounts>>,
     ): ReportsState {
       return { ...state, reportsCountAllTime: payload };
     },

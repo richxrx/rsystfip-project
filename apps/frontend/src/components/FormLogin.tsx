@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { Col, Form, Row, Spinner } from "react-bootstrap";
-import { IoMdLogIn } from "react-icons/io";
-import { useMutation } from "react-query";
-import { NavigateFunction, useNavigate } from "react-router-dom";
-import { AUTH_KEY } from "../constants";
-import { AuthState, setAuthenticatedUser } from "../features/auth/authSlice";
-import { useAppDispatch } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as authService from "../services/auth.service";
-import { THandleChangeI } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
-import Submitter from "./Submitter";
+import { useState } from 'react';
+import { Col, Form, Row, Spinner } from 'react-bootstrap';
+import { IoMdLogIn } from 'react-icons/io';
+import { useMutation } from 'react-query';
+import { NavigateFunction, useNavigate } from 'react-router-dom';
+import { AUTH_KEY } from '../constants';
+import { AuthState, setAuthenticatedUser } from '../features/auth/authSlice';
+import { useAppDispatch } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as authService from '../services/auth.service';
+import { THandleChangeI } from '../types/THandleChanges';
+import { THandleSubmit } from '../types/THandleSubmits';
+import Submitter from './Submitter';
 
 function FormLogin(): React.ReactNode {
   const formDataInitialState = {
-    username: "",
-    password: "",
+    username: '',
+    password: '',
   };
 
   const [formData, setFormData] = useState(formDataInitialState);
@@ -40,10 +40,10 @@ function FormLogin(): React.ReactNode {
       window.localStorage.setItem(AUTH_KEY, JSON.stringify(dataToSavedSession));
 
       dispatch(setAuthenticatedUser(dataToSavedSession));
-      navigate("/home/welcome");
+      navigate('/home/welcome');
     },
     onError: (error: any) =>
-      notify(error.response.data.error, { type: "error" }),
+      notify(error.response.data.error, { type: 'error' }),
   });
 
   const handleSubmit = (e: THandleSubmit) => {
@@ -82,7 +82,7 @@ function FormLogin(): React.ReactNode {
               className="border-0 bg-white"
               onChange={handleChange}
               value={formData.password}
-              type={passwordVisible ? "text" : "password"}
+              type={passwordVisible ? 'text' : 'password'}
               placeholder="Password"
               autoComplete="off"
               spellCheck={false}

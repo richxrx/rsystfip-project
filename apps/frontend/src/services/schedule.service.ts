@@ -1,7 +1,7 @@
-import api from "./api.service";
+import api from './api.service';
 
 export const getEvents = async () => {
-  const { data } = await api("/schedule");
+  const { data } = await api('/schedule');
   return data;
 };
 
@@ -11,6 +11,6 @@ export const cancellSchedule = async (id: number) => {
 };
 
 export const saveSchedule = async (scheduleData: any) => {
-  const { data } = await api.post("/schedule", scheduleData);
+  const { data } = await api.post('/schedule', scheduleData);
   return data;
 };

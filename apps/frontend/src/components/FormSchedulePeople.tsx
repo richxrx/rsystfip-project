@@ -1,34 +1,34 @@
-import { useEffect, useRef } from "react";
-import { Button, Col, Form, ModalFooter, Row, Spinner } from "react-bootstrap";
-import { GiReturnArrow } from "react-icons/gi";
-import { IoCalendarNumber } from "react-icons/io5";
-import { useMutation, useQuery } from "react-query";
-import { useParams } from "react-router-dom";
-import { registerAChange } from "../features/calendar/calendarSlice";
+import { useEffect, useRef } from 'react';
+import { Button, Col, Form, ModalFooter, Row, Spinner } from 'react-bootstrap';
+import { GiReturnArrow } from 'react-icons/gi';
+import { IoCalendarNumber } from 'react-icons/io5';
+import { useMutation, useQuery } from 'react-query';
+import { useParams } from 'react-router-dom';
+import { registerAChange } from '../features/calendar/calendarSlice';
 import {
   Deans,
   FormDataState,
   AppointmentStatus,
   setFormData,
-} from "../features/appointments/appointmentsSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as deanService from "../services/dean.service";
-import * as peopleService from "../services/people.service";
-import * as scheduleService from "../services/schedule.service";
-import { THandleChangeITS } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
-import FooterFormPeople from "./FooterFormPeople";
-import ProtectedElement from "./ProtectedElement";
-import SelectDocument from "./SelectDocument";
-import SelectFaculties from "./SelectFaculties";
-import SelectPerson from "./SelectPerson";
-import SmallCaption from "./SmallCaption";
+} from '../features/appointments/appointmentsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as deanService from '../services/dean.service';
+import * as peopleService from '../services/people.service';
+import * as scheduleService from '../services/schedule.service';
+import { THandleChangeITS } from '../types/THandleChanges';
+import { THandleSubmit } from '../types/THandleSubmits';
+import FooterFormPeople from './FooterFormPeople';
+import ProtectedElement from './ProtectedElement';
+import SelectDocument from './SelectDocument';
+import SelectFaculties from './SelectFaculties';
+import SelectPerson from './SelectPerson';
+import SmallCaption from './SmallCaption';
 
 export enum propsAction {
-  add = "add",
-  edit = "edit",
-  schedule = "schedule",
+  add = 'add',
+  edit = 'edit',
+  schedule = 'schedule',
 }
 
 interface IProps {
@@ -36,7 +36,7 @@ interface IProps {
   closeModalScheduling?: () => void;
 }
 
-export type actionFormSchedule = IProps["action"];
+export type actionFormSchedule = IProps['action'];
 
 function FormSchedulePeople({
   action,
@@ -49,11 +49,11 @@ function FormSchedulePeople({
   const dispatch = useAppDispatch();
 
   const formDataState: FormDataState = useAppSelector(
-    ({ appointments: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action],
   );
 
   const deansState: Array<Deans> = useAppSelector(
-    ({ appointments }) => appointments.deans
+    ({ appointments }) => appointments.deans,
   );
 
   const mutationEditPerson = useMutation(peopleService.editPeople, {
@@ -61,12 +61,12 @@ function FormSchedulePeople({
       dispatch(setFormData([action]));
 
       notify(data.ok, {
-        type: "success",
-        position: "top-left",
+        type: 'success',
+        position: 'top-left',
       });
     },
     onError: (error: any) =>
-      notify(error.response.data.error, { type: "error" }),
+      notify(error.response.data.error, { type: 'error' }),
   });
   const mutationSavePeople = useMutation(peopleService.savePeople);
   const mutationSchedule = useMutation(scheduleService.saveSchedule);
@@ -89,7 +89,7 @@ function FormSchedulePeople({
   };
 
   const schedulePerson = async (
-    closeModalScheduling?: IProps["closeModalScheduling"]
+    closeModalScheduling?: IProps['closeModalScheduling'],
   ): Promise<void> => {
     const payload = {
       category_id: formDataState.category_id,
@@ -110,11 +110,11 @@ function FormSchedulePeople({
     try {
       const resSavePeople = await mutationSavePeople.mutateAsync(payload);
       notify(resSavePeople.ok, {
-        type: "info",
-        position: "top-left",
+        type: 'info',
+        position: 'top-left',
       });
 
-      if (payload.category_id === "4") {
+      if (payload.category_id === '4') {
         const resDean = await mutationSaveDean.mutateAsync({
           id: payload.document_number,
           first_name: payload.first_name,
@@ -122,8 +122,8 @@ function FormSchedulePeople({
           faculty_id: payload.faculty_id,
         });
         notify(resDean.ok, {
-          type: "info",
-          position: "top-left",
+          type: 'info',
+          position: 'top-left',
         });
       }
 
@@ -136,8 +136,8 @@ function FormSchedulePeople({
         color: payload.color,
       });
       notify(resSchedule.ok, {
-        type: "success",
-        position: "top-left",
+        type: 'success',
+        position: 'top-left',
       });
 
       // Do the dispatch at redux state
@@ -153,7 +153,7 @@ function FormSchedulePeople({
       dispatch(registerAChange());
       closeModalScheduling();
     } catch (error: any) {
-      notify(error.response.data.error, { type: "error" });
+      notify(error.response.data.error, { type: 'error' });
     }
   };
 
@@ -175,16 +175,16 @@ function FormSchedulePeople({
               ...formDataState,
               status: AppointmentStatus.daily,
             },
-          ])
+          ]),
         );
         return schedulePerson();
     }
   };
 
   const personData = useQuery<any, any>(
-    ["personData", id],
+    ['personData', id],
     () => peopleService.getData(id as string),
-    { enabled: !!id }
+    { enabled: !!id },
   );
 
   const handleChange = (e: THandleChangeITS) => {
@@ -192,14 +192,14 @@ function FormSchedulePeople({
       setFormData([
         action,
         { ...formDataState, [e.target.name]: e.target.value },
-      ])
+      ]),
     );
   };
 
   const autocompleteDeansData = () => {
     if (
       !deansState ||
-      formDataState.category_id !== "4" ||
+      formDataState.category_id !== '4' ||
       action === propsAction.edit
     )
       return;
@@ -214,22 +214,22 @@ function FormSchedulePeople({
           action,
           {
             ...formDataState,
-            document_id: "1",
+            document_id: '1',
             first_name,
             last_name,
             faculty_id: faculty_id.toString(),
             disabledAfterAutocomplete: true,
           },
-        ])
+        ]),
       );
 
       if (facultieSelectRef.current) {
-        facultieSelectRef.current.className = "form-control border-0 bg-white";
+        facultieSelectRef.current.className = 'form-control border-0 bg-white';
       }
 
-      notify("The data deans has been auto-completed", {
-        type: "info",
-        position: "top-left",
+      notify('The data deans has been auto-completed', {
+        type: 'info',
+        position: 'top-left',
       });
     }
   };
@@ -255,9 +255,9 @@ function FormSchedulePeople({
             phone_number: data.phone_number,
             email: data.email,
           },
-        ])
+        ]),
       );
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [personData.data, personData.error]);
 
   return (
@@ -408,7 +408,7 @@ function FormSchedulePeople({
                 spellCheck={false}
                 minLength={10}
                 maxLength={150}
-                style={{ height: "100px" }}
+                style={{ height: '100px' }}
                 disabled={formDataState.disabledAll}
                 required
               />

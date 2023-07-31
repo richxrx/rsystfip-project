@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
-import { IPayload } from "interfaces/IPayload";
-import Jwt from "jsonwebtoken";
-import { SECRET_KEY } from "../config";
-import * as bcryptHelper from "../helpers/bcrypt.helper";
-import * as UserService from "../services/User.service";
-import { authSchema } from "../validation/schemas";
+import { Request, Response } from 'express';
+import { IPayload } from 'interfaces/IPayload';
+import Jwt from 'jsonwebtoken';
+import { SECRET_KEY } from '../config';
+import * as bcryptHelper from '../helpers/bcrypt.helper';
+import * as UserService from '../services/User.service';
+import { authSchema } from '../validation/schemas';
 
 export async function auth(req: Request, res: Response): Promise<Response> {
   const { error, value } = authSchema.validate(req.body);
@@ -12,16 +12,16 @@ export async function auth(req: Request, res: Response): Promise<Response> {
 
   const userFound = await UserService.getUser(
     undefined,
-    `${value.username}@itfip.edu.co`
+    `${value.username}@itfip.edu.co`,
   );
-  if (!userFound) return res.status(404).json({ error: "Bad credentials" });
+  if (!userFound) return res.status(404).json({ error: 'Bad credentials' });
 
   const passwordVerified = await bcryptHelper.verifyPassword(
     value.password,
-    userFound.password as string
+    userFound.password as string,
   );
   if (!passwordVerified)
-    return res.status(401).json({ error: "Bad credentials" });
+    return res.status(401).json({ error: 'Bad credentials' });
 
   const payload: Partial<IPayload> = {
     userId: userFound.id,
@@ -29,11 +29,11 @@ export async function auth(req: Request, res: Response): Promise<Response> {
     role_name: userFound.role_name,
     permissions: userFound.permissions,
   };
-  const token = Jwt.sign(payload, SECRET_KEY || "secretkey", {
+  const token = Jwt.sign(payload, SECRET_KEY || 'secretkey', {
     expiresIn: 7 * 24 * 60 * 60,
   });
 
-  return res.status(200).setHeader("Authorization", token).json({
+  return res.status(200).setHeader('Authorization', token).json({
     auth: true,
     userAuth: userFound,
   });

@@ -2,12 +2,12 @@ import {
   Data,
   StatisticsState,
   validSchedulingTypes,
-} from "../statisticsSlice";
+} from '../statisticsSlice';
 
 export function updateDataBySchedulingType(
   state: StatisticsState,
   appointmentStatus: string,
-  updateData: Partial<Data>
+  updateData: Partial<Data>,
 ): StatisticsState {
   if (!(appointmentStatus in validSchedulingTypes)) return state;
 

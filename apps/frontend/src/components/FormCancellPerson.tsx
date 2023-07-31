@@ -1,32 +1,32 @@
-import { useState } from "react";
-import { Button, Col, Form, ModalFooter, Row, Spinner } from "react-bootstrap";
-import { FaCheck, FaTimes } from "react-icons/fa";
-import { useMutation } from "react-query";
-import { registerAChange } from "../features/calendar/calendarSlice";
-import { FormDataState } from "../features/appointments/appointmentsSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as cancellationService from "../services/cancellation.service";
-import * as scheduleService from "../services/schedule.service";
-import * as sgService from "../services/sendgrid.service";
-import { THandleChangeI } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
+import { useState } from 'react';
+import { Button, Col, Form, ModalFooter, Row, Spinner } from 'react-bootstrap';
+import { FaCheck, FaTimes } from 'react-icons/fa';
+import { useMutation } from 'react-query';
+import { registerAChange } from '../features/calendar/calendarSlice';
+import { FormDataState } from '../features/appointments/appointmentsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as cancellationService from '../services/cancellation.service';
+import * as scheduleService from '../services/schedule.service';
+import * as sgService from '../services/sendgrid.service';
+import { THandleChangeI } from '../types/THandleChanges';
+import { THandleSubmit } from '../types/THandleSubmits';
 
 interface IProps {
   closeModalCancell: () => void;
 }
 
 function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
-  const [cancellationSubject, setCancellationSubject] = useState("");
+  const [cancellationSubject, setCancellationSubject] = useState('');
 
   const dispatch = useAppDispatch();
 
   const formDataState: FormDataState = useAppSelector(
-    ({ appointments }) => appointments.formData.schedule
+    ({ appointments }) => appointments.formData.schedule,
   );
 
   const mutationCancellation = useMutation(
-    cancellationService.createCancellation
+    cancellationService.createCancellation,
   );
   const mutationSendEmail = useMutation(sgService.sendEmail);
   const mutationSchedule = useMutation(scheduleService.cancellSchedule);
@@ -42,35 +42,35 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
     try {
       // person_id is same to formData.id
       const resSchedule = await mutationSchedule.mutateAsync(
-        +payload.person_id
+        +payload.person_id,
       );
       notify(resSchedule.ok, {
-        type: "info",
-        position: "top-left",
+        type: 'info',
+        position: 'top-left',
       });
 
       const resCancellation = await mutationCancellation.mutateAsync(payload);
       notify(resCancellation.ok, {
-        type: "info",
-        position: "top-left",
+        type: 'info',
+        position: 'top-left',
       });
 
       const sgPayload = {
         email: resSchedule.scheduleCancelled.email,
-        subject: "Schedule cancelled",
+        subject: 'Schedule cancelled',
         html: `<strong>${resSchedule.scheduleCancelled.first_name} ${resSchedule.scheduleCancelled.last_name}</strong>, your schedule cite for the day <code>${resSchedule.scheduleCancelled.start_time} has been cancelled. The reason of cancellation is: <code>${payload.cancellation_subject}</code>.</br><img src='https://repositorio.itfip.edu.co/themes/Mirage2/images/logo_wh.png'>`,
       };
       const resSendgrid = await mutationSendEmail.mutateAsync(sgPayload);
       notify(resSendgrid.ok, {
-        type: "success",
-        position: "top-left",
+        type: 'success',
+        position: 'top-left',
       });
 
       dispatch(registerAChange());
-      setCancellationSubject("");
+      setCancellationSubject('');
       closeModalCancell();
     } catch (error: any) {
-      notify(error.response.data.error, { type: "error" });
+      notify(error.response.data.error, { type: 'error' });
     }
   };
 
@@ -93,7 +93,7 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
               spellCheck={false}
               minLength={10}
               maxLength={150}
-              style={{ height: "100px" }}
+              style={{ height: '100px' }}
               autoFocus
               required
             />

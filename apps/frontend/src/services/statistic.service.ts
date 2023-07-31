@@ -1,9 +1,9 @@
-import api from "./api.service";
-import { QueryData } from "../features/statistics/statisticsSlice";
+import api from './api.service';
+import { QueryData } from '../features/statistics/statisticsSlice';
 
 export const getStatistics = async (
   scheduling_type: string,
-  { start_time, end_time }: QueryData
+  { start_time, end_time }: QueryData,
 ) => {
   const { data } = await api(`/statistics/${scheduling_type}`, {
     params: { start_time, end_time },
@@ -13,7 +13,7 @@ export const getStatistics = async (
 
 export const getMostAgendatedOnRange = async (
   scheduling_type: string,
-  { start_time, end_time }: QueryData
+  { start_time, end_time }: QueryData,
 ) => {
   const { data } = await api(`/statistics/onrange/${scheduling_type}`, {
     params: { start_time, end_time },

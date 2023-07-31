@@ -1,6 +1,6 @@
-import { Image, ListGroup } from "react-bootstrap";
-import { v4 } from "uuid";
-import { ICounts } from "../interfaces/ICounts";
+import { Image, ListGroup } from 'react-bootstrap';
+import { v4 } from 'uuid';
+import { ICounts } from '../interfaces/ICounts';
 
 interface IProps {
   title: string;

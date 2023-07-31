@@ -1,4 +1,4 @@
-import { Button, Col } from "react-bootstrap";
+import { Button, Col } from 'react-bootstrap';
 
 interface IProps {
   children: React.ReactNode;

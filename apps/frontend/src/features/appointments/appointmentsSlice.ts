@@ -1,11 +1,11 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IKeyBool } from "../../interfaces/IKeyBool";
-import { updateFormDataByAction } from "./functions";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IKeyBool } from '../../interfaces/IKeyBool';
+import { updateFormDataByAction } from './functions';
 
 export enum AppointmentStatus {
-  daily = "daily",
-  scheduled = "scheduled",
-  cancelled = "cancelled",
+  daily = 'daily',
+  scheduled = 'scheduled',
+  cancelled = 'cancelled',
 }
 
 export interface FormDataState {
@@ -35,19 +35,19 @@ interface FormData {
 }
 
 export const formDataInitialState: FormDataState = {
-  id: "",
-  category_id: "",
-  document_number: "",
-  document_id: "",
-  first_name: "",
-  last_name: "",
-  phone_number: "",
-  email: "",
-  faculty_id: "",
-  visit_subject: "",
-  color: "#388cdc",
-  start_time: "",
-  end_time: "",
+  id: '',
+  category_id: '',
+  document_number: '',
+  document_id: '',
+  first_name: '',
+  last_name: '',
+  phone_number: '',
+  email: '',
+  faculty_id: '',
+  visit_subject: '',
+  color: '#388cdc',
+  start_time: '',
+  end_time: '',
   status: AppointmentStatus.daily,
   disabledAll: true,
   disabledAfterAutocomplete: false,
@@ -81,18 +81,18 @@ const initialState: AppointmentState = {
 };
 
 const appointmentsSlice = createSlice({
-  name: "appointments",
+  name: 'appointments',
   initialState,
   reducers: {
     setFormData(
       state,
-      { payload: [action, formData] }: PayloadAction<[string, FormDataState?]>
+      { payload: [action, formData] }: PayloadAction<[string, FormDataState?]>,
     ): AppointmentState {
       return updateFormDataByAction(state, action, formData);
     },
     setDeans(
       state,
-      { payload }: PayloadAction<Array<Deans>>
+      { payload }: PayloadAction<Array<Deans>>,
     ): AppointmentState {
       return { ...state, deans: payload };
     },

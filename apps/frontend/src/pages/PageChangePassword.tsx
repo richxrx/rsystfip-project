@@ -1,6 +1,6 @@
-import { Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import FetcherDataForChangePsw from "../components/FetcherDataForChangePsw";
+import { Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import FetcherDataForChangePsw from '../components/FetcherDataForChangePsw';
 
 function PageChangePassword(): React.ReactNode {
   return (

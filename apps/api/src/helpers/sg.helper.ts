@@ -1,5 +1,5 @@
-import sgMail, { MailDataRequired } from "@sendgrid/mail";
-import { EMAIL_SENDER, SENDGRID_API_KEY } from "../config";
+import sgMail, { MailDataRequired } from '@sendgrid/mail';
+import { EMAIL_SENDER, SENDGRID_API_KEY } from '../config';
 
 export async function sendEmail(to: string, subject: string, html: string) {
   sgMail.setApiKey(SENDGRID_API_KEY as string);

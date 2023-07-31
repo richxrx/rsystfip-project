@@ -1,12 +1,12 @@
-import api from "./api.service";
+import api from './api.service';
 
 export const getPeople = async () => {
-  const { data } = await api("/people");
+  const { data } = await api('/people');
   return data;
 };
 
 export const getPeopleCancelled = async () => {
-  const { data } = await api("/people/cancelled");
+  const { data } = await api('/people/cancelled');
   return data;
 };
 
@@ -21,6 +21,6 @@ export const editPeople = async (peopleData: any) => {
 };
 
 export const savePeople = async (peopleData: any) => {
-  const { data } = await api.post("/people", peopleData);
+  const { data } = await api.post('/people', peopleData);
   return data;
 };

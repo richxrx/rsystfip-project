@@ -1,14 +1,14 @@
-import { configureStore } from "@reduxjs/toolkit";
-import usersSlice from "../features/users/usersSlice";
-import authReducer from "../features/auth/authSlice";
-import calendarSlice from "../features/calendar/calendarSlice";
-import cancellationsSlice from "../features/cancellations/cancellationsSlice";
-import peopleSlice from "../features/people/peopleSlice";
-import appointmentsSlice from "../features/appointments/appointmentsSlice";
-import reportsSlice from "../features/reports/reportsSlice";
-import resourcesSlice from "../features/resources/resourcesSlice";
-import statisticsSlice from "../features/statistics/statisticsSlice";
-import tempSlice from "../features/temp/tempSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import usersSlice from '../features/users/usersSlice';
+import authReducer from '../features/auth/authSlice';
+import calendarSlice from '../features/calendar/calendarSlice';
+import cancellationsSlice from '../features/cancellations/cancellationsSlice';
+import peopleSlice from '../features/people/peopleSlice';
+import appointmentsSlice from '../features/appointments/appointmentsSlice';
+import reportsSlice from '../features/reports/reportsSlice';
+import resourcesSlice from '../features/resources/resourcesSlice';
+import statisticsSlice from '../features/statistics/statisticsSlice';
+import tempSlice from '../features/temp/tempSlice';
 
 export const store = configureStore({
   reducer: {

@@ -1,5 +1,5 @@
-import { Card, Container, Image } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Card, Container, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function HeaderLogin(): React.ReactNode {
   return (
@@ -11,7 +11,7 @@ function HeaderLogin(): React.ReactNode {
       <Card className="border-0 m-5">
         <Card.Body>
           <Card.Text>
-            Sóftware para agendamiento de visitas Rectoría -{" "}
+            Sóftware para agendamiento de visitas Rectoría -{' '}
             <strong>ITFIP</strong>
           </Card.Text>
           <Link to="https://www.itfip.edu.co">

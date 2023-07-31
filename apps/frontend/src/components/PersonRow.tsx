@@ -1,6 +1,6 @@
-import { FiEdit3 } from "react-icons/fi";
-import { Link } from "react-router-dom";
-import { People } from "../features/people/peopleSlice";
+import { FiEdit3 } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { People } from '../features/people/peopleSlice';
 
 interface IProps {
   person: People;

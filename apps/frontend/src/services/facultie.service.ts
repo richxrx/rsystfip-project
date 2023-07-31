@@ -1,6 +1,6 @@
-import api from "./api.service";
+import api from './api.service';
 
 export const getFaculties = async () => {
-  const { data } = await api("/faculties");
+  const { data } = await api('/faculties');
   return data;
 };

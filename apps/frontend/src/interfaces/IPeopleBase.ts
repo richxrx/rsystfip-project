@@ -1,4 +1,4 @@
-import { IBase } from "./IResources";
+import { IBase } from './IResources';
 
 export interface IPeopleBase extends IBase {
   first_name: string;

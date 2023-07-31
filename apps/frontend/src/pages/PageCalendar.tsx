@@ -1,5 +1,5 @@
-import { Helmet } from "react-helmet";
-import FullCalendarScheduling from "../components/FullCalendarScheduling";
+import { Helmet } from 'react-helmet';
+import FullCalendarScheduling from '../components/FullCalendarScheduling';
 
 function PageCalendar(): React.ReactNode {
   return (

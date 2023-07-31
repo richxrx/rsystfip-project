@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AUTH_KEY } from "../../constants";
-import { ObjsHasSameStructure } from "../../libs/utils";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AUTH_KEY } from '../../constants';
+import { ObjsHasSameStructure } from '../../libs/utils';
 
 interface UserAuth {
   iat: number;
@@ -25,28 +25,28 @@ const initialState: AuthState = {
     iat: 0,
     exp: 0,
     id: 0,
-    role_name: "",
-    first_name: "",
-    last_name: "",
-    email: "",
+    role_name: '',
+    first_name: '',
+    last_name: '',
+    email: '',
     permissions: [],
   },
-  token: "",
+  token: '',
 };
 
 const userSessionSaved: AuthState = JSON.parse(
-  window.localStorage.getItem(AUTH_KEY) || JSON.stringify({})
+  window.localStorage.getItem(AUTH_KEY) || JSON.stringify({}),
 );
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: ObjsHasSameStructure(userSessionSaved, initialState)
     ? userSessionSaved
     : initialState,
   reducers: {
     setAuthenticatedUser(
       _state,
-      { payload }: PayloadAction<AuthState>
+      { payload }: PayloadAction<AuthState>,
     ): AuthState {
       return payload;
     },

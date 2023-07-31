@@ -1,5 +1,5 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
-import Error404Actioner from "./Error404Actioner";
+import { Col, Container, Image, Row } from 'react-bootstrap';
+import Error404Actioner from './Error404Actioner';
 
 function ResetTokenInvalid(): React.ReactNode {
   return (

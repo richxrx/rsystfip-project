@@ -1,15 +1,15 @@
-import { Request, Response } from "express";
-import { IPeople } from "../interfaces/IPeople";
-import * as PeopleService from "../services/People.service";
+import { Request, Response } from 'express';
+import { IPeople } from '../interfaces/IPeople';
+import * as PeopleService from '../services/People.service';
 import {
   idSchema,
   peopleEditSchema,
   schedulerSchema,
-} from "../validation/schemas";
+} from '../validation/schemas';
 
 export async function createPerson(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
   const { error, value } = schedulerSchema.validate(req.body);
   if (error) return res.status(400).json({ error: error.message });
@@ -26,29 +26,29 @@ export async function createPerson(
   };
   const personCreated = await PeopleService.createPerson(newPerson);
   if (!personCreated)
-    return res.status(500).json({ error: "Error creating person" });
+    return res.status(500).json({ error: 'Error creating person' });
 
   return res
     .status(201)
-    .json({ ok: "Person created successfully", personCreated });
+    .json({ ok: 'Person created successfully', personCreated });
 }
 
 export async function getPerson(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
   const { error, value } = idSchema.validate(req.params);
   if (error) return res.status(400).json({ error: error.message });
 
   const personFound = await PeopleService.getPerson(value.id);
-  if (!personFound) return res.status(404).json({ error: "Person not found" });
+  if (!personFound) return res.status(404).json({ error: 'Person not found' });
 
   return res.status(200).json(personFound);
 }
 
 export async function updatePerson(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
   const { error, value } = peopleEditSchema.validate({
     ...req.params,
@@ -57,7 +57,7 @@ export async function updatePerson(
   if (error) return res.status(400).json({ error: error.message });
 
   const personFound = await PeopleService.getPerson(value.id);
-  if (!personFound) return res.status(404).json({ error: "Person not found" });
+  if (!personFound) return res.status(404).json({ error: 'Person not found' });
 
   const dataPerson: IPeople = {
     first_name: value.first_name,
@@ -71,31 +71,31 @@ export async function updatePerson(
   };
   const peopleEdited = await PeopleService.updatePerson(value.id, dataPerson);
   if (!peopleEdited)
-    return res.status(500).json({ error: "None person updated" });
+    return res.status(500).json({ error: 'None person updated' });
 
   return res
     .status(200)
-    .json({ ok: "Person updated successfully", peopleEdited });
+    .json({ ok: 'Person updated successfully', peopleEdited });
 }
 
 export async function getPeople(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
   const peopleFound = await PeopleService.getPeople();
   if (!peopleFound)
-    return res.status(500).json({ error: "Error getting people" });
+    return res.status(500).json({ error: 'Error getting people' });
 
   return res.status(200).json(peopleFound);
 }
 
 export async function getCancelledPeople(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
   const peopleCancelled = await PeopleService.getCancelledPeople();
   if (!peopleCancelled)
-    return res.status(500).json({ error: "Error getting cancelled people" });
+    return res.status(500).json({ error: 'Error getting cancelled people' });
 
   return res.status(200).json(peopleCancelled);
 }

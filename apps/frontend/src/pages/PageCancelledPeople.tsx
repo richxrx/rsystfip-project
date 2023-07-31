@@ -1,6 +1,6 @@
-import { Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import TableCancelled from "../components/TableCancelled";
+import { Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import TableCancelled from '../components/TableCancelled';
 
 function PageCancelledPeople(): React.ReactNode {
   return (

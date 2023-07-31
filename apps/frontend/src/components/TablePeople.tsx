@@ -1,12 +1,12 @@
-import { Table } from "react-bootstrap";
-import { v4 } from "uuid";
-import { People } from "../features/people/peopleSlice";
-import { useAppSelector } from "../app/hooks";
-import PersonRow from "./PersonRow";
+import { Table } from 'react-bootstrap';
+import { v4 } from 'uuid';
+import { People } from '../features/people/peopleSlice';
+import { useAppSelector } from '../app/hooks';
+import PersonRow from './PersonRow';
 
 function TablePeople(): React.ReactNode {
   const peopleState: Array<People> = useAppSelector(
-    ({ people }) => people.people
+    ({ people }) => people.people,
   );
 
   return (

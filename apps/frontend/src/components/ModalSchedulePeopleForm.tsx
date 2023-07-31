@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import FormSchedulePeople, { propsAction } from "./FormSchedulePeople";
+import { Modal } from 'react-bootstrap';
+import FormSchedulePeople, { propsAction } from './FormSchedulePeople';
 
 interface IProps {
   stateModalScheduling: boolean;

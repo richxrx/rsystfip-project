@@ -1,7 +1,7 @@
-import { Card, Col, Container, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import FormLogin from "../components/FormLogin";
-import HeaderLogin from "../components/HeaderLogin";
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import FormLogin from '../components/FormLogin';
+import HeaderLogin from '../components/HeaderLogin';
 
 function PageAuth(): React.ReactNode {
   return (

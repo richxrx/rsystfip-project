@@ -1,20 +1,20 @@
-import { useEffect } from "react";
-import { FloatingLabel, FormSelect } from "react-bootstrap";
-import { UseQueryResult, useQueries } from "react-query";
-import { v4 } from "uuid";
-import { UNSET_STATUS } from "../constants";
+import { useEffect } from 'react';
+import { FloatingLabel, FormSelect } from 'react-bootstrap';
+import { UseQueryResult, useQueries } from 'react-query';
+import { v4 } from 'uuid';
+import { UNSET_STATUS } from '../constants';
 import {
   FormDataState,
   setDeans,
   setFormData,
-} from "../features/appointments/appointmentsSlice";
-import { setCategories } from "../features/resources/resourcesSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { ICategory } from "../interfaces/IResources";
-import { notify } from "../libs/toast";
-import * as categoryService from "../services/category.service";
-import * as deanService from "../services/dean.service";
-import { actionFormSchedule } from "./FormSchedulePeople";
+} from '../features/appointments/appointmentsSlice';
+import { setCategories } from '../features/resources/resourcesSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { ICategory } from '../interfaces/IResources';
+import { notify } from '../libs/toast';
+import * as categoryService from '../services/category.service';
+import * as deanService from '../services/dean.service';
+import { actionFormSchedule } from './FormSchedulePeople';
 
 interface IProps {
   action: actionFormSchedule;
@@ -28,17 +28,17 @@ function SelectPerson({
   facultieSelectRef,
 }: IProps): React.ReactNode {
   const categoriesState: Array<ICategory> = useAppSelector(
-    ({ resources }) => resources.categories
+    ({ resources }) => resources.categories,
   );
   const formDataState: FormDataState | undefined = useAppSelector(
-    ({ appointments: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action],
   );
 
   const dispatch = useAppDispatch();
 
   const queries = useQueries([
-    { queryKey: "deans", queryFn: deanService.getDeans, enabled: false },
-    { queryKey: "categories", queryFn: categoryService.getCategories },
+    { queryKey: 'deans', queryFn: deanService.getDeans, enabled: false },
+    { queryKey: 'categories', queryFn: categoryService.getCategories },
   ]);
 
   useEffect(
@@ -55,11 +55,11 @@ function SelectPerson({
         }
 
         if (error) {
-          notify(error.response.data.error, { type: "error" });
+          notify(error.response.data.error, { type: 'error' });
         }
       }
     },
-    queries.flatMap(({ data, error }) => [data, error])
+    queries.flatMap(({ data, error }) => [data, error]),
   );
 
   const inputsInteraction = async () => {
@@ -73,17 +73,17 @@ function SelectPerson({
           disabledAll: false,
           disabledAfterAutocomplete: false,
         },
-      ])
+      ]),
     );
 
-    if (formDataState.category_id === "4") {
+    if (formDataState.category_id === '4') {
       await queries[0].refetch();
     }
 
     if (facultieSelectRef.current) {
-      facultieSelectRef.current.className = "form-select border-0 bg-white";
+      facultieSelectRef.current.className = 'form-select border-0 bg-white';
       facultieSelectRef.current.disabled = false;
-      if (formDataState.category_id === "5")
+      if (formDataState.category_id === '5')
         facultieSelectRef.current.disabled = true;
     }
   };

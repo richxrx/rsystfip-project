@@ -1,31 +1,31 @@
-import { useEffect } from "react";
-import { Table } from "react-bootstrap";
-import { useQuery } from "react-query";
-import { v4 } from "uuid";
+import { useEffect } from 'react';
+import { Table } from 'react-bootstrap';
+import { useQuery } from 'react-query';
+import { v4 } from 'uuid';
 import {
   PeopleCancellation,
   setCancelledPeople,
-} from "../features/cancellations/cancellationsSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as peopleService from "../services/people.service";
-import CancelledRow from "./CancelledRow";
+} from '../features/cancellations/cancellationsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as peopleService from '../services/people.service';
+import CancelledRow from './CancelledRow';
 
 function TableCancelled(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const cancelledPeopleState: Array<PeopleCancellation> = useAppSelector(
-    ({ cancellation }) => cancellation
+    ({ cancellation }) => cancellation,
   );
 
   const { data, error } = useQuery<[], any>(
-    "peopleCancelled",
-    peopleService.getPeopleCancelled
+    'peopleCancelled',
+    peopleService.getPeopleCancelled,
   );
 
   useEffect(() => {
     if (data) dispatch(setCancelledPeople(data));
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
   return (

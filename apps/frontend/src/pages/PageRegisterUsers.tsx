@@ -1,6 +1,6 @@
-import { Card, Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import FormUserAdd from "../components/FormUserAdd";
+import { Card, Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import FormUserAdd from '../components/FormUserAdd';
 
 function PageRegisterUsers(): React.ReactNode {
   return (

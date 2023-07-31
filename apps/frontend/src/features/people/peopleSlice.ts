@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPeopleBase } from "../../interfaces/IPeopleBase";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IPeopleBase } from '../../interfaces/IPeopleBase';
 
 export interface People extends IPeopleBase {
   visit_subject: string;
@@ -14,11 +14,11 @@ interface PeopleState {
 const initialState: PeopleState = {
   people: [],
   peopleOrigen: [],
-  find: "",
+  find: '',
 };
 
 const peopleSlice = createSlice({
-  name: "people",
+  name: 'people',
   initialState,
   reducers: {
     setPeople(state, { payload }: PayloadAction<Array<People>>): PeopleState {
@@ -26,7 +26,7 @@ const peopleSlice = createSlice({
     },
     setPeopleOrigen: function (
       state,
-      { payload }: PayloadAction<Array<People>>
+      { payload }: PayloadAction<Array<People>>,
     ): PeopleState {
       return { ...state, peopleOrigen: payload };
     },

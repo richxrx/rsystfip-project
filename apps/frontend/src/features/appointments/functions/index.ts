@@ -3,12 +3,12 @@ import {
   AppointmentState,
   formDataInitialState,
   validFormDataAction,
-} from "../appointmentsSlice";
+} from '../appointmentsSlice';
 
 export function updateFormDataByAction(
   state: AppointmentState,
   action: string,
-  formData?: FormDataState
+  formData?: FormDataState,
 ): AppointmentState {
   if (!(action in validFormDataAction)) return state;
 

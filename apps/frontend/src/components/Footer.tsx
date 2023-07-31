@@ -1,8 +1,8 @@
-import { Col, Container, Image, Nav } from "react-bootstrap";
-import { FaCodeBranch } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { AuthState } from "../features/auth/authSlice";
-import { useAppSelector } from "../app/hooks";
+import { Col, Container, Image, Nav } from 'react-bootstrap';
+import { FaCodeBranch } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { AuthState } from '../features/auth/authSlice';
+import { useAppSelector } from '../app/hooks';
 
 function Footer(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
@@ -28,7 +28,7 @@ function Footer(): React.ReactNode {
           <Nav className="justify-content-end">
             <Nav.Item>
               <Link
-                to={!authState.auth ? "/" : "/home/welcome"}
+                to={!authState.auth ? '/' : '/home/welcome'}
                 className="nav-link px-2 text-body-secondary"
               >
                 Inicio

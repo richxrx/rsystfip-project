@@ -1,6 +1,6 @@
-import { Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import ActionerReports from "../components/ActionerReports";
+import { Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import ActionerReports from '../components/ActionerReports';
 
 function PageReportsPeople(): React.ReactNode {
   return (

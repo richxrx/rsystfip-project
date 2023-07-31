@@ -1,6 +1,6 @@
-import { Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import RecoveryPassword from "../components/RecoveryPassword";
+import { Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import RecoveryPassword from '../components/RecoveryPassword';
 
 function PageRecoveryPassword(): React.ReactNode {
   return (

@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { FloatingLabel, FormSelect } from "react-bootstrap";
-import { useQuery } from "react-query";
-import { v4 } from "uuid";
-import { FormDataState } from "../features/appointments/appointmentsSlice";
-import { setDocuments } from "../features/resources/resourcesSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { IDocument } from "../interfaces/IResources";
-import { notify } from "../libs/toast";
-import { actionFormSchedule } from "./FormSchedulePeople";
-import * as documentService from "../services/document.service";
+import { useEffect } from 'react';
+import { FloatingLabel, FormSelect } from 'react-bootstrap';
+import { useQuery } from 'react-query';
+import { v4 } from 'uuid';
+import { FormDataState } from '../features/appointments/appointmentsSlice';
+import { setDocuments } from '../features/resources/resourcesSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { IDocument } from '../interfaces/IResources';
+import { notify } from '../libs/toast';
+import { actionFormSchedule } from './FormSchedulePeople';
+import * as documentService from '../services/document.service';
 
 interface IProps {
   action: actionFormSchedule;
@@ -17,22 +17,22 @@ interface IProps {
 
 function SelectDocument({ action, handleChange }: IProps): React.ReactNode {
   const documentsState: Array<IDocument> = useAppSelector(
-    ({ resources }) => resources.documents
+    ({ resources }) => resources.documents,
   );
   const formDataState: FormDataState | undefined = useAppSelector(
-    ({ appointments: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action],
   );
 
   const dispatch = useAppDispatch();
 
   const { data, error } = useQuery<[], any>(
-    "documents",
-    documentService.getDocuments
+    'documents',
+    documentService.getDocuments,
   );
 
   useEffect(() => {
     if (data) dispatch(setDocuments(data));
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
   return (

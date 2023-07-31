@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IPeopleBase } from "../../interfaces/IPeopleBase";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IPeopleBase } from '../../interfaces/IPeopleBase';
 
 export interface PeopleCancellation extends IPeopleBase {
   cancellation_subject: string;
@@ -8,12 +8,12 @@ export interface PeopleCancellation extends IPeopleBase {
 const initialState: Array<PeopleCancellation> = [];
 
 const cancellationsSlice = createSlice({
-  name: "cancellations",
+  name: 'cancellations',
   initialState,
   reducers: {
     setCancelledPeople(
       _state,
-      { payload }: PayloadAction<Array<PeopleCancellation>>
+      { payload }: PayloadAction<Array<PeopleCancellation>>,
     ): Array<PeopleCancellation> {
       return payload;
     },

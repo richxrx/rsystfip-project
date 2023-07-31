@@ -1,8 +1,8 @@
-import { Card, Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import { FaUserPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import TableUsers from "../components/TableUsers";
+import { Card, Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import { FaUserPlus } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import TableUsers from '../components/TableUsers';
 
 function PageManageUsers(): React.ReactNode {
   return (

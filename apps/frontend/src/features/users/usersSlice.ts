@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserBase } from "../../interfaces/IUserBase";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IUserBase } from '../../interfaces/IUserBase';
 
 export interface User extends IUserBase {
   first_name: string;
@@ -28,20 +28,20 @@ interface AdminState {
 const initialState: AdminState = {
   users: [],
   formData: {
-    role_id: "",
-    first_name: "",
-    last_name: "",
-    document_id: "",
-    document_number: "",
-    email: "",
-    phone_number: "",
-    password: "",
-    password_confirm: "",
+    role_id: '',
+    first_name: '',
+    last_name: '',
+    document_id: '',
+    document_number: '',
+    email: '',
+    phone_number: '',
+    password: '',
+    password_confirm: '',
   },
 };
 
 const adminSlice = createSlice({
-  name: "admin",
+  name: 'admin',
   initialState,
   reducers: {
     setUsers(state, { payload }: PayloadAction<Array<User>>): AdminState {

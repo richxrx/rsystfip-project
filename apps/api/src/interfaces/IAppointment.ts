@@ -1,7 +1,7 @@
 export enum AppointmentStatus {
-  daily = "daily",
-  scheduled = "scheduled",
-  cancelled = "cancelled",
+  daily = 'daily',
+  scheduled = 'scheduled',
+  cancelled = 'cancelled',
 }
 
 export interface IAppointment {

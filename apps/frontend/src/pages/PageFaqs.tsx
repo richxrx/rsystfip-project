@@ -1,5 +1,5 @@
-import { Accordion, Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
+import { Accordion, Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
 
 function PageFaqs(): React.ReactNode {
   return (

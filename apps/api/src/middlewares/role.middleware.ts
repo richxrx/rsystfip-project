@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { IPayload } from "../interfaces/IPayload";
+import { Request, Response, NextFunction } from 'express';
+import { IPayload } from '../interfaces/IPayload';
 
 export default function watchRole(...allowedRoles: Array<string>) {
   return (req: Request, res: Response, next: NextFunction): Response | void => {
@@ -7,6 +7,6 @@ export default function watchRole(...allowedRoles: Array<string>) {
     const isAllowed = allowedRoles.includes(rolesUser.role_name);
     if (isAllowed) return next();
 
-    return res.status(401).json({ error: "Access denied" });
+    return res.status(401).json({ error: 'Access denied' });
   };
 }

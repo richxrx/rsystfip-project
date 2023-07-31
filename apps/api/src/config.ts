@@ -1,4 +1,4 @@
-import { config } from "dotenv";
+import { config } from 'dotenv';
 
 config(); // Read .env file into process.env
 

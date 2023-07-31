@@ -1,4 +1,4 @@
-import { Spinner } from "react-bootstrap";
+import { Spinner } from 'react-bootstrap';
 
 interface IProps {
   loadEventsRef: React.RefObject<HTMLDivElement>;

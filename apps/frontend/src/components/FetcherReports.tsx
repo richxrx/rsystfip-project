@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import { UseQueryResult, useQueries } from "react-query";
-import { setPeople, setPeopleOrigen } from "../features/people/peopleSlice";
+import { useEffect } from 'react';
+import { UseQueryResult, useQueries } from 'react-query';
+import { setPeople, setPeopleOrigen } from '../features/people/peopleSlice';
 import {
   QueryData,
   setPngBase64,
   setReportsCountAllTime,
   setReportsCountOnRange,
-} from "../features/reports/reportsSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as peopleService from "../services/people.service";
-import * as reportService from "../services/report.service";
-import * as resService from "../services/res.service";
-import PdfCreator from "./PdfCreator";
+} from '../features/reports/reportsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as peopleService from '../services/people.service';
+import * as reportService from '../services/report.service';
+import * as resService from '../services/res.service';
+import PdfCreator from './PdfCreator';
 
 interface IProps {
   errorReports: boolean;
@@ -22,23 +22,23 @@ function FetcherReports({ errorReports }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
-    ({ reports }) => reports.queryData
+    ({ reports }) => reports.queryData,
   );
 
   const queries = useQueries([
     {
-      queryKey: "people",
+      queryKey: 'people',
       queryFn: peopleService.getPeople,
       refetchOnWindowFocus: false,
     },
     {
-      queryKey: "reportsAllTime",
+      queryKey: 'reportsAllTime',
       queryFn: reportService.getReportsCountAlltime,
       refetchOnWindowFocus: false,
     },
     {
       queryKey: [
-        "reportsOnRange",
+        'reportsOnRange',
         queryDataState.start_time,
         queryDataState.end_time,
       ],
@@ -46,7 +46,7 @@ function FetcherReports({ errorReports }: IProps): React.ReactNode {
       refetchOnWindowFocus: false,
     },
     {
-      queryKey: "pngBase64",
+      queryKey: 'pngBase64',
       queryFn: resService.getPngbase64,
       refetchOnWindowFocus: false,
     },
@@ -68,7 +68,7 @@ function FetcherReports({ errorReports }: IProps): React.ReactNode {
           } else if (i === 3) {
             const reader = new FileReader();
             reader.readAsDataURL(data);
-            reader.addEventListener("load", () => {
+            reader.addEventListener('load', () => {
               if (reader.result) {
                 dispatch(setPngBase64(reader.result as string));
               }
@@ -77,11 +77,11 @@ function FetcherReports({ errorReports }: IProps): React.ReactNode {
         }
 
         if (error) {
-          notify(error.response.data.error, { type: "error" });
+          notify(error.response.data.error, { type: 'error' });
         }
       }
     },
-    queries.flatMap(({ data, error }) => [data, error])
+    queries.flatMap(({ data, error }) => [data, error]),
   );
 
   return <PdfCreator errorReports={errorReports} />;

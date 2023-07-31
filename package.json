@@ -4,6 +4,7 @@
   "description": "Scheduling System RSystfip",
   "scripts": {
     "build": "turbo build",
+    "format": "turbo format",
     "dev": "turbo dev",
     "start": "node apps/api/dist/index.js"
   },

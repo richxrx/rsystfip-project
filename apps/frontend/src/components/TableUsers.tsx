@@ -1,23 +1,23 @@
-import { useEffect } from "react";
-import { Table } from "react-bootstrap";
-import { useQuery } from "react-query";
-import { v4 } from "uuid";
-import { User, setUsers } from "../features/users/usersSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as userService from "../services/user.service";
-import UserRow from "./UserRow";
+import { useEffect } from 'react';
+import { Table } from 'react-bootstrap';
+import { useQuery } from 'react-query';
+import { v4 } from 'uuid';
+import { User, setUsers } from '../features/users/usersSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as userService from '../services/user.service';
+import UserRow from './UserRow';
 
 function TableUsers(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const usersState: Array<User> = useAppSelector(({ users }) => users.users);
 
-  const { data, error } = useQuery<[], any>("users", userService.getUsers);
+  const { data, error } = useQuery<[], any>('users', userService.getUsers);
 
   useEffect(() => {
     if (data) dispatch(setUsers(data));
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
   return (

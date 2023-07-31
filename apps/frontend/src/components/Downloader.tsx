@@ -1,6 +1,6 @@
-import { TCreatedPdf } from "pdfmake/build/pdfmake";
-import { Button, FloatingLabel } from "react-bootstrap";
-import { BsDownload } from "react-icons/bs";
+import { TCreatedPdf } from 'pdfmake/build/pdfmake';
+import { Button, FloatingLabel } from 'react-bootstrap';
+import { BsDownload } from 'react-icons/bs';
 
 interface IProps {
   pdf: TCreatedPdf;
@@ -17,7 +17,7 @@ function Downloader({ pdf, errorReports }: IProps): React.ReactNode {
           // pdf.download(`Rsystfip-Report-${formatTodaysDateTime()}.pdf`)
         }
         className={`form-control border-0 bg-white ${
-          errorReports ? " disabled" : ""
+          errorReports ? ' disabled' : ''
         }`}
         title="Reporte PDF"
       >

@@ -1,7 +1,7 @@
-import api from "./api.service";
+import api from './api.service';
 
 export const getUsers = async () => {
-  const { data } = await api("/users");
+  const { data } = await api('/users');
   return data;
 };
 
@@ -11,7 +11,7 @@ export const getData = async (role: string) => {
 };
 
 export const saveUser = async (user: any) => {
-  const { data } = await api.post("/users", user);
+  const { data } = await api.post('/users', user);
   return data;
 };
 

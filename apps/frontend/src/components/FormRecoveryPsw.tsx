@@ -1,15 +1,15 @@
-import { useState } from "react";
-import { Col, Form, Row, Spinner } from "react-bootstrap";
-import { BiMailSend } from "react-icons/bi";
-import { useMutation } from "react-query";
-import { notify } from "../libs/toast";
-import * as accountService from "../services/account.service";
-import { THandleChangeI } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
-import Submitter from "./Submitter";
+import { useState } from 'react';
+import { Col, Form, Row, Spinner } from 'react-bootstrap';
+import { BiMailSend } from 'react-icons/bi';
+import { useMutation } from 'react-query';
+import { notify } from '../libs/toast';
+import * as accountService from '../services/account.service';
+import { THandleChangeI } from '../types/THandleChanges';
+import { THandleSubmit } from '../types/THandleSubmits';
+import Submitter from './Submitter';
 
 function FormRecoveryPsw(): React.ReactNode {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
 
   const { mutate, isLoading } = useMutation(
     accountService.sendJwtForRecoverPsw,
@@ -17,13 +17,13 @@ function FormRecoveryPsw(): React.ReactNode {
       onSuccess: () => {
         notify(
           `We will send you an email with instructions to reset your password. The link sended expires in 3 minutes.`,
-          { type: "success" }
+          { type: 'success' },
         );
-        setEmail("");
+        setEmail('');
       },
       onError: (error: any) =>
-        notify(error.response.data.error, { type: "error" }),
-    }
+        notify(error.response.data.error, { type: 'error' }),
+    },
   );
 
   const handleSubmit = (e: THandleSubmit) => {

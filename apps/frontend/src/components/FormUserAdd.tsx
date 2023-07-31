@@ -1,27 +1,27 @@
-import { useEffect } from "react";
-import { Col, Form, Row, Spinner } from "react-bootstrap";
-import { FaUserPlus } from "react-icons/fa";
-import { useMutation, useQuery } from "react-query";
-import { v4 } from "uuid";
-import { setDocuments } from "../features/resources/resourcesSlice";
+import { useEffect } from 'react';
+import { Col, Form, Row, Spinner } from 'react-bootstrap';
+import { FaUserPlus } from 'react-icons/fa';
+import { useMutation, useQuery } from 'react-query';
+import { v4 } from 'uuid';
+import { setDocuments } from '../features/resources/resourcesSlice';
 import {
   FormData,
   resetFormDataAdmin,
   setFormData,
-} from "../features/users/usersSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { IDocument } from "../interfaces/IResources";
-import { notify } from "../libs/toast";
-import * as documentService from "../services/document.service";
-import * as userService from "../services/user.service";
-import { THandleChangeITS } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
-import Submitter from "./Submitter";
+} from '../features/users/usersSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { IDocument } from '../interfaces/IResources';
+import { notify } from '../libs/toast';
+import * as documentService from '../services/document.service';
+import * as userService from '../services/user.service';
+import { THandleChangeITS } from '../types/THandleChanges';
+import { THandleSubmit } from '../types/THandleSubmits';
+import Submitter from './Submitter';
 
 function FormUserAdd(): React.ReactNode {
   const formDataState: FormData = useAppSelector(({ users }) => users.formData);
   const documentsState: Array<IDocument> = useAppSelector(
-    ({ resources }) => resources.documents
+    ({ resources }) => resources.documents,
   );
 
   const dispatch = useAppDispatch();
@@ -31,7 +31,7 @@ function FormUserAdd(): React.ReactNode {
       setFormData({
         ...formDataState,
         [e.target.name]: e.target.value,
-      })
+      }),
     );
   };
 
@@ -39,12 +39,12 @@ function FormUserAdd(): React.ReactNode {
     onSuccess: (data) => {
       dispatch(resetFormDataAdmin());
       notify(data.ok, {
-        type: "success",
-        position: "top-left",
+        type: 'success',
+        position: 'top-left',
       });
     },
     onError: (error: any) =>
-      notify(error.response.data.error, { type: "error" }),
+      notify(error.response.data.error, { type: 'error' }),
   });
 
   const handleSubmit = (e: THandleSubmit) => {
@@ -56,13 +56,13 @@ function FormUserAdd(): React.ReactNode {
   };
 
   const { data, error } = useQuery<[], any>(
-    "documents",
-    documentService.getDocuments
+    'documents',
+    documentService.getDocuments,
   );
 
   useEffect(() => {
     if (data) dispatch(setDocuments(data));
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
   return (

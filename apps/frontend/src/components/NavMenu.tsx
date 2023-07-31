@@ -1,7 +1,7 @@
-import { Nav, NavDropdown, Navbar } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
-import NavLogoutDropdown from "./NavLogoutDropdown";
-import ProtectedElement from "./ProtectedElement";
+import { Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import NavLogoutDropdown from './NavLogoutDropdown';
+import ProtectedElement from './ProtectedElement';
 
 interface IProps {
   avatar: string;
@@ -21,7 +21,7 @@ function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
             Inicio
           </NavLink>
         </Nav.Item>
-        <ProtectedElement isAllowed={permissions.includes("admin")}>
+        <ProtectedElement isAllowed={permissions.includes('admin')}>
           <Nav.Item>
             <NavLink
               to="/users/manage"
@@ -33,7 +33,7 @@ function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
           </Nav.Item>
         </ProtectedElement>
         <NavDropdown title="Agendamiento">
-          <ProtectedElement isAllowed={permissions.includes("add")}>
+          <ProtectedElement isAllowed={permissions.includes('add')}>
             <NavLink
               to="/people/add"
               className="dropdown-item"
@@ -43,7 +43,7 @@ function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
             </NavLink>
           </ProtectedElement>
 
-          <ProtectedElement isAllowed={permissions.includes("schedule")}>
+          <ProtectedElement isAllowed={permissions.includes('schedule')}>
             <NavLink
               to="/people/schedule"
               className="dropdown-item"
@@ -53,7 +53,7 @@ function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
             </NavLink>
           </ProtectedElement>
         </NavDropdown>
-        <ProtectedElement isAllowed={permissions.includes("schedule")}>
+        <ProtectedElement isAllowed={permissions.includes('schedule')}>
           <Nav.Item>
             <NavLink
               to="/people/preview"
@@ -64,7 +64,7 @@ function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
             </NavLink>
           </Nav.Item>
         </ProtectedElement>
-        <ProtectedElement isAllowed={permissions.includes("statistics")}>
+        <ProtectedElement isAllowed={permissions.includes('statistics')}>
           <NavDropdown title="Estadísticas">
             <NavLink
               to="/people/statistics/daily"
@@ -92,7 +92,7 @@ function NavMenu({ avatar, permissions }: IProps): React.ReactNode {
             Historial personas
           </NavLink>
 
-          <ProtectedElement isAllowed={permissions.includes("reports")}>
+          <ProtectedElement isAllowed={permissions.includes('reports')}>
             <NavLink
               to="/people/reports"
               className="dropdown-item"

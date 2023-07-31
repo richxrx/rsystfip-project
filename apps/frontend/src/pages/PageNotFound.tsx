@@ -1,6 +1,6 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import Error404Actioner from "../components/Error404Actioner";
+import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import Error404Actioner from '../components/Error404Actioner';
 
 function PageNotFound(): React.ReactNode {
   return (

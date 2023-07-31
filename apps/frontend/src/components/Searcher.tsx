@@ -1,33 +1,33 @@
-import { useEffect } from "react";
-import { Button, ButtonGroup, FormControl, Spinner } from "react-bootstrap";
-import { FaSyncAlt } from "react-icons/fa";
-import { ImUserPlus } from "react-icons/im";
-import { IoCalendarNumber } from "react-icons/io5";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { useEffect } from 'react';
+import { Button, ButtonGroup, FormControl, Spinner } from 'react-bootstrap';
+import { FaSyncAlt } from 'react-icons/fa';
+import { ImUserPlus } from 'react-icons/im';
+import { IoCalendarNumber } from 'react-icons/io5';
+import { useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 import {
   People,
   setFind,
   setPeople,
   setPeopleOrigen,
-} from "../features/people/peopleSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { notify } from "../libs/toast";
-import * as peopleService from "../services/people.service";
-import { THandleChangeI } from "../types/THandleChanges";
-import TablePeople from "./TablePeople";
+} from '../features/people/peopleSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { notify } from '../libs/toast';
+import * as peopleService from '../services/people.service';
+import { THandleChangeI } from '../types/THandleChanges';
+import TablePeople from './TablePeople';
 
 function Searcher(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const peopleOrigenState: Array<People> = useAppSelector(
-    ({ people }) => people.peopleOrigen
+    ({ people }) => people.peopleOrigen,
   );
   const findState: string = useAppSelector(({ people }) => people.find);
 
   const { data, error, isLoading, refetch } = useQuery<[], any>(
-    "people",
-    peopleService.getPeople
+    'people',
+    peopleService.getPeople,
   );
 
   const filterPeople = (): void => {
@@ -37,26 +37,26 @@ function Searcher(): React.ReactNode {
           ({ first_name, last_name, document_number }) =>
             first_name.toLowerCase().startsWith(findState) ||
             last_name.toLowerCase().startsWith(findState) ||
-            document_number.startsWith(findState)
-        )
-      )
+            document_number.startsWith(findState),
+        ),
+      ),
     );
   };
 
   useEffect(() => {
     if (data) {
       dispatch(setPeopleOrigen(data));
-      if (findState === "") dispatch(setPeople(data));
+      if (findState === '') dispatch(setPeople(data));
       else filterPeople();
     }
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
   const handleChange = (e: THandleChangeI) =>
     dispatch(setFind(e.target.value.toLocaleLowerCase()));
 
   const handleClick = () => {
-    dispatch(setFind(""));
+    dispatch(setFind(''));
     refetch();
   };
 

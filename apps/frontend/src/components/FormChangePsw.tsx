@@ -1,23 +1,23 @@
-import { useState } from "react";
-import { Col, Form, Row, Spinner } from "react-bootstrap";
-import { BiKey } from "react-icons/bi";
-import { useMutation } from "react-query";
-import { IUserBase } from "../interfaces/IUserBase";
-import { notify } from "../libs/toast";
-import * as accountService from "../services/account.service";
-import { THandleChangeI } from "../types/THandleChanges";
-import { THandleSubmit } from "../types/THandleSubmits";
-import Submitter from "./Submitter";
+import { useState } from 'react';
+import { Col, Form, Row, Spinner } from 'react-bootstrap';
+import { BiKey } from 'react-icons/bi';
+import { useMutation } from 'react-query';
+import { IUserBase } from '../interfaces/IUserBase';
+import { notify } from '../libs/toast';
+import * as accountService from '../services/account.service';
+import { THandleChangeI } from '../types/THandleChanges';
+import { THandleSubmit } from '../types/THandleSubmits';
+import Submitter from './Submitter';
 
 interface IProps {
-  userId: IUserBase["id"];
+  userId: IUserBase['id'];
 }
 
 function FormChangePsw({ userId }: IProps): React.ReactNode {
   const formDataInitialState = {
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: '',
   };
 
   const [formData, setFormData] = useState(formDataInitialState);
@@ -26,12 +26,12 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
     onSuccess: (data) => {
       setFormData(formDataInitialState);
       notify(data.ok, {
-        type: "success",
-        position: "top-left",
+        type: 'success',
+        position: 'top-left',
       });
     },
     onError: (error: any) =>
-      notify(error.response.data.error, { type: "error" }),
+      notify(error.response.data.error, { type: 'error' }),
   });
 
   const handleSubmit = (e: THandleSubmit) => {

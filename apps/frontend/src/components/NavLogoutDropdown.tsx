@@ -1,13 +1,13 @@
-import { Button, Dropdown, Image } from "react-bootstrap";
-import { BiLogOutCircle } from "react-icons/bi";
-import { NavLink, NavigateFunction, useNavigate } from "react-router-dom";
-import { resetFormDataAdmin } from "../features/users/usersSlice";
-import { AuthState, resetUserAuthenticated } from "../features/auth/authSlice";
-import { resetAllFormDataProgramming } from "../features/appointments/appointmentsSlice";
-import { resetQueryDataReports } from "../features/reports/reportsSlice";
-import { resetQueryDataStatistics } from "../features/statistics/statisticsSlice";
-import { destroyTemporals } from "../features/temp/tempSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { Button, Dropdown, Image } from 'react-bootstrap';
+import { BiLogOutCircle } from 'react-icons/bi';
+import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
+import { resetFormDataAdmin } from '../features/users/usersSlice';
+import { AuthState, resetUserAuthenticated } from '../features/auth/authSlice';
+import { resetAllFormDataProgramming } from '../features/appointments/appointmentsSlice';
+import { resetQueryDataReports } from '../features/reports/reportsSlice';
+import { resetQueryDataStatistics } from '../features/statistics/statisticsSlice';
+import { destroyTemporals } from '../features/temp/tempSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 interface IProps {
   avatar: string;
@@ -23,7 +23,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
   const logout = () => {
     if (
       !confirm(
-        `${authState.userAuth.first_name} estás seguro(a)que deseas cerrar sesión?`
+        `${authState.userAuth.first_name} estás seguro(a)que deseas cerrar sesión?`,
       )
     )
       return;
@@ -34,7 +34,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
     dispatch(resetQueryDataStatistics());
     dispatch(resetAllFormDataProgramming());
     dispatch(destroyTemporals());
-    navigate("/auth/login");
+    navigate('/auth/login');
   };
 
   return (
@@ -47,7 +47,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
       </Dropdown.Toggle>
 
       <Dropdown.Menu
-        align={{ lg: "end" }}
+        align={{ lg: 'end' }}
         className="border-0 shadow-sm rounded-3 bg-white"
       >
         <NavLink to="/help/asks/frecuently" className="dropdown-item">

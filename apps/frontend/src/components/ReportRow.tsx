@@ -1,4 +1,4 @@
-import { Reports } from "../features/reports/reportsSlice";
+import { Reports } from '../features/reports/reportsSlice';
 
 interface IProps {
   report: Reports;
@@ -26,7 +26,7 @@ function ReportRow({
       <td>{new Date(updated_at).toLocaleString()}</td>
       <td>
         {new Date(start_time).toLocaleString()}
-        {" - "}
+        {' - '}
         {new Date(end_time).toLocaleString()}
       </td>
       <td>{scheduling_count}</td>

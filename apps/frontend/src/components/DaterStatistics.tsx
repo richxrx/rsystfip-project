@@ -1,11 +1,11 @@
-import { Col, FloatingLabel, FormControl, FormSelect } from "react-bootstrap";
-import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
+import { Col, FloatingLabel, FormControl, FormSelect } from 'react-bootstrap';
+import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
 import {
   QueryData,
   setQueryData,
-} from "../features/statistics/statisticsSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { THandleChangeITS } from "../types/THandleChanges";
+} from '../features/statistics/statisticsSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { THandleChangeITS } from '../types/THandleChanges';
 
 interface IProps {
   appointment_status: AppointmentStatus;
@@ -15,7 +15,7 @@ function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
-    ({ statistics }) => statistics[appointment_status].queryData
+    ({ statistics }) => statistics[appointment_status].queryData,
   );
 
   const handleChange = (e: THandleChangeITS) => {
@@ -26,7 +26,7 @@ function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
           ...queryDataState,
           [e.target.name]: e.target.value,
         },
-      ])
+      ]),
     );
   };
 

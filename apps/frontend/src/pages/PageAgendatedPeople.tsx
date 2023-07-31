@@ -1,6 +1,6 @@
-import { Col, Row } from "react-bootstrap";
-import { Helmet } from "react-helmet";
-import Searcher from "../components/Searcher";
+import { Col, Row } from 'react-bootstrap';
+import { Helmet } from 'react-helmet';
+import Searcher from '../components/Searcher';
 
 function PageAgendatedPeople(): React.ReactNode {
   return (

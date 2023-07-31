@@ -1,5 +1,5 @@
-import { Modal } from "react-bootstrap";
-import FormCancellPerson from "./FormCancellPerson";
+import { Modal } from 'react-bootstrap';
+import FormCancellPerson from './FormCancellPerson';
 
 interface IProps {
   stateModalCancell: boolean;

@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 export interface ICalendarState {
   changes: boolean;
@@ -19,12 +19,12 @@ const initialState: ICalendarState = {
 };
 
 const calendarSlice = createSlice({
-  name: "calendar",
+  name: 'calendar',
   initialState,
   reducers: {
     setCalendarEvents(
       state,
-      { payload }: PayloadAction<Array<ICalendarEvents>>
+      { payload }: PayloadAction<Array<ICalendarEvents>>,
     ): ICalendarState {
       return { ...state, calendarEvents: [...payload] };
     },

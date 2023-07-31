@@ -1,11 +1,11 @@
-import * as pdfMake from "pdfmake/build/pdfmake";
-import { TDocumentDefinitions } from "pdfmake/interfaces";
-import { createHeader, footer, myFonts, styles } from "../utils/pdfmake";
-import { People } from "../features/people/peopleSlice";
-import { QueryData, Reports } from "../features/reports/reportsSlice";
-import { useAppSelector } from "../app/hooks";
-import { ICounts } from "../interfaces/ICounts";
-import Downloader from "./Downloader";
+import * as pdfMake from 'pdfmake/build/pdfmake';
+import { TDocumentDefinitions } from 'pdfmake/interfaces';
+import { createHeader, footer, myFonts, styles } from '../utils/pdfmake';
+import { People } from '../features/people/peopleSlice';
+import { QueryData, Reports } from '../features/reports/reportsSlice';
+import { useAppSelector } from '../app/hooks';
+import { ICounts } from '../interfaces/ICounts';
+import Downloader from './Downloader';
 
 interface IProps {
   errorReports: boolean;
@@ -13,22 +13,22 @@ interface IProps {
 
 function PdfCreator({ errorReports }: IProps): React.ReactNode {
   const pngBase64State: string = useAppSelector(
-    ({ reports }) => reports.pngBase64
+    ({ reports }) => reports.pngBase64,
   );
   const reportsState: Array<Reports> = useAppSelector(
-    ({ reports }) => reports.reports
+    ({ reports }) => reports.reports,
   );
   const queryDataState: QueryData = useAppSelector(
-    ({ reports }) => reports.queryData
+    ({ reports }) => reports.queryData,
   );
   const peopleState: Array<People> = useAppSelector(
-    ({ people }) => people.people
+    ({ people }) => people.people,
   );
   const reportsCountOnRangeState: Array<ICounts> = useAppSelector(
-    ({ reports }) => reports.reportsCountOnRange
+    ({ reports }) => reports.reportsCountOnRange,
   );
   const reportsCountAllTimeState: Array<ICounts> = useAppSelector(
-    ({ reports }) => reports.reportsCountAllTime
+    ({ reports }) => reports.reportsCountAllTime,
   );
 
   const documentDefinition: TDocumentDefinitions = {
@@ -36,45 +36,45 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
     header: createHeader(
       pngBase64State,
       queryDataState.start_time,
-      queryDataState.end_time
+      queryDataState.end_time,
     ),
     footer,
     content: [
       {
         text: `Total personas agendadas: (${peopleState.length})`,
-        style: "header",
-        alignment: "center",
+        style: 'header',
+        alignment: 'center',
         marginBottom: 30,
       },
       peopleState.length !== 0
         ? {
-            style: "defaultPage",
-            layout: "lightHorizontalLines",
-            alignment: "center",
+            style: 'defaultPage',
+            layout: 'lightHorizontalLines',
+            alignment: 'center',
             table: {
               dontBreakRows: true,
               headerRows: 1,
               body: [
                 [
                   {
-                    text: "No.",
-                    style: "tableHeader",
+                    text: 'No.',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Nombre completo",
-                    style: "tableHeader",
+                    text: 'Nombre completo',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Categoría",
-                    style: "tableHeader",
+                    text: 'Categoría',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Facultad",
-                    style: "tableHeader",
+                    text: 'Facultad',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Asunto visita rectoría",
-                    style: "tableHeader",
+                    text: 'Asunto visita rectoría',
+                    style: 'tableHeader',
                   },
                 ],
                 ...peopleState.map(
@@ -91,7 +91,7 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
                     category_name,
                     faculty_name,
                     visit_subject,
-                  ]
+                  ],
                 ),
               ],
             },
@@ -99,40 +99,40 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
         : [],
       {
         text: `Reportes entre el rango de fecha: (${reportsState.length})`,
-        style: "header",
-        alignment: "center",
+        style: 'header',
+        alignment: 'center',
         marginBottom: 30,
-        pageBreak: "before",
+        pageBreak: 'before',
       },
       reportsState.length !== 0
         ? {
-            style: "defaultPage",
-            layout: "lightHorizontalLines",
-            alignment: "center",
+            style: 'defaultPage',
+            layout: 'lightHorizontalLines',
+            alignment: 'center',
             table: {
               dontBreakRows: true,
               headerRows: 1,
               body: [
                 [
                   {
-                    text: "Nombre completo",
-                    style: "tableHeader",
+                    text: 'Nombre completo',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Fecha y hora agendamiento",
-                    style: "tableHeader",
+                    text: 'Fecha y hora agendamiento',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Agendamiento diario",
-                    style: "tableHeader",
+                    text: 'Agendamiento diario',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Agendamiento programado",
-                    style: "tableHeader",
+                    text: 'Agendamiento programado',
+                    style: 'tableHeader',
                   },
                   {
-                    text: "Cetegoría persona",
-                    style: "tableHeader",
+                    text: 'Cetegoría persona',
+                    style: 'tableHeader',
                   },
                 ],
                 ...reportsState.map(
@@ -149,35 +149,35 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
                     scheduling_count,
                     daily_count,
                     category_name,
-                  ]
+                  ],
                 ),
               ],
             },
           }
         : [],
       {
-        text: "Cantidad agendado(a)s:",
-        style: "header",
-        alignment: "center",
+        text: 'Cantidad agendado(a)s:',
+        style: 'header',
+        alignment: 'center',
         marginBottom: 30,
-        pageBreak: reportsState.length !== 0 ? "before" : undefined,
+        pageBreak: reportsState.length !== 0 ? 'before' : undefined,
       },
       {
         columns: [
           {
             text: `Rango de fecha${
-              reportsCountOnRangeState.length !== 0 ? "" : " (0)"
+              reportsCountOnRangeState.length !== 0 ? '' : ' (0)'
             }`,
-            style: "subheader",
-            alignment: "center",
+            style: 'subheader',
+            alignment: 'center',
             marginBottom: 10,
           },
           {
             text: `Cantidad total${
-              reportsCountAllTimeState.length !== 0 ? "" : " (0)"
+              reportsCountAllTimeState.length !== 0 ? '' : ' (0)'
             }`,
-            style: "subheader",
-            alignment: "center",
+            style: 'subheader',
+            alignment: 'center',
             marginBottom: 10,
           },
         ],
@@ -186,26 +186,26 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
         columns: [
           reportsCountOnRangeState.length !== 0
             ? {
-                layout: "headerLineOnly",
-                alignment: "center",
+                layout: 'headerLineOnly',
+                alignment: 'center',
                 marginBottom: 30,
-                style: "defaultPage",
+                style: 'defaultPage',
                 table: {
                   dontBreakRows: true,
                   headerRows: 1,
                   body: [
                     [
                       {
-                        text: "Categoría de persona",
-                        style: "tableHeader",
+                        text: 'Categoría de persona',
+                        style: 'tableHeader',
                       },
                       {
-                        text: "Cantidad personas",
-                        style: "tableHeader",
+                        text: 'Cantidad personas',
+                        style: 'tableHeader',
                       },
                     ],
                     ...reportsCountOnRangeState.map(
-                      ({ category_name, counts }) => [category_name, counts]
+                      ({ category_name, counts }) => [category_name, counts],
                     ),
                   ],
                 },
@@ -213,26 +213,26 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
             : [],
           reportsCountAllTimeState.length !== 0
             ? {
-                layout: "headerLineOnly",
-                alignment: "center",
+                layout: 'headerLineOnly',
+                alignment: 'center',
                 marginBottom: 30,
-                style: "defaultPage",
+                style: 'defaultPage',
                 table: {
                   dontBreakRows: true,
                   headerRows: 1,
                   body: [
                     [
                       {
-                        text: "Categoría de persona",
-                        style: "tableHeader",
+                        text: 'Categoría de persona',
+                        style: 'tableHeader',
                       },
                       {
-                        text: "Cantidad personas",
-                        style: "tableHeader",
+                        text: 'Cantidad personas',
+                        style: 'tableHeader',
                       },
                     ],
                     ...reportsCountAllTimeState.map(
-                      ({ category_name, counts }) => [category_name, counts]
+                      ({ category_name, counts }) => [category_name, counts],
                     ),
                   ],
                 },
@@ -247,7 +247,7 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
   const pdf: pdfMake.TCreatedPdf = pdfMake.createPdf(
     documentDefinition,
     undefined,
-    myFonts
+    myFonts,
   );
 
   return <Downloader pdf={pdf} errorReports={errorReports} />;

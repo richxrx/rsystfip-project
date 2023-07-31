@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { FloatingLabel, FormSelect } from "react-bootstrap";
-import { useQuery } from "react-query";
-import { v4 } from "uuid";
-import { FormDataState } from "../features/appointments/appointmentsSlice";
-import { setFaculties } from "../features/resources/resourcesSlice";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { IFacultie } from "../interfaces/IResources";
-import { notify } from "../libs/toast";
-import * as facultieService from "../services/facultie.service";
-import { actionFormSchedule } from "./FormSchedulePeople";
+import { useEffect } from 'react';
+import { FloatingLabel, FormSelect } from 'react-bootstrap';
+import { useQuery } from 'react-query';
+import { v4 } from 'uuid';
+import { FormDataState } from '../features/appointments/appointmentsSlice';
+import { setFaculties } from '../features/resources/resourcesSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { IFacultie } from '../interfaces/IResources';
+import { notify } from '../libs/toast';
+import * as facultieService from '../services/facultie.service';
+import { actionFormSchedule } from './FormSchedulePeople';
 
 interface IProps {
   action: actionFormSchedule;
@@ -22,22 +22,22 @@ function SelectFaculties({
   facultieSelectRef,
 }: IProps): React.ReactNode {
   const formDataState: FormDataState | undefined = useAppSelector(
-    ({ appointments: { formData } }) => formData[action]
+    ({ appointments: { formData } }) => formData[action],
   );
   const facultiesState: Array<IFacultie> = useAppSelector(
-    ({ resources }) => resources.faculties
+    ({ resources }) => resources.faculties,
   );
 
   const dispatch = useAppDispatch();
 
   const { data, error } = useQuery<[], any>(
-    "faculties",
-    facultieService.getFaculties
+    'faculties',
+    facultieService.getFaculties,
   );
 
   useEffect(() => {
     if (data) dispatch(setFaculties(data));
-    if (error) notify(error.response.data.error, { type: "error" });
+    if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
   return (

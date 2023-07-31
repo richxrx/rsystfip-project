@@ -1,12 +1,12 @@
-import { Button } from "react-bootstrap";
-import { BiKey, BiTrash } from "react-icons/bi";
-import { useMutation } from "react-query";
-import { Link } from "react-router-dom";
-import { User } from "../features/users/usersSlice";
-import { IUserBase } from "../interfaces/IUserBase";
-import { notify } from "../libs/toast";
-import * as userService from "../services/user.service";
-import { FiEdit3 } from "react-icons/fi";
+import { Button } from 'react-bootstrap';
+import { BiKey, BiTrash } from 'react-icons/bi';
+import { useMutation } from 'react-query';
+import { Link } from 'react-router-dom';
+import { User } from '../features/users/usersSlice';
+import { IUserBase } from '../interfaces/IUserBase';
+import { notify } from '../libs/toast';
+import * as userService from '../services/user.service';
+import { FiEdit3 } from 'react-icons/fi';
 
 interface IProps {
   user: User;
@@ -17,13 +17,13 @@ function UserRow({
 }: IProps): React.ReactNode | undefined {
   const { isSuccess, mutate } = useMutation(userService.deleteUser, {
     onSuccess: (data) =>
-      notify(data.ok, { type: "success", position: "top-left" }),
+      notify(data.ok, { type: 'success', position: 'top-left' }),
     onError: (error: any) =>
-      notify(error.response.data.error, { type: "error" }),
+      notify(error.response.data.error, { type: 'error' }),
   });
 
-  const handleClick = (roleId: IUserBase["id"]) => {
-    if (!confirm("Seguro(a) de eliminar ese usuario?")) return;
+  const handleClick = (roleId: IUserBase['id']) => {
+    if (!confirm('Seguro(a) de eliminar ese usuario?')) return;
     mutate(roleId);
   };
 
@@ -55,7 +55,7 @@ function UserRow({
         <Button
           onClick={() => handleClick(id)}
           variant="danger"
-          className={"m-1".concat(id !== 3 ? "" : " disabled")}
+          className={'m-1'.concat(id !== 3 ? '' : ' disabled')}
           title={`Delete user ${email} (Requires confirmation)`}
         >
           <BiTrash />

@@ -1,6 +1,6 @@
-import { Container, Image, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import NavMenu from "./NavMenu";
+import { Container, Image, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import NavMenu from './NavMenu';
 
 interface IProps {
   avatar: string;
