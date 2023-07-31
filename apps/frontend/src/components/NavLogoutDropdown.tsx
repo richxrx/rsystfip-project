@@ -1,13 +1,13 @@
-import { Button, Dropdown, Image } from 'react-bootstrap';
+import { Dropdown, Image } from 'react-bootstrap';
 import { BiLogOutCircle } from 'react-icons/bi';
 import { NavLink, NavigateFunction, useNavigate } from 'react-router-dom';
-import { resetFormDataAdmin } from '../features/users/usersSlice';
-import { AuthState, resetUserAuthenticated } from '../features/auth/authSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { resetAllFormDataProgramming } from '../features/appointments/appointmentsSlice';
+import { AuthState, resetUserAuthenticated } from '../features/auth/authSlice';
 import { resetQueryDataReports } from '../features/reports/reportsSlice';
 import { resetQueryDataStatistics } from '../features/statistics/statisticsSlice';
 import { destroyTemporals } from '../features/temp/tempSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { resetFormDataAdmin } from '../features/users/usersSlice';
 
 interface IProps {
   avatar: string;
@@ -20,14 +20,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
 
   const navigate: NavigateFunction = useNavigate();
 
-  const logout = () => {
-    if (
-      !confirm(
-        `${authState.userAuth.first_name} estás seguro(a)que deseas cerrar sesión?`,
-      )
-    )
-      return;
-
+  const handleClick = () => {
     dispatch(resetUserAuthenticated());
     dispatch(resetFormDataAdmin());
     dispatch(resetQueryDataReports());
@@ -43,7 +36,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
         as="a"
         className="d-flex align-items-center mt-3 mt-lg-0 mb-2 mb-lg-0 link-dark text-decoration-none me-3"
       >
-        <Image roundedCircle src={avatar} width="40" alt="Account" />
+        <Image src={avatar} roundedCircle width="40" alt="Account" />
       </Dropdown.Toggle>
 
       <Dropdown.Menu
@@ -60,9 +53,9 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
           Cambiar contraseña
         </NavLink>
         <Dropdown.Divider />
-        <Button onClick={logout} className="dropdown-item">
+        <Dropdown.Item onClick={handleClick}>
           Cerrar sesión <BiLogOutCircle />
-        </Button>
+        </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

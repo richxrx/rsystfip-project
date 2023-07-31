@@ -79,21 +79,13 @@ function Searcher(): React.ReactNode {
           autoComplete="off"
           autoFocus
         />
-        <Button variant="dark" onClick={handleClick} title="Refrescar datos">
+        <Button variant="dark" onClick={handleClick}>
           {isLoading ? <Spinner size="sm" /> : <FaSyncAlt className="mb-1" />}
         </Button>
-        <Link
-          to="/people/add"
-          className="btn btn-dark"
-          title="Agendamiento por día"
-        >
+        <Link to="/people/add" className="btn btn-dark">
           <ImUserPlus className="mb-1" />
         </Link>
-        <Link
-          to="/people/schedule"
-          className="btn btn-dark"
-          title="Agendamiento programado"
-        >
+        <Link to="/people/schedule" className="btn btn-dark">
           <IoCalendarNumber className="mb-1" />
         </Link>
       </ButtonGroup>
