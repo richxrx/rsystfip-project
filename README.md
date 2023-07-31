@@ -38,25 +38,25 @@ For install this project, follow these steps:
 
 RSystfip Project includes the following scripts defined in the package.json file:
 
-- `build`: This script is used to build the application using Turbo, a toolkit for web application and API development. To build the project, run:
+- **`build`**: This script is used to build the application using Turbo, a toolkit for web application and API development. To build the project, run:
 
   ```bash
   pnpm run build
   ```
 
-- `dev`: This script starts a development server for the project. It will automatically reload whenever you make changes to the code. To run the development server, use:
+- **`dev`**: This script starts a development server for the project. It will automatically reload whenever you make changes to the code. To run the development server, use:
 
   ```bash
   pnpm run dev
   ```
 
-- `start`: This script starts the application in a production environment. The application will be executed using the index.js file located in the apps/api/dist folder. To start the application in production, use:
+- **`start`**: This script starts the application in a production environment. The application will be executed using the index.js file located in the apps/api/dist folder. To start the application in production, use:
 
   ```bash
   npm start
   ```
 
-- `Format`: Formats the TypeScript and SCSS files in the src directory using Prettier.
+- **`Format`**: Formats the TypeScript and SCSS files in the src directory using Prettier.
 
   ```bash
   pnpm run format

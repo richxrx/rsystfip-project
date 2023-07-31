@@ -12,25 +12,25 @@ The RSystfip API is a private project and is not meant to be installed separatel
 
 The RSystfip API includes the following scripts:
 
-- Build: Compiles the TypeScript code into JavaScript.
+- **Build**: Compiles the TypeScript code into JavaScript.
 
   ```bash
   npm run build
   ```
 
-- Development Mode: Starts the API in development mode using nodemon, which automatically restarts the server when changes are made to the source code.
+- **Development Mode**: Starts the API in development mode using nodemon, which automatically restarts the server when changes are made to the source code.
 
   ```bash
   pnpm run dev
   ```
 
-- Production Mode: Starts the API in a production environment using the compiled JavaScript code from the dist folder.
+- **Production Mode**: Starts the API in a production environment using the compiled JavaScript code from the dist folder.
 
   ```bash
   pnpm start
   ```
 
-- `Format`: Formats the TypeScript and SCSS files in the src directory using Prettier.
+- **Format**: Formats the TypeScript and SCSS files in the src directory using Prettier.
 
   ```bash
   pnpm run format
