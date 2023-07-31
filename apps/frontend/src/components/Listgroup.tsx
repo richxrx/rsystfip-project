@@ -1,5 +1,6 @@
 import { Image, ListGroup } from 'react-bootstrap';
 import { v4 } from 'uuid';
+import rsystfipLogo from '../assets/rsystfip.svg';
 import { ICounts } from '../interfaces/ICounts';
 
 interface IProps {
@@ -15,7 +16,7 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
       <ListGroup className="mb-5">
         {data.map(({ category_name, counts }) => (
           <ListGroup.Item key={v4()} action className="d-flex gap-3 py-3">
-            <Image src="/rsystfip.svg" alt="twbs" width="32" height="27" />
+            <Image src={rsystfipLogo} alt="twbs" width="32" height="27" />
             <div className="d-flex gap-2 w-100 justify-content-between">
               <div>
                 <h6 className="mb-0">{category_name}</h6>

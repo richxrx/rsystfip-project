@@ -1,4 +1,5 @@
 import { Col, Container, Image, Row } from 'react-bootstrap';
+import rsystfipLogo from '../assets/rsystfip.svg';
 import Error404Actioner from './Error404Actioner';
 
 function ResetTokenInvalid(): React.ReactNode {
@@ -7,7 +8,7 @@ function ResetTokenInvalid(): React.ReactNode {
       <Row className="justify-content-center">
         <Col md={6}>
           <Image
-            src="/rsystfip.svg"
+            src={rsystfipLogo}
             alt="Rsystfip"
             width={72}
             height={57}

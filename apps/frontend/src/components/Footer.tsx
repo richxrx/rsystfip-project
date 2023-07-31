@@ -1,8 +1,9 @@
 import { Col, Container, Image, Nav } from 'react-bootstrap';
 import { FaCodeBranch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { AuthState } from '../features/auth/authSlice';
 import { useAppSelector } from '../app/hooks';
+import rsystfipLogo from '../assets/rsystfip.svg';
+import { AuthState } from '../features/auth/authSlice';
 
 function Footer(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
@@ -20,7 +21,7 @@ function Footer(): React.ReactNode {
             to="/"
             className="d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
           >
-            <Image src="/rsystfip.svg" alt="Rsystfip" width="40" height="32" />
+            <Image src={rsystfipLogo} alt="Rsystfip" width="40" height="32" />
           </Link>
         </Col>
 

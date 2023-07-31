@@ -1,5 +1,6 @@
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
+import rsystfipLogo from '../assets/rsystfip.svg';
 import Error404Actioner from '../components/Error404Actioner';
 
 function PageNotFound(): React.ReactNode {
@@ -11,7 +12,7 @@ function PageNotFound(): React.ReactNode {
       <Row className="justify-content-center">
         <Col md={6}>
           <Image
-            src="/rsystfip.svg"
+            src={rsystfipLogo}
             alt="Rsystfip"
             width={72}
             height={57}

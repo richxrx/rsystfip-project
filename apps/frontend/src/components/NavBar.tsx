@@ -1,5 +1,6 @@
 import { Container, Image, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import rsystfipLogo from '../assets/rsystfip.svg';
 import NavMenu from './NavMenu';
 
 interface IProps {
@@ -13,7 +14,7 @@ function NavBar({ avatar, permissions }: IProps): React.ReactNode {
       <Container fluid>
         <Navbar.Brand className="px-lg-3">
           <Link to="/">
-            <Image src="/rsystfip.svg" alt="Rsystfip" width="40" height="32" />
+            <Image src={rsystfipLogo} alt="Rsystfip" width="40" height="32" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle />

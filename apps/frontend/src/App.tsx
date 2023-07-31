@@ -36,9 +36,7 @@ const queryClient = new QueryClient();
 function App(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
-  const avatar = authState.auth
-    ? `/img/${authState.userAuth.role_name}.png`
-    : '';
+  const avatar = authState.auth ? `/${authState.userAuth.role_name}.png` : '';
   const permissions = authState.userAuth.permissions;
 
   return (
