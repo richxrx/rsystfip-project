@@ -35,3 +35,9 @@ The RSystfip Frontend includes the following scripts:
   ```bash
   pnpm run preview
   ```
+
+- `Format`: Formats the TypeScript and SCSS files in the src directory using Prettier.
+
+  ```bash
+  pnpm run format
+  ```

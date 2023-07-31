@@ -30,6 +30,12 @@ The RSystfip API includes the following scripts:
   pnpm start
   ```
 
+- `Format`: Formats the TypeScript and SCSS files in the src directory using Prettier.
+
+  ```bash
+  pnpm run format
+  ```
+
 ## Keywords
 
 - rest

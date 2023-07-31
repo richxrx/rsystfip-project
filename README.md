@@ -56,6 +56,12 @@ RSystfip Project includes the following scripts defined in the package.json file
   npm start
   ```
 
+- `Format`: Formats the TypeScript and SCSS files in the src directory using Prettier.
+
+  ```bash
+  pnpm run format
+  ```
+
 ## Apps
 
 - [RSystfip Project Restapi ExpressJS.](apps/api/README.md)
