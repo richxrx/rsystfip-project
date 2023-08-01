@@ -9,7 +9,8 @@ import { THandleSubmit } from '../types/THandleSubmits';
 import Submitter from './Submitter';
 
 function FormRecoveryPsw(): React.ReactNode {
-  const [email, setEmail] = useState('');
+  const formDataInitialState = { email: '' };
+  const [formData, setFormData] = useState(formDataInitialState);
 
   const { mutate, isLoading } = useMutation(
     accountService.sendJwtForRecoverPsw,
@@ -19,7 +20,8 @@ function FormRecoveryPsw(): React.ReactNode {
           `We will send you an email with instructions to reset your password. The link sended expires in 3 minutes.`,
           { type: 'success' },
         );
-        setEmail('');
+
+        setFormData(formDataInitialState);
       },
       onError: (error: any) =>
         notify(error.response.data.error, { type: 'error' }),
@@ -29,12 +31,17 @@ function FormRecoveryPsw(): React.ReactNode {
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
 
-    const payload = { email };
+    const payload = formData;
 
     mutate(payload.email);
   };
 
-  const handleChange = (e: THandleChangeI) => setEmail(e.target.value);
+  const handleChange = (e: THandleChangeI) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <Col md={2} className="mx-auto">
@@ -46,7 +53,7 @@ function FormRecoveryPsw(): React.ReactNode {
                 name="email"
                 className="border-0 bg-white"
                 onChange={handleChange}
-                value={email}
+                value={formData.email}
                 type="email"
                 placeholder="Email"
                 autoComplete="off"

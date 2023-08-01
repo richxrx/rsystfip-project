@@ -24,11 +24,12 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
 
   const { mutate, isLoading } = useMutation(accountService.changePassword, {
     onSuccess: (data) => {
-      setFormData(formDataInitialState);
       notify(data.ok, {
         type: 'success',
         position: 'top-left',
       });
+
+      setFormData(formDataInitialState);
     },
     onError: (error: any) =>
       notify(error.response.data.error, { type: 'error' }),
@@ -48,7 +49,10 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
   };
 
   const handleChange = (e: THandleChangeI) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (

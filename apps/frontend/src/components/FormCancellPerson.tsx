@@ -17,7 +17,9 @@ interface IProps {
 }
 
 function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
-  const [cancellationSubject, setCancellationSubject] = useState('');
+  const formDataInitialState = { cancellation_subject: '' };
+
+  const [formData, setFormData] = useState(formDataInitialState);
 
   const dispatch = useAppDispatch();
 
@@ -36,7 +38,7 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
 
     const payload = {
       person_id: formDataState.id,
-      cancellation_subject: cancellationSubject,
+      cancellation_subject: formData.cancellation_subject,
     };
 
     try {
@@ -67,15 +69,19 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
       });
 
       dispatch(registerAChange());
-      setCancellationSubject('');
+      setFormData(formDataInitialState);
       closeModalCancell();
     } catch (error: any) {
       notify(error.response.data.error, { type: 'error' });
     }
   };
 
-  const handleChange = (e: THandleChangeI) =>
-    setCancellationSubject(e.target.value);
+  const handleChange = (e: THandleChangeI) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -87,7 +93,7 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
               name="cancellation_subject"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={cancellationSubject}
+              value={formData.cancellation_subject}
               placeholder="Complete campo"
               autoComplete="off"
               spellCheck={false}
