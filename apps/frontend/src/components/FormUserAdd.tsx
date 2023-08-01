@@ -11,7 +11,7 @@ import {
 } from '../features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IDocument } from '../interfaces/IResources';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as documentService from '../services/document.service';
 import * as userService from '../services/user.service';
 import { THandleChangeITS } from '../types/THandleChanges';

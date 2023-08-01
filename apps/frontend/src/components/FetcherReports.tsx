@@ -8,7 +8,7 @@ import {
   setReportsCountOnRange,
 } from '../features/reports/reportsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as peopleService from '../services/people.service';
 import * as reportService from '../services/report.service';
 import * as resService from '../services/res.service';

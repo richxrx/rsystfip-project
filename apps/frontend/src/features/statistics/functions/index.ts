@@ -4,11 +4,11 @@ import {
   validSchedulingTypes,
 } from '../statisticsSlice';
 
-export function updateDataBySchedulingType(
+export const updateDataBySchedulingType = (
   state: StatisticsState,
   appointmentStatus: string,
   updateData: Partial<Data>,
-): StatisticsState {
+): StatisticsState => {
   if (!(appointmentStatus in validSchedulingTypes)) return state;
 
   return {
@@ -18,4 +18,4 @@ export function updateDataBySchedulingType(
       ...updateData,
     },
   };
-}
+};

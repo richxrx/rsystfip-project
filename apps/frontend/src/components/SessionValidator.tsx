@@ -3,7 +3,7 @@ import { useMutation } from 'react-query';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { AuthState, resetUserAuthenticated } from '../features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import api from '../services/api.service';
 import * as sessionService from '../services/session.service';
 

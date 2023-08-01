@@ -7,7 +7,7 @@ import {
   setReportsOrigen,
 } from '../features/reports/reportsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import DaterReports from './DaterReports';
 import TableReports from './TableReports';
 import { useQuery } from 'react-query';

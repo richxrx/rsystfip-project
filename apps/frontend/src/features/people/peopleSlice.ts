@@ -24,7 +24,7 @@ const peopleSlice = createSlice({
     setPeople(state, { payload }: PayloadAction<Array<People>>): PeopleState {
       return { ...state, people: payload };
     },
-    setPeopleOrigen: function (
+    setPeopleOrigen(
       state,
       { payload }: PayloadAction<Array<People>>,
     ): PeopleState {

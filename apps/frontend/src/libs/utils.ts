@@ -1,4 +1,4 @@
-export function ObjsHasSameStructure(obj1: {}, obj2: {}) {
+export const ObjsHasSameStructure = (obj1: {}, obj2: {}) => {
   const keysObj1 = Object.keys(obj1);
   const keysObj2 = Object.keys(obj2);
 
@@ -12,4 +12,4 @@ export function ObjsHasSameStructure(obj1: {}, obj2: {}) {
   }
 
   return true;
-}
+};

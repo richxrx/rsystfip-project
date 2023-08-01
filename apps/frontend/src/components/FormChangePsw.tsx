@@ -3,7 +3,7 @@ import { Col, Form, Row, Spinner } from 'react-bootstrap';
 import { BiKey } from 'react-icons/bi';
 import { useMutation } from 'react-query';
 import { IUserBase } from '../interfaces/IUserBase';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as accountService from '../services/account.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';

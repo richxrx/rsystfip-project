@@ -7,7 +7,7 @@ import {
   setCancelledPeople,
 } from '../features/cancellations/cancellationsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as peopleService from '../services/people.service';
 import CancelledRow from './CancelledRow';
 

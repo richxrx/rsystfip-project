@@ -12,7 +12,7 @@ import {
   setPeopleOrigen,
 } from '../features/people/peopleSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as peopleService from '../services/people.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import TablePeople from './TablePeople';

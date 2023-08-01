@@ -6,7 +6,7 @@ import { FormDataState } from '../features/appointments/appointmentsSlice';
 import { setFaculties } from '../features/resources/resourcesSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IFacultie } from '../interfaces/IResources';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as facultieService from '../services/facultie.service';
 import { actionFormSchedule } from './FormSchedulePeople';
 

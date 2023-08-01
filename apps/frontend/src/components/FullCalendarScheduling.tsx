@@ -15,7 +15,7 @@ import {
   setFormData,
 } from '../features/appointments/appointmentsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as scheduleService from '../services/schedule.service';
 import LoadCalendar from './LoadCalendar';
 import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation';

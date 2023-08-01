@@ -6,7 +6,7 @@ import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { AUTH_KEY } from '../constants';
 import { AuthState, setAuthenticatedUser } from '../features/auth/authSlice';
 import { useAppDispatch } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as authService from '../services/auth.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';

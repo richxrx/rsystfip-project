@@ -4,7 +4,7 @@ import { useMutation } from 'react-query';
 import { Link } from 'react-router-dom';
 import { User } from '../features/users/usersSlice';
 import { IUserBase } from '../interfaces/IUserBase';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as userService from '../services/user.service';
 import { FiEdit3 } from 'react-icons/fi';
 

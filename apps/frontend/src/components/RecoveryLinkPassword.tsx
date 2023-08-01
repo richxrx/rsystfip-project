@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Card, Col, Container, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as accountService from '../services/account.service';
 import FormChangePswForget from './FormChangePswForget';
 import ResetTokenInvalid from './ResetTokenInvalid';

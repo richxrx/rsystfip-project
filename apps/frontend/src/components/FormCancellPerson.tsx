@@ -5,7 +5,7 @@ import { useMutation } from 'react-query';
 import { registerAChange } from '../features/calendar/calendarSlice';
 import { FormDataState } from '../features/appointments/appointmentsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as cancellationService from '../services/cancellation.service';
 import * as scheduleService from '../services/schedule.service';
 import * as sgService from '../services/sendgrid.service';

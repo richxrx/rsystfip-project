@@ -12,7 +12,7 @@ import {
   setFormData,
 } from '../features/appointments/appointmentsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as deanService from '../services/dean.service';
 import * as peopleService from '../services/people.service';
 import * as scheduleService from '../services/schedule.service';

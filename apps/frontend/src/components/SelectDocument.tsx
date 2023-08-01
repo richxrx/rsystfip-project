@@ -6,7 +6,7 @@ import { FormDataState } from '../features/appointments/appointmentsSlice';
 import { setDocuments } from '../features/resources/resourcesSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IDocument } from '../interfaces/IResources';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import { actionFormSchedule } from './FormSchedulePeople';
 import * as documentService from '../services/document.service';
 

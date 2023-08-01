@@ -25,7 +25,7 @@ import {
   setMostAgendatedOnRange,
 } from '../features/statistics/statisticsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as statisticService from '../services/statistic.service';
 import Ctx from './Ctx';
 import DaterStatistics from './DaterStatistics';

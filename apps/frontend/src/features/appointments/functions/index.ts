@@ -5,11 +5,11 @@ import {
   validFormDataAction,
 } from '../appointmentsSlice';
 
-export function updateFormDataByAction(
+export const updateFormDataByAction = (
   state: AppointmentState,
   action: string,
   formData?: FormDataState,
-): AppointmentState {
+): AppointmentState => {
   if (!(action in validFormDataAction)) return state;
 
   return {
@@ -19,4 +19,4 @@ export function updateFormDataByAction(
       [action]: formData || formDataInitialState,
     },
   };
-}
+};

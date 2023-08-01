@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 import { v4 } from 'uuid';
 import { User, setUsers } from '../features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { notify } from '../libs/toast';
+import { notify } from '../libs/notify';
 import * as userService from '../services/user.service';
 import UserRow from './UserRow';
 

@@ -16,7 +16,7 @@ const tempSlice = createSlice({
   name: 'temp',
   initialState,
   reducers: {
-    setTempDataForChangePsw: function (
+    setTempDataForChangePsw(
       state,
       { payload }: PayloadAction<IUserBase>,
     ): TempState {
