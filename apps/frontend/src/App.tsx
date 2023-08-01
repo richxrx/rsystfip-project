@@ -3,14 +3,14 @@ import { Container } from 'react-bootstrap';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.scss';
-import ContainerToast from './components/ContainerToast';
-import Footer from './components/Footer';
-import Loader from './components/Loader';
-import ProtectedElement from './components/ProtectedElement';
-import ProtectedRoute from './components/ProtectedRoute';
-import { AuthState } from './features/auth/authSlice';
 import { useAppSelector } from './app/hooks';
-import PageAuth from './pages/PageAuth';
+import Loader from './components/Loader';
+import { AuthState } from './features/auth/authSlice';
+const ContainerToast = lazy(() => import('./components/ContainerToast'));
+const ProtectedElement = lazy(() => import('./components/ProtectedElement'));
+const ProtectedRoute = lazy(() => import('./components/ProtectedRoute'));
+const PageAuth = lazy(() => import('./pages/PageAuth'));
+const Footer = lazy(() => import('./components/Footer'));
 const SessionValidator = lazy(() => import('./components/SessionValidator'));
 const NavBar = lazy(() => import('./components/NavBar'));
 const PageAddPeople = lazy(() => import('./pages/PageAddPeople'));
@@ -40,16 +40,18 @@ function App(): React.ReactNode {
   const permissions = authState.userAuth.permissions;
 
   return (
-    <Suspense fallback={<Loader />}>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <ProtectedElement isAllowed={authState.auth}>
-            <SessionValidator />
-          </ProtectedElement>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Suspense fallback={<Loader />}>
           <Container fluid>
+            <ProtectedElement isAllowed={authState.auth}>
+              <SessionValidator />
+            </ProtectedElement>
+
             <ProtectedElement isAllowed={authState.auth}>
               <NavBar avatar={avatar} permissions={permissions} />
             </ProtectedElement>
+
             <Routes>
               <Route
                 index
@@ -62,6 +64,7 @@ function App(): React.ReactNode {
                   </ProtectedRoute>
                 }
               />
+
               <Route
                 path="/signin"
                 element={
@@ -79,18 +82,22 @@ function App(): React.ReactNode {
                   path="/home"
                   element={<PageHome permissions={permissions} />}
                 />
+
                 <Route
                   path="/users/change-password/:role"
                   element={<PageChangePassword />}
                 />
+
                 <Route
                   path="/history/general"
                   element={<PageAgendatedPeople />}
                 />
+
                 <Route
                   path="/history/general/update/:id"
                   element={<PageEditPeople />}
                 />
+
                 <Route
                   path="/history/cancelled"
                   element={<PageCancelledPeople />}
@@ -106,7 +113,9 @@ function App(): React.ReactNode {
                 }
               >
                 <Route path="/users" element={<PageManageUsers />} />
+
                 <Route path="/users/create" element={<PageRegisterUsers />} />
+
                 <Route
                   path="/users/delete/:role"
                   element={<PageManageUsers />}
@@ -207,10 +216,11 @@ function App(): React.ReactNode {
           </Container>
 
           <Footer />
-        </BrowserRouter>
-      </QueryClientProvider>
+        </Suspense>
+      </BrowserRouter>
+
       <ContainerToast />
-    </Suspense>
+    </QueryClientProvider>
   );
 }
 

@@ -9,7 +9,7 @@ interface IProps {
 function ProtectedRoute({
   children,
   isAllowed,
-  navigateTo = '/auth/signin',
+  navigateTo = '/signin',
 }: IProps): React.ReactNode {
   if (!isAllowed) return <Navigate to={navigateTo} />;
   return children || <Outlet />;

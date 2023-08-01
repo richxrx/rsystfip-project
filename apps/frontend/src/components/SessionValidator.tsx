@@ -20,7 +20,7 @@ function SessionValidator(): undefined {
     onError: (error: any) => {
       notify(error.response.data.error, { type: 'error' });
       dispatch(resetUserAuthenticated());
-      navigate('/auth/signin');
+      navigate('/signin');
     },
   });
 
