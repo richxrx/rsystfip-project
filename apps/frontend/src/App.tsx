@@ -56,18 +56,18 @@ function App(): React.ReactNode {
                 element={
                   <ProtectedRoute
                     isAllowed={!authState.auth}
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageAuth />
                   </ProtectedRoute>
                 }
               />
               <Route
-                path="/auth/login"
+                path="/signin"
                 element={
                   <ProtectedRoute
                     isAllowed={!authState.auth}
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageAuth />
                   </ProtectedRoute>
@@ -76,21 +76,24 @@ function App(): React.ReactNode {
 
               <Route element={<ProtectedRoute isAllowed={authState.auth} />}>
                 <Route
-                  path="/home/welcome"
+                  path="/home"
                   element={<PageHome permissions={permissions} />}
                 />
                 <Route
-                  path="/users/manage/password/:role/change"
+                  path="/users/change-password/:role"
                   element={<PageChangePassword />}
                 />
-                <Route path="/people/view" element={<PageAgendatedPeople />} />
                 <Route
-                  path="/people/cancelled"
-                  element={<PageCancelledPeople />}
+                  path="/history/general"
+                  element={<PageAgendatedPeople />}
                 />
                 <Route
-                  path="/people/view/:id/edit"
+                  path="/history/general/update/:id"
                   element={<PageEditPeople />}
+                />
+                <Route
+                  path="/history/cancelled"
+                  element={<PageCancelledPeople />}
                 />
               </Route>
 
@@ -98,27 +101,24 @@ function App(): React.ReactNode {
                 element={
                   <ProtectedRoute
                     isAllowed={authState.auth && permissions.includes('admin')}
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   />
                 }
               >
-                <Route path="/users/manage" element={<PageManageUsers />} />
+                <Route path="/users" element={<PageManageUsers />} />
+                <Route path="/users/create" element={<PageRegisterUsers />} />
                 <Route
-                  path="/users/manage/add"
-                  element={<PageRegisterUsers />}
-                />
-                <Route
-                  path="/users/manage/:role/delete"
+                  path="/users/delete/:role"
                   element={<PageManageUsers />}
                 />
               </Route>
 
               <Route
-                path="/people/add"
+                path="/people/create"
                 element={
                   <ProtectedRoute
                     isAllowed={authState.auth && permissions.includes('add')}
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageAddPeople />
                   </ProtectedRoute>
@@ -126,13 +126,13 @@ function App(): React.ReactNode {
               />
 
               <Route
-                path="/people/schedule"
+                path="/people/create-schedule"
                 element={
                   <ProtectedRoute
                     isAllowed={
                       authState.auth && permissions.includes('schedule')
                     }
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageProgramming />
                   </ProtectedRoute>
@@ -140,25 +140,22 @@ function App(): React.ReactNode {
               />
 
               <Route
-                path="/people/preview"
+                path="/appointments"
                 element={
-                  <ProtectedRoute
-                    isAllowed={authState.auth}
-                    navigateTo="/home/welcome"
-                  >
+                  <ProtectedRoute isAllowed={authState.auth} navigateTo="/home">
                     <PageCalendar />
                   </ProtectedRoute>
                 }
               />
 
               <Route
-                path="/people/reports"
+                path="/reports"
                 element={
                   <ProtectedRoute
                     isAllowed={
                       authState.auth && permissions.includes('reports')
                     }
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageReportsPeople />
                   </ProtectedRoute>
@@ -166,13 +163,13 @@ function App(): React.ReactNode {
               />
 
               <Route
-                path="/people/statistics/daily"
+                path="/statistics/daily"
                 element={
                   <ProtectedRoute
                     isAllowed={
                       authState.auth && permissions.includes('statistics')
                     }
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageStcsDaily />
                   </ProtectedRoute>
@@ -180,28 +177,28 @@ function App(): React.ReactNode {
               />
 
               <Route
-                path="/people/statistics/scheduled"
+                path="/statistics/scheduled"
                 element={
                   <ProtectedRoute
                     isAllowed={
                       authState.auth && permissions.includes('statistics')
                     }
-                    navigateTo="/home/welcome"
+                    navigateTo="/home"
                   >
                     <PageStcsScheduled />
                   </ProtectedRoute>
                 }
               />
 
-              <Route path="/help/asks/frecuently" element={<PageFaqs />} />
+              <Route path="/faqs" element={<PageFaqs />} />
 
               <Route
-                path="/forget/my/password"
+                path="/recover-password"
                 element={<PageRecoveryPassword />}
               />
 
               <Route
-                path="/forget/my/password/:resetToken/recovery"
+                path="/:resetToken/recover-password"
                 element={<PageLinkRecoveryPsw />}
               />
 

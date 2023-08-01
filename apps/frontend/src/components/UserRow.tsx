@@ -37,7 +37,7 @@ function UserRow({
 
       <td>
         <Link
-          to={`/users/manage/password/${id}/change`}
+          to={`/users/change-password/${id}`}
           className="btn btn-light m-1"
           title={`Change password for user ${email}`}
         >
@@ -45,7 +45,7 @@ function UserRow({
         </Link>
 
         <Link
-          to={`/users/manage/password/${id}/change`}
+          to={`/users/change-password/${id}`}
           className="btn btn-light m-1"
           title={`Edit data for user ${first_name} ${last_name}`}
         >

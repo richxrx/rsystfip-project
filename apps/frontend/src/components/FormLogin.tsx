@@ -40,7 +40,7 @@ function FormLogin(): React.ReactNode {
       window.localStorage.setItem(AUTH_KEY, JSON.stringify(dataToSavedSession));
 
       dispatch(setAuthenticatedUser(dataToSavedSession));
-      navigate('/home/welcome');
+      navigate('/home');
     },
     onError: (error: any) =>
       notify(error.response.data.error, { type: 'error' }),
@@ -75,6 +75,7 @@ function FormLogin(): React.ReactNode {
             />
           </Form.FloatingLabel>
         </Col>
+
         <Col md={12}>
           <Form.FloatingLabel label="Contraseña">
             <Form.Control
@@ -92,23 +93,27 @@ function FormLogin(): React.ReactNode {
             />
           </Form.FloatingLabel>
         </Col>
+
         <Col md={12}>
           <Form.Check
-            className="mt-2"
+            className="my-3"
             onClick={() => setPasswordVisible(!passwordVisible)}
             type="switch"
             label="Mostrar contraseña"
           />
         </Col>
-        <Submitter loading={isLoading}>
-          {!isLoading ? (
-            <>
-              Entrar <IoMdLogIn className="mb-1" />
-            </>
-          ) : (
-            <Spinner size="sm" />
-          )}
-        </Submitter>
+
+        <Col md={6}>
+          <Submitter loading={isLoading}>
+            {!isLoading ? (
+              <>
+                Entrar <IoMdLogIn className="mb-1" />
+              </>
+            ) : (
+              <Spinner size="sm" />
+            )}
+          </Submitter>
+        </Col>
       </Row>
     </Form>
   );

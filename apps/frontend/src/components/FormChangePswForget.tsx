@@ -51,56 +51,60 @@ function FormChangePswForget(): React.ReactNode {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row className="g-3">
-        <Col md={12}>
-          <Form.FloatingLabel label="Contraseña nueva:">
-            <Form.Control
-              name="password"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formData.password}
-              type="password"
-              placeholder="New password"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              autoFocus
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+    <Col md={2} className="mx-auto">
+      <Form onSubmit={handleSubmit}>
+        <Row className="g-3">
+          <Col md={12}>
+            <Form.FloatingLabel label="Contraseña nueva:">
+              <Form.Control
+                name="password"
+                className="border-0 bg-white"
+                onChange={handleChange}
+                value={formData.password}
+                type="password"
+                placeholder="New password"
+                autoComplete="off"
+                spellCheck={false}
+                minLength={8}
+                maxLength={30}
+                autoFocus
+                required
+              />
+            </Form.FloatingLabel>
+          </Col>
 
-        <Col md={12}>
-          <Form.FloatingLabel label="Confirmar contraseña nueva:">
-            <Form.Control
-              name="confirmPassword"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formData.confirmPassword}
-              type="password"
-              placeholder="Confirm new password"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+          <Col md={12}>
+            <Form.FloatingLabel label="Confirmar contraseña nueva:">
+              <Form.Control
+                name="confirmPassword"
+                className="border-0 bg-white"
+                onChange={handleChange}
+                value={formData.confirmPassword}
+                type="password"
+                placeholder="Confirm new password"
+                autoComplete="off"
+                spellCheck={false}
+                minLength={8}
+                maxLength={30}
+                required
+              />
+            </Form.FloatingLabel>
+          </Col>
 
-        <Submitter loading={isLoading}>
-          {!isLoading ? (
-            <>
-              Cambiar contraseña <BiKey className="mb-1" />
-            </>
-          ) : (
-            <Spinner size="sm" />
-          )}
-        </Submitter>
-      </Row>
-    </Form>
+          <Col md={6}>
+            <Submitter loading={isLoading}>
+              {!isLoading ? (
+                <>
+                  Continuar <BiKey className="mb-1" />
+                </>
+              ) : (
+                <Spinner size="sm" />
+              )}
+            </Submitter>
+          </Col>
+        </Row>
+      </Form>
+    </Col>
   );
 }
 

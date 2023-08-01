@@ -37,7 +37,7 @@ function PersonRow({
       <td>{visit_subject}</td>
       <td>
         <Link
-          to={`/people/view/${id}/edit`}
+          to={`/history/general/update/${id}`}
           className="btn btn-link link-fc"
           title={`Edit personal data for person ${first_name} ${last_name}`}
         >

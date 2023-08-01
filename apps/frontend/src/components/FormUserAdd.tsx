@@ -230,15 +230,17 @@ function FormUserAdd(): React.ReactNode {
           </Form.FloatingLabel>
         </Col>
 
-        <Submitter loading={isLoading}>
-          {!isLoading ? (
-            <>
-              Registrar <FaUserPlus className="mb-1" />
-            </>
-          ) : (
-            <Spinner size="sm" />
-          )}
-        </Submitter>
+        <Col md={6}>
+          <Submitter loading={isLoading}>
+            {!isLoading ? (
+              <>
+                Registrar <FaUserPlus className="mb-1" />
+              </>
+            ) : (
+              <Spinner size="sm" />
+            )}
+          </Submitter>
+        </Col>
       </Row>
     </Form>
   );

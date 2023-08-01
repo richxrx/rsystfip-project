@@ -27,7 +27,7 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
     dispatch(resetQueryDataStatistics());
     dispatch(resetAllFormDataProgramming());
     dispatch(destroyTemporals());
-    navigate('/auth/login');
+    navigate('/signin');
   };
 
   return (
@@ -43,11 +43,11 @@ function NavLogoutDropdown({ avatar }: IProps): React.ReactNode {
         align={{ lg: 'end' }}
         className="border-0 shadow-sm rounded-3 bg-white"
       >
-        <NavLink to="/help/asks/frecuently" className="dropdown-item">
+        <NavLink to="/faqs" className="dropdown-item">
           FAQs
         </NavLink>
         <NavLink
-          to={`/users/manage/password/${authState.userAuth.id}/change`}
+          to={`/users/change-password/${authState.userAuth.id}`}
           className="dropdown-item"
         >
           Cambiar contraseña

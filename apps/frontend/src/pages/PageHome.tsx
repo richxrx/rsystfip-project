@@ -19,11 +19,11 @@ function PageHome({ permissions }: IProps): React.ReactNode {
       <Col md={12}>
         <UserLoggedInfo />
         <ProtectedElement isAllowed={permissions.includes('add')}>
-          <Link to="/people/add" className="btn btn-primary m-1">
+          <Link to="/people/create" className="btn btn-primary m-1">
             Diario <FaUserPlus className="mb-1" />
           </Link>
         </ProtectedElement>
-        <Link to="/people/schedule" className="btn btn-primary m-1">
+        <Link to="/people/create-schedule" className="btn btn-primary m-1">
           Programar <IoCalendarNumber className="mb-1" />
         </Link>
       </Col>

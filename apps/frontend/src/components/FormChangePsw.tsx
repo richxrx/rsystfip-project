@@ -109,15 +109,17 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
           </Form.FloatingLabel>
         </Col>
 
-        <Submitter loading={isLoading}>
-          {!isLoading ? (
-            <>
-              Cambiar contraseña <BiKey className="mb-1" />
-            </>
-          ) : (
-            <Spinner size="sm" />
-          )}
-        </Submitter>
+        <Col md={6}>
+          <Submitter loading={isLoading}>
+            {!isLoading ? (
+              <>
+                Continuar <BiKey className="mb-1" />
+              </>
+            ) : (
+              <Spinner size="sm" />
+            )}
+          </Submitter>
+        </Col>
       </Row>
     </Form>
   );

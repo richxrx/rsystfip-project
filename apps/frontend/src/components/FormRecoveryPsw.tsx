@@ -37,38 +37,42 @@ function FormRecoveryPsw(): React.ReactNode {
   const handleChange = (e: THandleChangeI) => setEmail(e.target.value);
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row className="g-3">
-        <Col md={12}>
-          <Form.FloatingLabel label="Email de registro">
-            <Form.Control
-              name="email"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={email}
-              type="email"
-              placeholder="Email"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={10}
-              maxLength={30}
-              autoFocus
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+    <Col md={2} className="mx-auto">
+      <Form onSubmit={handleSubmit}>
+        <Row className="g-3">
+          <Col md={12}>
+            <Form.FloatingLabel label="Email de registro">
+              <Form.Control
+                name="email"
+                className="border-0 bg-white"
+                onChange={handleChange}
+                value={email}
+                type="email"
+                placeholder="Email"
+                autoComplete="off"
+                spellCheck={false}
+                minLength={10}
+                maxLength={30}
+                autoFocus
+                required
+              />
+            </Form.FloatingLabel>
+          </Col>
 
-        <Submitter loading={isLoading}>
-          {!isLoading ? (
-            <>
-              Enviar email <BiMailSend className="mb-1" />
-            </>
-          ) : (
-            <Spinner size="sm" />
-          )}
-        </Submitter>
-      </Row>
-    </Form>
+          <Col md={6}>
+            <Submitter loading={isLoading}>
+              {!isLoading ? (
+                <>
+                  Enviar <BiMailSend className="mb-1" />
+                </>
+              ) : (
+                <Spinner size="sm" />
+              )}
+            </Submitter>
+          </Col>
+        </Row>
+      </Form>
+    </Col>
   );
 }
 

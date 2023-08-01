@@ -82,10 +82,10 @@ function Searcher(): React.ReactNode {
         <Button variant="dark" onClick={handleClick}>
           {isLoading ? <Spinner size="sm" /> : <FaSyncAlt className="mb-1" />}
         </Button>
-        <Link to="/people/add" className="btn btn-dark">
+        <Link to="/people/create" className="btn btn-dark">
           <ImUserPlus className="mb-1" />
         </Link>
-        <Link to="/people/schedule" className="btn btn-dark">
+        <Link to="/people/create-schedule" className="btn btn-dark">
           <IoCalendarNumber className="mb-1" />
         </Link>
       </ButtonGroup>

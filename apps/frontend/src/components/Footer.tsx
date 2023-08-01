@@ -29,7 +29,7 @@ function Footer(): React.ReactNode {
           <Nav className="justify-content-end">
             <Nav.Item>
               <Link
-                to={!authState.auth ? '/' : '/home/welcome'}
+                to={!authState.auth ? '/' : '/home'}
                 className="nav-link px-2 text-body-secondary"
               >
                 Inicio
@@ -37,10 +37,7 @@ function Footer(): React.ReactNode {
             </Nav.Item>
 
             <Nav.Item>
-              <Link
-                to="/help/asks/frecuently"
-                className="nav-link px-2 text-body-secondary"
-              >
+              <Link to="/faqs" className="nav-link px-2 text-body-secondary">
                 FAQs
               </Link>
             </Nav.Item>
@@ -53,7 +50,7 @@ function Footer(): React.ReactNode {
 
             <Nav.Item>
               <Link
-                to="/forget/my/password"
+                to="/recover-password"
                 className="nav-link px-2 text-body-secondary"
               >
                 Olvidó su contraseña?
