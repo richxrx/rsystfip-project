@@ -84,6 +84,9 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.0
         version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.2.12)(react@18.2.0)
+      '@fontsource/roboto':
+        specifier: ^5.0.5
+        version: 5.0.5
       '@fullcalendar/core':
         specifier: ^6.1.8
         version: 6.1.8
@@ -93,6 +96,9 @@ importers:
       '@fullcalendar/react':
         specifier: ^6.1.8
         version: 6.1.8(@fullcalendar/core@6.1.8)(react-dom@18.2.0)(react@18.2.0)
+      '@mui/icons-material':
+        specifier: ^5.14.3
+        version: 5.14.3(@mui/material@5.14.2)(@types/react@18.2.12)(react@18.2.0)
       '@mui/material':
         specifier: ^5.14.2
         version: 5.14.2(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
@@ -1090,6 +1096,10 @@ packages:
     resolution: {integrity: sha512-59SgoZ3EXbkfSX7b63tsou/SDGzwUEK6MuB5sKqgVK1/XE0fxmpsOb9DQI8LXW3KfGnAjImCGhhEb7uPPAUVNA==}
     dev: false
 
+  /@fontsource/roboto@5.0.5:
+    resolution: {integrity: sha512-IMXFq5AMgGx0sgNLfwWsmPuy3qa7lmDmQcXXihqwF4mT2UpD725cbxZj93ERY793OWon+6V1ANax02I3nt9+4w==}
+    dev: false
+
   /@fullcalendar/core@6.1.8:
     resolution: {integrity: sha512-i8JBIvZCWGO9dsMEDcx9bnsQZ9PtGSJdOXGgWbhLaGq2iq41OBdp9g9gM4b/Otv2oK8bL5Gl6CsMmb/HkDtA6Q==}
     dependencies:
@@ -1515,6 +1525,23 @@ packages:
 
   /@mui/core-downloads-tracker@5.14.2:
     resolution: {integrity: sha512-x+c/MgDL1t/IIy5lDbMlrDouFG5DYZbl3DP4dbbuhlpPFBnE9glYwmJEee/orVHQpOPwLxCAIWQs+2DKSaBVWQ==}
+    dev: false
+
+  /@mui/icons-material@5.14.3(@mui/material@5.14.2)(@types/react@18.2.12)(react@18.2.0):
+    resolution: {integrity: sha512-XkxWPhageu1OPUm2LWjo5XqeQ0t2xfGe8EiLkRW9oz2LHMMZmijvCxulhgquUVTF1DnoSh+3KoDLSsoAFtVNVw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      '@mui/material': ^5.0.0
+      '@types/react': ^17.0.0 || ^18.0.0
+      react: ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.22.6
+      '@mui/material': 5.14.2(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.12
+      react: 18.2.0
     dev: false
 
   /@mui/material@5.14.2(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0):
