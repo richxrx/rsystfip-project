@@ -1,29 +1,47 @@
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import { Helmet } from 'react-helmet';
 import rsystfipLogo from '../assets/rsystfip.svg';
-import Error404Actioner from '../components/Error404Actioner';
+import GoHome from '../components/GoHome';
 
 function PageNotFound(): React.ReactNode {
   return (
-    <Container className="px-4 py-5 my-5 text-center">
+    <>
       <Helmet>
         <title>RSystfip | Not found</title>
       </Helmet>
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <Image
+
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            component="img"
             src={rsystfipLogo}
             alt="Rsystfip"
             width={72}
             height={57}
-            className="mb-4"
+            sx={{ mb: 4 }}
           />
-          <h1 className="display-5 fw-bold">Error 404</h1>
-          <p className="lead mb-4">Not Found.</p>
-          <Error404Actioner />
-        </Col>
-      </Row>
-    </Container>
+
+          <Typography component="h1" variant="h3" gutterBottom>
+            Error 404
+          </Typography>
+
+          <Typography variant="body1" gutterBottom>
+            Oops! The page you're looking for doesn't exist.
+          </Typography>
+
+          <GoHome />
+        </Box>
+      </Container>
+    </>
   );
 }
 

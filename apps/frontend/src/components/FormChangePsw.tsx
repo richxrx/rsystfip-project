@@ -1,6 +1,6 @@
+import KeyIcon from '@mui/icons-material/Key';
 import { useState } from 'react';
 import { Col, Form, Row, Spinner } from 'react-bootstrap';
-import { BiKey } from 'react-icons/bi';
 import { useMutation } from 'react-query';
 import { IUserBase } from '../interfaces/IUserBase';
 import { notify } from '../libs/notify';
@@ -19,11 +19,10 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
     newPassword: '',
     confirmPassword: '',
   };
-
   const [formData, setFormData] = useState(formDataInitialState);
 
   const { mutate, isLoading } = useMutation(accountService.changePassword, {
-    onSuccess: (data) => {
+    onSuccess(data) {
       notify(data.ok, {
         type: 'success',
         position: 'top-left',
@@ -31,8 +30,9 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
 
       setFormData(formDataInitialState);
     },
-    onError: (error: any) =>
-      notify(error.response.data.error, { type: 'error' }),
+    onError(error: any) {
+      notify(error.response.data.error, { type: 'error' });
+    },
   });
 
   const handleSubmit = (e: THandleSubmit) => {
@@ -117,7 +117,7 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
           <Submitter loading={isLoading}>
             {!isLoading ? (
               <>
-                Continuar <BiKey className="mb-1" />
+                Continuar <KeyIcon />
               </>
             ) : (
               <Spinner size="sm" />

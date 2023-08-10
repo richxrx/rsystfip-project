@@ -104,7 +104,7 @@ export const changePswSchema = idSchema.keys({
 export const forgetPswSchema = JoiDefaults.object({
   resetToken: Joi.string().required(),
   password: Joi.string().min(8).max(30).required(),
-  password_confirm: Joi.string()
+  password2: Joi.string()
     .valid(Joi.ref('password'), '')
     .min(8)
     .max(30)
@@ -141,7 +141,7 @@ export const userSchema = emailItfipSchema.keys({
     .required()
     .messages({ 'string.pattern.base': '"phone_number" invalid' }),
   password: Joi.string().min(8).max(30).required(),
-  password_confirm: Joi.string()
+  password2: Joi.string()
     .valid(Joi.ref('password'))
     .min(8)
     .max(30)

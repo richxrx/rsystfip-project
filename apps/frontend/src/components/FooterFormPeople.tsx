@@ -1,6 +1,6 @@
+import AddIcon from '@mui/icons-material/Add';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Button, Col, Spinner } from 'react-bootstrap';
-import { FaUserPlus } from 'react-icons/fa';
-import { GiReturnArrow } from 'react-icons/gi';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { THandleClick } from '../types/THandleClicks';
 import ProtectedElement from './ProtectedElement';
@@ -23,7 +23,7 @@ function FooterFormPeople({ isAllowed, isLoading }: IProps): React.ReactNode {
       <Button className="m-1" disabled={isLoading} type="submit">
         {!isLoading ? (
           <>
-            Registrar <FaUserPlus className="mb-1" />
+            Registrar <AddIcon />
           </>
         ) : (
           <Spinner size="sm" />
@@ -36,7 +36,7 @@ function FooterFormPeople({ isAllowed, isLoading }: IProps): React.ReactNode {
           className="m-1"
           type="submit"
         >
-          Volver <GiReturnArrow />
+          Volver <ArrowBackIcon />
         </Button>
       </ProtectedElement>
     </Col>

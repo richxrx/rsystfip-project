@@ -17,7 +17,7 @@ function SessionValidator(): undefined {
   const sessionValidatorTimerRef = useRef<NodeJS.Timer | undefined>(undefined);
 
   const { mutate } = useMutation(sessionService.verifySession, {
-    onError: (error: any) => {
+    onError(error: any) {
       notify(error.response.data.error, { type: 'error' });
       dispatch(resetUserAuthenticated());
       navigate('/signin');

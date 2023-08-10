@@ -1,40 +1,82 @@
-import { Table } from 'react-bootstrap';
-import { v4 } from 'uuid';
-import { QueryData, Reports } from '../features/reports/reportsSlice';
+import Paper from '@mui/material/Paper';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import parseISO from 'date-fns/parseISO';
+import format from 'date-fns/format';
+import esLocale from 'date-fns/locale/es';
 import { useAppSelector } from '../app/hooks';
-import ReportRow from './ReportRow';
+import { Reports } from '../features/reports/reportsSlice';
+import { createColumn } from '../libs/utils';
 
-function TableReports(): React.ReactNode {
+interface IProps {
+  isLoading: boolean;
+}
+
+const columns: GridColDef[] = [
+  createColumn('id', 'ID', 70),
+  {
+    ...createColumn('full_name', 'Full name', 250),
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    valueGetter: (params: GridValueGetterParams) =>
+      `${params.row.first_name || ''} ${params.row.last_name || ''}`,
+  },
+  {
+    ...createColumn('created_at', 'Created at', 200),
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    valueGetter: (params: GridValueGetterParams) =>
+      format(parseISO(params.row.created_at), "MMM d, yyyy 'a las' h:mm a", {
+        locale: esLocale,
+      }),
+  },
+  {
+    ...createColumn('updated_at', 'Updated at', 200),
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    valueGetter: (params: GridValueGetterParams) =>
+      format(parseISO(params.row.updated_at), "MMM d, yyyy 'a las' h:mm a", {
+        locale: esLocale,
+      }),
+  },
+  {
+    ...createColumn('appointment_date', 'Appointment date', 380),
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    valueGetter: (params: GridValueGetterParams) =>
+      `${format(parseISO(params.row.start_time), "MMM d, yyyy 'a las' h:mm a", {
+        locale: esLocale,
+      })}${' - '}
+    ${format(parseISO(params.row.start_time), "MMM d, yyyy 'a las' h:mm a", {
+      locale: esLocale,
+    })}`,
+  },
+  createColumn('scheduling_count', 'Scheduling count', 130),
+  createColumn('daily_count', 'Daily count', 90),
+  createColumn('category_name', 'Category name', 160),
+];
+
+function TableReports({ isLoading }: IProps): React.ReactNode {
   const reportsState: Array<Reports> = useAppSelector(
     ({ reports }) => reports.reports,
   );
-  const queryDataState: QueryData = useAppSelector(
-    ({ reports }) => reports.queryData,
-  );
 
   return (
-    <Table responsive hover borderless size="sm" className="text-center">
-      <caption>
-        Data about people schedule between {queryDataState.start_time} and{' '}
-        {queryDataState.end_time}.
-      </caption>
-      <thead>
-        <tr>
-          <th>Nombres</th>
-          <th>Creado en</th>
-          <th>Actualizado en</th>
-          <th>Agendamiento Inicio - Fin</th>
-          <th>Agendamiento Programado</th>
-          <th>Agendamiento Diario</th>
-          <th>Tipo Persona</th>
-        </tr>
-      </thead>
-      <tbody>
-        {reportsState.map((person) => (
-          <ReportRow key={v4()} report={person} />
-        ))}
-      </tbody>
-    </Table>
+    <div style={{ height: 400, width: '100%' }}>
+      <Paper>
+        <DataGrid
+          rows={reportsState}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: { page: 0, pageSize: 5 },
+            },
+          }}
+          pageSizeOptions={[5, 10]}
+          loading={isLoading}
+          sx={{ border: 'none' }}
+        />
+      </Paper>
+    </div>
   );
 }
 

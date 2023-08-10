@@ -17,7 +17,7 @@ export interface FormData {
   email: string;
   phone_number: string;
   password: string;
-  password_confirm: string;
+  password2: string;
 }
 
 interface AdminState {
@@ -36,7 +36,7 @@ const initialState: AdminState = {
     email: '',
     phone_number: '',
     password: '',
-    password_confirm: '',
+    password2: '',
   },
 };
 

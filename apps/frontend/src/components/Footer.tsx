@@ -1,5 +1,5 @@
+import CodeIcon from '@mui/icons-material/Code';
 import { Col, Container, Image, Nav } from 'react-bootstrap';
-import { FaCodeBranch } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import rsystfipLogo from '../assets/rsystfip.svg';
@@ -13,7 +13,7 @@ function Footer(): React.ReactNode {
       <footer className="d-flex flex-wrap justify-content-between align-items-center">
         <Col md={4} className="mb-0 text-body-secondary">
           © 2023 Tecnología en gestión informatica
-          <FaCodeBranch className="mb-1" />
+          <CodeIcon />
         </Col>
 
         <Col md={4}>

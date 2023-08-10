@@ -1,33 +1,55 @@
-import { Col, Row } from 'react-bootstrap';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import Container from '@mui/material/Container';
+import Typography from '@mui/material/Typography';
 import { Helmet } from 'react-helmet';
-import { FaUserPlus } from 'react-icons/fa';
-import { IoCalendarNumber } from 'react-icons/io5';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { useAppSelector } from '../app/hooks';
 import ProtectedElement from '../components/ProtectedElement';
-import UserLoggedInfo from '../components/UserLoggedInfo';
+import { AuthState } from '../features/auth/authSlice';
 
 interface IProps {
   permissions: Array<string>;
 }
 
 function PageHome({ permissions }: IProps): React.ReactNode {
+  const authState: AuthState = useAppSelector(({ auth }) => auth);
+
   return (
-    <Row>
+    <>
       <Helmet>
         <title>RSystfip | Home</title>
       </Helmet>
-      <Col md={12}>
-        <UserLoggedInfo />
-        <ProtectedElement isAllowed={permissions.includes('add')}>
-          <Link to="/people/create" className="btn btn-primary m-1">
-            Diario <FaUserPlus className="mb-1" />
-          </Link>
-        </ProtectedElement>
-        <Link to="/people/create-schedule" className="btn btn-primary m-1">
-          Programar <IoCalendarNumber className="mb-1" />
-        </Link>
-      </Col>
-    </Row>
+
+      <Container component="main" maxWidth="xl">
+        <Typography
+          component="h1"
+          variant="h3"
+          gutterBottom
+          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+        >
+          {`${
+            authState.userAuth.role_name === 'secretaria'
+              ? 'Bienvenida'
+              : 'Bienvenido'
+          } ${authState.userAuth.role_name}: ${authState.userAuth.first_name} ${
+            authState.userAuth.last_name
+          }`}
+        </Typography>
+
+        <ButtonGroup variant="outlined" aria-label="outlined button group">
+          <ProtectedElement isAllowed={permissions.includes('add')}>
+            <Button component={RouterLink} to="/people/create">
+              Agendamiento diario
+            </Button>
+          </ProtectedElement>
+
+          <Button component={RouterLink} to="/people/create-schedule">
+            Agendamiento programado
+          </Button>
+        </ButtonGroup>
+      </Container>
+    </>
   );
 }
 

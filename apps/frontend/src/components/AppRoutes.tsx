@@ -1,24 +1,26 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AuthState } from '../features/auth/authSlice';
-import PageAuth from '../pages/PageAuth';
+import PageSignin from '../pages/PageSignin';
 import ProtectedRoute from './ProtectedRoute';
-const PageAddPeople = lazy(() => import('../pages/PageAddPeople'));
-const PageAgendatedPeople = lazy(() => import('../pages/PageAgendatedPeople'));
-const PageCalendar = lazy(() => import('../pages/PageCalendar'));
-const PageCancelledPeople = lazy(() => import('../pages/PageCancelledPeople'));
+const PageDailyScheduling = lazy(() => import('../pages/PageDailyScheduling'));
+const PageHistoryPeople = lazy(() => import('../pages/PageHistoryPeople'));
+const PageAppointments = lazy(() => import('../pages/PageAppointments'));
+const PageHistoryCancelledPeople = lazy(
+  () => import('../pages/PageHistoryCanceledPeople'),
+);
 const PageChangePassword = lazy(() => import('../pages/PageChangePassword'));
 const PageEditPeople = lazy(() => import('../pages/PageEditPeople'));
 const PageFaqs = lazy(() => import('../pages/PageFaqs'));
 const PageHome = lazy(() => import('../pages/PageHome'));
 const PageLinkRecoveryPsw = lazy(() => import('../pages/PageLinkRecoveryPsw'));
-const PageManageUsers = lazy(() => import('../pages/PageManageUsers'));
+const PageUsers = lazy(() => import('../pages/PageUsers'));
 const PageNotFound = lazy(() => import('../pages/PageNotFound'));
-const PageProgramming = lazy(() => import('../pages/PageProgramming'));
-const PageRecoveryPassword = lazy(
-  () => import('../pages/PageRecoveryPassword'),
+const PageScheduleScheduling = lazy(
+  () => import('../pages/PageScheduleScheduling'),
 );
-const PageRegisterUsers = lazy(() => import('../pages/PageRegisterUsers'));
+const PageRecoverPassword = lazy(() => import('../pages/PageRecoverPassword'));
+const PageRegisterUser = lazy(() => import('../pages/PageRegisterUser'));
 const PageReportsPeople = lazy(() => import('../pages/PageReportsPeople'));
 const PageStcsDaily = lazy(() => import('../pages/PageStcsDaily'));
 const PageStcsScheduled = lazy(() => import('../pages/PageStcsScheduled'));
@@ -35,7 +37,7 @@ function AppRoutes({ authState, permissions }: IProps) {
         index
         element={
           <ProtectedRoute isAllowed={!authState.auth} navigateTo="/home">
-            <PageAuth />
+            <PageSignin />
           </ProtectedRoute>
         }
       />
@@ -44,7 +46,7 @@ function AppRoutes({ authState, permissions }: IProps) {
         path="/signin"
         element={
           <ProtectedRoute isAllowed={!authState.auth} navigateTo="/home">
-            <PageAuth />
+            <PageSignin />
           </ProtectedRoute>
         }
       />
@@ -57,14 +59,17 @@ function AppRoutes({ authState, permissions }: IProps) {
           element={<PageChangePassword />}
         />
 
-        <Route path="/history/general" element={<PageAgendatedPeople />} />
+        <Route path="/history/general" element={<PageHistoryPeople />} />
 
         <Route
           path="/history/general/update/:id"
           element={<PageEditPeople />}
         />
 
-        <Route path="/history/cancelled" element={<PageCancelledPeople />} />
+        <Route
+          path="/history/cancelled"
+          element={<PageHistoryCancelledPeople />}
+        />
       </Route>
 
       <Route
@@ -75,11 +80,11 @@ function AppRoutes({ authState, permissions }: IProps) {
           />
         }
       >
-        <Route path="/users" element={<PageManageUsers />} />
+        <Route path="/users" element={<PageUsers />} />
 
-        <Route path="/users/create" element={<PageRegisterUsers />} />
+        <Route path="/users/create" element={<PageRegisterUser />} />
 
-        <Route path="/users/delete/:role" element={<PageManageUsers />} />
+        <Route path="/users/delete/:role" element={<PageUsers />} />
       </Route>
 
       <Route
@@ -89,7 +94,7 @@ function AppRoutes({ authState, permissions }: IProps) {
             isAllowed={authState.auth && permissions.includes('add')}
             navigateTo="/home"
           >
-            <PageAddPeople />
+            <PageDailyScheduling />
           </ProtectedRoute>
         }
       />
@@ -101,7 +106,7 @@ function AppRoutes({ authState, permissions }: IProps) {
             isAllowed={authState.auth && permissions.includes('schedule')}
             navigateTo="/home"
           >
-            <PageProgramming />
+            <PageScheduleScheduling />
           </ProtectedRoute>
         }
       />
@@ -110,7 +115,7 @@ function AppRoutes({ authState, permissions }: IProps) {
         path="/appointments"
         element={
           <ProtectedRoute isAllowed={authState.auth} navigateTo="/home">
-            <PageCalendar />
+            <PageAppointments />
           </ProtectedRoute>
         }
       />
@@ -153,7 +158,7 @@ function AppRoutes({ authState, permissions }: IProps) {
 
       <Route path="/faqs" element={<PageFaqs />} />
 
-      <Route path="/recover-password" element={<PageRecoveryPassword />} />
+      <Route path="/recover-password" element={<PageRecoverPassword />} />
 
       <Route
         path="/:resetToken/recover-password"

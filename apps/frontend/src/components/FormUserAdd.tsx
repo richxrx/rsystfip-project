@@ -1,15 +1,15 @@
+import AddIcon from '@mui/icons-material/Add';
 import { useEffect } from 'react';
 import { Col, Form, Row, Spinner } from 'react-bootstrap';
-import { FaUserPlus } from 'react-icons/fa';
 import { useMutation, useQuery } from 'react-query';
 import { v4 } from 'uuid';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setDocuments } from '../features/resources/resourcesSlice';
 import {
   FormData,
   resetFormDataAdmin,
   setFormData,
 } from '../features/users/usersSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IDocument } from '../interfaces/IResources';
 import { notify } from '../libs/notify';
 import * as documentService from '../services/document.service';
@@ -36,22 +36,22 @@ function FormUserAdd(): React.ReactNode {
   };
 
   const { mutate, isLoading } = useMutation(userService.saveUser, {
-    onSuccess: (data) => {
-      dispatch(resetFormDataAdmin());
+    onSuccess(data) {
       notify(data.ok, {
         type: 'success',
         position: 'top-left',
       });
+
+      dispatch(resetFormDataAdmin());
     },
-    onError: (error: any) =>
-      notify(error.response.data.error, { type: 'error' }),
+    onError(error: any) {
+      notify(error.response.data.error, { type: 'error' });
+    },
   });
 
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
-
     const payload = formDataState;
-
     mutate(payload);
   };
 
@@ -215,10 +215,10 @@ function FormUserAdd(): React.ReactNode {
         <Col md={6}>
           <Form.FloatingLabel label="Confirmar contraseña:">
             <Form.Control
-              name="password_confirm"
+              name="password2"
               className="border-0 bg-white"
               onChange={handleChange}
-              value={formDataState.password_confirm}
+              value={formDataState.password2}
               type="password"
               placeholder="Password confirm"
               autoComplete="off"
@@ -234,7 +234,7 @@ function FormUserAdd(): React.ReactNode {
           <Submitter loading={isLoading}>
             {!isLoading ? (
               <>
-                Registrar <FaUserPlus className="mb-1" />
+                Registrar <AddIcon />
               </>
             ) : (
               <Spinner size="sm" />

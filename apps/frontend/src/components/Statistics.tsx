@@ -1,3 +1,4 @@
+import Typography from '@mui/material/Typography';
 import {
   ArcElement,
   BarController,
@@ -16,20 +17,18 @@ import {
 } from 'chart.js';
 import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
 import { useEffect, useRef, useState } from 'react';
-import { Col } from 'react-bootstrap';
 import { UseQueryResult, useQueries } from 'react-query';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
 import {
   QueryData,
   setMostAgendatedAllTime,
   setMostAgendatedOnRange,
 } from '../features/statistics/statisticsSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { notify } from '../libs/notify';
 import * as statisticService from '../services/statistic.service';
-import Ctx from './Ctx';
 import DaterStatistics from './DaterStatistics';
-import ListerStatistics from './ListerStatistics';
+import StatisticsData from './StatisticsData';
 
 ChartJS.register(
   ArcElement,
@@ -122,7 +121,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
         },
         plugins: {
           datalabels: {
-            formatter: (value: number, ctx: Context): string => {
+            formatter(value: number, ctx: Context): string {
               let sum = 0;
               const data = ctx.dataset.data;
               data.forEach((n) => (sum += Number(n)));
@@ -209,19 +208,18 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
 
   return (
     <>
-      <Col md={12}>
-        <h1 className="h3">Estadísticas de agendamiento {labelText}</h1>
-      </Col>
+      <Typography
+        component="h1"
+        variant="h4"
+        gutterBottom
+        marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+      >
+        Estadísticas de agendamiento {labelText}
+      </Typography>
 
       <DaterStatistics appointment_status={appointment_status} />
 
-      <Col md={12} className="my-5">
-        <Ctx ctxRef={ctxRef} />
-      </Col>
-
-      <Col md={12}>
-        <ListerStatistics appointment_status={appointment_status} />
-      </Col>
+      <StatisticsData appointment_status={appointment_status} ctxRef={ctxRef} />
     </>
   );
 }

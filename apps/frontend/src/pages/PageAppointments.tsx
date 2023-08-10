@@ -1,13 +1,13 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { Helmet } from 'react-helmet';
-import Reports from '../components/Reports';
+import FullCalendarScheduling from '../components/FullCalendarScheduling';
 
-function PageReportsPeople(): React.ReactNode {
+function PageAppointments(): React.ReactNode {
   return (
     <>
       <Helmet>
-        <title>RSystfip | Reports</title>
+        <title>RSystfip | Appointments</title>
       </Helmet>
 
       <Container component="main" maxWidth="xl">
@@ -17,13 +17,16 @@ function PageReportsPeople(): React.ReactNode {
           gutterBottom
           marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
         >
-          Reportes por mes
+          Ver agendamientos programados
         </Typography>
 
-        <Reports />
+        <FullCalendarScheduling
+          right="listMonth,dayGridMonth"
+          initialView="listMonth"
+        />
       </Container>
     </>
   );
 }
 
-export default PageReportsPeople;
+export default PageAppointments;

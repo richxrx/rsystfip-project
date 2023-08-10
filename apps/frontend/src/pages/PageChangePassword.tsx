@@ -1,15 +1,18 @@
-import { Row } from 'react-bootstrap';
+import Container from '@mui/material/Container';
 import { Helmet } from 'react-helmet';
 import FetcherDataForChangePsw from '../components/FetcherDataForChangePsw';
 
 function PageChangePassword(): React.ReactNode {
   return (
-    <Row>
+    <>
       <Helmet>
-        <title>RSystfip | Change password users</title>
+        <title>RSystfip | Change password</title>
       </Helmet>
-      <FetcherDataForChangePsw />
-    </Row>
+
+      <Container component="main" maxWidth="xl">
+        <FetcherDataForChangePsw />
+      </Container>
+    </>
   );
 }
 

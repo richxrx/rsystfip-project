@@ -1,16 +1,19 @@
-import { Row } from 'react-bootstrap';
+import Container from '@mui/material/Container';
 import { Helmet } from 'react-helmet';
 import Statistics from '../components/Statistics';
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
 
 function PageStcsDaily(): React.ReactNode {
   return (
-    <Row className="g-3">
+    <>
       <Helmet>
         <title>RSystfip | Statistics daily people</title>
       </Helmet>
-      <Statistics appointment_status={AppointmentStatus.daily} />
-    </Row>
+
+      <Container component="main" maxWidth="xl">
+        <Statistics appointment_status={AppointmentStatus.daily} />
+      </Container>
+    </>
   );
 }
 

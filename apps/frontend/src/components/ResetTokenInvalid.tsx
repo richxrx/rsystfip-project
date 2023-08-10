@@ -1,6 +1,6 @@
 import { Col, Container, Image, Row } from 'react-bootstrap';
 import rsystfipLogo from '../assets/rsystfip.svg';
-import Error404Actioner from './Error404Actioner';
+import GoHome from './GoHome';
 
 function ResetTokenInvalid(): React.ReactNode {
   return (
@@ -18,7 +18,7 @@ function ResetTokenInvalid(): React.ReactNode {
           <p className="lead mb-4">
             El link para cambio de contraseña ha expirado o es inválido.
           </p>
-          <Error404Actioner />
+          <GoHome />
         </Col>
       </Row>
     </Container>

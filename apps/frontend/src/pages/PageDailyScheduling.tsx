@@ -6,11 +6,11 @@ import FormSchedulePeople, {
   propsAction,
 } from '../components/FormSchedulePeople';
 
-function PageEditPeople(): React.ReactNode {
+function PageDailyScheduling(): React.ReactNode {
   return (
     <>
       <Helmet>
-        <title>RSystfip | Edit people</title>
+        <title>RSystfip | Daily scheduling</title>
       </Helmet>
 
       <Container component="main" maxWidth="xl">
@@ -21,11 +21,11 @@ function PageEditPeople(): React.ReactNode {
             gutterBottom
             marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
           >
-            Actualizar Datos
+            Agendamiento diario
           </Typography>
 
           <Card.Body className="my-4">
-            <FormSchedulePeople action={propsAction.edit} />
+            <FormSchedulePeople action={propsAction.add} />
           </Card.Body>
         </Card>
       </Container>
@@ -33,4 +33,4 @@ function PageEditPeople(): React.ReactNode {
   );
 }
 
-export default PageEditPeople;
+export default PageDailyScheduling;

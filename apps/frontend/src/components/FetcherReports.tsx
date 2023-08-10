@@ -1,24 +1,20 @@
 import { useEffect } from 'react';
 import { UseQueryResult, useQueries } from 'react-query';
-import { setPeople, setPeopleOrigen } from '../features/people/peopleSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { setPeople } from '../features/people/peopleSlice';
 import {
   QueryData,
   setPngBase64,
   setReportsCountAllTime,
   setReportsCountOnRange,
 } from '../features/reports/reportsSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { notify } from '../libs/notify';
 import * as peopleService from '../services/people.service';
 import * as reportService from '../services/report.service';
 import * as resService from '../services/res.service';
 import PdfCreator from './PdfCreator';
 
-interface IProps {
-  errorReports: boolean;
-}
-
-function FetcherReports({ errorReports }: IProps): React.ReactNode {
+function FetcherReports(): React.ReactNode {
   const dispatch = useAppDispatch();
 
   const queryDataState: QueryData = useAppSelector(
@@ -60,7 +56,6 @@ function FetcherReports({ errorReports }: IProps): React.ReactNode {
         if (data) {
           if (i === 0) {
             dispatch(setPeople(data));
-            dispatch(setPeopleOrigen(data));
           } else if (i === 1) {
             dispatch(setReportsCountAllTime(data));
           } else if (i === 2) {
@@ -84,7 +79,7 @@ function FetcherReports({ errorReports }: IProps): React.ReactNode {
     queries.flatMap(({ data, error }) => [data, error]),
   );
 
-  return <PdfCreator errorReports={errorReports} />;
+  return <PdfCreator />;
 }
 
 export default FetcherReports;

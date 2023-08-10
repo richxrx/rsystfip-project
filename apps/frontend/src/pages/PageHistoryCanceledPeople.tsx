@@ -1,13 +1,13 @@
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { Helmet } from 'react-helmet';
-import Reports from '../components/Reports';
+import TableHistoryCanceledPeople from '../components/TableHistoryCanceledPeople';
 
-function PageReportsPeople(): React.ReactNode {
+function PageHistoryCancelledPeople(): React.ReactNode {
   return (
     <>
       <Helmet>
-        <title>RSystfip | Reports</title>
+        <title>RSystfip | Canceled people history</title>
       </Helmet>
 
       <Container component="main" maxWidth="xl">
@@ -17,13 +17,13 @@ function PageReportsPeople(): React.ReactNode {
           gutterBottom
           marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
         >
-          Reportes por mes
+          Citas canceladas
         </Typography>
 
-        <Reports />
+        <TableHistoryCanceledPeople />
       </Container>
     </>
   );
 }
 
-export default PageReportsPeople;
+export default PageHistoryCancelledPeople;

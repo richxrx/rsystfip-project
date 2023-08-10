@@ -2,15 +2,13 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { Card } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
-import FormSchedulePeople, {
-  propsAction,
-} from '../components/FormSchedulePeople';
+import FormUserAdd from '../components/FormUserAdd';
 
-function PageEditPeople(): React.ReactNode {
+function PageRegisterUser(): React.ReactNode {
   return (
     <>
       <Helmet>
-        <title>RSystfip | Edit people</title>
+        <title>RSystfip | Register user</title>
       </Helmet>
 
       <Container component="main" maxWidth="xl">
@@ -21,11 +19,11 @@ function PageEditPeople(): React.ReactNode {
             gutterBottom
             marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
           >
-            Actualizar Datos
+            Registrar nuevo usuario
           </Typography>
 
           <Card.Body className="my-4">
-            <FormSchedulePeople action={propsAction.edit} />
+            <FormUserAdd />
           </Card.Body>
         </Card>
       </Container>
@@ -33,4 +31,4 @@ function PageEditPeople(): React.ReactNode {
   );
 }
 
-export default PageEditPeople;
+export default PageRegisterUser;

@@ -1,7 +1,5 @@
-import { ChangeEvent } from 'react';
+export type THandleChangeI = React.ChangeEvent<HTMLInputElement>;
 
-export type THandleChangeI = ChangeEvent<HTMLInputElement>;
-
-export type THandleChangeITS = ChangeEvent<
+export type THandleChangeITS = React.ChangeEvent<
   HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
 >;

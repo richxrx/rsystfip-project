@@ -1,17 +1,16 @@
+import format from 'date-fns/format';
+import esLocale from 'date-fns/locale/es';
+import parseISO from 'date-fns/parseISO';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { createHeader, footer, myFonts, styles } from '../utils/pdfmake';
+import { useAppSelector } from '../app/hooks';
 import { People } from '../features/people/peopleSlice';
 import { QueryData, Reports } from '../features/reports/reportsSlice';
-import { useAppSelector } from '../app/hooks';
 import { ICounts } from '../interfaces/ICounts';
+import { createHeader, footer, myFonts, styles } from '../utils/pdfmake';
 import Downloader from './Downloader';
 
-interface IProps {
-  errorReports: boolean;
-}
-
-function PdfCreator({ errorReports }: IProps): React.ReactNode {
+function PdfCreator(): React.ReactNode {
   const pngBase64State: string = useAppSelector(
     ({ reports }) => reports.pngBase64,
   );
@@ -145,7 +144,9 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
                     category_name,
                   }) => [
                     `${first_name} ${last_name}`,
-                    new Date(start_time).toLocaleString(),
+                    format(parseISO(start_time), "MMM d, yyyy 'a las' h:mm a", {
+                      locale: esLocale,
+                    }),
                     scheduling_count,
                     daily_count,
                     category_name,
@@ -250,7 +251,7 @@ function PdfCreator({ errorReports }: IProps): React.ReactNode {
     myFonts,
   );
 
-  return <Downloader pdf={pdf} errorReports={errorReports} />;
+  return <Downloader pdf={pdf} />;
 }
 
 export default PdfCreator;

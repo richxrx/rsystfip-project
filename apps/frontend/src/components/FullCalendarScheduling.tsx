@@ -1,47 +1,45 @@
 import esLocale from '@fullcalendar/core/locales/es';
 import FullCalendar from '@fullcalendar/react';
-import { format } from 'date-fns';
+import TableContainer from '@mui/material/TableContainer';
+import format from 'date-fns/format';
 import { EventSourceInput, globalPlugins } from 'fullcalendar';
 import { useEffect, useRef, useState } from 'react';
-import { Container } from 'react-bootstrap';
 import { useQuery } from 'react-query';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import {
+  AppointmentStatus,
+  FormDataState,
+  setFormData,
+} from '../features/appointments/appointmentsSlice';
 import {
   ICalendarState,
   setCalendarEvents,
 } from '../features/calendar/calendarSlice';
-import {
-  FormDataState,
-  AppointmentStatus,
-  setFormData,
-} from '../features/appointments/appointmentsSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { notify } from '../libs/notify';
 import * as scheduleService from '../services/schedule.service';
+import { propsAction } from './FormSchedulePeople';
 import LoadCalendar from './LoadCalendar';
 import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation';
 import ModalSchedulePeopleForm from './ModalSchedulePeopleForm';
-import Responsive from './Responsive';
-import { propsAction } from './FormSchedulePeople';
 
 interface IProps {
   right: string;
   initialView: string;
 }
 
+const action = propsAction.schedule;
+
 function FullCalendarScheduling({
   right,
   initialView,
 }: IProps): React.ReactNode {
-  const action = propsAction.schedule;
-
+  const dispatch = useAppDispatch();
   const formDataState: FormDataState = useAppSelector(
     ({ appointments }) => appointments.formData.schedule,
   );
   const calendarEventsState: ICalendarState = useAppSelector(
     ({ calendar }) => calendar,
   );
-
-  const dispatch = useAppDispatch();
 
   // Modal states
   const [stateModalCancell, setStateModalCancell] = useState(false);
@@ -66,17 +64,20 @@ function FullCalendarScheduling({
   }, [data, error]);
 
   return (
-    <Responsive>
+    <TableContainer>
       <LoadCalendar loadEventsRef={loadEventsRef} />
+
       <ModalSchedulePeopleForm
         stateModalScheduling={stateModalScheduling}
         closeModalScheduling={closeModalScheduling}
       />
+
       <ModalCancellPersonConfirmation
         stateModalCancell={stateModalCancell}
         closeModalCancell={closeModalCancell}
       />
-      <Container fluid className="schg-sm lh-1">
+
+      <div className="schg-sm">
         <FullCalendar
           height="auto"
           headerToolbar={{
@@ -169,11 +170,8 @@ function FullCalendarScheduling({
           initialView={initialView}
           plugins={globalPlugins}
         />
-      </Container>
-      <p className="text-center mt-2">
-        Appointments are only available from 6am to 9pm.
-      </p>
-    </Responsive>
+      </div>
+    </TableContainer>
   );
 }
 

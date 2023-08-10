@@ -1,6 +1,6 @@
+import KeyIcon from '@mui/icons-material/Key';
 import { useState } from 'react';
 import { Col, Form, Row, Spinner } from 'react-bootstrap';
-import { BiKey } from 'react-icons/bi';
 import { useMutation } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { notify } from '../libs/notify';
@@ -10,27 +10,24 @@ import { THandleSubmit } from '../types/THandleSubmits';
 import Submitter from './Submitter';
 
 function FormChangePswForget(): React.ReactNode {
-  const formDataInitialState = {
-    password: '',
-    confirmPassword: '',
-  };
-
+  const formDataInitialState = { password: '', password2: '' };
   const [formData, setFormData] = useState(formDataInitialState);
-
   const { resetToken } = useParams<{ resetToken: string }>();
 
   const { mutate, isLoading } = useMutation(
     accountService.changePasswordWithJwt,
     {
-      onSuccess: (data) => {
-        setFormData(formDataInitialState);
+      onSuccess(data) {
         notify(data.ok, {
           type: 'success',
           position: 'top-left',
         });
+
+        setFormData(formDataInitialState);
       },
-      onError: (error: any) =>
-        notify(error.response.data.error, { type: 'error' }),
+      onError(error: any) {
+        notify(error.response.data.error, { type: 'error' });
+      },
     },
   );
 
@@ -40,7 +37,7 @@ function FormChangePswForget(): React.ReactNode {
     const payload = {
       resetToken,
       password: formData.password,
-      password_confirm: formData.confirmPassword,
+      password2: formData.password2,
     };
 
     mutate(payload);
@@ -79,10 +76,10 @@ function FormChangePswForget(): React.ReactNode {
           <Col md={12}>
             <Form.FloatingLabel label="Confirmar contraseña nueva:">
               <Form.Control
-                name="confirmPassword"
+                name="password2"
                 className="border-0 bg-white"
                 onChange={handleChange}
-                value={formData.confirmPassword}
+                value={formData.password2}
                 type="password"
                 placeholder="Confirm new password"
                 autoComplete="off"
@@ -98,7 +95,7 @@ function FormChangePswForget(): React.ReactNode {
             <Submitter loading={isLoading}>
               {!isLoading ? (
                 <>
-                  Continuar <BiKey className="mb-1" />
+                  Continuar <KeyIcon />
                 </>
               ) : (
                 <Spinner size="sm" />

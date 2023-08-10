@@ -1,10 +1,11 @@
+import CheckIcon from '@mui/icons-material/Check';
+import ErrorIcon from '@mui/icons-material/Error';
 import { useState } from 'react';
 import { Button, Col, Form, ModalFooter, Row, Spinner } from 'react-bootstrap';
-import { FaCheck, FaTimes } from 'react-icons/fa';
 import { useMutation } from 'react-query';
-import { registerAChange } from '../features/calendar/calendarSlice';
-import { FormDataState } from '../features/appointments/appointmentsSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { FormDataState } from '../features/appointments/appointmentsSlice';
+import { registerAChange } from '../features/calendar/calendarSlice';
 import { notify } from '../libs/notify';
 import * as cancellationService from '../services/cancellation.service';
 import * as scheduleService from '../services/schedule.service';
@@ -18,11 +19,9 @@ interface IProps {
 
 function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
   const formDataInitialState = { cancellation_subject: '' };
-
   const [formData, setFormData] = useState(formDataInitialState);
 
   const dispatch = useAppDispatch();
-
   const formDataState: FormDataState = useAppSelector(
     ({ appointments }) => appointments.formData.schedule,
   );
@@ -105,10 +104,12 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
             />
           </Form.FloatingLabel>
         </Col>
+
         <ModalFooter>
           <Button onClick={closeModalCancell} variant="light">
-            No <FaTimes className="mb-1" />
+            No <ErrorIcon />
           </Button>
+
           <Button
             variant="danger"
             disabled={
@@ -124,7 +125,7 @@ function FormCancellPerson({ closeModalCancell }: IProps): React.ReactNode {
               mutationSendEmail.isLoading
             ) ? (
               <>
-                Sí, cancelar <FaCheck className="mb-1" />
+                Sí, cancelar <CheckIcon />
               </>
             ) : (
               <Spinner size="sm" />

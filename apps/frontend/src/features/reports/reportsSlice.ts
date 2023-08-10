@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { UNSET_STATUS } from '../../constants';
+import endOfMonth from 'date-fns/endOfMonth';
+import format from 'date-fns/format';
 import { ICounts } from '../../interfaces/ICounts';
-import { endOfMonth, format } from 'date-fns';
 
 export interface Reports {
   category_id: number;
@@ -40,7 +40,7 @@ const initialState: ReportsState = {
   queryData: {
     start_time: format(new Date(), 'yyyy-MM-01'),
     end_time: format(endOfMonth(new Date()), 'yyyy-MM-dd'),
-    category_id: UNSET_STATUS,
+    category_id: '',
   },
 };
 

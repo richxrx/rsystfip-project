@@ -2,14 +2,13 @@ import { useEffect } from 'react';
 import { FloatingLabel, FormSelect } from 'react-bootstrap';
 import { UseQueryResult, useQueries } from 'react-query';
 import { v4 } from 'uuid';
-import { UNSET_STATUS } from '../constants';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
   FormDataState,
   setDeans,
   setFormData,
 } from '../features/appointments/appointmentsSlice';
 import { setCategories } from '../features/resources/resourcesSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { ICategory } from '../interfaces/IResources';
 import { notify } from '../libs/notify';
 import * as categoryService from '../services/category.service';
@@ -63,7 +62,7 @@ function SelectPerson({
   );
 
   const inputsInteraction = async () => {
-    if (formDataState.category_id === UNSET_STATUS) return;
+    if (!formDataState.category_id) return;
 
     dispatch(
       setFormData([

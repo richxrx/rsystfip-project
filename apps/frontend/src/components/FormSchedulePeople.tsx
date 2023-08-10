@@ -1,17 +1,17 @@
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useEffect, useRef } from 'react';
 import { Button, Col, Form, ModalFooter, Row, Spinner } from 'react-bootstrap';
-import { GiReturnArrow } from 'react-icons/gi';
-import { IoCalendarNumber } from 'react-icons/io5';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { registerAChange } from '../features/calendar/calendarSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import {
+  AppointmentStatus,
   Deans,
   FormDataState,
-  AppointmentStatus,
   setFormData,
 } from '../features/appointments/appointmentsSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { registerAChange } from '../features/calendar/calendarSlice';
 import { notify } from '../libs/notify';
 import * as deanService from '../services/dean.service';
 import * as peopleService from '../services/people.service';
@@ -23,7 +23,6 @@ import ProtectedElement from './ProtectedElement';
 import SelectDocument from './SelectDocument';
 import SelectFaculties from './SelectFaculties';
 import SelectPerson from './SelectPerson';
-import SmallCaption from './SmallCaption';
 
 export enum propsAction {
   add = 'add',
@@ -57,16 +56,17 @@ function FormSchedulePeople({
   );
 
   const mutationEditPerson = useMutation(peopleService.editPeople, {
-    onSuccess: (data) => {
-      dispatch(setFormData([action]));
-
+    onSuccess(data) {
       notify(data.ok, {
         type: 'success',
         position: 'top-left',
       });
+
+      dispatch(setFormData([action]));
     },
-    onError: (error: any) =>
-      notify(error.response.data.error, { type: 'error' }),
+    onError(error: any) {
+      notify(error.response.data.error, { type: 'error' });
+    },
   });
   const mutationSavePeople = useMutation(peopleService.savePeople);
   const mutationSchedule = useMutation(scheduleService.saveSchedule);
@@ -157,34 +157,33 @@ function FormSchedulePeople({
     }
   };
 
+  const executionsToSubmit = {
+    [propsAction.add]: () => {
+      dispatch(
+        setFormData([
+          action,
+          {
+            ...formDataState,
+            status: AppointmentStatus.daily,
+          },
+        ]),
+      );
+
+      return schedulePerson();
+    },
+    [propsAction.edit]: () => editPerson(),
+    [propsAction.schedule]: () => schedulePerson(closeModalScheduling),
+  };
+
   const handleSubmit = (e: THandleSubmit) => {
     e.preventDefault();
-
-    switch (action) {
-      case propsAction.edit:
-        return editPerson();
-
-      case propsAction.schedule:
-        return schedulePerson(closeModalScheduling);
-
-      case propsAction.add:
-        dispatch(
-          setFormData([
-            action,
-            {
-              ...formDataState,
-              status: AppointmentStatus.daily,
-            },
-          ]),
-        );
-        return schedulePerson();
-    }
+    executionsToSubmit[action]();
   };
 
   const personData = useQuery<any, any>(
     ['personData', id],
     () => peopleService.getData(id as string),
-    { enabled: !!id },
+    { enabled: Boolean(id) },
   );
 
   const handleChange = (e: THandleChangeITS) => {
@@ -428,8 +427,6 @@ function FormSchedulePeople({
           </Col>
         </ProtectedElement>
 
-        <SmallCaption />
-
         <ProtectedElement isAllowed={action !== propsAction.schedule}>
           <FooterFormPeople
             isAllowed={action === propsAction.edit}
@@ -445,7 +442,7 @@ function FormSchedulePeople({
         <ProtectedElement isAllowed={action === propsAction.schedule}>
           <ModalFooter>
             <Button variant="light" onClick={closeModalScheduling}>
-              Cerrar <GiReturnArrow className="mb-1" />
+              Cerrar <ArrowBackIcon />
             </Button>
             <Button type="submit">
               {!(
@@ -456,7 +453,7 @@ function FormSchedulePeople({
               ) ? (
                 <>
                   Agendar
-                  <IoCalendarNumber className="mb-1" />
+                  <CalendarMonthIcon />
                 </>
               ) : (
                 <Spinner size="sm" />

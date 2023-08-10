@@ -1,3 +1,4 @@
+import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import { Card, Col, Container, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
@@ -26,13 +27,19 @@ function RecoveryLinkPassword(): React.ReactNode {
   }, [data, error]);
 
   return (
-    <Col md={12} className="mx-auto">
+    <>
       <Card className="border-0 shadow-sm rounded-3 bg-white px-3 py-5 mt-3 mb-3">
         <Col md={4} className="mx-auto">
-          <h1 className="h3 text-center">
+          <Typography
+            component="h1"
+            variant="h4"
+            gutterBottom
+            marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          >
             Recuperacion de contraseña {dataUserVerified.email}
-          </h1>
+          </Typography>
         </Col>
+
         <Card.Body className="my-4">
           {!isLoading ? (
             dataUserVerified.tokenIsValid ? (
@@ -47,7 +54,7 @@ function RecoveryLinkPassword(): React.ReactNode {
           )}
         </Card.Body>
       </Card>
-    </Col>
+    </>
   );
 }
 

@@ -1,18 +1,26 @@
-import { Card, Col } from 'react-bootstrap';
+import { Box, Button } from '@mui/material';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import { Link as RouterLink } from 'react-router-dom';
 import FormRecoveryPsw from './FormRecoveryPsw';
 
 function RecoveryPassword(): React.ReactNode {
   return (
-    <Col md={12}>
-      <Card className="border-0 shadow-sm rounded-3 bg-white px-3 py-5 mt-3 mb-3">
-        <Col md={8} className="mx-auto">
-          <h1 className="h3 text-center">Recuperacion de contraseña</h1>
-        </Col>
-        <Card.Body className="my-4">
-          <FormRecoveryPsw />
-        </Card.Body>
-      </Card>
-    </Col>
+    <>
+      <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }} elevation={6}>
+        <Typography component="h1" variant="h4" gutterBottom align="center">
+          Recuperacion de contraseña
+        </Typography>
+
+        <FormRecoveryPsw />
+
+        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+          <Button component={RouterLink} to="/signin" sx={{ mt: 3, ml: 1 }}>
+            Back
+          </Button>
+        </Box>
+      </Paper>
+    </>
   );
 }
 

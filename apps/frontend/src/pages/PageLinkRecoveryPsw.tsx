@@ -1,15 +1,18 @@
-import { Row } from 'react-bootstrap';
+import Container from '@mui/material/Container';
 import { Helmet } from 'react-helmet';
 import RecoveryLinkPassword from '../components/RecoveryLinkPassword';
 
 function PageLinkRecoveryPsw(): React.ReactNode {
   return (
-    <Row>
+    <>
       <Helmet>
-        <title>RSystfip | Recover my password</title>
+        <title>RSystfip | Recover password</title>
       </Helmet>
-      <RecoveryLinkPassword />
-    </Row>
+
+      <Container component="main" maxWidth="xl">
+        <RecoveryLinkPassword />
+      </Container>
+    </>
   );
 }
 

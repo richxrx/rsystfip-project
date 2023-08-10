@@ -1,12 +1,18 @@
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { v4 } from 'uuid';
-import { User, setUsers } from '../features/users/usersSlice';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { User, setUsers } from '../features/users/usersSlice';
 import { notify } from '../libs/notify';
 import * as userService from '../services/user.service';
-import UserRow from './UserRow';
+import RowTableUsers from './RowTableUsers';
 
 function TableUsers(): React.ReactNode {
   const dispatch = useAppDispatch();
@@ -21,20 +27,25 @@ function TableUsers(): React.ReactNode {
   }, [data, error]);
 
   return (
-    <Table responsive hover borderless size="sm" className="text-center">
-      <caption>Access users.</caption>
-      <thead>
-        <tr>
-          <th>Correo institucional</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {usersState.map((user) => (
-          <UserRow key={v4()} user={user} />
-        ))}
-      </tbody>
-    </Table>
+    <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }}>
+        <TableHead>
+          <TableRow>
+            <TableCell>Institutional Itfip Email</TableCell>
+
+            <TableCell width={170} align="center">
+              Actions
+            </TableCell>
+          </TableRow>
+        </TableHead>
+
+        <TableBody>
+          {usersState.map((user) => (
+            <RowTableUsers key={v4()} user={user} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }
 

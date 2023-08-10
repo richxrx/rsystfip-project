@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AUTH_KEY } from '../../constants';
-import { ObjsHasSameStructure } from '../../libs/utils';
+import { objEquals } from '../../libs/utils';
 
 interface UserAuth {
   iat: number;
@@ -40,7 +40,7 @@ const userSessionSaved: AuthState = JSON.parse(
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: ObjsHasSameStructure(userSessionSaved, initialState)
+  initialState: objEquals(userSessionSaved, initialState)
     ? userSessionSaved
     : initialState,
   reducers: {
