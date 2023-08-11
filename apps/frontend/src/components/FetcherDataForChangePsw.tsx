@@ -1,6 +1,6 @@
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { useEffect } from 'react';
-import { Card } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -30,20 +30,13 @@ function FetcherDataForChangePsw(): React.ReactNode {
 
   return (
     <>
-      <Card className="border-0 shadow-sm rounded-3 bg-white px-3 py-5 mt-3 mb-3">
-        <Typography
-          component="h1"
-          variant="h4"
-          gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
-        >
+      <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }} elevation={6}>
+        <Typography component="h1" variant="h5" gutterBottom align="center">
           {tempDataStateForChangePsw.email}
         </Typography>
 
-        <Card.Body className="my-4">
-          <FormChangePsw userId={tempDataStateForChangePsw.id} />
-        </Card.Body>
-      </Card>
+        <FormChangePsw userId={tempDataStateForChangePsw.id} />
+      </Paper>
     </>
   );
 }

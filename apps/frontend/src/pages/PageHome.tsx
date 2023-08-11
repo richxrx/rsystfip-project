@@ -37,7 +37,7 @@ function PageHome({ permissions }: IProps): React.ReactNode {
           }`}
         </Typography>
 
-        <ButtonGroup variant="outlined" aria-label="outlined button group">
+        <ButtonGroup variant="outlined">
           <ProtectedElement isAllowed={permissions.includes('add')}>
             <Button component={RouterLink} to="/people/create">
               Agendamiento diario

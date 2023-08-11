@@ -42,6 +42,7 @@ function PageFaqs(): React.ReactNode {
           container
           spacing={2}
           marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginBottom={{ xs: '4rem', sm: '5rem', md: '6rem' }}
         >
           <Grid item md>
             <Accordion

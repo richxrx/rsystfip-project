@@ -9,7 +9,7 @@ function PageChangePassword(): React.ReactNode {
         <title>RSystfip | Change password</title>
       </Helmet>
 
-      <Container component="main" maxWidth="xl">
+      <Container component="main" maxWidth="sm">
         <FetcherDataForChangePsw />
       </Container>
     </>

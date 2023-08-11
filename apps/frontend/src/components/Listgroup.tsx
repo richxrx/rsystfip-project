@@ -30,11 +30,7 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
       {data.map(({ category_name, counts }) => (
         <ListItem
           key={v4()}
-          secondaryAction={
-            <IconButton edge="end" aria-label="delete">
-              {counts}
-            </IconButton>
-          }
+          secondaryAction={<IconButton edge="end">{counts}</IconButton>}
         >
           <ListItemAvatar>
             <Avatar src={rsystfipLogo} alt="twbs" />

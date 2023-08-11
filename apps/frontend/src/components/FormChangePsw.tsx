@@ -1,13 +1,19 @@
 import KeyIcon from '@mui/icons-material/Key';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import LoadingButton from '@mui/lab/LoadingButton';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
+import TextField from '@mui/material/TextField';
 import { useState } from 'react';
-import { Col, Form, Row, Spinner } from 'react-bootstrap';
 import { useMutation } from 'react-query';
 import { IUserBase } from '../interfaces/IUserBase';
 import { notify } from '../libs/notify';
 import * as accountService from '../services/account.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
-import Submitter from './Submitter';
+import PasswordMeter from './PasswordMeter';
 
 interface IProps {
   userId: IUserBase['id'];
@@ -18,6 +24,7 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
+    passwordVisible: false,
   };
   const [formData, setFormData] = useState(formDataInitialState);
 
@@ -48,6 +55,13 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
     mutate(payload);
   };
 
+  const handleClickTogglePassword = () => {
+    setFormData({
+      ...formData,
+      passwordVisible: !formData.passwordVisible,
+    });
+  };
+
   const handleChange = (e: THandleChangeI) => {
     setFormData({
       ...formData,
@@ -56,76 +70,124 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row className="g-3">
-        <Col md={12}>
-          <Form.FloatingLabel label="Contraseña anterior:">
-            <Form.Control
-              name="currentPassword"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formData.currentPassword}
-              type="password"
-              placeholder="Current password"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              autoFocus
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+    <Box component="form" onSubmit={handleSubmit}>
+      <TextField
+        margin="normal"
+        required
+        fullWidth
+        name="currentPassword"
+        label="Current password"
+        onChange={handleChange}
+        value={formData.currentPassword}
+        type={formData.passwordVisible ? 'text' : 'password'}
+        autoComplete="off"
+        spellCheck={false}
+        inputProps={{ minLength: 8, maxLength: 30 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <KeyIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClickTogglePassword}>
+                {formData.passwordVisible ? (
+                  <VisibilityOffIcon />
+                ) : (
+                  <VisibilityIcon />
+                )}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+        autoFocus
+      />
 
-        <Col md={12}>
-          <Form.FloatingLabel label="Contraseña nueva:">
-            <Form.Control
-              name="newPassword"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formData.newPassword}
-              type="password"
-              placeholder="New password"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+      <TextField
+        margin="normal"
+        required
+        fullWidth
+        name="newPassword"
+        label="New password"
+        onChange={handleChange}
+        value={formData.newPassword}
+        type={formData.passwordVisible ? 'text' : 'password'}
+        autoComplete="off"
+        spellCheck={false}
+        inputProps={{ minLength: 8, maxLength: 30 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <KeyIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClickTogglePassword}>
+                {formData.passwordVisible ? (
+                  <VisibilityOffIcon />
+                ) : (
+                  <VisibilityIcon />
+                )}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
 
-        <Col md={12}>
-          <Form.FloatingLabel label="Confirmar contraseña nueva:">
-            <Form.Control
-              name="confirmPassword"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formData.confirmPassword}
-              type="password"
-              placeholder="Confirm new password"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+      <PasswordMeter
+        valueLength={formData.newPassword.length}
+        LinearProgressProps={{
+          variant: 'determinate',
+        }}
+      />
 
-        <Col md={6}>
-          <Submitter loading={isLoading}>
-            {!isLoading ? (
-              <>
-                Continuar <KeyIcon />
-              </>
-            ) : (
-              <Spinner size="sm" />
-            )}
-          </Submitter>
-        </Col>
-      </Row>
-    </Form>
+      <TextField
+        margin="normal"
+        required
+        fullWidth
+        name="confirmPassword"
+        label="Confirm password"
+        onChange={handleChange}
+        value={formData.confirmPassword}
+        type={formData.passwordVisible ? 'text' : 'password'}
+        autoComplete="off"
+        spellCheck={false}
+        inputProps={{ minLength: 8, maxLength: 30 }}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <KeyIcon />
+            </InputAdornment>
+          ),
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton onClick={handleClickTogglePassword}>
+                {formData.passwordVisible ? (
+                  <VisibilityOffIcon />
+                ) : (
+                  <VisibilityIcon />
+                )}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }}
+      />
+
+      <PasswordMeter
+        valueLength={formData.confirmPassword.length}
+        LinearProgressProps={{
+          variant: 'determinate',
+        }}
+      />
+
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <LoadingButton type="submit" loading={isLoading} sx={{ mt: 3, ml: 1 }}>
+          Continue
+        </LoadingButton>
+      </Box>
+    </Box>
   );
 }
 
