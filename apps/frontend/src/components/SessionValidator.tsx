@@ -14,7 +14,9 @@ function SessionValidator(): undefined {
 
   const navigate: NavigateFunction = useNavigate();
 
-  const sessionValidatorTimerRef = useRef<NodeJS.Timer | undefined>(undefined);
+  const sessionValidatorTimerRef = useRef<NodeJS.Timeout | undefined>(
+    undefined,
+  );
 
   const { mutate } = useMutation(sessionService.verifySession, {
     onError(error: any) {
@@ -31,6 +33,8 @@ function SessionValidator(): undefined {
       if (!authState.auth || !authState.token) return;
       mutate(authState);
     }, 30000);
+
+    console.log(sessionValidatorTimerRef.current);
 
     return () => clearInterval(sessionValidatorTimerRef.current);
   }, [authState.auth]);
