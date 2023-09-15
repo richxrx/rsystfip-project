@@ -1,7 +1,7 @@
 # RSystfip Project Documentation
 
 <p align="center">
-  <img src="./apps\frontend\src\assets\rsystfip.svg" width="200" alt="RSystfip Logo" />
+  <img src="./apps\frontend\src\assets\rsystfip.svg" width="200" alt="RSystfip logotype" />
 </p>
 
 ## Description

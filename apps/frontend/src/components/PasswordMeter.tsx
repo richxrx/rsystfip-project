@@ -1,9 +1,10 @@
-import LinearProgress, {
-  linearProgressClasses,
+import {
+  LinearProgress,
   LinearProgressProps,
-} from '@mui/material/LinearProgress';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+  Typography,
+  linearProgressClasses,
+  styled,
+} from '@mui/material';
 
 interface IProps {
   valueLength: number;

@@ -1,9 +1,7 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import KeyIcon from '@mui/icons-material/Key';
-import IconButton from '@mui/material/IconButton';
-import TableCell from '@mui/material/TableCell';
-import TableRow from '@mui/material/TableRow';
+import { IconButton, TableCell, TableRow } from '@mui/material';
 import { useMutation } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
 import { User } from '../features/users/usersSlice';

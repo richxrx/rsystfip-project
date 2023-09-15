@@ -1,4 +1,4 @@
-import Grid from '@mui/material/Grid';
+import { Grid } from '@mui/material';
 import React from 'react';
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
 import Ctx from './Ctx';

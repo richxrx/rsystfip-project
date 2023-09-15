@@ -34,8 +34,6 @@ function SessionValidator(): undefined {
       mutate(authState);
     }, 30000);
 
-    console.log(sessionValidatorTimerRef.current);
-
     return () => clearInterval(sessionValidatorTimerRef.current);
   }, [authState.auth]);
 

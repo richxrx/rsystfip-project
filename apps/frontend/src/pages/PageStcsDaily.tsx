@@ -1,4 +1,4 @@
-import Container from '@mui/material/Container';
+import { Container } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import Statistics from '../components/Statistics';
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice';

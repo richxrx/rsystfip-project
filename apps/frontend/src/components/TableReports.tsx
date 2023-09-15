@@ -1,8 +1,8 @@
-import Paper from '@mui/material/Paper';
+import { Paper } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import parseISO from 'date-fns/parseISO';
 import format from 'date-fns/format';
 import esLocale from 'date-fns/locale/es';
+import parseISO from 'date-fns/parseISO';
 import { useAppSelector } from '../app/hooks';
 import { Reports } from '../features/reports/reportsSlice';
 import { createColumn } from '../libs/utils';

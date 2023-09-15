@@ -1,7 +1,4 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import FormRecoveryPsw from './FormRecoveryPsw';
 

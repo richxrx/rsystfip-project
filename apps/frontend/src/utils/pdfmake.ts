@@ -14,7 +14,7 @@ const createHeader = (
       link: 'https://www.itfip.edu.co',
     },
     {
-      text: `Rsystfip / Report between ${startDate} and ${endDate}.`,
+      text: `RSystfip / Report between ${startDate} and ${endDate}.`,
       fontSize: 8,
       alignment: 'center',
       marginTop: 37,
@@ -24,7 +24,7 @@ const createHeader = (
 });
 
 const footer = (currentPage: number, pageCount: number): Content => ({
-  text: `Page ${currentPage}/${pageCount} - Rsystfip`,
+  text: `Page ${currentPage}/${pageCount} - RSystfip`,
   alignment: 'center',
   fontSize: 8,
   italics: true,

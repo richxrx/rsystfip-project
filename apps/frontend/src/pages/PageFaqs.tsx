@@ -1,10 +1,12 @@
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 

@@ -1,7 +1,4 @@
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Button, ButtonGroup, Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';

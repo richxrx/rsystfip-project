@@ -1,12 +1,12 @@
+import { Paper } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { People, setPeople } from '../features/people/peopleSlice';
 import { notify } from '../libs/notify';
-import * as peopleService from '../services/people.service';
 import { createColumn } from '../libs/utils';
-import Paper from '@mui/material/Paper';
+import * as peopleService from '../services/people.service';
 
 const columns: GridColDef[] = [
   createColumn('id', 'ID', 70),

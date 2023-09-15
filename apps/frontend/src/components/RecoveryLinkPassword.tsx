@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Card, Col, Container, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';

@@ -1,6 +1,6 @@
 import esLocale from '@fullcalendar/core/locales/es';
 import FullCalendar from '@fullcalendar/react';
-import TableContainer from '@mui/material/TableContainer';
+import { TableContainer } from '@mui/material';
 import format from 'date-fns/format';
 import { EventSourceInput, globalPlugins } from 'fullcalendar';
 import { useEffect, useRef, useState } from 'react';

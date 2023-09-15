@@ -2,9 +2,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import CssBaseline from '@mui/material/CssBaseline';
-import ThemeProvider from '@mui/material/styles/ThemeProvider';
-import createTheme from '@mui/material/styles/createTheme';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
@@ -27,7 +25,7 @@ function App(): React.ReactNode {
 
   const darkTheme = createTheme({
     palette: {
-      mode: 'light',
+      mode: 'dark',
     },
   });
 

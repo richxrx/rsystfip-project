@@ -9,7 +9,7 @@ function ResetTokenInvalid(): React.ReactNode {
         <Col md={6}>
           <Image
             src={rsystfipLogo}
-            alt="Rsystfip"
+            alt="RSystfip logotype"
             width={72}
             height={57}
             className="mb-4"

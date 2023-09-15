@@ -1,16 +1,18 @@
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import LoadingButton from '@mui/lab/LoadingButton';
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  Grid,
+  IconButton,
+  InputAdornment,
+  Link,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useMutation } from 'react-query';
@@ -127,7 +129,7 @@ function PageSignin() {
           >
             <Box
               component="img"
-              alt="Rsystfip logo"
+              alt="RSystfip logotype"
               src={rsystfipLogo}
               width={40}
               height={32}

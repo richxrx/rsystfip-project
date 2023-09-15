@@ -1,6 +1,4 @@
-import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Box, Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import rsystfipLogo from '../assets/rsystfip.svg';
 import GoHome from '../components/GoHome';
@@ -24,7 +22,7 @@ function PageNotFound(): React.ReactNode {
           <Box
             component="img"
             src={rsystfipLogo}
-            alt="Rsystfip"
+            alt="RSystfip logotype"
             width={72}
             height={57}
             sx={{ mb: 4 }}

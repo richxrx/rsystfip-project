@@ -1,5 +1,4 @@
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import { Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import Reports from '../components/Reports';
 

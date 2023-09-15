@@ -1,4 +1,4 @@
-import Paper from '@mui/material/Paper';
+import { Paper } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';

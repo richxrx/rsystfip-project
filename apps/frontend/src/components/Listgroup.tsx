@@ -1,9 +1,11 @@
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import ListItem from '@mui/material/ListItem';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemText from '@mui/material/ListItemText';
-import Typography from '@mui/material/Typography';
+import {
+  Avatar,
+  IconButton,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+} from '@mui/material';
 import format from 'date-fns/format';
 import esLocale from 'date-fns/locale/es';
 import parseISO from 'date-fns/parseISO';
@@ -33,7 +35,7 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
           secondaryAction={<IconButton edge="end">{counts}</IconButton>}
         >
           <ListItemAvatar>
-            <Avatar src={rsystfipLogo} alt="twbs" />
+            <Avatar src={rsystfipLogo} alt="RSystfip logotype" />
           </ListItemAvatar>
 
           <ListItemText

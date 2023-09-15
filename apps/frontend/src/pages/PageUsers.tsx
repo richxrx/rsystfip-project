@@ -1,7 +1,5 @@
 import AddIcon from '@mui/icons-material/Add';
-import Container from '@mui/material/Container';
-import Fab from '@mui/material/Fab';
-import Typography from '@mui/material/Typography';
+import { Container, Fab, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { Link as RouterLink } from 'react-router-dom';
 import TableUsers from '../components/TableUsers';

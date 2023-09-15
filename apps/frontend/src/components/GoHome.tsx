@@ -1,5 +1,5 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
 function GoHome(): React.ReactNode {

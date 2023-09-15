@@ -1,5 +1,4 @@
-import Link from '@mui/material/Link';
-import Typography from '@mui/material/Typography';
+import { Link, Typography } from '@mui/material';
 
 function Copyright(props: any) {
   return (
@@ -11,7 +10,7 @@ function Copyright(props: any) {
     >
       {'Copyright © '}
       <Link color="inherit" href="https://itfip.edu.co/">
-        Rsystfip
+        RSystfip
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

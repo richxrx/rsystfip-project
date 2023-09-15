@@ -21,7 +21,12 @@ function Footer(): React.ReactNode {
             to="/"
             className="d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
           >
-            <Image src={rsystfipLogo} alt="Rsystfip" width="40" height="32" />
+            <Image
+              src={rsystfipLogo}
+              alt="RSystfip logotype"
+              width="40"
+              height="32"
+            />
           </Link>
         </Col>
 

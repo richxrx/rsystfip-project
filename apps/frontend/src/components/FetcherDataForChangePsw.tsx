@@ -1,5 +1,4 @@
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Paper, Typography } from '@mui/material';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';

@@ -1,15 +1,17 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import MenuIcon from '@mui/icons-material/Menu';
-import AppBar from '@mui/material/AppBar';
-import Avatar from '@mui/material/Avatar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Toolbar from '@mui/material/Toolbar';
-import Tooltip from '@mui/material/Tooltip';
-import Typography from '@mui/material/Typography';
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { useState } from 'react';
 import {
   NavigateFunction,
@@ -93,7 +95,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
       <Toolbar disableGutters sx={{ mx: 3 }}>
         <Box
           component="img"
-          alt="Rsystfip logo"
+          alt="RSystfip logotype"
           src={rsystfipLogo}
           width={40}
           height={32}

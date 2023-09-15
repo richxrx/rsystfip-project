@@ -1,4 +1,4 @@
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 
 interface IProps {
   ctxRef: React.RefObject<HTMLCanvasElement>;
