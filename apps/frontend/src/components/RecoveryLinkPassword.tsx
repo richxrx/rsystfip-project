@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Card, Col, Container, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
@@ -28,17 +28,10 @@ function RecoveryLinkPassword(): React.ReactNode {
 
   return (
     <>
-      <Card className="border-0 shadow-sm rounded-3 bg-white px-3 py-5 mt-3 mb-3">
-        <Col md={4} className="mx-auto">
-          <Typography
-            component="h1"
-            variant="h4"
-            gutterBottom
-            marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
-          >
-            Recuperacion de contraseña {dataUserVerified.email}
-          </Typography>
-        </Col>
+      <Paper sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }} elevation={6}>
+        <Typography component="h1" variant="h5" gutterBottom align="center">
+          {dataUserVerified.email}
+        </Typography>
 
         <Card.Body className="my-4">
           {!isLoading ? (
@@ -53,7 +46,7 @@ function RecoveryLinkPassword(): React.ReactNode {
             </Container>
           )}
         </Card.Body>
-      </Card>
+      </Paper>
     </>
   );
 }

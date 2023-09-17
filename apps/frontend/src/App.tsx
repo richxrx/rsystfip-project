@@ -25,7 +25,7 @@ function App(): React.ReactNode {
 
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: 'light',
     },
   });
 

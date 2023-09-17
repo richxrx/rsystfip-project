@@ -24,16 +24,12 @@ function PageUsers(): React.ReactNode {
         <Fab
           component={RouterLink}
           to="/users/create"
-          variant="extended"
+          variant="circular"
           size="small"
           color="primary"
           sx={{ mb: 2 }}
         >
-          <AddIcon sx={{ mr: 1 }} />
-
-          <Typography fontWeight={500} sx={{ mr: 1 }}>
-            Add user
-          </Typography>
+          <AddIcon />
         </Fab>
 
         <TableUsers />

@@ -1,5 +1,5 @@
 import DownloadIcon from '@mui/icons-material/Download';
-import { Fab, Typography } from '@mui/material';
+import { Fab } from '@mui/material';
 import { TCreatedPdf } from 'pdfmake/build/pdfmake';
 
 interface IProps {
@@ -9,7 +9,7 @@ interface IProps {
 function Downloader({ pdf }: IProps): React.ReactNode {
   return (
     <Fab
-      variant="extended"
+      variant="circular"
       size="small"
       color="primary"
       sx={{ mb: 2 }}
@@ -18,11 +18,7 @@ function Downloader({ pdf }: IProps): React.ReactNode {
         // pdf.download(`RSystfip-Report-${formatTodaysDateTime()}.pdf`)
       }
     >
-      <DownloadIcon sx={{ mr: 1 }} />
-
-      <Typography fontWeight={500} sx={{ mr: 1 }}>
-        Download
-      </Typography>
+      <DownloadIcon />
     </Fab>
   );
 }
