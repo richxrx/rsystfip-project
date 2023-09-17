@@ -3,14 +3,12 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
-import { Suspense } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 import './App.scss';
 import { useAppSelector } from './app/hooks';
 import AppRoutes from './components/AppRoutes';
 import ContainerToast from './components/ContainerToast';
-import Loader from './components/Loader';
 import NavBar from './components/NavBar';
 import ProtectedElement from './components/ProtectedElement';
 import SessionValidator from './components/SessionValidator';
@@ -35,19 +33,17 @@ function App(): React.ReactNode {
 
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Suspense fallback={<Loader />}>
-            <ProtectedElement isAllowed={authState.auth}>
-              <SessionValidator />
-            </ProtectedElement>
+          <ProtectedElement isAllowed={authState.auth}>
+            <SessionValidator />
+          </ProtectedElement>
 
-            <ProtectedElement isAllowed={authState.auth}>
-              <NavBar permissions={permissions} />
-            </ProtectedElement>
+          <ProtectedElement isAllowed={authState.auth}>
+            <NavBar permissions={permissions} />
+          </ProtectedElement>
 
-            <AppRoutes authState={authState} permissions={permissions} />
+          <AppRoutes authState={authState} permissions={permissions} />
 
-            {/* <Footer /> */}
-          </Suspense>
+          {/* <Footer /> */}
         </BrowserRouter>
 
         <ContainerToast />

@@ -1,29 +1,24 @@
-import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AuthState } from '../features/auth/authSlice';
+import PageAppointments from '../pages/PageAppointments';
+import PageChangePassword from '../pages/PageChangePassword';
+import PageDailyScheduling from '../pages/PageDailyScheduling';
+import PageEditPeople from '../pages/PageEditPeople';
+import PageFaqs from '../pages/PageFaqs';
+import PageHistoryCancelledPeople from '../pages/PageHistoryCanceledPeople';
+import PageHistoryPeople from '../pages/PageHistoryPeople';
+import PageHome from '../pages/PageHome';
+import PageLinkRecoveryPsw from '../pages/PageLinkRecoveryPsw';
+import PageNotFound from '../pages/PageNotFound';
+import PageRecoverPassword from '../pages/PageRecoverPassword';
+import PageRegisterUser from '../pages/PageRegisterUser';
+import PageReportsPeople from '../pages/PageReportsPeople';
+import PageScheduleScheduling from '../pages/PageScheduleScheduling';
 import PageSignin from '../pages/PageSignin';
+import PageStcsDaily from '../pages/PageStcsDaily';
+import PageStcsScheduled from '../pages/PageStcsScheduled';
+import PageUsers from '../pages/PageUsers';
 import ProtectedRoute from './ProtectedRoute';
-const PageDailyScheduling = lazy(() => import('../pages/PageDailyScheduling'));
-const PageHistoryPeople = lazy(() => import('../pages/PageHistoryPeople'));
-const PageAppointments = lazy(() => import('../pages/PageAppointments'));
-const PageHistoryCancelledPeople = lazy(
-  () => import('../pages/PageHistoryCanceledPeople'),
-);
-const PageChangePassword = lazy(() => import('../pages/PageChangePassword'));
-const PageEditPeople = lazy(() => import('../pages/PageEditPeople'));
-const PageFaqs = lazy(() => import('../pages/PageFaqs'));
-const PageHome = lazy(() => import('../pages/PageHome'));
-const PageLinkRecoveryPsw = lazy(() => import('../pages/PageLinkRecoveryPsw'));
-const PageUsers = lazy(() => import('../pages/PageUsers'));
-const PageNotFound = lazy(() => import('../pages/PageNotFound'));
-const PageScheduleScheduling = lazy(
-  () => import('../pages/PageScheduleScheduling'),
-);
-const PageRecoverPassword = lazy(() => import('../pages/PageRecoverPassword'));
-const PageRegisterUser = lazy(() => import('../pages/PageRegisterUser'));
-const PageReportsPeople = lazy(() => import('../pages/PageReportsPeople'));
-const PageStcsDaily = lazy(() => import('../pages/PageStcsDaily'));
-const PageStcsScheduled = lazy(() => import('../pages/PageStcsScheduled'));
 
 interface IProps {
   authState: AuthState;
