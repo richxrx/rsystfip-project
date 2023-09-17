@@ -1,27 +1,39 @@
-import { Col, Container, Image, Row } from 'react-bootstrap';
+import { Box, Container, Typography } from '@mui/material';
 import rsystfipLogo from '../assets/rsystfip.svg';
 import GoHome from './GoHome';
 
 function ResetTokenInvalid(): React.ReactNode {
   return (
-    <Container className="px-4 py-5 my-5 text-center">
-      <Row className="justify-content-center">
-        <Col md={6}>
-          <Image
+    <>
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 10,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Box
+            component="img"
             src={rsystfipLogo}
             alt="RSystfip logotype"
             width={72}
             height={57}
-            className="mb-4"
+            sx={{ mb: 4 }}
           />
-          <h1 className="display-5 fw-bold">Link inválido</h1>
-          <p className="lead mb-4">
-            El link para cambio de contraseña ha expirado o es inválido.
-          </p>
+          <Typography component="h1" variant="h3" gutterBottom>
+            Invalid Link
+          </Typography>
+
+          <Typography variant="body1" gutterBottom>
+            The link to change your password is invalid!
+          </Typography>
+
           <GoHome />
-        </Col>
-      </Row>
-    </Container>
+        </Box>
+      </Container>
+    </>
   );
 }
 

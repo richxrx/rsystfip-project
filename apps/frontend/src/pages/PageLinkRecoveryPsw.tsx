@@ -9,7 +9,7 @@ function PageLinkRecoveryPsw(): React.ReactNode {
         <title>RSystfip | Recover password</title>
       </Helmet>
 
-      <Container component="main" maxWidth="xl">
+      <Container component="main" maxWidth="sm">
         <RecoveryLinkPassword />
       </Container>
     </>

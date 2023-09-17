@@ -1,12 +1,12 @@
 import { Paper, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Card, Col, Container, Spinner } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { notify } from '../libs/notify';
 import * as accountService from '../services/account.service';
 import FormChangePswForget from './FormChangePswForget';
 import ResetTokenInvalid from './ResetTokenInvalid';
+import Loader from './Loader';
 
 function RecoveryLinkPassword(): React.ReactNode {
   const { resetToken } = useParams<{ resetToken: string }>();
@@ -19,6 +19,7 @@ function RecoveryLinkPassword(): React.ReactNode {
   const { data, isLoading, error } = useQuery<any, any>(
     'verifyJwtForRecoverPsw',
     () => accountService.verifyJwtForRecoverPsw(resetToken as string),
+    { refetchOnWindowFocus: false },
   );
 
   useEffect(() => {
@@ -33,19 +34,15 @@ function RecoveryLinkPassword(): React.ReactNode {
           {dataUserVerified.email}
         </Typography>
 
-        <Card.Body className="my-4">
-          {!isLoading ? (
-            dataUserVerified.tokenIsValid ? (
-              <FormChangePswForget />
-            ) : (
-              <ResetTokenInvalid />
-            )
+        {!isLoading ? (
+          dataUserVerified.tokenIsValid ? (
+            <FormChangePswForget />
           ) : (
-            <Container className="text-center">
-              <Spinner className="my-5" />
-            </Container>
-          )}
-        </Card.Body>
+            <ResetTokenInvalid />
+          )
+        ) : (
+          <Loader />
+        )}
       </Paper>
     </>
   );
