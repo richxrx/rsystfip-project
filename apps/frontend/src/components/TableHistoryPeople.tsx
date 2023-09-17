@@ -1,7 +1,9 @@
-import { Paper } from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import { IconButton, Paper } from '@mui/material';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { Link as RouterLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { People, setPeople } from '../features/people/peopleSlice';
 import { notify } from '../libs/notify';
@@ -18,15 +20,28 @@ const columns: GridColDef[] = [
       `${params.row.first_name || ''} ${params.row.last_name || ''}`,
   },
   {
-    ...createColumn('identification', 'Identification', 170),
+    ...createColumn('identification', 'Identification', 140),
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     valueGetter: (params: GridValueGetterParams) =>
       `${params.row.document_name || ''} ${params.row.document_number || ''}`,
   },
-  createColumn('category_name', 'Category Name', 160),
-  createColumn('faculty_name', 'Faculty Name', 350),
-  createColumn('visit_subject', 'Visit Subject', 450),
+  createColumn('category_name', 'Category Name', 120),
+  createColumn('faculty_name', 'Faculty Name', 300),
+  createColumn('visit_subject', 'Visit Subject', 530),
+  {
+    ...createColumn('actions', 'Actions', 75),
+    align: 'center',
+    renderCell: (params) => (
+      <IconButton
+        component={RouterLink}
+        to={`/history/general/update/${params.row.id}`}
+        title={`Edit data for ${params.row.full_name}`}
+      >
+        <EditIcon />
+      </IconButton>
+    ),
+  },
 ];
 
 function TableHistoryPeople(): React.ReactNode {
@@ -54,7 +69,10 @@ function TableHistoryPeople(): React.ReactNode {
           columns={columns}
           initialState={{
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
+              paginationModel: {
+                page: 0,
+                pageSize: 5,
+              },
             },
           }}
           pageSizeOptions={[5, 10]}
