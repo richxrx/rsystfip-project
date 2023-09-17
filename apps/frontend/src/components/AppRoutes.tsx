@@ -30,7 +30,7 @@ interface IProps {
   permissions: string[];
 }
 
-function AppRoutes({ authState, permissions }: IProps) {
+function AppRoutes({ authState, permissions }: IProps): React.ReactNode {
   return (
     <Routes>
       <Route

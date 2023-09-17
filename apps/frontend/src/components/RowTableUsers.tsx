@@ -30,7 +30,7 @@ function RowTableUsers({
     mutate(roleId);
   };
 
-  if (isSuccess) return;
+  if (isSuccess) return undefined;
 
   return (
     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

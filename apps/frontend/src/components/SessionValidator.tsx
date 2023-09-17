@@ -7,7 +7,7 @@ import { notify } from '../libs/notify';
 import api from '../services/api.service';
 import * as sessionService from '../services/session.service';
 
-function SessionValidator(): undefined {
+function SessionValidator(): React.ReactNode | undefined {
   const dispatch = useAppDispatch();
 
   const authState: AuthState = useAppSelector(({ auth }) => auth);

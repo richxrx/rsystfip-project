@@ -32,7 +32,7 @@ import * as authService from '../services/auth.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
 
-function PageSignin() {
+function PageSignin(): React.ReactNode {
   const formDataInitialState = {
     username: '',
     password: '',

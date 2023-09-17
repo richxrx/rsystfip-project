@@ -11,7 +11,10 @@ interface IProps {
   LinearProgressProps: LinearProgressProps;
 }
 
-function PasswordMeter({ valueLength, LinearProgressProps }: IProps) {
+function PasswordMeter({
+  valueLength,
+  LinearProgressProps,
+}: IProps): React.ReactNode {
   const minLength = 8;
   const hue = Math.min(valueLength * 10, 120);
 

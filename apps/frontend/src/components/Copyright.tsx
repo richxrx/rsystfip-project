@@ -1,6 +1,6 @@
 import { Link, Typography } from '@mui/material';
 
-function Copyright(props: any) {
+function Copyright(props: any): React.ReactNode {
   return (
     <Typography
       variant="body2"

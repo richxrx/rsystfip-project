@@ -1,6 +1,6 @@
 import { Backdrop, CircularProgress } from '@mui/material';
 
-function Loader() {
+function Loader(): React.ReactNode {
   return (
     <Backdrop
       sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
