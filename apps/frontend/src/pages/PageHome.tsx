@@ -25,13 +25,9 @@ function PageHome({ permissions }: IProps): React.ReactNode {
           gutterBottom
           marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
         >
-          {`${
-            authState.userAuth.role_name === 'secretaria'
-              ? 'Bienvenida'
-              : 'Bienvenido'
-          } ${authState.userAuth.role_name}: ${authState.userAuth.first_name} ${
-            authState.userAuth.last_name
-          }`}
+          {`${'Bienvenido(a)'} ${authState.userAuth.role_name}: ${
+            authState.userAuth.first_name
+          } ${authState.userAuth.last_name}`}
         </Typography>
 
         <ButtonGroup variant="outlined">

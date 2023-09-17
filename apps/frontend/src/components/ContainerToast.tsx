@@ -1,4 +1,4 @@
-import { ToastContainer, Bounce } from 'react-toastify';
+import { ToastContainer, Flip } from 'react-toastify';
 
 function ContainerToast(): React.ReactNode {
   return (
@@ -7,7 +7,7 @@ function ContainerToast(): React.ReactNode {
       autoClose={3000}
       hideProgressBar
       newestOnTop
-      transition={Bounce}
+      transition={Flip}
       closeOnClick
       rtl={false}
       pauseOnFocusLoss={false}

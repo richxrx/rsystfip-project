@@ -79,7 +79,7 @@ function FormUserAdd(): React.ReactNode {
             >
               <option value="">No seleccionado</option>
               <option value="2">Rector</option>
-              <option value="3">Secretaria</option>
+              <option value="3">Secretario(a)</option>
             </Form.Select>
           </Form.FloatingLabel>
         </Col>
