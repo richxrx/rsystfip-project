@@ -1,5 +1,5 @@
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+// import EditIcon from '@mui/icons-material/Edit';
 import KeyIcon from '@mui/icons-material/Key';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import { useMutation } from 'react-query';
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 function RowTableUsers({
-  user: { id, email, first_name, last_name, role_name },
+  user: { id, email, role_name },
 }: IProps): React.ReactNode | undefined {
   const { isSuccess, mutate } = useMutation(userService.deleteUser, {
     onSuccess(data) {
@@ -47,13 +47,13 @@ function RowTableUsers({
           <KeyIcon />
         </IconButton>
 
-        <IconButton
+        {/* <IconButton
           component={RouterLink}
           to={`/users/change-password/${id}`}
-          title={`Edit data for user ${first_name} ${last_name}`}
+          title={`Edit data for user ${email}`}
         >
           <EditIcon />
-        </IconButton>
+        </IconButton> */}
 
         <IconButton
           color="error"
