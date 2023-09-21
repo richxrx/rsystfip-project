@@ -1,16 +1,15 @@
-import AddIcon from '@mui/icons-material/Add';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { Button, Col, Spinner } from 'react-bootstrap';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Box, Button } from '@mui/material';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { THandleClick } from '../types/THandleClicks';
 import ProtectedElement from './ProtectedElement';
 
 interface IProps {
-  isAllowed: boolean;
+  isEdit: boolean;
   isLoading: boolean;
 }
 
-function FooterFormPeople({ isAllowed, isLoading }: IProps): React.ReactNode {
+function FooterFormPeople({ isEdit, isLoading }: IProps): React.ReactNode {
   const navigate: NavigateFunction = useNavigate();
 
   const handleClick = (e: THandleClick) => {
@@ -19,27 +18,27 @@ function FooterFormPeople({ isAllowed, isLoading }: IProps): React.ReactNode {
   };
 
   return (
-    <Col md={12}>
-      <Button className="m-1" disabled={isLoading} type="submit">
-        {!isLoading ? (
-          <>
-            Registrar <AddIcon />
-          </>
-        ) : (
-          <Spinner size="sm" />
-        )}
-      </Button>
-      <ProtectedElement isAllowed={isAllowed}>
-        <Button
-          variant="light"
-          onClick={handleClick}
-          className="m-1"
-          type="submit"
-        >
-          Volver <ArrowBackIcon />
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: isEdit ? 'space-between' : 'flex-end',
+      }}
+    >
+      <ProtectedElement isAllowed={isEdit}>
+        <Button onClick={handleClick} sx={{ mt: 3, ml: 1 }}>
+          Back
         </Button>
       </ProtectedElement>
-    </Col>
+
+      <LoadingButton
+        type="submit"
+        loading={isLoading}
+        disabled={isLoading}
+        sx={{ mt: 3, ml: 1 }}
+      >
+        {isEdit ? 'Actualizar' : 'Registrar'}
+      </LoadingButton>
+    </Box>
   );
 }
 

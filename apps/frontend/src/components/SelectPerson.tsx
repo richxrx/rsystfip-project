@@ -1,5 +1,11 @@
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import { useEffect } from 'react';
-import { FloatingLabel, FormSelect } from 'react-bootstrap';
 import { UseQueryResult, useQueries } from 'react-query';
 import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -17,7 +23,7 @@ import { actionFormSchedule } from './FormSchedulePeople';
 
 interface IProps {
   action: actionFormSchedule;
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleChange: (e: SelectChangeEvent) => void;
   facultieSelectRef: React.RefObject<HTMLSelectElement>;
 }
 
@@ -92,22 +98,26 @@ function SelectPerson({
   }, [formDataState.category_id]);
 
   return (
-    <FloatingLabel label="Persona a registrar:">
-      <FormSelect
+    <FormControl fullWidth sx={{ minWidth: 120, mt: 1 }}>
+      <InputLabel>Category</InputLabel>
+
+      <Select
         name="category_id"
-        className="border-0 bg-white"
-        onChange={handleChange}
+        label="Category"
         value={formDataState.category_id}
+        onChange={handleChange}
         required
       >
-        <option value="">No seleccionado</option>
+        <MenuItem value="">
+          <em>No seleccionado</em>
+        </MenuItem>
         {categoriesState.map(({ id, category_name }) => (
-          <option key={v4()} value={id}>
+          <MenuItem key={v4()} value={id.toString()}>
             {category_name}
-          </option>
+          </MenuItem>
         ))}
-      </FormSelect>
-    </FloatingLabel>
+      </Select>
+    </FormControl>
   );
 }
 

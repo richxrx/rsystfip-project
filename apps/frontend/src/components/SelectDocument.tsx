@@ -1,18 +1,24 @@
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import { useEffect } from 'react';
-import { FloatingLabel, FormSelect } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { v4 } from 'uuid';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { FormDataState } from '../features/appointments/appointmentsSlice';
 import { setDocuments } from '../features/resources/resourcesSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IDocument } from '../interfaces/IResources';
 import { notify } from '../libs/notify';
-import { actionFormSchedule } from './FormSchedulePeople';
 import * as documentService from '../services/document.service';
+import { actionFormSchedule } from './FormSchedulePeople';
 
 interface IProps {
   action: actionFormSchedule;
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleChange: (e: SelectChangeEvent) => void;
 }
 
 function SelectDocument({ action, handleChange }: IProps): React.ReactNode {
@@ -36,25 +42,29 @@ function SelectDocument({ action, handleChange }: IProps): React.ReactNode {
   }, [data, error]);
 
   return (
-    <FloatingLabel label="Tipo de Documento:">
-      <FormSelect
+    <FormControl fullWidth sx={{ minWidth: 120, mt: 1 }}>
+      <InputLabel>Document</InputLabel>
+
+      <Select
         name="document_id"
-        className="border-0 bg-white"
-        onChange={handleChange}
+        label="Document"
         value={formDataState.document_id}
+        onChange={handleChange}
         disabled={
           formDataState.disabledAll || formDataState.disabledAfterAutocomplete
         }
         required
       >
-        <option value="">No seleccionado</option>
+        <MenuItem value="">
+          <em>No seleccionado</em>
+        </MenuItem>
         {documentsState.map(({ id, document_description }) => (
-          <option key={v4()} value={id}>
+          <MenuItem key={v4()} value={id.toString()}>
             {document_description}
-          </option>
+          </MenuItem>
         ))}
-      </FormSelect>
-    </FloatingLabel>
+      </Select>
+    </FormControl>
   );
 }
 

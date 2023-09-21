@@ -18,6 +18,7 @@ export interface FormData {
   phone_number: string;
   password: string;
   password2: string;
+  passwordVisible: boolean;
 }
 
 interface AdminState {
@@ -37,6 +38,7 @@ const initialState: AdminState = {
     phone_number: '',
     password: '',
     password2: '',
+    passwordVisible: false,
   },
 };
 

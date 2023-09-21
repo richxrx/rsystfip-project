@@ -1,10 +1,16 @@
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+} from '@mui/material';
 import { useEffect } from 'react';
-import { FloatingLabel, FormSelect } from 'react-bootstrap';
 import { useQuery } from 'react-query';
 import { v4 } from 'uuid';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { FormDataState } from '../features/appointments/appointmentsSlice';
 import { setFaculties } from '../features/resources/resourcesSlice';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { IFacultie } from '../interfaces/IResources';
 import { notify } from '../libs/notify';
 import * as facultieService from '../services/facultie.service';
@@ -12,7 +18,7 @@ import { actionFormSchedule } from './FormSchedulePeople';
 
 interface IProps {
   action: actionFormSchedule;
-  handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleChange: (e: SelectChangeEvent) => void;
   facultieSelectRef: React.RefObject<HTMLSelectElement>;
 }
 
@@ -41,26 +47,30 @@ function SelectFaculties({
   }, [data, error]);
 
   return (
-    <FloatingLabel label="Facultad:">
-      <FormSelect
+    <FormControl fullWidth sx={{ minWidth: 120, mt: 1 }}>
+      <InputLabel>Faculty</InputLabel>
+
+      <Select
         name="faculty_id"
-        className="border-0 bg-white"
-        onChange={handleChange}
+        label="Faculty"
         value={formDataState.faculty_id}
+        onChange={handleChange}
         ref={facultieSelectRef}
         disabled={
           formDataState.disabledAll || formDataState.disabledAfterAutocomplete
         }
         required
       >
-        <option value="">No seleccionado</option>
+        <MenuItem value="">
+          <em>No seleccionado</em>
+        </MenuItem>
         {facultiesState.map(({ id, faculty_name }) => (
-          <option key={v4()} value={id}>
+          <MenuItem key={v4()} value={id.toString()}>
             {faculty_name}
-          </option>
+          </MenuItem>
         ))}
-      </FormSelect>
-    </FloatingLabel>
+      </Select>
+    </FormControl>
   );
 }
 

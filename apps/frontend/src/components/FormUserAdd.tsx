@@ -1,6 +1,20 @@
-import AddIcon from '@mui/icons-material/Add';
+import KeyIcon from '@mui/icons-material/Key';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import LoadingButton from '@mui/lab/LoadingButton';
+import {
+  Box,
+  FormControl,
+  Grid,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  TextField,
+} from '@mui/material';
 import { useEffect } from 'react';
-import { Col, Form, Row, Spinner } from 'react-bootstrap';
 import { useMutation, useQuery } from 'react-query';
 import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -16,7 +30,7 @@ import * as documentService from '../services/document.service';
 import * as userService from '../services/user.service';
 import { THandleChangeITS } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
-import Submitter from './Submitter';
+import PasswordMeter from './PasswordMeter';
 
 function FormUserAdd(): React.ReactNode {
   const formDataState: FormData = useAppSelector(({ users }) => users.formData);
@@ -26,7 +40,16 @@ function FormUserAdd(): React.ReactNode {
 
   const dispatch = useAppDispatch();
 
-  const handleChange = (e: THandleChangeITS) => {
+  const handleClickTogglePassword = () => {
+    dispatch(
+      setFormData({
+        ...formDataState,
+        passwordVisible: !formDataState.passwordVisible,
+      }),
+    );
+  };
+
+  const handleChange = (e: THandleChangeITS | SelectChangeEvent) => {
     dispatch(
       setFormData({
         ...formDataState,
@@ -66,183 +89,219 @@ function FormUserAdd(): React.ReactNode {
   }, [data, error]);
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row className="g-2">
-        <Col md={4}>
-          <Form.FloatingLabel label="Rol usuario:">
-            <Form.Select
+    <Box component="form" onSubmit={handleSubmit}>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item md={4}>
+          <FormControl fullWidth sx={{ minWidth: 120, mt: 1 }}>
+            <InputLabel>Role</InputLabel>
+
+            <Select
               name="role_id"
-              className="border-0 bg-white"
-              onChange={handleChange}
+              label="Role"
               value={formDataState.role_id}
-              required
+              onChange={handleChange}
             >
-              <option value="">No seleccionado</option>
-              <option value="2">Rector</option>
-              <option value="3">Secretario(a)</option>
-            </Form.Select>
-          </Form.FloatingLabel>
-        </Col>
+              <MenuItem value="">
+                <em>No seleccionado</em>
+              </MenuItem>
+              <MenuItem value="2">Rector</MenuItem>
+              <MenuItem value="3">Secretario(a)</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
 
-        <Col md={4}>
-          <Form.FloatingLabel label="Nombre:">
-            <Form.Control
-              name="first_name"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.first_name}
-              type="text"
-              placeholder="Name"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={3}
-              maxLength={25}
-              autoFocus
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={4}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="first_name"
+            label="First name"
+            onChange={handleChange}
+            value={formDataState.first_name}
+            type="text"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 3, maxLength: 25 }}
+            autoFocus
+          />
+        </Grid>
 
-        <Col md={4}>
-          <Form.FloatingLabel label="Apellido:">
-            <Form.Control
-              name="last_name"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.last_name}
-              type="text"
-              placeholder="Lastname"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={3}
-              maxLength={25}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={4}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="last_name"
+            label="Last name"
+            onChange={handleChange}
+            value={formDataState.last_name}
+            type="text"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 3, maxLength: 25 }}
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Tipo de Documento:">
-            <Form.Select
+        <Grid item md={6}>
+          <FormControl fullWidth sx={{ minWidth: 120 }}>
+            <InputLabel>Document</InputLabel>
+
+            <Select
               name="document_id"
-              className="border-0 bg-white"
-              onChange={handleChange}
+              label="Document"
               value={formDataState.document_id}
-              required
+              onChange={handleChange}
             >
-              <option value="">No seleccionado</option>
+              <MenuItem value="">
+                <em>No seleccionado</em>
+              </MenuItem>
               {documentsState.map(({ id, document_description }) => (
-                <option key={v4()} value={id}>
+                <MenuItem key={v4()} value={id}>
                   {document_description}
-                </option>
+                </MenuItem>
               ))}
-            </Form.Select>
-          </Form.FloatingLabel>
-        </Col>
+            </Select>
+          </FormControl>
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Número de documento:">
-            <Form.Control
-              name="document_number"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.document_number}
-              type="number"
-              placeholder="Document number"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={10}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="document_number"
+            label="Document number"
+            onChange={handleChange}
+            value={formDataState.document_number}
+            type="number"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 8, maxLength: 10 }}
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Correo institucional:">
-            <Form.Control
-              name="email"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.email}
-              type="email"
-              placeholder="Email"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={10}
-              maxLength={30}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Institutional email"
+            onChange={handleChange}
+            value={formDataState.email}
+            type="email"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 10, maxLength: 30 }}
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Celular:">
-            <Form.Control
-              name="phone_number"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.phone_number}
-              type="number"
-              placeholder="Phone Number"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={10}
-              maxLength={10}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="phone_number"
+            label="Phone number"
+            onChange={handleChange}
+            value={formDataState.phone_number}
+            type="number"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 10, maxLength: 10 }}
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Contraseña:">
-            <Form.Control
-              name="password"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.password}
-              type="password"
-              placeholder="Password"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            onChange={handleChange}
+            value={formDataState.password}
+            type={formDataState.passwordVisible ? 'text' : 'password'}
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 8, maxLength: 30 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <KeyIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleClickTogglePassword}>
+                    {formDataState.passwordVisible ? (
+                      <VisibilityOffIcon />
+                    ) : (
+                      <VisibilityIcon />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Confirmar contraseña:">
-            <Form.Control
-              name="password2"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.password2}
-              type="password"
-              placeholder="Password confirm"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+          <PasswordMeter
+            valueLength={formDataState.password.length}
+            LinearProgressProps={{
+              variant: 'determinate',
+            }}
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Submitter loading={isLoading}>
-            {!isLoading ? (
-              <>
-                Registrar <AddIcon />
-              </>
-            ) : (
-              <Spinner size="sm" />
-            )}
-          </Submitter>
-        </Col>
-      </Row>
-    </Form>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password2"
+            label="Password confirm"
+            onChange={handleChange}
+            value={formDataState.password2}
+            type={formDataState.passwordVisible ? 'text' : 'password'}
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 8, maxLength: 30 }}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <KeyIcon />
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleClickTogglePassword}>
+                    {formDataState.passwordVisible ? (
+                      <VisibilityOffIcon />
+                    ) : (
+                      <VisibilityIcon />
+                    )}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <PasswordMeter
+            valueLength={formDataState.password2.length}
+            LinearProgressProps={{
+              variant: 'determinate',
+            }}
+          />
+        </Grid>
+      </Grid>
+
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <LoadingButton type="submit" loading={isLoading} sx={{ mt: 3, ml: 1 }}>
+          Registrar
+        </LoadingButton>
+      </Box>
+    </Box>
   );
 }
 

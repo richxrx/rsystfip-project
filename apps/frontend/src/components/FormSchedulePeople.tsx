@@ -1,7 +1,5 @@
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Box, Grid, SelectChangeEvent, TextField } from '@mui/material';
 import { useEffect, useRef } from 'react';
-import { Button, Col, Form, ModalFooter, Row, Spinner } from 'react-bootstrap';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -33,6 +31,7 @@ export enum propsAction {
 interface IProps {
   action: propsAction;
   closeModalScheduling?: () => void;
+  changeIsLoadingScheduleAction?: (value: boolean) => void;
 }
 
 export type actionFormSchedule = IProps['action'];
@@ -40,6 +39,7 @@ export type actionFormSchedule = IProps['action'];
 function FormSchedulePeople({
   action,
   closeModalScheduling,
+  changeIsLoadingScheduleAction,
 }: IProps): React.ReactNode {
   const { id } = useParams<{ id: string }>();
 
@@ -186,11 +186,14 @@ function FormSchedulePeople({
     { enabled: Boolean(id) },
   );
 
-  const handleChange = (e: THandleChangeITS) => {
+  const handleChange = (e: THandleChangeITS | SelectChangeEvent) => {
     dispatch(
       setFormData([
         action,
-        { ...formDataState, [e.target.name]: e.target.value },
+        {
+          ...formDataState,
+          [e.target.name]: e.target.value,
+        },
       ]),
     );
   };
@@ -259,210 +262,196 @@ function FormSchedulePeople({
     if (error) notify(error.response.data.error, { type: 'error' });
   }, [personData.data, personData.error]);
 
+  useEffect(() => {
+    if (changeIsLoadingScheduleAction) {
+      changeIsLoadingScheduleAction(
+        mutationEditPerson.isLoading ||
+          mutationSavePeople.isLoading ||
+          mutationSchedule.isLoading ||
+          mutationSaveDean.isLoading,
+      );
+    }
+  }, [
+    mutationEditPerson.isLoading,
+    mutationSavePeople.isLoading,
+    mutationSchedule.isLoading,
+    mutationSaveDean.isLoading,
+  ]);
+
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row className="g-2">
-        <Col md={6}>
+    <Box component="form" onSubmit={handleSubmit} id="formSchedule">
+      <Grid container spacing={2} alignItems="center">
+        <Grid item md={6}>
           <SelectPerson
             action={action}
             handleChange={handleChange}
             facultieSelectRef={facultieSelectRef}
           />
-        </Col>
+        </Grid>
 
-        <Col md={6}>
+        <Grid item md={6}>
           <SelectFaculties
             action={action}
             handleChange={handleChange}
             facultieSelectRef={facultieSelectRef}
           />
-        </Col>
+        </Grid>
 
-        <Col md={6}>
+        <Grid item md={6}>
           <SelectDocument action={action} handleChange={handleChange} />
-        </Col>
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Cédula:">
-            <Form.Control
-              name="document_number"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.document_number}
-              type="number"
-              placeholder="Complete campo"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={8}
-              maxLength={30}
-              disabled={
-                formDataState.disabledAll ||
-                formDataState.disabledAfterAutocomplete
-              }
-              autoFocus
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="document_number"
+            label="Document number"
+            onChange={handleChange}
+            value={formDataState.document_number}
+            type="number"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 8, maxLength: 10 }}
+            disabled={
+              formDataState.disabledAll ||
+              formDataState.disabledAfterAutocomplete
+            }
+            autoFocus
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Nombre:">
-            <Form.Control
-              name="first_name"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.first_name}
-              type="text"
-              placeholder="Complete campo"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={3}
-              maxLength={25}
-              disabled={
-                formDataState.disabledAll ||
-                formDataState.disabledAfterAutocomplete
-              }
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="first_name"
+            label="First name"
+            onChange={handleChange}
+            value={formDataState.first_name}
+            type="text"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 3, maxLength: 25 }}
+            disabled={
+              formDataState.disabledAll ||
+              formDataState.disabledAfterAutocomplete
+            }
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Apellido:">
-            <Form.Control
-              name="last_name"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.last_name}
-              type="text"
-              placeholder="Complete campo"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={3}
-              maxLength={25}
-              disabled={
-                formDataState.disabledAll ||
-                formDataState.disabledAfterAutocomplete
-              }
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="last_name"
+            label="Last name"
+            onChange={handleChange}
+            value={formDataState.last_name}
+            type="text"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 3, maxLength: 25 }}
+            disabled={
+              formDataState.disabledAll ||
+              formDataState.disabledAfterAutocomplete
+            }
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Número de teléfono:">
-            <Form.Control
-              name="phone_number"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.phone_number}
-              type="number"
-              placeholder="Complete campo"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={10}
-              maxLength={10}
-              disabled={
-                formDataState.disabledAll ||
-                formDataState.disabledAfterAutocomplete
-              }
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="phone_number"
+            label="Phone number"
+            onChange={handleChange}
+            value={formDataState.phone_number}
+            type="number"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 10, maxLength: 10 }}
+            disabled={
+              formDataState.disabledAll ||
+              formDataState.disabledAfterAutocomplete
+            }
+          />
+        </Grid>
 
-        <Col md={6}>
-          <Form.FloatingLabel label="Email de contacto:">
-            <Form.Control
-              name="email"
-              className="border-0 bg-white"
-              onChange={handleChange}
-              value={formDataState.email}
-              type="email"
-              placeholder="Complete campo"
-              autoComplete="off"
-              spellCheck={false}
-              minLength={10}
-              maxLength={30}
-              disabled={
-                formDataState.disabledAll ||
-                formDataState.disabledAfterAutocomplete
-              }
-              required
-            />
-          </Form.FloatingLabel>
-        </Col>
+        <Grid item md={6}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="email"
+            label="Contact email"
+            onChange={handleChange}
+            value={formDataState.email}
+            type="email"
+            autoComplete="off"
+            spellCheck={false}
+            inputProps={{ minLength: 10, maxLength: 30 }}
+            disabled={
+              formDataState.disabledAll ||
+              formDataState.disabledAfterAutocomplete
+            }
+          />
+        </Grid>
 
         <ProtectedElement isAllowed={action !== propsAction.edit}>
-          <Col md={12}>
-            <Form.FloatingLabel label="Asunto:">
-              <Form.Control
-                as="textarea"
-                name="visit_subject"
-                className="border-0 bg-white"
-                onChange={handleChange}
-                value={formDataState.visit_subject}
-                placeholder="Complete campo"
-                autoComplete="off"
-                spellCheck={false}
-                minLength={10}
-                maxLength={150}
-                style={{ height: '100px' }}
-                disabled={formDataState.disabledAll}
-                required
-              />
-            </Form.FloatingLabel>
-          </Col>
+          <Grid item md={12}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="visit_subject"
+              label="Visit subject"
+              onChange={handleChange}
+              value={formDataState.visit_subject}
+              type="text"
+              multiline
+              rows={4}
+              autoComplete="off"
+              spellCheck={false}
+              inputProps={{ minLength: 10, maxLength: 150 }}
+              disabled={formDataState.disabledAll}
+            />
+          </Grid>
         </ProtectedElement>
 
         <ProtectedElement isAllowed={action === propsAction.schedule}>
-          <Col md={12}>
-            <Form.Control
+          <Grid item md={12}>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
               name="color"
-              className="border-0 bg-white"
+              label="Appointment color"
               onChange={handleChange}
               value={formDataState.color}
               type="color"
+              disabled={formDataState.disabledAll}
             />
-          </Col>
+          </Grid>
         </ProtectedElement>
+      </Grid>
 
-        <ProtectedElement isAllowed={action !== propsAction.schedule}>
-          <FooterFormPeople
-            isAllowed={action === propsAction.edit}
-            isLoading={
-              mutationEditPerson.isLoading ||
-              mutationSavePeople.isLoading ||
-              mutationSchedule.isLoading ||
-              mutationSaveDean.isLoading
-            }
-          />
-        </ProtectedElement>
-
-        <ProtectedElement isAllowed={action === propsAction.schedule}>
-          <ModalFooter>
-            <Button variant="light" onClick={closeModalScheduling}>
-              Cerrar <ArrowBackIcon />
-            </Button>
-            <Button type="submit">
-              {!(
-                mutationEditPerson.isLoading ||
-                mutationSavePeople.isLoading ||
-                mutationSchedule.isLoading ||
-                mutationSaveDean.isLoading
-              ) ? (
-                <>
-                  Agendar
-                  <CalendarMonthIcon />
-                </>
-              ) : (
-                <Spinner size="sm" />
-              )}
-            </Button>
-          </ModalFooter>
-        </ProtectedElement>
-      </Row>
-    </Form>
+      <ProtectedElement isAllowed={action !== propsAction.schedule}>
+        <FooterFormPeople
+          isEdit={action === propsAction.edit}
+          isLoading={
+            mutationEditPerson.isLoading ||
+            mutationSavePeople.isLoading ||
+            mutationSchedule.isLoading ||
+            mutationSaveDean.isLoading
+          }
+        />
+      </ProtectedElement>
+    </Box>
   );
 }
 

@@ -1,4 +1,12 @@
-import { Modal } from 'react-bootstrap';
+import LoadingButton from '@mui/lab/LoadingButton';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material';
+import { useState } from 'react';
 import FormSchedulePeople, { propsAction } from './FormSchedulePeople';
 
 interface IProps {
@@ -10,24 +18,35 @@ function ModalSchedulePeopleForm({
   stateModalScheduling,
   closeModalScheduling,
 }: IProps): React.ReactNode {
-  return (
-    <Modal
-      show={stateModalScheduling}
-      onHide={closeModalScheduling}
-      backdrop="static"
-      keyboard={false}
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>Agendamiento Programado</Modal.Title>
-      </Modal.Header>
+  const [isLoadingScheduleAction, setIsLoadingScheduleAction] = useState(false);
 
-      <Modal.Body>
+  const changeIsLoadingScheduleAction = (value: boolean) =>
+    setIsLoadingScheduleAction(value);
+
+  return (
+    <Dialog open={stateModalScheduling} onClose={closeModalScheduling}>
+      <DialogTitle>Agendamiento Programado</DialogTitle>
+
+      <DialogContent>
         <FormSchedulePeople
           action={propsAction.schedule}
           closeModalScheduling={closeModalScheduling}
+          changeIsLoadingScheduleAction={changeIsLoadingScheduleAction}
         />
-      </Modal.Body>
-    </Modal>
+      </DialogContent>
+
+      <DialogActions>
+        <Button onClick={closeModalScheduling}>Close</Button>
+
+        <LoadingButton
+          type="submit"
+          form="formSchedule"
+          loading={isLoadingScheduleAction}
+        >
+          Schedule
+        </LoadingButton>
+      </DialogActions>
+    </Dialog>
   );
 }
 
