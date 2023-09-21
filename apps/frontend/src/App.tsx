@@ -13,6 +13,7 @@ import NavBar from './components/NavBar';
 import ProtectedElement from './components/ProtectedElement';
 import SessionValidator from './components/SessionValidator';
 import { AuthState } from './features/auth/authSlice';
+import Footer from './components/Footer';
 
 const queryClient = new QueryClient();
 
@@ -43,7 +44,9 @@ function App(): React.ReactNode {
 
           <AppRoutes authState={authState} permissions={permissions} />
 
-          {/* <Footer /> */}
+          <ProtectedElement isAllowed={authState.auth}>
+            <Footer />
+          </ProtectedElement>
         </BrowserRouter>
 
         <ContainerToast />

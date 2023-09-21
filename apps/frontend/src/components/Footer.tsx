@@ -1,6 +1,6 @@
 import CodeIcon from '@mui/icons-material/Code';
-import { Col, Container, Image, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Box, Container, Grid, Link, Typography } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import rsystfipLogo from '../assets/rsystfip.svg';
 import { AuthState } from '../features/auth/authSlice';
@@ -9,60 +9,88 @@ function Footer(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
 
   return (
-    <Container fluid className="py-4 my-4">
-      <footer className="d-flex flex-wrap justify-content-between align-items-center">
-        <Col md={4} className="mb-0 text-body-secondary">
-          © 2023 Tecnología en gestión informatica
-          <CodeIcon />
-        </Col>
+    <Container maxWidth="lg" sx={{ py: 4, my: 4 }}>
+      <footer>
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="center"
+          textAlign="center"
+        >
+          <Grid item xs={12} md={4}>
+            <Typography variant="body2" color="textSecondary">
+              © 2023 Tecnología en gestión informática{' '}
+              <CodeIcon fontSize="small" sx={{ my: -0.5 }} />
+            </Typography>
+          </Grid>
 
-        <Col md={4}>
-          <Link
-            to="/"
-            className="d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-          >
-            <Image
-              src={rsystfipLogo}
-              alt="RSystfip logotype"
-              width="40"
-              height="32"
-            />
-          </Link>
-        </Col>
+          <Grid item xs={12} md={4}>
+            <Link
+              to="/"
+              component={RouterLink}
+              underline="none"
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                mb: { xs: 3, md: 0 },
+                mr: { xs: 0, md: 'auto' },
+              }}
+            >
+              <Box
+                component="img"
+                alt="RSystfip logotype"
+                src={rsystfipLogo}
+                width={40}
+                height={32}
+                sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}
+              />
+            </Link>
+          </Grid>
 
-        <Col md={4}>
-          <Nav className="justify-content-end">
-            <Nav.Item>
+          <Grid item xs={12} md={4}>
+            <nav>
               <Link
                 to={!authState.auth ? '/' : '/home'}
-                className="nav-link px-2 text-body-secondary"
+                component={RouterLink}
+                variant="body2"
+                color="textSecondary"
+                sx={{ mr: 2 }}
               >
                 Inicio
               </Link>
-            </Nav.Item>
 
-            <Nav.Item>
-              <Link to="/faqs" className="nav-link px-2 text-body-secondary">
+              <Link
+                to="/faqs"
+                component={RouterLink}
+                variant="body2"
+                color="textSecondary"
+                sx={{ mr: 2 }}
+              >
                 FAQs
               </Link>
-            </Nav.Item>
 
-            <Nav.Item>
-              <Link to="#" className="nav-link px-2 text-body-secondary">
+              <Link
+                to="#"
+                component={RouterLink}
+                variant="body2"
+                color="textSecondary"
+                sx={{ mr: 2 }}
+              >
                 Acerca de
               </Link>
-            </Nav.Item>
 
-            <Nav.Item>
               <Link
                 to="/recover-password"
-                className="nav-link px-2 text-body-secondary"
+                component={RouterLink}
+                variant="body2"
+                color="textSecondary"
               >
                 Olvidó su contraseña?
               </Link>
-            </Nav.Item>
-          </Nav>
-        </Col>
+            </nav>
+          </Grid>
+        </Grid>
       </footer>
     </Container>
   );
