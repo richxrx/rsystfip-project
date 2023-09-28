@@ -18,12 +18,16 @@ export interface FormData {
   phone_number: string;
   password: string;
   password2: string;
+}
+
+export interface Temps {
   passwordVisible: boolean;
 }
 
 interface AdminState {
   users: Array<User>;
   formData: FormData;
+  temps: Temps;
 }
 
 const initialState: AdminState = {
@@ -38,6 +42,8 @@ const initialState: AdminState = {
     phone_number: '',
     password: '',
     password2: '',
+  },
+  temps: {
     passwordVisible: false,
   },
 };
@@ -52,12 +58,16 @@ const adminSlice = createSlice({
     setFormData(state, { payload }: PayloadAction<FormData>): AdminState {
       return { ...state, formData: payload };
     },
+    setTemps(state, { payload }: PayloadAction<Temps>): AdminState {
+      return { ...state, temps: payload };
+    },
     resetFormDataAdmin(state) {
       return { ...state, formData: initialState.formData };
     },
   },
 });
 
-export const { setUsers, setFormData, resetFormDataAdmin } = adminSlice.actions;
+export const { setUsers, setFormData, setTemps, resetFormDataAdmin } =
+  adminSlice.actions;
 
 export default adminSlice.reducer;

@@ -21,8 +21,10 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setDocuments } from '../features/resources/resourcesSlice';
 import {
   FormData,
+  Temps,
   resetFormDataAdmin,
   setFormData,
+  setTemps,
 } from '../features/users/usersSlice';
 import { IDocument } from '../interfaces/IResources';
 import { notify } from '../libs/notify';
@@ -34,6 +36,7 @@ import PasswordMeter from './PasswordMeter';
 
 function FormUserAdd(): React.ReactNode {
   const formDataState: FormData = useAppSelector(({ users }) => users.formData);
+  const tempsData: Temps = useAppSelector(({ users }) => users.temps);
   const documentsState: Array<IDocument> = useAppSelector(
     ({ resources }) => resources.documents,
   );
@@ -42,9 +45,9 @@ function FormUserAdd(): React.ReactNode {
 
   const handleClickTogglePassword = () => {
     dispatch(
-      setFormData({
-        ...formDataState,
-        passwordVisible: !formDataState.passwordVisible,
+      setTemps({
+        ...tempsData,
+        passwordVisible: !tempsData.passwordVisible,
       }),
     );
   };
@@ -85,6 +88,7 @@ function FormUserAdd(): React.ReactNode {
 
   useEffect(() => {
     if (data) dispatch(setDocuments(data));
+
     if (error) notify(error.response.data.error, { type: 'error' });
   }, [data, error]);
 
@@ -144,7 +148,7 @@ function FormUserAdd(): React.ReactNode {
         </Grid>
 
         <Grid item md={6}>
-          <FormControl fullWidth sx={{ minWidth: 120 }}>
+          <FormControl fullWidth sx={{ minWidth: 120, mt: 1 }}>
             <InputLabel>Document</InputLabel>
 
             <Select
@@ -157,7 +161,7 @@ function FormUserAdd(): React.ReactNode {
                 <em>No seleccionado</em>
               </MenuItem>
               {documentsState.map(({ id, document_description }) => (
-                <MenuItem key={v4()} value={id}>
+                <MenuItem key={v4()} value={id.toString()}>
                   {document_description}
                 </MenuItem>
               ))}
@@ -222,7 +226,7 @@ function FormUserAdd(): React.ReactNode {
             label="Password"
             onChange={handleChange}
             value={formDataState.password}
-            type={formDataState.passwordVisible ? 'text' : 'password'}
+            type={tempsData.passwordVisible ? 'text' : 'password'}
             autoComplete="off"
             spellCheck={false}
             inputProps={{ minLength: 8, maxLength: 30 }}
@@ -235,7 +239,7 @@ function FormUserAdd(): React.ReactNode {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleClickTogglePassword}>
-                    {formDataState.passwordVisible ? (
+                    {tempsData.passwordVisible ? (
                       <VisibilityOffIcon />
                     ) : (
                       <VisibilityIcon />
@@ -263,7 +267,7 @@ function FormUserAdd(): React.ReactNode {
             label="Password confirm"
             onChange={handleChange}
             value={formDataState.password2}
-            type={formDataState.passwordVisible ? 'text' : 'password'}
+            type={tempsData.passwordVisible ? 'text' : 'password'}
             autoComplete="off"
             spellCheck={false}
             inputProps={{ minLength: 8, maxLength: 30 }}
@@ -276,7 +280,7 @@ function FormUserAdd(): React.ReactNode {
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleClickTogglePassword}>
-                    {formDataState.passwordVisible ? (
+                    {tempsData.passwordVisible ? (
                       <VisibilityOffIcon />
                     ) : (
                       <VisibilityIcon />
