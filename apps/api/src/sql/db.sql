@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1-1.fc38
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 21, 2023 at 01:05 AM
--- Server version: 8.0.31
--- PHP Version: 8.2.8
+-- Generation Time: Sep 28, 2023 at 10:16 AM
+-- Server version: 11.1.2-MariaDB
+-- PHP Version: 8.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
@@ -22,15 +21,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Appointments` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del agendamiento, Primary key.',
-  `person_id` int UNSIGNED NOT NULL COMMENT 'Campo que almacena el id de la persona agendada, llave foranea del campo id de la tabla registered people.',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Campo que guarda la fecha del agendamiento, utilizada para hacer busquedas en rango en  la base de datos.',
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Campo que guarda la fecha y hora de actualización.',
-  `start_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Campo que guarda la fecha y hora (datetime), de inicio de la visita a la rectoria, de la persona agendada.',
-  `end_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Campo que guarda la fecha y hora (datetime), de finalizacion de la visita a la rectoria, de la persona agendada.',
-  `visit_subject` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el asunto, motivo o razon de la visita a la rectoria, para su posterior agendamiento.',
-  `status` enum('scheduled','daily','cancelled') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el tipo de agendamiento realizado, puede ser de dos tipos,agendamiento programado o agendamiento al dia.',
-  `color` varchar(7) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda un valor de texto correspondiente al color que tendra el registro al ser agendado.'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del agendamiento, Primary key.',
+  `person_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que almacena el id de la persona agendada, llave foranea del campo id de la tabla registered people.',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Campo que guarda la fecha del agendamiento, utilizada para hacer busquedas en rango en  la base de datos.',
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Campo que guarda la fecha y hora de actualización.',
+  `start_time` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Campo que guarda la fecha y hora (datetime), de inicio de la visita a la rectoria, de la persona agendada.',
+  `end_time` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Campo que guarda la fecha y hora (datetime), de finalizacion de la visita a la rectoria, de la persona agendada.',
+  `visit_subject` varchar(150) NOT NULL COMMENT 'Campo que guarda el asunto, motivo o razon de la visita a la rectoria, para su posterior agendamiento.',
+  `status` enum('scheduled','daily','cancelled') NOT NULL COMMENT 'Campo que guarda el tipo de agendamiento realizado, puede ser de dos tipos,agendamiento programado o agendamiento al dia.',
+  `color` varchar(7) NOT NULL COMMENT 'Campo que guarda un valor de texto correspondiente al color que tendra el registro al ser agendado.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena todos los agendamientos en fecha del aplicativo.';
 
 --
@@ -57,11 +56,11 @@ INSERT INTO `Appointments` (`id`, `person_id`, `created_at`, `updated_at`, `star
 --
 
 CREATE TABLE `CanceledAppointments` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del agendamiento cancelado, Primary Key.',
-  `person_id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de la persona que se va a cancelar la cita.',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Campo que guarda la fecha y hora en la que se cancela la cita.',
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Campo que guarda la fecha y hora de actualización.',
-  `cancellation_subject` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el asunto por el cual se cancela la cita.'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del agendamiento cancelado, Primary Key.',
+  `person_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de la persona que se va a cancelar la cita.',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Campo que guarda la fecha y hora en la que se cancela la cita.',
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'Campo que guarda la fecha y hora de actualización.',
+  `cancellation_subject` varchar(150) NOT NULL COMMENT 'Campo que guarda el asunto por el cual se cancela la cita.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena las citas canceladas.';
 
 --
@@ -78,8 +77,8 @@ INSERT INTO `CanceledAppointments` (`id`, `person_id`, `created_at`, `updated_at
 --
 
 CREATE TABLE `Categories` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de persona (autoincremental).',
-  `category_name` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el nombre del tipo de persona, clasificado por categoria.'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de persona (autoincremental).',
+  `category_name` varchar(15) NOT NULL COMMENT 'Campo que guarda el nombre del tipo de persona, clasificado por categoria.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los diferentes tipos de persona clasificada por categoria, usada para los agendamientos.';
 
 --
@@ -100,10 +99,10 @@ INSERT INTO `Categories` (`id`, `category_name`) VALUES
 --
 
 CREATE TABLE `Deans` (
-  `id` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el numero de cedula del de decano del ITFIP, (unique).',
-  `first_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el nombre de decano del ITFIP.',
-  `last_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el apellido de decano del ITFIP.',
-  `faculty_id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de facultad a la que pertenece el decano del ITFIP.'
+  `id` varchar(11) NOT NULL COMMENT 'Campo que guarda el numero de cedula del de decano del ITFIP, (unique).',
+  `first_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el nombre de decano del ITFIP.',
+  `last_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el apellido de decano del ITFIP.',
+  `faculty_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de facultad a la que pertenece el decano del ITFIP.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los datos de decanos del ITFIP, que seran utilizados para el agendamiento de personas mas rapidamente, haciendo un autocompletado.';
 
 --
@@ -121,9 +120,9 @@ INSERT INTO `Deans` (`id`, `first_name`, `last_name`, `faculty_id`) VALUES
 --
 
 CREATE TABLE `Documents` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de documento, (autoincremental).',
-  `document_name` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda una abreviacion corta del tipo de documento.',
-  `document_description` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el nombre detallado del tipo de documento.'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de documento, (autoincremental).',
+  `document_name` varchar(3) NOT NULL COMMENT 'Campo que guarda una abreviacion corta del tipo de documento.',
+  `document_description` varchar(40) NOT NULL COMMENT 'Campo que guarda el nombre detallado del tipo de documento.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los tipos de documentos, que seran utilizados para el agendamiento de personas.';
 
 --
@@ -143,8 +142,8 @@ INSERT INTO `Documents` (`id`, `document_name`, `document_description`) VALUES
 --
 
 CREATE TABLE `Faculties` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de la facultad, (autoincremental).',
-  `faculty_name` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el nombre de la facultad.'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de la facultad, (autoincremental).',
+  `faculty_name` varchar(60) NOT NULL COMMENT 'Campo que guarda el nombre de la facultad.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena las facultades actuales de los programas academicos del ITFIP.';
 
 --
@@ -164,15 +163,15 @@ INSERT INTO `Faculties` (`id`, `faculty_name`) VALUES
 --
 
 CREATE TABLE `People` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de las personas agendadas (autoincremental).',
-  `first_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el nombre de las personas agendadas.',
-  `last_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el apellido de las personas agendadas.',
-  `document_id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de documento referenciado de la tabla document.',
-  `document_number` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el numero de documento de las personas agendadas.',
-  `phone_number` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el numero de telefono de contacto.',
-  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el correo electronico de contacto.',
-  `category_id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de persona referenciado de la tabla person_type.',
-  `faculty_id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de la facultad a la que pertenece referenciado de la tabla faculties.'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de las personas agendadas (autoincremental).',
+  `first_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el nombre de las personas agendadas.',
+  `last_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el apellido de las personas agendadas.',
+  `document_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de documento referenciado de la tabla document.',
+  `document_number` varchar(11) NOT NULL COMMENT 'Campo que guarda el numero de documento de las personas agendadas.',
+  `phone_number` char(10) NOT NULL COMMENT 'Campo que guarda el numero de telefono de contacto.',
+  `email` varchar(30) NOT NULL COMMENT 'Campo que guarda el correo electronico de contacto.',
+  `category_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id del tipo de persona referenciado de la tabla person_type.',
+  `faculty_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de la facultad a la que pertenece referenciado de la tabla faculties.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena todos los datos personales de las personas que han sido agendadas.';
 
 --
@@ -199,9 +198,9 @@ INSERT INTO `People` (`id`, `first_name`, `last_name`, `document_id`, `document_
 --
 
 CREATE TABLE `Roles` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el rol que tiene el usaurio, existen 3: admin, rector, secretaria.',
-  `role_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el rol que tiene el usuario, existen 3: admin, rector, secretaria.',
-  `permissions` json NOT NULL COMMENT 'Campo que guarda los permisos que tiene el usaurio'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el rol que tiene el usaurio, existen 3: admin, rector, secretaria.',
+  `role_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el rol que tiene el usuario, existen 3: admin, rector, secretaria.',
+  `permissions` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'Campo que guarda los permisos que tiene el usaurio' CHECK (json_valid(`permissions`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los roles de la aplicación.';
 
 --
@@ -220,16 +219,16 @@ INSERT INTO `Roles` (`id`, `role_name`, `permissions`) VALUES
 --
 
 CREATE TABLE `Users` (
-  `id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de los usuarios del aplicativo, con acceso permitido (unique).',
-  `first_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el nombre de los usuarios del aplicativo, con acceso permitido.',
-  `last_name` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el apellido de los usuarios del aplicativo, con acceso permitido.',
-  `document_id` int UNSIGNED NOT NULL COMMENT 'Campo que almacena el id del tipo de documento, de la tabla document.',
-  `document_number` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el numero de documento.',
-  `phone_number` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el numero de telefono de contacto.',
-  `email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el correo electronico institucional o usuario de acceso al aplicativo.',
-  `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Campo que guarda el password de acceso al aplicativo (encriptado).',
-  `role_id` int UNSIGNED NOT NULL COMMENT 'Campo que guarda el rol que tiene el usaurio, existen 3: admin, rector, secretaria.',
-  `authorized` tinyint(1) NOT NULL DEFAULT '0'
+  `id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el id de los usuarios del aplicativo, con acceso permitido (unique).',
+  `first_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el nombre de los usuarios del aplicativo, con acceso permitido.',
+  `last_name` varchar(25) NOT NULL COMMENT 'Campo que guarda el apellido de los usuarios del aplicativo, con acceso permitido.',
+  `document_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que almacena el id del tipo de documento, de la tabla document.',
+  `document_number` varchar(11) NOT NULL COMMENT 'Campo que guarda el numero de documento.',
+  `phone_number` char(10) NOT NULL COMMENT 'Campo que guarda el numero de telefono de contacto.',
+  `email` varchar(30) NOT NULL COMMENT 'Campo que guarda el correo electronico institucional o usuario de acceso al aplicativo.',
+  `password` varchar(100) NOT NULL COMMENT 'Campo que guarda el password de acceso al aplicativo (encriptado).',
+  `role_id` int(10) UNSIGNED NOT NULL COMMENT 'Campo que guarda el rol que tiene el usaurio, existen 3: admin, rector, secretaria.',
+  `authorized` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabla que almacena los usuarios del aplicativo, y sus respectivos usuarios y password de acceso al aplicativo.';
 
 --
@@ -237,8 +236,8 @@ CREATE TABLE `Users` (
 --
 
 INSERT INTO `Users` (`id`, `first_name`, `last_name`, `document_id`, `document_number`, `phone_number`, `email`, `password`, `role_id`, `authorized`) VALUES
-(1, 'Kay', 'Elliott', 2, '647545858', '3173926578', 'rectoria@itfip.edu.co', '$2a$10$h8DWXY72/r3KAfE9f5h/OOmHK4KvgJy0r4NxYN1qHvlFi3ieRK0wa', 2, 0),
-(2, 'Yoko', 'Carter', 3, '79647585', '3173926578', 'secretaria@itfip.edu.co', '$2a$10$qy46EEBNpoDKhl1.u7u1zOHcBYEyRH.X6.li1DzlzgtugoRFOJ8bC', 3, 0),
+(1, 'José Manuel', 'Mendoza Vásquez', 1, '1005773423', '3186329251', 'jmendoza23@itfip.edu.co', '$2a$10$KlgJL5qfkrhlMPh4DGGuE.M.hIKZTMy..fsATl0Srg3RbCrJaGoc2', 2, 0),
+(2, 'Carlos Enrique', 'Lara Meneses', 1, '64858737', '3012834716', 'CLARA16@itfip.edu.co', '$2a$10$ku9fm7qvIbxytaHkcRw7luIfCAL7W3zPvXxnMgXkkcgGQ/ku69nsi', 3, 0),
 (3, 'Ricardo Andrés', 'Rojas Rico', 1, '1111122448', '3173926578', 'rrojas48@itfip.edu.co', '$2a$10$aqA6nW8IxaeJMa7jFdEcLu2eZHkFa4TGlttiTRF7j57ctmUUZAP7.', 1, 0);
 
 --
@@ -307,47 +306,46 @@ ALTER TABLE `Users`
 -- AUTO_INCREMENT for table `Appointments`
 --
 ALTER TABLE `Appointments`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del agendamiento, Primary key.', AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del agendamiento, Primary key.', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `CanceledAppointments`
 --
 ALTER TABLE `CanceledAppointments`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del agendamiento cancelado, Primary Key.', AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del agendamiento cancelado, Primary Key.', AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Categories`
 --
 ALTER TABLE `Categories`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del tipo de persona (autoincremental).', AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del tipo de persona (autoincremental).', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Documents`
 --
 ALTER TABLE `Documents`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del tipo de documento, (autoincremental).', AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id del tipo de documento, (autoincremental).', AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `Faculties`
 --
 ALTER TABLE `Faculties`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id de la facultad, (autoincremental).', AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id de la facultad, (autoincremental).', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `People`
 --
 ALTER TABLE `People`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id de las personas agendadas (autoincremental).', AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id de las personas agendadas (autoincremental).', AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `Roles`
 --
 ALTER TABLE `Roles`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el rol que tiene el usaurio, existen 3: admin, rector, secretaria.', AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el rol que tiene el usaurio, existen 3: admin, rector, secretaria.', AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id de los usuarios del aplicativo, con acceso permitido (unique).', AUTO_INCREMENT=4;
-COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Campo que guarda el id de los usuarios del aplicativo, con acceso permitido (unique).', AUTO_INCREMENT=4;
