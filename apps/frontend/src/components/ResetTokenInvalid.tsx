@@ -1,6 +1,5 @@
 import { Box, Container, Typography } from '@mui/material';
-import rsystfipLogo from '../assets/rsystfip.svg';
-import GoHome from './GoHome';
+import GoHome from './ui/GoHome';
 
 function ResetTokenInvalid(): React.ReactNode {
   return (
@@ -16,7 +15,7 @@ function ResetTokenInvalid(): React.ReactNode {
         >
           <Box
             component="img"
-            src={rsystfipLogo}
+            src={'/rsystfip.svg'}
             alt="RSystfip logotype"
             width={72}
             height={57}

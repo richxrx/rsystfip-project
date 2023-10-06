@@ -64,8 +64,12 @@ function FetcherReports(): React.ReactNode {
             const reader = new FileReader();
             reader.readAsDataURL(data);
             reader.addEventListener('load', () => {
-              if (reader.result) {
-                dispatch(setPngBase64(reader.result as string));
+              if (
+                reader.result &&
+                typeof reader.result === 'string' &&
+                reader.result.length > 0
+              ) {
+                dispatch(setPngBase64(reader.result));
               }
             });
           }

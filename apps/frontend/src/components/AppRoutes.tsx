@@ -18,7 +18,7 @@ import PageSignin from '../pages/PageSignin';
 import PageStcsDaily from '../pages/PageStcsDaily';
 import PageStcsScheduled from '../pages/PageStcsScheduled';
 import PageUsers from '../pages/PageUsers';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './ui/ProtectedRoute';
 
 interface IProps {
   authState: AuthState;

@@ -19,7 +19,7 @@ function FetcherDataForChangePsw(): React.ReactNode {
   );
 
   const { data, error } = useQuery<any, any>(['userData', role], () =>
-    userService.getData(role as string),
+    userService.getData(role!),
   );
 
   useEffect(() => {

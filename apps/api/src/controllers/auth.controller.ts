@@ -18,7 +18,7 @@ export async function auth(req: Request, res: Response): Promise<Response> {
 
   const passwordVerified = await bcryptHelper.verifyPassword(
     value.password,
-    userFound.password as string,
+    userFound.password!,
   );
   if (!passwordVerified)
     return res.status(401).json({ error: 'Bad credentials' });

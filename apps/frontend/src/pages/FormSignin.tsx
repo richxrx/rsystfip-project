@@ -20,7 +20,7 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { useAppDispatch } from '../app/hooks';
-import Copyright from '../components/Copyright';
+import Copyright from '../components/ui/Copyright';
 import { AUTH_KEY } from '../constants';
 import { AuthState, setAuthenticatedUser } from '../features/auth/authSlice';
 import { notify } from '../libs/notify';
@@ -33,6 +33,7 @@ function FormSignin() {
     username: '',
     password: '',
     passwordVisible: false,
+    terms: true,
   };
   const [formData, setFormData] = useState(formDataInitialState);
 
@@ -131,8 +132,20 @@ function FormSignin() {
       />
 
       <FormControlLabel
-        control={<Checkbox name="remember" color="primary" />}
-        label="Remember me"
+        control={
+          <Checkbox
+            name="terms"
+            color="primary"
+            onChange={() =>
+              setFormData({
+                ...formData,
+                terms: !formData.terms,
+              })
+            }
+            checked={formData.terms}
+          />
+        }
+        label="I accept the terms and conditions"
       />
 
       <LoadingButton
@@ -141,6 +154,7 @@ function FormSignin() {
         variant="contained"
         sx={{ mt: 3, mb: 2 }}
         loading={isLoading}
+        disabled={!formData.terms}
       >
         Sign In
       </LoadingButton>

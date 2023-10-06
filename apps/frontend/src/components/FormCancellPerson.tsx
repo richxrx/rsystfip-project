@@ -10,6 +10,7 @@ import * as scheduleService from '../services/schedule.service';
 import * as sgService from '../services/sendgrid.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
+import { AxiosError } from 'axios';
 
 interface IProps {
   closeModalCancell: () => void;
@@ -72,8 +73,10 @@ function FormCancellPerson({
       dispatch(registerAChange());
       setFormData(formDataInitialState);
       closeModalCancell();
-    } catch (error: any) {
-      notify(error.response.data.error, { type: 'error' });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        notify(error.response?.data.error, { type: 'error' });
+      }
     }
   };
 

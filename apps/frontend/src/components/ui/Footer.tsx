@@ -1,9 +1,8 @@
 import CodeIcon from '@mui/icons-material/Code';
 import { Box, Container, Grid, Link, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { useAppSelector } from '../app/hooks';
-import rsystfipLogo from '../assets/rsystfip.svg';
-import { AuthState } from '../features/auth/authSlice';
+import { useAppSelector } from '../../app/hooks';
+import { AuthState } from '../../features/auth/authSlice';
 
 function Footer(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth);
@@ -40,7 +39,7 @@ function Footer(): React.ReactNode {
               <Box
                 component="img"
                 alt="RSystfip logotype"
-                src={rsystfipLogo}
+                src={'/rsystfip.svg'}
                 width={40}
                 height={32}
                 sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}

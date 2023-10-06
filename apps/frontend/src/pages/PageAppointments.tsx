@@ -1,8 +1,12 @@
+import dayGridPlugin from '@fullcalendar/daygrid';
+import listPlugin from '@fullcalendar/list';
 import { Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import FullCalendarScheduling from '../components/FullCalendarScheduling';
 
 function PageAppointments(): React.ReactNode {
+  const plugins = [dayGridPlugin, listPlugin];
+
   return (
     <>
       <Helmet>
@@ -22,6 +26,7 @@ function PageAppointments(): React.ReactNode {
         <FullCalendarScheduling
           right="listMonth,dayGridMonth"
           initialView="listMonth"
+          plugins={plugins}
         />
       </Container>
     </>

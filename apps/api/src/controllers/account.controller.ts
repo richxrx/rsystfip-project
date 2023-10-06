@@ -71,7 +71,7 @@ export async function updatePassword(
 
   const auth = await bcryptHelper.verifyPassword(
     value.current_password,
-    userFound.password as string,
+    userFound.password!,
   );
   if (!auth)
     return res.status(401).json({ error: 'Current password incorrect' });
@@ -103,7 +103,7 @@ export async function updatePasswordWithJwt(
 
     const auth = await bcryptHelper.verifyPassword(
       value.password,
-      userFound.password as string,
+      userFound.password!,
     );
     if (auth) return res.status(400).json({ error: 'None password updated' });
 

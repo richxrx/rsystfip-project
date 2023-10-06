@@ -2,7 +2,7 @@ import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
 import { QueryData } from '../features/statistics/statisticsSlice';
 import { useAppSelector } from '../app/hooks';
 import { ICounts } from '../interfaces/ICounts';
-import Listgroup from './Listgroup';
+import Listgroup from './ui/Listgroup';
 
 interface IProps {
   appointment_status: AppointmentStatus;

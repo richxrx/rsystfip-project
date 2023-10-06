@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { Link as RouterLink } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
-import ProtectedElement from '../components/ProtectedElement';
+import ProtectedElement from '../components/ui/ProtectedElement';
 import { AuthState } from '../features/auth/authSlice';
 
 interface IProps {

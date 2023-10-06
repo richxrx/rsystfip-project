@@ -1,7 +1,6 @@
 import { Box, Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import rsystfipLogo from '../assets/rsystfip.svg';
-import GoHome from '../components/GoHome';
+import GoHome from '../components/ui/GoHome';
 
 function PageNotFound(): React.ReactNode {
   return (
@@ -21,7 +20,7 @@ function PageNotFound(): React.ReactNode {
         >
           <Box
             component="img"
-            src={rsystfipLogo}
+            src={'/rsystfip.svg'}
             alt="RSystfip logotype"
             width={72}
             height={57}

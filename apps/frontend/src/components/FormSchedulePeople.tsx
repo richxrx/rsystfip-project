@@ -17,10 +17,11 @@ import * as scheduleService from '../services/schedule.service';
 import { THandleChangeITS } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
 import FooterFormPeople from './FooterFormPeople';
-import ProtectedElement from './ProtectedElement';
+import ProtectedElement from './ui/ProtectedElement';
 import SelectDocument from './SelectDocument';
 import SelectFaculties from './SelectFaculties';
 import SelectPerson from './SelectPerson';
+import { AxiosError } from 'axios';
 
 export enum propsAction {
   add = 'add',
@@ -152,8 +153,10 @@ function FormSchedulePeople({
 
       dispatch(registerAChange());
       closeModalScheduling();
-    } catch (error: any) {
-      notify(error.response.data.error, { type: 'error' });
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        notify(error.response?.data.error, { type: 'error' });
+      }
     }
   };
 
@@ -182,7 +185,7 @@ function FormSchedulePeople({
 
   const personData = useQuery<any, any>(
     ['personData', id],
-    () => peopleService.getData(id as string),
+    () => peopleService.getData(id!),
     { enabled: Boolean(id) },
   );
 

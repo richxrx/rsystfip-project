@@ -1,8 +1,8 @@
+import { EventSourceInput, PluginDef } from '@fullcalendar/core';
 import esLocale from '@fullcalendar/core/locales/es';
 import FullCalendar from '@fullcalendar/react';
 import { TableContainer } from '@mui/material';
 import format from 'date-fns/format';
-import { EventSourceInput, globalPlugins } from 'fullcalendar';
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
@@ -18,13 +18,16 @@ import {
 import { notify } from '../libs/notify';
 import * as scheduleService from '../services/schedule.service';
 import { propsAction } from './FormSchedulePeople';
-import LoadCalendar from './LoadCalendar';
 import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation';
 import ModalSchedulePeopleForm from './ModalSchedulePeopleForm';
+import LoadCalendar from './ui/LoadCalendar';
+
+import interactionPlugin from '@fullcalendar/interaction';
 
 interface IProps {
   right: string;
   initialView: string;
+  plugins: PluginDef[];
 }
 
 const action = propsAction.schedule;
@@ -32,6 +35,7 @@ const action = propsAction.schedule;
 function FullCalendarScheduling({
   right,
   initialView,
+  plugins,
 }: IProps): React.ReactNode {
   const dispatch = useAppDispatch();
   const formDataState: FormDataState = useAppSelector(
@@ -79,18 +83,26 @@ function FullCalendarScheduling({
 
       <div className="schg-sm">
         <FullCalendar
+          initialView={initialView}
+          plugins={[...plugins, interactionPlugin]}
           height="auto"
+          locale="es-us"
+          locales={[esLocale]}
+          navLinks
+          editable
+          nowIndicator
+          dayHeaders
+          dayMaxEvents
+          weekends
+          weekNumbers
+          weekNumberCalculation="ISO"
+          selectable
+          selectMirror
           headerToolbar={{
             left: 'prevYear prev,next nextYear today',
             center: 'title',
             right,
           }}
-          locales={[esLocale]}
-          locale="es-us"
-          navLinks
-          nowIndicator
-          dayHeaders
-          weekends
           dayHeaderFormat={{
             weekday: 'long',
             day: 'numeric',
@@ -100,20 +112,16 @@ function FullCalendarScheduling({
             startTime: '06:00',
             endTime: '22:00',
           }}
-          weekNumbers
-          weekNumberCalculation="ISO"
-          selectable
-          selectMirror
           select={({ view, start, end }) => {
             if ('dayGridMonth' === view.type) return;
 
             const now = new Date();
             if (start < now) {
               view.calendar.unselect();
-              return notify(
-                'No se puede agendar en una fecha que ya ha pasado.',
-                { type: 'warning' },
-              );
+              notify('No se puede agendar en una fecha que ya ha pasado.', {
+                type: 'warning',
+              });
+              return;
             }
 
             if (
@@ -123,9 +131,10 @@ function FullCalendarScheduling({
             ) {
               // The selection is out of allow range, cancel
               view.calendar.unselect();
-              return notify('Agendamientos no disponible en ese horario.', {
+              notify('Agendamientos no disponible en ese horario.', {
                 type: 'warning',
               });
+              return;
             }
 
             showModalScheduling();
@@ -155,8 +164,6 @@ function FullCalendarScheduling({
               ]),
             );
           }}
-          editable
-          dayMaxEvents
           events={calendarEventsState.calendarEvents as EventSourceInput}
           eventOrder="-start"
           eventTimeFormat={{
@@ -167,8 +174,6 @@ function FullCalendarScheduling({
             if (loadEventsRef.current)
               loadEventsRef.current.style.display = state ? 'block' : 'none';
           }}
-          initialView={initialView}
-          plugins={globalPlugins}
         />
       </div>
     </TableContainer>

@@ -32,7 +32,7 @@ import * as documentService from '../services/document.service';
 import * as userService from '../services/user.service';
 import { THandleChangeITS } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
-import PasswordMeter from './PasswordMeter';
+import PasswordMeter from './ui/PasswordMeter';
 
 function FormUserAdd(): React.ReactNode {
   const formDataState: FormData = useAppSelector(({ users }) => users.formData);

@@ -10,7 +10,7 @@ import { notify } from '../libs/notify';
 import * as accountService from '../services/account.service';
 import { THandleChangeI } from '../types/THandleChanges';
 import { THandleSubmit } from '../types/THandleSubmits';
-import PasswordMeter from './PasswordMeter';
+import PasswordMeter from './ui/PasswordMeter';
 
 interface IProps {
   userId: IUserBase['id'];

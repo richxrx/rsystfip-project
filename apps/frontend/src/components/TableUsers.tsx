@@ -14,7 +14,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { User, setUsers } from '../features/users/usersSlice';
 import { notify } from '../libs/notify';
 import * as userService from '../services/user.service';
-import RowTableUsers from './RowTableUsers';
+import RowTableUsers from './ui/RowTableUsers';
 
 function TableUsers(): React.ReactNode {
   const dispatch = useAppDispatch();

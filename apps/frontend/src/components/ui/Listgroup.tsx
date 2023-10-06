@@ -10,8 +10,7 @@ import format from 'date-fns/format';
 import esLocale from 'date-fns/locale/es';
 import parseISO from 'date-fns/parseISO';
 import { v4 } from 'uuid';
-import rsystfipLogo from '../assets/rsystfip.svg';
-import { ICounts } from '../interfaces/ICounts';
+import { ICounts } from '../../interfaces/ICounts';
 import ProtectedElement from './ProtectedElement';
 
 interface IProps {
@@ -35,7 +34,7 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
           secondaryAction={<IconButton edge="end">{counts}</IconButton>}
         >
           <ListItemAvatar>
-            <Avatar src={rsystfipLogo} alt="RSystfip logotype" />
+            <Avatar src={'/rsystfip.svg'} alt="RSystfip logotype" />
           </ListItemAvatar>
 
           <ListItemText

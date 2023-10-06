@@ -19,14 +19,13 @@ import {
   useNavigate,
 } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import rsystfipLogo from '../assets/rsystfip.svg';
 import { resetAllFormDataProgramming } from '../features/appointments/appointmentsSlice';
 import { AuthState, resetUserAuthenticated } from '../features/auth/authSlice';
 import { resetQueryDataReports } from '../features/reports/reportsSlice';
 import { resetQueryDataStatistics } from '../features/statistics/statisticsSlice';
 import { destroyTemporals } from '../features/temp/tempSlice';
 import { resetFormDataAdmin } from '../features/users/usersSlice';
-import ProtectedElement from './ProtectedElement';
+import ProtectedElement from './ui/ProtectedElement';
 
 interface IProps {
   permissions: Array<string>;
@@ -96,7 +95,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
         <Box
           component="img"
           alt="RSystfip logotype"
-          src={rsystfipLogo}
+          src={'/rsystfip.svg'}
           width={40}
           height={32}
           sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}

@@ -2,7 +2,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Button } from '@mui/material';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import { THandleClick } from '../types/THandleClicks';
-import ProtectedElement from './ProtectedElement';
+import ProtectedElement from './ui/ProtectedElement';
 
 interface IProps {
   isEdit: boolean;

@@ -6,7 +6,7 @@ import { notify } from '../libs/notify';
 import * as accountService from '../services/account.service';
 import FormChangePswForget from './FormChangePswForget';
 import ResetTokenInvalid from './ResetTokenInvalid';
-import Loader from './Loader';
+import Loader from './ui/Loader';
 
 function RecoveryLinkPassword(): React.ReactNode {
   const { resetToken } = useParams<{ resetToken: string }>();
@@ -18,7 +18,7 @@ function RecoveryLinkPassword(): React.ReactNode {
 
   const { data, isLoading, error } = useQuery<any, any>(
     'verifyJwtForRecoverPsw',
-    () => accountService.verifyJwtForRecoverPsw(resetToken as string),
+    () => accountService.verifyJwtForRecoverPsw(resetToken!),
     { refetchOnWindowFocus: false },
   );
 

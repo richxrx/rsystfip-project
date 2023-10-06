@@ -4,10 +4,10 @@ import KeyIcon from '@mui/icons-material/Key';
 import { IconButton, TableCell, TableRow } from '@mui/material';
 import { useMutation } from 'react-query';
 import { Link as RouterLink } from 'react-router-dom';
-import { User } from '../features/users/usersSlice';
-import { IUserBase } from '../interfaces/IUserBase';
-import { notify } from '../libs/notify';
-import * as userService from '../services/user.service';
+import { User } from '../../features/users/usersSlice';
+import { IUserBase } from '../../interfaces/IUserBase';
+import { notify } from '../../libs/notify';
+import * as userService from '../../services/user.service';
 
 interface IProps {
   user: User;

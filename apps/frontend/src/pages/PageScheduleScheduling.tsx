@@ -1,6 +1,10 @@
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import { Container, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import FullCalendarScheduling from '../components/FullCalendarScheduling';
+
+const plugins = [dayGridPlugin, timeGridPlugin];
 
 function PageScheduleScheduling(): React.ReactNode {
   return (
@@ -18,9 +22,11 @@ function PageScheduleScheduling(): React.ReactNode {
         >
           Agendamiento programado
         </Typography>
+
         <FullCalendarScheduling
           right="timeGridDay,timeGridWeek"
           initialView="timeGridDay"
+          plugins={plugins}
         />
       </Container>
     </>

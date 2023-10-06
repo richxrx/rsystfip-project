@@ -1,7 +1,5 @@
 import { Box, Grid, Paper, Typography } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import photoEntryItfip1 from '../assets/PHOTO-ENTRY-ITFIP-1.jpg';
-import rsystfipLogo from '../assets/rsystfip.svg';
 import FormSignin from './FormSignin';
 
 function PageSignin(): React.ReactNode {
@@ -18,7 +16,7 @@ function PageSignin(): React.ReactNode {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: `url(${photoEntryItfip1})`,
+            backgroundImage: 'url("/PHOTO-ENTRY-ITFIP-1.jpg")',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light'
@@ -51,7 +49,7 @@ function PageSignin(): React.ReactNode {
             <Box
               component="img"
               alt="RSystfip logotype"
-              src={rsystfipLogo}
+              src={'/rsystfip.svg'}
               width={40}
               height={32}
               sx={{ m: 1 }}
