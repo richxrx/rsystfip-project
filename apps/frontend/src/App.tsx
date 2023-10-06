@@ -2,18 +2,24 @@ import '@fontsource/roboto/300.css'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material'
+import {
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+  useMediaQuery
+} from '@mui/material'
+import { useMemo } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 import './App.scss'
 import { useAppSelector } from './app/hooks'
 import AppRoutes from './components/AppRoutes'
-import ContainerToast from './components/ui/ContainerToast'
 import NavBar from './components/NavBar'
-import ProtectedElement from './components/ui/ProtectedElement'
 import SessionValidator from './components/SessionValidator'
-import { AuthState } from './features/auth/authSlice'
+import ContainerToast from './components/ui/ContainerToast'
 import Footer from './components/ui/Footer'
+import ProtectedElement from './components/ui/ProtectedElement'
+import { AuthState } from './features/auth/authSlice'
 
 const queryClient = new QueryClient()
 
@@ -22,14 +28,26 @@ function App(): React.ReactNode {
 
   const permissions = authState.userAuth.permissions
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: 'dark'
-    }
-  })
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
+
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+          primary: {
+            main: '#3366CC'
+          },
+          error: {
+            main: '#E6161C'
+          }
+        }
+      }),
+    [prefersDarkMode]
+  )
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
 
       <QueryClientProvider client={queryClient}>

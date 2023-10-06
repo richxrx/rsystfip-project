@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import FormSignin from './FormSignin'
+import FormSignin from '../components/FormSignin'
 
 function PageSignin(): React.ReactNode {
   return (

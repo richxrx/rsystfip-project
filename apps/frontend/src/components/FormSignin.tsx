@@ -20,7 +20,7 @@ import {
   useNavigate
 } from 'react-router-dom'
 import { useAppDispatch } from '../app/hooks'
-import Copyright from '../components/ui/Copyright'
+import Copyright from './ui/Copyright'
 import { AUTH_KEY } from '../constants'
 import { AuthState, setAuthenticatedUser } from '../features/auth/authSlice'
 import { notify } from '../libs/notify'
