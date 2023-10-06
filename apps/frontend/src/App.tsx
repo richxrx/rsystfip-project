@@ -26,8 +26,6 @@ const queryClient = new QueryClient()
 function App(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth)
 
-  const permissions = authState.userAuth.permissions
-
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
 
   const theme = useMemo(
@@ -57,10 +55,10 @@ function App(): React.ReactNode {
           </ProtectedElement>
 
           <ProtectedElement isAllowed={authState.auth}>
-            <NavBar permissions={permissions} />
+            <NavBar permissions={authState.userAuth.permissions} />
           </ProtectedElement>
 
-          <AppRoutes authState={authState} permissions={permissions} />
+          <AppRoutes />
 
           <ProtectedElement isAllowed={authState.auth}>
             <Footer />

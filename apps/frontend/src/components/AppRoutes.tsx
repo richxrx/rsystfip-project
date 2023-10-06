@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
+import { useAppSelector } from '../app/hooks'
 import { AuthState } from '../features/auth/authSlice'
 import PageAppointments from '../pages/PageAppointments'
 import PageChangePassword from '../pages/PageChangePassword'
@@ -20,12 +21,11 @@ import PageStcsScheduled from '../pages/PageStcsScheduled'
 import PageUsers from '../pages/PageUsers'
 import ProtectedRoute from './ui/ProtectedRoute'
 
-interface IProps {
-  authState: AuthState
-  permissions: string[]
-}
+function AppRoutes(): React.ReactNode {
+  const authState: AuthState = useAppSelector(({ auth }) => auth)
 
-function AppRoutes({ authState, permissions }: IProps): React.ReactNode {
+  const permissions = authState.userAuth.permissions
+
   return (
     <Routes>
       <Route
