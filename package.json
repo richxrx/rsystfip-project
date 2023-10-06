@@ -33,6 +33,9 @@
       "email": "unknow69007@gmail.com"
     }
   ],
+  "bugs": {
+    "email": "rojasricor@gmail.com"
+  },
   "prettier": {
     "semi": false,
     "trailingComma": "none",
