@@ -1,10 +1,10 @@
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import { Container, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import FullCalendarScheduling from '../components/FullCalendarScheduling';
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import { Container, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import FullCalendarScheduling from '../components/FullCalendarScheduling'
 
-const plugins = [dayGridPlugin, timeGridPlugin];
+const plugins = [dayGridPlugin, timeGridPlugin]
 
 function PageScheduleScheduling(): React.ReactNode {
   return (
@@ -30,7 +30,7 @@ function PageScheduleScheduling(): React.ReactNode {
         />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageScheduleScheduling;
+export default PageScheduleScheduling

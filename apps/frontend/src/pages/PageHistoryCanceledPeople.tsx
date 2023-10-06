@@ -1,6 +1,6 @@
-import { Container, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import TableHistoryCanceledPeople from '../components/TableHistoryCanceledPeople';
+import { Container, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import TableHistoryCanceledPeople from '../components/TableHistoryCanceledPeople'
 
 function PageHistoryCancelledPeople(): React.ReactNode {
   return (
@@ -22,7 +22,7 @@ function PageHistoryCancelledPeople(): React.ReactNode {
         <TableHistoryCanceledPeople />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageHistoryCancelledPeople;
+export default PageHistoryCancelledPeople

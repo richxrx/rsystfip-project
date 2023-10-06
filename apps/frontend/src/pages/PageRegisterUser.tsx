@@ -1,6 +1,6 @@
-import { Container, Paper, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import FormUserAdd from '../components/FormUserAdd';
+import { Container, Paper, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import FormUserAdd from '../components/FormUserAdd'
 
 function PageRegisterUser(): React.ReactNode {
   return (
@@ -19,7 +19,7 @@ function PageRegisterUser(): React.ReactNode {
         </Paper>
       </Container>
     </>
-  );
+  )
 }
 
-export default PageRegisterUser;
+export default PageRegisterUser

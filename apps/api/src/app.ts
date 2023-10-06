@@ -1,110 +1,110 @@
-import express from 'express';
-import morgan from 'morgan';
-import path from 'path';
-import { PORT } from './config';
-import authMiddleware from './middlewares/auth.middleware';
-import roleMiddleware from './middlewares/role.middleware';
-import accountRoutes from './routes/account.routes';
-import authRoutes from './routes/auth.routes';
-import cancellationRoutes from './routes/cancellation.routes';
-import deanRoutes from './routes/dean.routes';
-import peopleRoutes from './routes/people.routes';
-import reportRoutes from './routes/report.routes';
-import scheduleRoutes from './routes/schedule.routes';
-import sessionRoutes from './routes/session.routes';
-import statisticRoutes from './routes/statistic.routes';
-import userRoutes from './routes/user.routes';
-import categoryRoutes from './routes/category.routes';
-import documentRoutes from './routes/document.routes';
-import facultyRoutes from './routes/faculty.routes';
-import sgRoutes from './routes/sendgrid.routes';
+import express from 'express'
+import morgan from 'morgan'
+import path from 'path'
+import { PORT } from './config'
+import authMiddleware from './middlewares/auth.middleware'
+import roleMiddleware from './middlewares/role.middleware'
+import accountRoutes from './routes/account.routes'
+import authRoutes from './routes/auth.routes'
+import cancellationRoutes from './routes/cancellation.routes'
+import deanRoutes from './routes/dean.routes'
+import peopleRoutes from './routes/people.routes'
+import reportRoutes from './routes/report.routes'
+import scheduleRoutes from './routes/schedule.routes'
+import sessionRoutes from './routes/session.routes'
+import statisticRoutes from './routes/statistic.routes'
+import userRoutes from './routes/user.routes'
+import categoryRoutes from './routes/category.routes'
+import documentRoutes from './routes/document.routes'
+import facultyRoutes from './routes/faculty.routes'
+import sgRoutes from './routes/sendgrid.routes'
 
 export class App {
-  private app: express.Application;
+  private app: express.Application
 
   constructor(private port: number) {
-    this.app = express();
-    this.settings();
-    this.middlewares();
-    this.routes();
+    this.app = express()
+    this.settings()
+    this.middlewares()
+    this.routes()
   }
 
   settings() {
-    this.app.set('port', this.port || PORT || 3000);
+    this.app.set('port', this.port || PORT || 3000)
   }
 
   middlewares() {
-    this.app.use(morgan('dev'));
-    this.app.use(express.json());
+    this.app.use(morgan('dev'))
+    this.app.use(express.json())
     this.app.use(
-      express.static(path.join(__dirname, '..', '..', 'frontend', 'dist')),
-    );
+      express.static(path.join(__dirname, '..', '..', 'frontend', 'dist'))
+    )
   }
 
   routes() {
-    this.app.use('/api/auth', authRoutes);
-    this.app.use('/api/sendgrid', sgRoutes);
-    this.app.use('/api/session', sessionRoutes);
-    this.app.use('/api/account', accountRoutes);
-    this.app.use('/api/users', authMiddleware(), userRoutes);
+    this.app.use('/api/auth', authRoutes)
+    this.app.use('/api/sendgrid', sgRoutes)
+    this.app.use('/api/session', sessionRoutes)
+    this.app.use('/api/account', accountRoutes)
+    this.app.use('/api/users', authMiddleware(), userRoutes)
     this.app.use(
       '/api/people',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      peopleRoutes,
-    );
+      peopleRoutes
+    )
     this.app.use(
       '/api/schedule',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      scheduleRoutes,
-    );
+      scheduleRoutes
+    )
     this.app.use(
       '/api/cancellation',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      cancellationRoutes,
-    );
+      cancellationRoutes
+    )
     this.app.use(
       '/api/categories',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      categoryRoutes,
-    );
+      categoryRoutes
+    )
     this.app.use(
       '/api/faculties',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      facultyRoutes,
-    );
+      facultyRoutes
+    )
     this.app.use(
       '/api/documents',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      documentRoutes,
-    );
+      documentRoutes
+    )
     this.app.use(
       '/api/deans',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria', 'rector'),
-      deanRoutes,
-    );
+      deanRoutes
+    )
     this.app.use(
       '/api/reports',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria'),
-      reportRoutes,
-    );
+      reportRoutes
+    )
     this.app.use(
       '/api/statistics',
       authMiddleware(),
       roleMiddleware('admin', 'secretaria'),
-      statisticRoutes,
-    );
+      statisticRoutes
+    )
   }
 
   listen() {
-    this.app.listen(this.app.get('port'));
-    console.info('Server running on port', this.app.get('port'));
+    this.app.listen(this.app.get('port'))
+    console.info('Server running on port', this.app.get('port'))
   }
 }

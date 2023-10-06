@@ -1,26 +1,26 @@
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
-import { QueryData } from '../features/statistics/statisticsSlice';
-import { useAppSelector } from '../app/hooks';
-import { ICounts } from '../interfaces/ICounts';
-import Listgroup from './ui/Listgroup';
+import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
+import { QueryData } from '../features/statistics/statisticsSlice'
+import { useAppSelector } from '../app/hooks'
+import { ICounts } from '../interfaces/ICounts'
+import Listgroup from './ui/Listgroup'
 
 interface IProps {
-  appointment_status: AppointmentStatus;
+  appointment_status: AppointmentStatus
 }
 
 function ListerStatistics({ appointment_status }: IProps): React.ReactNode {
   const mostAgendatedOnRangeState: Array<ICounts> = useAppSelector(
-    ({ statistics }) => statistics[appointment_status].mostAgendatedOnRange,
-  );
+    ({ statistics }) => statistics[appointment_status].mostAgendatedOnRange
+  )
   const mostAgendatedAllTimeState: Array<ICounts> = useAppSelector(
-    ({ statistics }) => statistics[appointment_status].mostAgendatedAllTime,
-  );
+    ({ statistics }) => statistics[appointment_status].mostAgendatedAllTime
+  )
   const queryDataState: QueryData = useAppSelector(
-    ({ statistics }) => statistics[appointment_status].queryData,
-  );
+    ({ statistics }) => statistics[appointment_status].queryData
+  )
 
   const titleText: string =
-    appointment_status === AppointmentStatus.daily ? 'diario' : 'programado';
+    appointment_status === AppointmentStatus.daily ? 'diario' : 'programado'
 
   return (
     <>
@@ -36,7 +36,7 @@ function ListerStatistics({ appointment_status }: IProps): React.ReactNode {
         end_time={queryDataState.end_time}
       />
     </>
-  );
+  )
 }
 
-export default ListerStatistics;
+export default ListerStatistics

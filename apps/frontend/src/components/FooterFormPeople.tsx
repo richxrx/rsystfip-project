@@ -1,27 +1,27 @@
-import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, Button } from '@mui/material';
-import { NavigateFunction, useNavigate } from 'react-router-dom';
-import { THandleClick } from '../types/THandleClicks';
-import ProtectedElement from './ui/ProtectedElement';
+import LoadingButton from '@mui/lab/LoadingButton'
+import { Box, Button } from '@mui/material'
+import { NavigateFunction, useNavigate } from 'react-router-dom'
+import { THandleClick } from '../types/THandleClicks'
+import ProtectedElement from './ui/ProtectedElement'
 
 interface IProps {
-  isEdit: boolean;
-  isLoading: boolean;
+  isEdit: boolean
+  isLoading: boolean
 }
 
 function FooterFormPeople({ isEdit, isLoading }: IProps): React.ReactNode {
-  const navigate: NavigateFunction = useNavigate();
+  const navigate: NavigateFunction = useNavigate()
 
   const handleClick = (e: THandleClick) => {
-    e.preventDefault();
-    navigate(-1);
-  };
+    e.preventDefault()
+    navigate(-1)
+  }
 
   return (
     <Box
       sx={{
         display: 'flex',
-        justifyContent: isEdit ? 'space-between' : 'flex-end',
+        justifyContent: isEdit ? 'space-between' : 'flex-end'
       }}
     >
       <ProtectedElement isAllowed={isEdit}>
@@ -39,7 +39,7 @@ function FooterFormPeople({ isEdit, isLoading }: IProps): React.ReactNode {
         {isEdit ? 'Actualizar' : 'Registrar'}
       </LoadingButton>
     </Box>
-  );
+  )
 }
 
-export default FooterFormPeople;
+export default FooterFormPeople

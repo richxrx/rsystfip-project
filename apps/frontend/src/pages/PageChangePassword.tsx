@@ -1,6 +1,6 @@
-import { Container } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import FetcherDataForChangePsw from '../components/FetcherDataForChangePsw';
+import { Container } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import FetcherDataForChangePsw from '../components/FetcherDataForChangePsw'
 
 function PageChangePassword(): React.ReactNode {
   return (
@@ -13,7 +13,7 @@ function PageChangePassword(): React.ReactNode {
         <FetcherDataForChangePsw />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageChangePassword;
+export default PageChangePassword

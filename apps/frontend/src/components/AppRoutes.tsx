@@ -1,28 +1,28 @@
-import { Route, Routes } from 'react-router-dom';
-import { AuthState } from '../features/auth/authSlice';
-import PageAppointments from '../pages/PageAppointments';
-import PageChangePassword from '../pages/PageChangePassword';
-import PageDailyScheduling from '../pages/PageDailyScheduling';
-import PageEditPeople from '../pages/PageEditPeople';
-import PageFaqs from '../pages/PageFaqs';
-import PageHistoryCancelledPeople from '../pages/PageHistoryCanceledPeople';
-import PageHistoryPeople from '../pages/PageHistoryPeople';
-import PageHome from '../pages/PageHome';
-import PageLinkRecoveryPsw from '../pages/PageLinkRecoveryPsw';
-import PageNotFound from '../pages/PageNotFound';
-import PageRecoverPassword from '../pages/PageRecoverPassword';
-import PageRegisterUser from '../pages/PageRegisterUser';
-import PageReportsPeople from '../pages/PageReportsPeople';
-import PageScheduleScheduling from '../pages/PageScheduleScheduling';
-import PageSignin from '../pages/PageSignin';
-import PageStcsDaily from '../pages/PageStcsDaily';
-import PageStcsScheduled from '../pages/PageStcsScheduled';
-import PageUsers from '../pages/PageUsers';
-import ProtectedRoute from './ui/ProtectedRoute';
+import { Route, Routes } from 'react-router-dom'
+import { AuthState } from '../features/auth/authSlice'
+import PageAppointments from '../pages/PageAppointments'
+import PageChangePassword from '../pages/PageChangePassword'
+import PageDailyScheduling from '../pages/PageDailyScheduling'
+import PageEditPeople from '../pages/PageEditPeople'
+import PageFaqs from '../pages/PageFaqs'
+import PageHistoryCancelledPeople from '../pages/PageHistoryCanceledPeople'
+import PageHistoryPeople from '../pages/PageHistoryPeople'
+import PageHome from '../pages/PageHome'
+import PageLinkRecoveryPsw from '../pages/PageLinkRecoveryPsw'
+import PageNotFound from '../pages/PageNotFound'
+import PageRecoverPassword from '../pages/PageRecoverPassword'
+import PageRegisterUser from '../pages/PageRegisterUser'
+import PageReportsPeople from '../pages/PageReportsPeople'
+import PageScheduleScheduling from '../pages/PageScheduleScheduling'
+import PageSignin from '../pages/PageSignin'
+import PageStcsDaily from '../pages/PageStcsDaily'
+import PageStcsScheduled from '../pages/PageStcsScheduled'
+import PageUsers from '../pages/PageUsers'
+import ProtectedRoute from './ui/ProtectedRoute'
 
 interface IProps {
-  authState: AuthState;
-  permissions: string[];
+  authState: AuthState
+  permissions: string[]
 }
 
 function AppRoutes({ authState, permissions }: IProps): React.ReactNode {
@@ -162,7 +162,7 @@ function AppRoutes({ authState, permissions }: IProps): React.ReactNode {
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>
-  );
+  )
 }
 
-export default AppRoutes;
+export default AppRoutes

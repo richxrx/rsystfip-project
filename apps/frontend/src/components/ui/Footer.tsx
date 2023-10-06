@@ -1,11 +1,11 @@
-import CodeIcon from '@mui/icons-material/Code';
-import { Box, Container, Grid, Link, Typography } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import { useAppSelector } from '../../app/hooks';
-import { AuthState } from '../../features/auth/authSlice';
+import CodeIcon from '@mui/icons-material/Code'
+import { Box, Container, Grid, Link, Typography } from '@mui/material'
+import { Link as RouterLink } from 'react-router-dom'
+import { useAppSelector } from '../../app/hooks'
+import { AuthState } from '../../features/auth/authSlice'
 
 function Footer(): React.ReactNode {
-  const authState: AuthState = useAppSelector(({ auth }) => auth);
+  const authState: AuthState = useAppSelector(({ auth }) => auth)
 
   return (
     <Container maxWidth="lg" sx={{ py: 4, my: 4 }}>
@@ -33,7 +33,7 @@ function Footer(): React.ReactNode {
                 alignItems: 'center',
                 justifyContent: 'center',
                 mb: { xs: 3, md: 0 },
-                mr: { xs: 0, md: 'auto' },
+                mr: { xs: 0, md: 'auto' }
               }}
             >
               <Box
@@ -92,7 +92,7 @@ function Footer(): React.ReactNode {
         </Grid>
       </footer>
     </Container>
-  );
+  )
 }
 
-export default Footer;
+export default Footer

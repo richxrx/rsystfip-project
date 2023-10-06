@@ -1,16 +1,16 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IUserBase } from '../../interfaces/IUserBase';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IUserBase } from '../../interfaces/IUserBase'
 
 export interface TempState {
-  tempDataForChangePsw: IUserBase;
+  tempDataForChangePsw: IUserBase
 }
 
 const initialState: TempState = {
   tempDataForChangePsw: {
     id: 0,
-    email: '',
-  },
-};
+    email: ''
+  }
+}
 
 const tempSlice = createSlice({
   name: 'temp',
@@ -18,16 +18,16 @@ const tempSlice = createSlice({
   reducers: {
     setTempDataForChangePsw(
       state,
-      { payload }: PayloadAction<IUserBase>,
+      { payload }: PayloadAction<IUserBase>
     ): TempState {
-      return { ...state, tempDataForChangePsw: payload };
+      return { ...state, tempDataForChangePsw: payload }
     },
     destroyTemporals(): TempState {
-      return initialState;
-    },
-  },
-});
+      return initialState
+    }
+  }
+})
 
-export const { setTempDataForChangePsw, destroyTemporals } = tempSlice.actions;
+export const { setTempDataForChangePsw, destroyTemporals } = tempSlice.actions
 
-export default tempSlice.reducer;
+export default tempSlice.reducer

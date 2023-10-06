@@ -1,1 +1,1 @@
-export const AUTH_KEY = 'rsystfip-project';
+export const AUTH_KEY = 'rsystfip-project'

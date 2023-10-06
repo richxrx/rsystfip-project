@@ -4,19 +4,19 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
-} from '@mui/material';
-import format from 'date-fns/format';
-import esLocale from 'date-fns/locale/es';
-import parseISO from 'date-fns/parseISO';
-import { v4 } from 'uuid';
-import { ICounts } from '../../interfaces/ICounts';
-import ProtectedElement from './ProtectedElement';
+  Typography
+} from '@mui/material'
+import format from 'date-fns/format'
+import esLocale from 'date-fns/locale/es'
+import parseISO from 'date-fns/parseISO'
+import { v4 } from 'uuid'
+import { ICounts } from '../../interfaces/ICounts'
+import ProtectedElement from './ProtectedElement'
 
 interface IProps {
-  title: string;
-  data: Array<ICounts>;
-  end_time: string;
+  title: string
+  data: Array<ICounts>
+  end_time: string
 }
 
 function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
@@ -40,13 +40,13 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
           <ListItemText
             primary={category_name}
             secondary={format(parseISO(end_time), 'MMM d, yyyy', {
-              locale: esLocale,
+              locale: esLocale
             })}
           />
         </ListItem>
       ))}
     </>
-  );
+  )
 }
 
-export default Listgroup;
+export default Listgroup

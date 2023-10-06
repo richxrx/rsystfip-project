@@ -1,31 +1,31 @@
-import { Paper, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import { notify } from '../libs/notify';
-import * as accountService from '../services/account.service';
-import FormChangePswForget from './FormChangePswForget';
-import ResetTokenInvalid from './ResetTokenInvalid';
-import Loader from './ui/Loader';
+import { Paper, Typography } from '@mui/material'
+import { useEffect, useState } from 'react'
+import { useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
+import { notify } from '../libs/notify'
+import * as accountService from '../services/account.service'
+import FormChangePswForget from './FormChangePswForget'
+import ResetTokenInvalid from './ResetTokenInvalid'
+import Loader from './ui/Loader'
 
 function RecoveryLinkPassword(): React.ReactNode {
-  const { resetToken } = useParams<{ resetToken: string }>();
+  const { resetToken } = useParams<{ resetToken: string }>()
 
   const [dataUserVerified, setDataUserVerified] = useState({
     tokenIsValid: false,
-    email: '',
-  });
+    email: ''
+  })
 
   const { data, isLoading, error } = useQuery<any, any>(
     'verifyJwtForRecoverPsw',
     () => accountService.verifyJwtForRecoverPsw(resetToken!),
-    { refetchOnWindowFocus: false },
-  );
+    { refetchOnWindowFocus: false }
+  )
 
   useEffect(() => {
-    if (data) setDataUserVerified(data);
-    if (error) notify(error.response.data.error, { type: 'error' });
-  }, [data, error]);
+    if (data) setDataUserVerified(data)
+    if (error) notify(error.response.data.error, { type: 'error' })
+  }, [data, error])
 
   return (
     <>
@@ -45,7 +45,7 @@ function RecoveryLinkPassword(): React.ReactNode {
         )}
       </Paper>
     </>
-  );
+  )
 }
 
-export default RecoveryLinkPassword;
+export default RecoveryLinkPassword

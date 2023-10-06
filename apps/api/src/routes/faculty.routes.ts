@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import * as facultyCtrl from '../controllers/faculty.controller';
+import { Router } from 'express'
+import * as facultyCtrl from '../controllers/faculty.controller'
 
-const router = Router();
+const router = Router()
 
-router.route('/').get(facultyCtrl.getFaculties);
+router.route('/').get(facultyCtrl.getFaculties)
 
-export default router;
+export default router

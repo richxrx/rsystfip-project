@@ -1,7 +1,7 @@
-import { Container } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import Statistics from '../components/Statistics';
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
+import { Container } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import Statistics from '../components/Statistics'
+import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
 
 function PageStcsDaily(): React.ReactNode {
   return (
@@ -14,7 +14,7 @@ function PageStcsDaily(): React.ReactNode {
         <Statistics appointment_status={AppointmentStatus.daily} />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageStcsDaily;
+export default PageStcsDaily

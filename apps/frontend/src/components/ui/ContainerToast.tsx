@@ -1,4 +1,4 @@
-import { ToastContainer, Flip } from 'react-toastify';
+import { ToastContainer, Flip } from 'react-toastify'
 
 function ContainerToast(): React.ReactNode {
   return (
@@ -16,7 +16,7 @@ function ContainerToast(): React.ReactNode {
       limit={4}
       theme="dark"
     />
-  );
+  )
 }
 
-export default ContainerToast;
+export default ContainerToast

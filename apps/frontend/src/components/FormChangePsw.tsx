@@ -1,19 +1,19 @@
-import KeyIcon from '@mui/icons-material/Key';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, IconButton, InputAdornment, TextField } from '@mui/material';
-import { useState } from 'react';
-import { useMutation } from 'react-query';
-import { IUserBase } from '../interfaces/IUserBase';
-import { notify } from '../libs/notify';
-import * as accountService from '../services/account.service';
-import { THandleChangeI } from '../types/THandleChanges';
-import { THandleSubmit } from '../types/THandleSubmits';
-import PasswordMeter from './ui/PasswordMeter';
+import KeyIcon from '@mui/icons-material/Key'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import LoadingButton from '@mui/lab/LoadingButton'
+import { Box, IconButton, InputAdornment, TextField } from '@mui/material'
+import { useState } from 'react'
+import { useMutation } from 'react-query'
+import { IUserBase } from '../interfaces/IUserBase'
+import { notify } from '../libs/notify'
+import * as accountService from '../services/account.service'
+import { THandleChangeI } from '../types/THandleChanges'
+import { THandleSubmit } from '../types/THandleSubmits'
+import PasswordMeter from './ui/PasswordMeter'
 
 interface IProps {
-  userId: IUserBase['id'];
+  userId: IUserBase['id']
 }
 
 function FormChangePsw({ userId }: IProps): React.ReactNode {
@@ -21,50 +21,50 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
     currentPassword: '',
     newPassword: '',
     confirmPassword: '',
-    passwordVisible: false,
-  };
-  const [formData, setFormData] = useState(formDataInitialState);
+    passwordVisible: false
+  }
+  const [formData, setFormData] = useState(formDataInitialState)
 
   const { mutate, isLoading } = useMutation(accountService.changePassword, {
     onSuccess(data) {
       notify(data.ok, {
         type: 'success',
-        position: 'top-left',
-      });
+        position: 'top-left'
+      })
 
-      setFormData(formDataInitialState);
+      setFormData(formDataInitialState)
     },
     onError(error: any) {
-      notify(error.response.data.error, { type: 'error' });
-    },
-  });
+      notify(error.response.data.error, { type: 'error' })
+    }
+  })
 
   const handleSubmit = (e: THandleSubmit) => {
-    e.preventDefault();
+    e.preventDefault()
 
     const payload = {
       id: userId.toString(),
       current_password: formData.currentPassword,
       new_password: formData.newPassword,
-      new_password_confirm: formData.confirmPassword,
-    };
+      new_password_confirm: formData.confirmPassword
+    }
 
-    mutate(payload);
-  };
+    mutate(payload)
+  }
 
   const handleClickTogglePassword = () => {
     setFormData({
       ...formData,
-      passwordVisible: !formData.passwordVisible,
-    });
-  };
+      passwordVisible: !formData.passwordVisible
+    })
+  }
 
   const handleChange = (e: THandleChangeI) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
@@ -96,7 +96,7 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
                 )}
               </IconButton>
             </InputAdornment>
-          ),
+          )
         }}
         autoFocus
       />
@@ -129,14 +129,14 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
                 )}
               </IconButton>
             </InputAdornment>
-          ),
+          )
         }}
       />
 
       <PasswordMeter
         valueLength={formData.newPassword.length}
         LinearProgressProps={{
-          variant: 'determinate',
+          variant: 'determinate'
         }}
       />
 
@@ -168,14 +168,14 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
                 )}
               </IconButton>
             </InputAdornment>
-          ),
+          )
         }}
       />
 
       <PasswordMeter
         valueLength={formData.confirmPassword.length}
         LinearProgressProps={{
-          variant: 'determinate',
+          variant: 'determinate'
         }}
       />
 
@@ -185,7 +185,7 @@ function FormChangePsw({ userId }: IProps): React.ReactNode {
         </LoadingButton>
       </Box>
     </Box>
-  );
+  )
 }
 
-export default FormChangePsw;
+export default FormChangePsw

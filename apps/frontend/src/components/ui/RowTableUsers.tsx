@@ -1,36 +1,36 @@
-import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Delete'
 // import EditIcon from '@mui/icons-material/Edit';
-import KeyIcon from '@mui/icons-material/Key';
-import { IconButton, TableCell, TableRow } from '@mui/material';
-import { useMutation } from 'react-query';
-import { Link as RouterLink } from 'react-router-dom';
-import { User } from '../../features/users/usersSlice';
-import { IUserBase } from '../../interfaces/IUserBase';
-import { notify } from '../../libs/notify';
-import * as userService from '../../services/user.service';
+import KeyIcon from '@mui/icons-material/Key'
+import { IconButton, TableCell, TableRow } from '@mui/material'
+import { useMutation } from 'react-query'
+import { Link as RouterLink } from 'react-router-dom'
+import { User } from '../../features/users/usersSlice'
+import { IUserBase } from '../../interfaces/IUserBase'
+import { notify } from '../../libs/notify'
+import * as userService from '../../services/user.service'
 
 interface IProps {
-  user: User;
+  user: User
 }
 
 function RowTableUsers({
-  user: { id, email, role_name },
+  user: { id, email, role_name }
 }: IProps): React.ReactNode | undefined {
   const { isSuccess, mutate } = useMutation(userService.deleteUser, {
     onSuccess(data) {
-      notify(data.ok, { type: 'success', position: 'top-left' });
+      notify(data.ok, { type: 'success', position: 'top-left' })
     },
     onError(error: any) {
-      notify(error.response.data.error, { type: 'error' });
-    },
-  });
+      notify(error.response.data.error, { type: 'error' })
+    }
+  })
 
   const handleClick = (roleId: IUserBase['id']) => {
-    if (!confirm('Seguro(a) de eliminar ese usuario?')) return;
-    mutate(roleId);
-  };
+    if (!confirm('Seguro(a) de eliminar ese usuario?')) return
+    mutate(roleId)
+  }
 
-  if (isSuccess) return undefined;
+  if (isSuccess) return undefined
 
   return (
     <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -65,7 +65,7 @@ function RowTableUsers({
         </IconButton>
       </TableCell>
     </TableRow>
-  );
+  )
 }
 
-export default RowTableUsers;
+export default RowTableUsers

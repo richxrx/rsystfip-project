@@ -1,6 +1,6 @@
-import { Container, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import Reports from '../components/Reports';
+import { Container, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import Reports from '../components/Reports'
 
 function PageReportsPeople(): React.ReactNode {
   return (
@@ -22,7 +22,7 @@ function PageReportsPeople(): React.ReactNode {
         <Reports />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageReportsPeople;
+export default PageReportsPeople

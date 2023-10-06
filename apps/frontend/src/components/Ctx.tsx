@@ -1,7 +1,7 @@
-import { Box } from '@mui/material';
+import { Box } from '@mui/material'
 
 interface IProps {
-  ctxRef: React.RefObject<HTMLCanvasElement>;
+  ctxRef: React.RefObject<HTMLCanvasElement>
 }
 
 function Ctx({ ctxRef }: IProps): React.ReactNode {
@@ -11,7 +11,7 @@ function Ctx({ ctxRef }: IProps): React.ReactNode {
       ref={ctxRef}
       sx={{ width: 700, height: 400, marginY: 5 }}
     />
-  );
+  )
 }
 
-export default Ctx;
+export default Ctx

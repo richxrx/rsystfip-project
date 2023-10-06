@@ -1,4 +1,4 @@
-import { Typography } from '@mui/material';
+import { Typography } from '@mui/material'
 import {
   ArcElement,
   BarController,
@@ -13,22 +13,22 @@ import {
   PointElement,
   PolarAreaController,
   RadialLinearScale,
-  Tooltip,
-} from 'chart.js';
-import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels';
-import { useEffect, useRef, useState } from 'react';
-import { UseQueryResult, useQueries } from 'react-query';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
+  Tooltip
+} from 'chart.js'
+import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels'
+import { useEffect, useRef, useState } from 'react'
+import { UseQueryResult, useQueries } from 'react-query'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
 import {
   QueryData,
   setMostAgendatedAllTime,
-  setMostAgendatedOnRange,
-} from '../features/statistics/statisticsSlice';
-import { notify } from '../libs/notify';
-import * as statisticService from '../services/statistic.service';
-import DaterStatistics from './DaterStatistics';
-import StatisticsData from './StatisticsData';
+  setMostAgendatedOnRange
+} from '../features/statistics/statisticsSlice'
+import { notify } from '../libs/notify'
+import * as statisticService from '../services/statistic.service'
+import DaterStatistics from './DaterStatistics'
+import StatisticsData from './StatisticsData'
 
 ChartJS.register(
   ArcElement,
@@ -43,11 +43,11 @@ ChartJS.register(
   PointElement,
   PolarAreaController,
   RadialLinearScale,
-  Tooltip,
-);
+  Tooltip
+)
 
 interface IProps {
-  appointment_status: AppointmentStatus;
+  appointment_status: AppointmentStatus
 }
 
 function Statistics({ appointment_status }: IProps): React.ReactNode {
@@ -55,21 +55,21 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
     keyof ChartTypeRegistry,
     Array<string>,
     string
-  > | null>(null);
+  > | null>(null)
 
-  const ctxRef = useRef<HTMLCanvasElement>(null);
+  const ctxRef = useRef<HTMLCanvasElement>(null)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const queryDataState: QueryData = useAppSelector(
-    ({ statistics }) => statistics[appointment_status].queryData,
-  );
+    ({ statistics }) => statistics[appointment_status].queryData
+  )
 
   const labelText =
-    appointment_status === AppointmentStatus.daily ? 'diario' : 'programado';
+    appointment_status === AppointmentStatus.daily ? 'diario' : 'programado'
 
   const refreshChart = (labels: Array<string>, data: Array<string>) => {
-    if (chartJS) chartJS.destroy();
+    if (chartJS) chartJS.destroy()
 
     const newChart = new ChartJS(ctxRef.current as HTMLCanvasElement, {
       type: queryDataState.chart_type as keyof ChartTypeRegistry,
@@ -86,7 +86,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
               'rgba(255, 205, 86, 0.2)',
               'rgba(75, 192, 192, 0.2)',
               'rgba(153, 102, 255, 0.2)',
-              'rgba(201, 203, 207, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
             ],
             borderColor: [
               'rgb(54, 162, 235)',
@@ -95,13 +95,13 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
               'rgb(255, 205, 86)',
               'rgb(75, 192, 192)',
               'rgb(153, 102, 255)',
-              'rgb(201, 203, 207)',
+              'rgb(201, 203, 207)'
             ],
             borderWidth: 1,
             hoverOffset: 4,
-            tension: 0.1,
-          },
-        ],
+            tension: 0.1
+          }
+        ]
       },
       options: {
         responsive: true,
@@ -112,31 +112,31 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
             easing: 'linear',
             from: 1,
             to: 0,
-            loop: true,
-          },
+            loop: true
+          }
         },
         scales: {
           x: { beginAtZero: true },
-          y: { beginAtZero: true },
+          y: { beginAtZero: true }
         },
         plugins: {
           datalabels: {
             formatter(value: number, ctx: Context): string {
-              let sum = 0;
-              const data = ctx.dataset.data;
-              data.forEach((n) => (sum += Number(n)));
-              const percent = Math.round((value / sum) * 100);
-              return (isNaN(percent) ? 0 : percent).toString().concat('%');
+              let sum = 0
+              const data = ctx.dataset.data
+              data.forEach((n) => (sum += Number(n)))
+              const percent = Math.round((value / sum) * 100)
+              return (isNaN(percent) ? 0 : percent).toString().concat('%')
             },
             labels: { title: { font: { size: 20 } } },
-            align: 'end',
-          },
-        },
-      },
-    });
+            align: 'end'
+          }
+        }
+      }
+    })
 
-    setChartJS(newChart);
-  };
+    setChartJS(newChart)
+  }
 
   const queries = useQueries([
     {
@@ -144,67 +144,67 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
         'statistics',
         queryDataState.start_time,
         queryDataState.end_time,
-        queryDataState.chart_type,
+        queryDataState.chart_type
       ],
       queryFn: () =>
-        statisticService.getStatistics(appointment_status, queryDataState),
+        statisticService.getStatistics(appointment_status, queryDataState)
     },
     {
       queryKey: [
         'statisticsOnRange',
         queryDataState.start_time,
         queryDataState.end_time,
-        queryDataState.chart_type,
+        queryDataState.chart_type
       ],
       queryFn: () =>
         statisticService.getMostAgendatedOnRange(
           appointment_status,
-          queryDataState,
-        ),
+          queryDataState
+        )
     },
     {
       queryKey: [
         'statisticsAllTime',
         queryDataState.start_time,
         queryDataState.end_time,
-        queryDataState.chart_type,
+        queryDataState.chart_type
       ],
       queryFn: () =>
-        statisticService.getMostAgendatedAllTime(appointment_status),
-    },
-  ]);
+        statisticService.getMostAgendatedAllTime(appointment_status)
+    }
+  ])
 
   useEffect(
     () => {
       for (let i = 0; i < queries.length; i++) {
-        const { data, error } = queries[i] as UseQueryResult<any, any>;
+        const { data, error } = queries[i] as UseQueryResult<any, any>
 
         if (data) {
           if (i === 0) {
             const labels: Array<string> = data.map(
-              ({ category_name }: { category_name: string }) => category_name,
-            );
+              ({ category_name }: { category_name: string }) => category_name
+            )
             const dataset: Array<string> = data.map(
               ({ scheduling_count }: { scheduling_count: string }) =>
-                scheduling_count,
-            );
-            refreshChart(labels, dataset);
+                scheduling_count
+            )
+            refreshChart(labels, dataset)
           }
           if (i === 1) {
-            dispatch(setMostAgendatedOnRange([appointment_status, data]));
+            dispatch(setMostAgendatedOnRange([appointment_status, data]))
           }
           if (i === 2) {
-            dispatch(setMostAgendatedAllTime([appointment_status, data]));
+            dispatch(setMostAgendatedAllTime([appointment_status, data]))
           }
         }
 
         if (error) {
-          notify(error.response.data.error, { type: 'error' });
+          notify(error.response.data.error, { type: 'error' })
         }
       }
     },
-    queries.flatMap(({ data, error }) => [data, error]),
-  );
+    queries.flatMap(({ data, error }) => [data, error])
+  )
 
   return (
     <>
@@ -221,7 +221,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
 
       <StatisticsData appointment_status={appointment_status} ctxRef={ctxRef} />
     </>
-  );
+  )
 }
 
-export default Statistics;
+export default Statistics

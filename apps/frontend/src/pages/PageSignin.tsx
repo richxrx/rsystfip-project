@@ -1,6 +1,6 @@
-import { Box, Grid, Paper, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import FormSignin from './FormSignin';
+import { Box, Grid, Paper, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import FormSignin from './FormSignin'
 
 function PageSignin(): React.ReactNode {
   return (
@@ -23,7 +23,7 @@ function PageSignin(): React.ReactNode {
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center'
           }}
         />
 
@@ -43,7 +43,7 @@ function PageSignin(): React.ReactNode {
               mx: 4,
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
+              alignItems: 'center'
             }}
           >
             <Box
@@ -68,7 +68,7 @@ function PageSignin(): React.ReactNode {
         </Grid>
       </Grid>
     </>
-  );
+  )
 }
 
-export default PageSignin;
+export default PageSignin

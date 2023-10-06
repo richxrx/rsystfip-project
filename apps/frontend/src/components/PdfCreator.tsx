@@ -1,41 +1,41 @@
-import format from 'date-fns/format';
-import esLocale from 'date-fns/locale/es';
-import parseISO from 'date-fns/parseISO';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import { TDocumentDefinitions } from 'pdfmake/interfaces';
-import { useAppSelector } from '../app/hooks';
-import { People } from '../features/people/peopleSlice';
-import { QueryData, Reports } from '../features/reports/reportsSlice';
-import { ICounts } from '../interfaces/ICounts';
-import { createHeader, footer, myFonts, styles } from '../utils/pdfmake';
-import Downloader from './Downloader';
+import format from 'date-fns/format'
+import esLocale from 'date-fns/locale/es'
+import parseISO from 'date-fns/parseISO'
+import * as pdfMake from 'pdfmake/build/pdfmake'
+import { TDocumentDefinitions } from 'pdfmake/interfaces'
+import { useAppSelector } from '../app/hooks'
+import { People } from '../features/people/peopleSlice'
+import { QueryData, Reports } from '../features/reports/reportsSlice'
+import { ICounts } from '../interfaces/ICounts'
+import { createHeader, footer, myFonts, styles } from '../utils/pdfmake'
+import Downloader from './Downloader'
 
 function PdfCreator(): React.ReactNode {
   const pngBase64State: string = useAppSelector(
-    ({ reports }) => reports.pngBase64,
-  );
+    ({ reports }) => reports.pngBase64
+  )
   const reportsState: Array<Reports> = useAppSelector(
-    ({ reports }) => reports.reports,
-  );
+    ({ reports }) => reports.reports
+  )
   const queryDataState: QueryData = useAppSelector(
-    ({ reports }) => reports.queryData,
-  );
+    ({ reports }) => reports.queryData
+  )
   const peopleState: Array<People> = useAppSelector(
-    ({ people }) => people.people,
-  );
+    ({ people }) => people.people
+  )
   const reportsCountOnRangeState: Array<ICounts> = useAppSelector(
-    ({ reports }) => reports.reportsCountOnRange,
-  );
+    ({ reports }) => reports.reportsCountOnRange
+  )
   const reportsCountAllTimeState: Array<ICounts> = useAppSelector(
-    ({ reports }) => reports.reportsCountAllTime,
-  );
+    ({ reports }) => reports.reportsCountAllTime
+  )
 
   const documentDefinition: TDocumentDefinitions = {
     pageMargins: [28, 90],
     header: createHeader(
       pngBase64State,
       queryDataState.start_time,
-      queryDataState.end_time,
+      queryDataState.end_time
     ),
     footer,
     content: [
@@ -43,7 +43,7 @@ function PdfCreator(): React.ReactNode {
         text: `Total personas agendadas: (${peopleState.length})`,
         style: 'header',
         alignment: 'center',
-        marginBottom: 30,
+        marginBottom: 30
       },
       peopleState.length !== 0
         ? {
@@ -57,24 +57,24 @@ function PdfCreator(): React.ReactNode {
                 [
                   {
                     text: 'No.',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Nombre completo',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Categoría',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Facultad',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Asunto visita rectoría',
-                    style: 'tableHeader',
-                  },
+                    style: 'tableHeader'
+                  }
                 ],
                 ...peopleState.map(
                   ({
@@ -83,17 +83,17 @@ function PdfCreator(): React.ReactNode {
                     last_name,
                     category_name,
                     faculty_name,
-                    visit_subject,
+                    visit_subject
                   }) => [
                     id,
                     `${first_name} ${last_name}`,
                     category_name,
                     faculty_name,
-                    visit_subject,
-                  ],
-                ),
-              ],
-            },
+                    visit_subject
+                  ]
+                )
+              ]
+            }
           }
         : [],
       {
@@ -101,7 +101,7 @@ function PdfCreator(): React.ReactNode {
         style: 'header',
         alignment: 'center',
         marginBottom: 30,
-        pageBreak: 'before',
+        pageBreak: 'before'
       },
       reportsState.length !== 0
         ? {
@@ -115,24 +115,24 @@ function PdfCreator(): React.ReactNode {
                 [
                   {
                     text: 'Nombre completo',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Fecha y hora agendamiento',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Agendamiento diario',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Agendamiento programado',
-                    style: 'tableHeader',
+                    style: 'tableHeader'
                   },
                   {
                     text: 'Cetegoría persona',
-                    style: 'tableHeader',
-                  },
+                    style: 'tableHeader'
+                  }
                 ],
                 ...reportsState.map(
                   ({
@@ -141,19 +141,19 @@ function PdfCreator(): React.ReactNode {
                     start_time,
                     scheduling_count,
                     daily_count,
-                    category_name,
+                    category_name
                   }) => [
                     `${first_name} ${last_name}`,
                     format(parseISO(start_time), "MMM d, yyyy 'a las' h:mm a", {
-                      locale: esLocale,
+                      locale: esLocale
                     }),
                     scheduling_count,
                     daily_count,
-                    category_name,
-                  ],
-                ),
-              ],
-            },
+                    category_name
+                  ]
+                )
+              ]
+            }
           }
         : [],
       {
@@ -161,7 +161,7 @@ function PdfCreator(): React.ReactNode {
         style: 'header',
         alignment: 'center',
         marginBottom: 30,
-        pageBreak: reportsState.length !== 0 ? 'before' : undefined,
+        pageBreak: reportsState.length !== 0 ? 'before' : undefined
       },
       {
         columns: [
@@ -171,7 +171,7 @@ function PdfCreator(): React.ReactNode {
             }`,
             style: 'subheader',
             alignment: 'center',
-            marginBottom: 10,
+            marginBottom: 10
           },
           {
             text: `Cantidad total${
@@ -179,9 +179,9 @@ function PdfCreator(): React.ReactNode {
             }`,
             style: 'subheader',
             alignment: 'center',
-            marginBottom: 10,
-          },
-        ],
+            marginBottom: 10
+          }
+        ]
       },
       {
         columns: [
@@ -198,18 +198,18 @@ function PdfCreator(): React.ReactNode {
                     [
                       {
                         text: 'Categoría de persona',
-                        style: 'tableHeader',
+                        style: 'tableHeader'
                       },
                       {
                         text: 'Cantidad personas',
-                        style: 'tableHeader',
-                      },
+                        style: 'tableHeader'
+                      }
                     ],
                     ...reportsCountOnRangeState.map(
-                      ({ category_name, counts }) => [category_name, counts],
-                    ),
-                  ],
-                },
+                      ({ category_name, counts }) => [category_name, counts]
+                    )
+                  ]
+                }
               }
             : [],
           reportsCountAllTimeState.length !== 0
@@ -225,33 +225,33 @@ function PdfCreator(): React.ReactNode {
                     [
                       {
                         text: 'Categoría de persona',
-                        style: 'tableHeader',
+                        style: 'tableHeader'
                       },
                       {
                         text: 'Cantidad personas',
-                        style: 'tableHeader',
-                      },
+                        style: 'tableHeader'
+                      }
                     ],
                     ...reportsCountAllTimeState.map(
-                      ({ category_name, counts }) => [category_name, counts],
-                    ),
-                  ],
-                },
+                      ({ category_name, counts }) => [category_name, counts]
+                    )
+                  ]
+                }
               }
-            : [],
-        ],
-      },
+            : []
+        ]
+      }
     ],
-    styles,
-  };
+    styles
+  }
 
   const pdf: pdfMake.TCreatedPdf = pdfMake.createPdf(
     documentDefinition,
     undefined,
-    myFonts,
-  );
+    myFonts
+  )
 
-  return <Downloader pdf={pdf} />;
+  return <Downloader pdf={pdf} />
 }
 
-export default PdfCreator;
+export default PdfCreator

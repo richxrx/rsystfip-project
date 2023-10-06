@@ -1,5 +1,5 @@
-import { Box, Container, Typography } from '@mui/material';
-import GoHome from './ui/GoHome';
+import { Box, Container, Typography } from '@mui/material'
+import GoHome from './ui/GoHome'
 
 function ResetTokenInvalid(): React.ReactNode {
   return (
@@ -10,7 +10,7 @@ function ResetTokenInvalid(): React.ReactNode {
             marginTop: 10,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Box
@@ -33,7 +33,7 @@ function ResetTokenInvalid(): React.ReactNode {
         </Box>
       </Container>
     </>
-  );
+  )
 }
 
-export default ResetTokenInvalid;
+export default ResetTokenInvalid

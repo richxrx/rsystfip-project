@@ -1,77 +1,77 @@
-import { Box, Grid, SelectChangeEvent, TextField } from '@mui/material';
-import { useEffect, useRef } from 'react';
-import { useMutation, useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { Box, Grid, SelectChangeEvent, TextField } from '@mui/material'
+import { useEffect, useRef } from 'react'
+import { useMutation, useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   AppointmentStatus,
   Deans,
   FormDataState,
-  setFormData,
-} from '../features/appointments/appointmentsSlice';
-import { registerAChange } from '../features/calendar/calendarSlice';
-import { notify } from '../libs/notify';
-import * as deanService from '../services/dean.service';
-import * as peopleService from '../services/people.service';
-import * as scheduleService from '../services/schedule.service';
-import { THandleChangeITS } from '../types/THandleChanges';
-import { THandleSubmit } from '../types/THandleSubmits';
-import FooterFormPeople from './FooterFormPeople';
-import ProtectedElement from './ui/ProtectedElement';
-import SelectDocument from './SelectDocument';
-import SelectFaculties from './SelectFaculties';
-import SelectPerson from './SelectPerson';
-import { AxiosError } from 'axios';
+  setFormData
+} from '../features/appointments/appointmentsSlice'
+import { registerAChange } from '../features/calendar/calendarSlice'
+import { notify } from '../libs/notify'
+import * as deanService from '../services/dean.service'
+import * as peopleService from '../services/people.service'
+import * as scheduleService from '../services/schedule.service'
+import { THandleChangeITS } from '../types/THandleChanges'
+import { THandleSubmit } from '../types/THandleSubmits'
+import FooterFormPeople from './FooterFormPeople'
+import ProtectedElement from './ui/ProtectedElement'
+import SelectDocument from './SelectDocument'
+import SelectFaculties from './SelectFaculties'
+import SelectPerson from './SelectPerson'
+import { AxiosError } from 'axios'
 
 export enum propsAction {
   add = 'add',
   edit = 'edit',
-  schedule = 'schedule',
+  schedule = 'schedule'
 }
 
 interface IProps {
-  action: propsAction;
-  closeModalScheduling?: () => void;
-  changeIsLoadingScheduleAction?: (value: boolean) => void;
+  action: propsAction
+  closeModalScheduling?: () => void
+  changeIsLoadingScheduleAction?: (value: boolean) => void
 }
 
-export type actionFormSchedule = IProps['action'];
+export type actionFormSchedule = IProps['action']
 
 function FormSchedulePeople({
   action,
   closeModalScheduling,
-  changeIsLoadingScheduleAction,
+  changeIsLoadingScheduleAction
 }: IProps): React.ReactNode {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams<{ id: string }>()
 
-  const facultieSelectRef = useRef<HTMLSelectElement>(null);
+  const facultieSelectRef = useRef<HTMLSelectElement>(null)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const formDataState: FormDataState = useAppSelector(
-    ({ appointments: { formData } }) => formData[action],
-  );
+    ({ appointments: { formData } }) => formData[action]
+  )
 
   const deansState: Array<Deans> = useAppSelector(
-    ({ appointments }) => appointments.deans,
-  );
+    ({ appointments }) => appointments.deans
+  )
 
   const mutationEditPerson = useMutation(peopleService.editPeople, {
     onSuccess(data) {
       notify(data.ok, {
         type: 'success',
-        position: 'top-left',
-      });
+        position: 'top-left'
+      })
 
-      dispatch(setFormData([action]));
+      dispatch(setFormData([action]))
     },
     onError(error: any) {
-      notify(error.response.data.error, { type: 'error' });
-    },
-  });
-  const mutationSavePeople = useMutation(peopleService.savePeople);
-  const mutationSchedule = useMutation(scheduleService.saveSchedule);
-  const mutationSaveDean = useMutation(deanService.saveDean);
+      notify(error.response.data.error, { type: 'error' })
+    }
+  })
+  const mutationSavePeople = useMutation(peopleService.savePeople)
+  const mutationSchedule = useMutation(scheduleService.saveSchedule)
+  const mutationSaveDean = useMutation(deanService.saveDean)
 
   const editPerson = () => {
     const payload = {
@@ -83,14 +83,14 @@ function FormSchedulePeople({
       document_number: formDataState.document_number,
       faculty_id: formDataState.faculty_id,
       email: formDataState.email,
-      phone_number: formDataState.phone_number,
-    };
+      phone_number: formDataState.phone_number
+    }
 
-    mutationEditPerson.mutate(payload);
-  };
+    mutationEditPerson.mutate(payload)
+  }
 
   const schedulePerson = async (
-    closeModalScheduling?: IProps['closeModalScheduling'],
+    closeModalScheduling?: IProps['closeModalScheduling']
   ): Promise<void> => {
     const payload = {
       category_id: formDataState.category_id,
@@ -105,27 +105,27 @@ function FormSchedulePeople({
       color: formDataState.color,
       start_time: formDataState.start_time,
       end_time: formDataState.end_time,
-      status: formDataState.status,
-    };
+      status: formDataState.status
+    }
 
     try {
-      const resSavePeople = await mutationSavePeople.mutateAsync(payload);
+      const resSavePeople = await mutationSavePeople.mutateAsync(payload)
       notify(resSavePeople.ok, {
         type: 'info',
-        position: 'top-left',
-      });
+        position: 'top-left'
+      })
 
       if (payload.category_id === '4') {
         const resDean = await mutationSaveDean.mutateAsync({
           id: payload.document_number,
           first_name: payload.first_name,
           last_name: payload.last_name,
-          faculty_id: payload.faculty_id,
-        });
+          faculty_id: payload.faculty_id
+        })
         notify(resDean.ok, {
           type: 'info',
-          position: 'top-left',
-        });
+          position: 'top-left'
+        })
       }
 
       const resSchedule = await mutationSchedule.mutateAsync({
@@ -134,31 +134,31 @@ function FormSchedulePeople({
         end_time: payload.end_time || undefined,
         visit_subject: payload.visit_subject,
         status: payload.status,
-        color: payload.color,
-      });
+        color: payload.color
+      })
       notify(resSchedule.ok, {
         type: 'success',
-        position: 'top-left',
-      });
+        position: 'top-left'
+      })
 
       // Do the dispatch at redux state
-      dispatch(setFormData([action]));
+      dispatch(setFormData([action]))
 
       // Finish the function if status isn't scheduled
       if (
         formDataState.status !== AppointmentStatus.scheduled ||
         !closeModalScheduling
       )
-        return;
+        return
 
-      dispatch(registerAChange());
-      closeModalScheduling();
+      dispatch(registerAChange())
+      closeModalScheduling()
     } catch (error) {
       if (error instanceof AxiosError) {
-        notify(error.response?.data.error, { type: 'error' });
+        notify(error.response?.data.error, { type: 'error' })
       }
     }
-  };
+  }
 
   const executionsToSubmit = {
     [propsAction.add]: () => {
@@ -167,27 +167,27 @@ function FormSchedulePeople({
           action,
           {
             ...formDataState,
-            status: AppointmentStatus.daily,
-          },
-        ]),
-      );
+            status: AppointmentStatus.daily
+          }
+        ])
+      )
 
-      return schedulePerson();
+      return schedulePerson()
     },
     [propsAction.edit]: () => editPerson(),
-    [propsAction.schedule]: () => schedulePerson(closeModalScheduling),
-  };
+    [propsAction.schedule]: () => schedulePerson(closeModalScheduling)
+  }
 
   const handleSubmit = (e: THandleSubmit) => {
-    e.preventDefault();
-    executionsToSubmit[action]();
-  };
+    e.preventDefault()
+    executionsToSubmit[action]()
+  }
 
   const personData = useQuery<any, any>(
     ['personData', id],
     () => peopleService.getData(id!),
-    { enabled: Boolean(id) },
-  );
+    { enabled: Boolean(id) }
+  )
 
   const handleChange = (e: THandleChangeITS | SelectChangeEvent) => {
     dispatch(
@@ -195,11 +195,11 @@ function FormSchedulePeople({
         action,
         {
           ...formDataState,
-          [e.target.name]: e.target.value,
-        },
-      ]),
-    );
-  };
+          [e.target.name]: e.target.value
+        }
+      ])
+    )
+  }
 
   const autocompleteDeansData = () => {
     if (
@@ -207,12 +207,12 @@ function FormSchedulePeople({
       formDataState.category_id !== '4' ||
       action === propsAction.edit
     )
-      return;
+      return
 
     for (let i = 0; i < deansState.length; i++) {
-      const { id, first_name, last_name, faculty_id } = deansState[i];
+      const { id, first_name, last_name, faculty_id } = deansState[i]
 
-      if (id !== formDataState.document_number) continue;
+      if (id !== formDataState.document_number) continue
 
       dispatch(
         setFormData([
@@ -223,28 +223,28 @@ function FormSchedulePeople({
             first_name,
             last_name,
             faculty_id: faculty_id.toString(),
-            disabledAfterAutocomplete: true,
-          },
-        ]),
-      );
+            disabledAfterAutocomplete: true
+          }
+        ])
+      )
 
       if (facultieSelectRef.current) {
-        facultieSelectRef.current.className = 'form-control border-0 bg-white';
+        facultieSelectRef.current.className = 'form-control border-0 bg-white'
       }
 
       notify('The data deans has been auto-completed', {
         type: 'info',
-        position: 'top-left',
-      });
+        position: 'top-left'
+      })
     }
-  };
+  }
 
   useEffect(() => {
-    autocompleteDeansData();
-  }, [formDataState.document_number]);
+    autocompleteDeansData()
+  }, [formDataState.document_number])
 
   useEffect(() => {
-    const { data, error } = personData;
+    const { data, error } = personData
     if (data)
       dispatch(
         setFormData([
@@ -258,12 +258,12 @@ function FormSchedulePeople({
             last_name: data.last_name,
             document_number: data.document_number,
             phone_number: data.phone_number,
-            email: data.email,
-          },
-        ]),
-      );
-    if (error) notify(error.response.data.error, { type: 'error' });
-  }, [personData.data, personData.error]);
+            email: data.email
+          }
+        ])
+      )
+    if (error) notify(error.response.data.error, { type: 'error' })
+  }, [personData.data, personData.error])
 
   useEffect(() => {
     if (changeIsLoadingScheduleAction) {
@@ -271,15 +271,15 @@ function FormSchedulePeople({
         mutationEditPerson.isLoading ||
           mutationSavePeople.isLoading ||
           mutationSchedule.isLoading ||
-          mutationSaveDean.isLoading,
-      );
+          mutationSaveDean.isLoading
+      )
     }
   }, [
     mutationEditPerson.isLoading,
     mutationSavePeople.isLoading,
     mutationSchedule.isLoading,
-    mutationSaveDean.isLoading,
-  ]);
+    mutationSaveDean.isLoading
+  ])
 
   return (
     <Box component="form" onSubmit={handleSubmit} id="formSchedule">
@@ -455,7 +455,7 @@ function FormSchedulePeople({
         />
       </ProtectedElement>
     </Box>
-  );
+  )
 }
 
-export default FormSchedulePeople;
+export default FormSchedulePeople

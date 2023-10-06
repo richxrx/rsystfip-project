@@ -1,6 +1,6 @@
-import { Box, Container, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import GoHome from '../components/ui/GoHome';
+import { Box, Container, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import GoHome from '../components/ui/GoHome'
 
 function PageNotFound(): React.ReactNode {
   return (
@@ -15,7 +15,7 @@ function PageNotFound(): React.ReactNode {
             marginTop: 10,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Box
@@ -39,7 +39,7 @@ function PageNotFound(): React.ReactNode {
         </Box>
       </Container>
     </>
-  );
+  )
 }
 
-export default PageNotFound;
+export default PageNotFound

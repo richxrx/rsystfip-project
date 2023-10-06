@@ -3,33 +3,33 @@ import {
   LinearProgressProps,
   Typography,
   linearProgressClasses,
-  styled,
-} from '@mui/material';
+  styled
+} from '@mui/material'
 
 interface IProps {
-  valueLength: number;
-  LinearProgressProps: LinearProgressProps;
+  valueLength: number
+  LinearProgressProps: LinearProgressProps
 }
 
 function PasswordMeter({
   valueLength,
-  LinearProgressProps,
+  LinearProgressProps
 }: IProps): React.ReactNode {
-  const minLength = 8;
-  const hue = Math.min(valueLength * 10, 120);
+  const minLength = 8
+  const hue = Math.min(valueLength * 10, 120)
 
   const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 5,
     borderRadius: 5,
     [`&.${linearProgressClasses.colorPrimary}`]: {
       backgroundColor:
-        theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+        theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800]
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor: `hsl(${hue} 80% 50%)`,
-    },
-  }));
+      backgroundColor: `hsl(${hue} 80% 50%)`
+    }
+  }))
 
   return (
     <>
@@ -48,7 +48,7 @@ function PasswordMeter({
         {valueLength >= 10 && 'Very strong'}
       </Typography>
     </>
-  );
+  )
 }
 
-export default PasswordMeter;
+export default PasswordMeter

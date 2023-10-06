@@ -1,8 +1,8 @@
-import AddIcon from '@mui/icons-material/Add';
-import { Container, Fab, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import { Link as RouterLink } from 'react-router-dom';
-import TableUsers from '../components/TableUsers';
+import AddIcon from '@mui/icons-material/Add'
+import { Container, Fab, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import { Link as RouterLink } from 'react-router-dom'
+import TableUsers from '../components/TableUsers'
 
 function PageUsers(): React.ReactNode {
   return (
@@ -35,7 +35,7 @@ function PageUsers(): React.ReactNode {
         <TableUsers />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageUsers;
+export default PageUsers

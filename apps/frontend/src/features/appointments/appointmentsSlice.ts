@@ -1,37 +1,37 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { IKeyBool } from '../../interfaces/IKeyBool';
-import { updateFormDataByAction } from './functions';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { IKeyBool } from '../../interfaces/IKeyBool'
+import { updateFormDataByAction } from './functions'
 
 export enum AppointmentStatus {
   daily = 'daily',
   scheduled = 'scheduled',
-  cancelled = 'cancelled',
+  cancelled = 'cancelled'
 }
 
 export interface FormDataState {
-  id: string;
-  category_id?: string;
-  document_number?: string;
-  document_id?: string;
-  first_name?: string;
-  last_name?: string;
-  phone_number?: string;
-  email?: string;
-  faculty_id?: string;
-  visit_subject?: string;
-  color?: string;
-  start_time?: string;
-  end_time?: string;
-  status?: AppointmentStatus;
-  disabledAll?: boolean;
-  disabledAfterAutocomplete?: boolean;
+  id: string
+  category_id?: string
+  document_number?: string
+  document_id?: string
+  first_name?: string
+  last_name?: string
+  phone_number?: string
+  email?: string
+  faculty_id?: string
+  visit_subject?: string
+  color?: string
+  start_time?: string
+  end_time?: string
+  status?: AppointmentStatus
+  disabledAll?: boolean
+  disabledAfterAutocomplete?: boolean
 }
 
 interface FormData {
-  add: FormDataState;
-  edit: FormDataState;
-  schedule: FormDataState;
-  [action: string]: FormDataState;
+  add: FormDataState
+  edit: FormDataState
+  schedule: FormDataState
+  [action: string]: FormDataState
 }
 
 export const formDataInitialState: FormDataState = {
@@ -50,35 +50,35 @@ export const formDataInitialState: FormDataState = {
   end_time: '',
   status: AppointmentStatus.daily,
   disabledAll: true,
-  disabledAfterAutocomplete: false,
-};
+  disabledAfterAutocomplete: false
+}
 
 export interface Deans {
-  id: string;
-  first_name: string;
-  last_name: string;
-  faculty_id: string;
+  id: string
+  first_name: string
+  last_name: string
+  faculty_id: string
 }
 
 export interface AppointmentState {
-  formData: FormData;
-  deans: Array<Deans>;
+  formData: FormData
+  deans: Array<Deans>
 }
 
 export const validFormDataAction: IKeyBool = {
   add: true,
   edit: true,
-  schedule: true,
-};
+  schedule: true
+}
 
 const initialState: AppointmentState = {
   formData: {
     add: formDataInitialState,
     edit: formDataInitialState,
-    schedule: formDataInitialState,
+    schedule: formDataInitialState
   },
-  deans: [],
-};
+  deans: []
+}
 
 const appointmentsSlice = createSlice({
   name: 'appointments',
@@ -86,23 +86,23 @@ const appointmentsSlice = createSlice({
   reducers: {
     setFormData(
       state,
-      { payload: [action, formData] }: PayloadAction<[string, FormDataState?]>,
+      { payload: [action, formData] }: PayloadAction<[string, FormDataState?]>
     ): AppointmentState {
-      return updateFormDataByAction(state, action, formData);
+      return updateFormDataByAction(state, action, formData)
     },
     setDeans(
       state,
-      { payload }: PayloadAction<Array<Deans>>,
+      { payload }: PayloadAction<Array<Deans>>
     ): AppointmentState {
-      return { ...state, deans: payload };
+      return { ...state, deans: payload }
     },
     resetAllFormDataProgramming(state): AppointmentState {
-      return { ...state, formData: { ...initialState.formData } };
-    },
-  },
-});
+      return { ...state, formData: { ...initialState.formData } }
+    }
+  }
+})
 
 export const { setFormData, setDeans, resetAllFormDataProgramming } =
-  appointmentsSlice.actions;
+  appointmentsSlice.actions
 
-export default appointmentsSlice.reducer;
+export default appointmentsSlice.reducer

@@ -1,6 +1,6 @@
-import { Container, Typography } from '@mui/material';
-import { Helmet } from 'react-helmet';
-import TableHistoryPeople from '../components/TableHistoryPeople';
+import { Container, Typography } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import TableHistoryPeople from '../components/TableHistoryPeople'
 
 function PageHistoryPeople(): React.ReactNode {
   return (
@@ -22,7 +22,7 @@ function PageHistoryPeople(): React.ReactNode {
         <TableHistoryPeople />
       </Container>
     </>
-  );
+  )
 }
 
-export default PageHistoryPeople;
+export default PageHistoryPeople

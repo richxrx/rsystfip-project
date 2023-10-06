@@ -1,4 +1,4 @@
-import { Backdrop, CircularProgress } from '@mui/material';
+import { Backdrop, CircularProgress } from '@mui/material'
 
 function Loader(): React.ReactNode {
   return (
@@ -8,7 +8,7 @@ function Loader(): React.ReactNode {
     >
       <CircularProgress color="inherit" />
     </Backdrop>
-  );
+  )
 }
 
-export default Loader;
+export default Loader

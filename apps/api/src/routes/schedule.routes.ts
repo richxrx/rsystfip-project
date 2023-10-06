@@ -1,13 +1,13 @@
-import { Router } from 'express';
-import * as scheduleCtrl from '../controllers/schedule.controller';
+import { Router } from 'express'
+import * as scheduleCtrl from '../controllers/schedule.controller'
 
-const router = Router();
+const router = Router()
 
 router
   .route('/')
   .get(scheduleCtrl.getSchedule)
-  .post(scheduleCtrl.createSchedule);
+  .post(scheduleCtrl.createSchedule)
 
-router.route('/:id').patch(scheduleCtrl.cancellSchedule);
+router.route('/:id').patch(scheduleCtrl.cancellSchedule)
 
-export default router;
+export default router

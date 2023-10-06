@@ -1,24 +1,24 @@
-import CheckIcon from '@mui/icons-material/Check';
-import ErrorIcon from '@mui/icons-material/Error';
-import MailIcon from '@mui/icons-material/Mail';
+import CheckIcon from '@mui/icons-material/Check'
+import ErrorIcon from '@mui/icons-material/Error'
+import MailIcon from '@mui/icons-material/Mail'
 import {
   Box,
   CircularProgress,
   Fab,
   InputAdornment,
-  TextField,
-} from '@mui/material';
-import { green } from '@mui/material/colors';
-import React, { useState } from 'react';
-import { useMutation } from 'react-query';
-import { notify } from '../libs/notify';
-import * as accountService from '../services/account.service';
-import { THandleChangeI } from '../types/THandleChanges';
-import { THandleSubmit } from '../types/THandleSubmits';
+  TextField
+} from '@mui/material'
+import { green } from '@mui/material/colors'
+import React, { useState } from 'react'
+import { useMutation } from 'react-query'
+import { notify } from '../libs/notify'
+import * as accountService from '../services/account.service'
+import { THandleChangeI } from '../types/THandleChanges'
+import { THandleSubmit } from '../types/THandleSubmits'
 
 function FormRecoveryPsw(): React.ReactNode {
-  const formDataInitialState = { email: '' };
-  const [formData, setFormData] = useState(formDataInitialState);
+  const formDataInitialState = { email: '' }
+  const [formData, setFormData] = useState(formDataInitialState)
 
   const { mutate, isLoading, isSuccess, isError } = useMutation(
     accountService.sendJwtForRecoverPsw,
@@ -26,29 +26,29 @@ function FormRecoveryPsw(): React.ReactNode {
       onSuccess() {
         notify(
           `We will send you an email with instructions to reset your password. The link sended expires in 3 minutes.`,
-          { type: 'success' },
-        );
+          { type: 'success' }
+        )
 
-        setFormData(formDataInitialState);
+        setFormData(formDataInitialState)
       },
       onError(error: any) {
-        notify(error.response.data.error, { type: 'error' });
-      },
-    },
-  );
+        notify(error.response.data.error, { type: 'error' })
+      }
+    }
+  )
 
   const handleSubmit = (e: THandleSubmit) => {
-    e.preventDefault();
-    const payload = formData;
-    mutate(payload.email);
-  };
+    e.preventDefault()
+    const payload = formData
+    mutate(payload.email)
+  }
 
   const handleChange = (e: THandleChangeI) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
@@ -96,18 +96,18 @@ function FormRecoveryPsw(): React.ReactNode {
                       position: 'absolute',
                       top: -6,
                       left: -6,
-                      zIndex: 1,
+                      zIndex: 1
                     }}
                   />
                 )}
               </Box>
             </InputAdornment>
-          ),
+          )
         }}
         autoFocus
       />
     </Box>
-  );
+  )
 }
 
-export default FormRecoveryPsw;
+export default FormRecoveryPsw

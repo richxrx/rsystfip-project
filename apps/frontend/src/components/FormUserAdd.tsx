@@ -1,7 +1,7 @@
-import KeyIcon from '@mui/icons-material/Key';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
-import LoadingButton from '@mui/lab/LoadingButton';
+import KeyIcon from '@mui/icons-material/Key'
+import VisibilityIcon from '@mui/icons-material/Visibility'
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
+import LoadingButton from '@mui/lab/LoadingButton'
 import {
   Box,
   FormControl,
@@ -12,85 +12,85 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  TextField,
-} from '@mui/material';
-import { useEffect } from 'react';
-import { useMutation, useQuery } from 'react-query';
-import { v4 } from 'uuid';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setDocuments } from '../features/resources/resourcesSlice';
+  TextField
+} from '@mui/material'
+import { useEffect } from 'react'
+import { useMutation, useQuery } from 'react-query'
+import { v4 } from 'uuid'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { setDocuments } from '../features/resources/resourcesSlice'
 import {
   FormData,
   Temps,
   resetFormDataAdmin,
   setFormData,
-  setTemps,
-} from '../features/users/usersSlice';
-import { IDocument } from '../interfaces/IResources';
-import { notify } from '../libs/notify';
-import * as documentService from '../services/document.service';
-import * as userService from '../services/user.service';
-import { THandleChangeITS } from '../types/THandleChanges';
-import { THandleSubmit } from '../types/THandleSubmits';
-import PasswordMeter from './ui/PasswordMeter';
+  setTemps
+} from '../features/users/usersSlice'
+import { IDocument } from '../interfaces/IResources'
+import { notify } from '../libs/notify'
+import * as documentService from '../services/document.service'
+import * as userService from '../services/user.service'
+import { THandleChangeITS } from '../types/THandleChanges'
+import { THandleSubmit } from '../types/THandleSubmits'
+import PasswordMeter from './ui/PasswordMeter'
 
 function FormUserAdd(): React.ReactNode {
-  const formDataState: FormData = useAppSelector(({ users }) => users.formData);
-  const tempsData: Temps = useAppSelector(({ users }) => users.temps);
+  const formDataState: FormData = useAppSelector(({ users }) => users.formData)
+  const tempsData: Temps = useAppSelector(({ users }) => users.temps)
   const documentsState: Array<IDocument> = useAppSelector(
-    ({ resources }) => resources.documents,
-  );
+    ({ resources }) => resources.documents
+  )
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const handleClickTogglePassword = () => {
     dispatch(
       setTemps({
         ...tempsData,
-        passwordVisible: !tempsData.passwordVisible,
-      }),
-    );
-  };
+        passwordVisible: !tempsData.passwordVisible
+      })
+    )
+  }
 
   const handleChange = (e: THandleChangeITS | SelectChangeEvent) => {
     dispatch(
       setFormData({
         ...formDataState,
-        [e.target.name]: e.target.value,
-      }),
-    );
-  };
+        [e.target.name]: e.target.value
+      })
+    )
+  }
 
   const { mutate, isLoading } = useMutation(userService.saveUser, {
     onSuccess(data) {
       notify(data.ok, {
         type: 'success',
-        position: 'top-left',
-      });
+        position: 'top-left'
+      })
 
-      dispatch(resetFormDataAdmin());
+      dispatch(resetFormDataAdmin())
     },
     onError(error: any) {
-      notify(error.response.data.error, { type: 'error' });
-    },
-  });
+      notify(error.response.data.error, { type: 'error' })
+    }
+  })
 
   const handleSubmit = (e: THandleSubmit) => {
-    e.preventDefault();
-    const payload = formDataState;
-    mutate(payload);
-  };
+    e.preventDefault()
+    const payload = formDataState
+    mutate(payload)
+  }
 
   const { data, error } = useQuery<[], any>(
     'documents',
-    documentService.getDocuments,
-  );
+    documentService.getDocuments
+  )
 
   useEffect(() => {
-    if (data) dispatch(setDocuments(data));
+    if (data) dispatch(setDocuments(data))
 
-    if (error) notify(error.response.data.error, { type: 'error' });
-  }, [data, error]);
+    if (error) notify(error.response.data.error, { type: 'error' })
+  }, [data, error])
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
@@ -246,14 +246,14 @@ function FormUserAdd(): React.ReactNode {
                     )}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
 
           <PasswordMeter
             valueLength={formDataState.password.length}
             LinearProgressProps={{
-              variant: 'determinate',
+              variant: 'determinate'
             }}
           />
         </Grid>
@@ -287,14 +287,14 @@ function FormUserAdd(): React.ReactNode {
                     )}
                   </IconButton>
                 </InputAdornment>
-              ),
+              )
             }}
           />
 
           <PasswordMeter
             valueLength={formDataState.password2.length}
             LinearProgressProps={{
-              variant: 'determinate',
+              variant: 'determinate'
             }}
           />
         </Grid>
@@ -306,7 +306,7 @@ function FormUserAdd(): React.ReactNode {
         </LoadingButton>
       </Box>
     </Box>
-  );
+  )
 }
 
-export default FormUserAdd;
+export default FormUserAdd

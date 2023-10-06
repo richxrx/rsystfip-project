@@ -1,31 +1,31 @@
-import { Paper, Typography } from '@mui/material';
-import { useEffect } from 'react';
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setTempDataForChangePsw } from '../features/temp/tempSlice';
-import { IUserBase } from '../interfaces/IUserBase';
-import { notify } from '../libs/notify';
-import * as userService from '../services/user.service';
-import FormChangePsw from './FormChangePsw';
+import { Paper, Typography } from '@mui/material'
+import { useEffect } from 'react'
+import { useQuery } from 'react-query'
+import { useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
+import { setTempDataForChangePsw } from '../features/temp/tempSlice'
+import { IUserBase } from '../interfaces/IUserBase'
+import { notify } from '../libs/notify'
+import * as userService from '../services/user.service'
+import FormChangePsw from './FormChangePsw'
 
 function FetcherDataForChangePsw(): React.ReactNode {
-  const { role } = useParams<{ role: string }>();
+  const { role } = useParams<{ role: string }>()
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   const tempDataStateForChangePsw: IUserBase = useAppSelector(
-    ({ temp }) => temp.tempDataForChangePsw,
-  );
+    ({ temp }) => temp.tempDataForChangePsw
+  )
 
   const { data, error } = useQuery<any, any>(['userData', role], () =>
-    userService.getData(role!),
-  );
+    userService.getData(role!)
+  )
 
   useEffect(() => {
-    if (data) dispatch(setTempDataForChangePsw(data));
-    if (error) notify(error.response.data.error, { type: 'error' });
-  }, [data, error]);
+    if (data) dispatch(setTempDataForChangePsw(data))
+    if (error) notify(error.response.data.error, { type: 'error' })
+  }, [data, error])
 
   return (
     <>
@@ -37,7 +37,7 @@ function FetcherDataForChangePsw(): React.ReactNode {
         <FormChangePsw userId={tempDataStateForChangePsw.id} />
       </Paper>
     </>
-  );
+  )
 }
 
-export default FetcherDataForChangePsw;
+export default FetcherDataForChangePsw

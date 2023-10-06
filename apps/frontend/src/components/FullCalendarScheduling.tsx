@@ -1,71 +1,71 @@
-import { EventSourceInput, PluginDef } from '@fullcalendar/core';
-import esLocale from '@fullcalendar/core/locales/es';
-import FullCalendar from '@fullcalendar/react';
-import { TableContainer } from '@mui/material';
-import format from 'date-fns/format';
-import { useEffect, useRef, useState } from 'react';
-import { useQuery } from 'react-query';
-import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { EventSourceInput, PluginDef } from '@fullcalendar/core'
+import esLocale from '@fullcalendar/core/locales/es'
+import FullCalendar from '@fullcalendar/react'
+import { TableContainer } from '@mui/material'
+import format from 'date-fns/format'
+import { useEffect, useRef, useState } from 'react'
+import { useQuery } from 'react-query'
+import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   AppointmentStatus,
   FormDataState,
-  setFormData,
-} from '../features/appointments/appointmentsSlice';
+  setFormData
+} from '../features/appointments/appointmentsSlice'
 import {
   ICalendarState,
-  setCalendarEvents,
-} from '../features/calendar/calendarSlice';
-import { notify } from '../libs/notify';
-import * as scheduleService from '../services/schedule.service';
-import { propsAction } from './FormSchedulePeople';
-import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation';
-import ModalSchedulePeopleForm from './ModalSchedulePeopleForm';
-import LoadCalendar from './ui/LoadCalendar';
+  setCalendarEvents
+} from '../features/calendar/calendarSlice'
+import { notify } from '../libs/notify'
+import * as scheduleService from '../services/schedule.service'
+import { propsAction } from './FormSchedulePeople'
+import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation'
+import ModalSchedulePeopleForm from './ModalSchedulePeopleForm'
+import LoadCalendar from './ui/LoadCalendar'
 
-import interactionPlugin from '@fullcalendar/interaction';
+import interactionPlugin from '@fullcalendar/interaction'
 
 interface IProps {
-  right: string;
-  initialView: string;
-  plugins: PluginDef[];
+  right: string
+  initialView: string
+  plugins: PluginDef[]
 }
 
-const action = propsAction.schedule;
+const action = propsAction.schedule
 
 function FullCalendarScheduling({
   right,
   initialView,
-  plugins,
+  plugins
 }: IProps): React.ReactNode {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   const formDataState: FormDataState = useAppSelector(
-    ({ appointments }) => appointments.formData.schedule,
-  );
+    ({ appointments }) => appointments.formData.schedule
+  )
   const calendarEventsState: ICalendarState = useAppSelector(
-    ({ calendar }) => calendar,
-  );
+    ({ calendar }) => calendar
+  )
 
   // Modal states
-  const [stateModalCancell, setStateModalCancell] = useState(false);
-  const [stateModalScheduling, setStateModalScheduling] = useState(false);
+  const [stateModalCancell, setStateModalCancell] = useState(false)
+  const [stateModalScheduling, setStateModalScheduling] = useState(false)
 
   // Modal methods
-  const closeModalCancell = (): void => setStateModalCancell(false);
-  const showModalCancell = (): void => setStateModalCancell(true);
-  const closeModalScheduling = (): void => setStateModalScheduling(false);
-  const showModalScheduling = (): void => setStateModalScheduling(true);
+  const closeModalCancell = (): void => setStateModalCancell(false)
+  const showModalCancell = (): void => setStateModalCancell(true)
+  const closeModalScheduling = (): void => setStateModalScheduling(false)
+  const showModalScheduling = (): void => setStateModalScheduling(true)
 
-  const loadEventsRef = useRef<HTMLDivElement>(null);
+  const loadEventsRef = useRef<HTMLDivElement>(null)
 
   const { data, error } = useQuery<[], any>(
     [propsAction.schedule, calendarEventsState.changes],
-    scheduleService.getEvents,
-  );
+    scheduleService.getEvents
+  )
 
   useEffect(() => {
-    if (data) dispatch(setCalendarEvents(data));
-    if (error) notify(error.response.data.error, { type: 'error' });
-  }, [data, error]);
+    if (data) dispatch(setCalendarEvents(data))
+    if (error) notify(error.response.data.error, { type: 'error' })
+  }, [data, error])
 
   return (
     <TableContainer>
@@ -101,27 +101,27 @@ function FullCalendarScheduling({
           headerToolbar={{
             left: 'prevYear prev,next nextYear today',
             center: 'title',
-            right,
+            right
           }}
           dayHeaderFormat={{
             weekday: 'long',
-            day: 'numeric',
+            day: 'numeric'
           }}
           businessHours={{
             daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
             startTime: '06:00',
-            endTime: '22:00',
+            endTime: '22:00'
           }}
           select={({ view, start, end }) => {
-            if ('dayGridMonth' === view.type) return;
+            if ('dayGridMonth' === view.type) return
 
-            const now = new Date();
+            const now = new Date()
             if (start < now) {
-              view.calendar.unselect();
+              view.calendar.unselect()
               notify('No se puede agendar en una fecha que ya ha pasado.', {
-                type: 'warning',
-              });
-              return;
+                type: 'warning'
+              })
+              return
             }
 
             if (
@@ -130,14 +130,14 @@ function FullCalendarScheduling({
               end.getHours() === 0
             ) {
               // The selection is out of allow range, cancel
-              view.calendar.unselect();
+              view.calendar.unselect()
               notify('Agendamientos no disponible en ese horario.', {
-                type: 'warning',
-              });
-              return;
+                type: 'warning'
+              })
+              return
             }
 
-            showModalScheduling();
+            showModalScheduling()
 
             dispatch(
               setFormData([
@@ -146,38 +146,38 @@ function FullCalendarScheduling({
                   ...formDataState,
                   start_time: format(start, 'yyyy-MM-dd HH:mm:ss'),
                   end_time: format(end, 'yyyy-MM-dd HH:mm:ss'),
-                  status: AppointmentStatus.scheduled,
-                },
-              ]),
-            );
+                  status: AppointmentStatus.scheduled
+                }
+              ])
+            )
           }}
           eventClick={({ event }) => {
-            showModalCancell();
+            showModalCancell()
 
             dispatch(
               setFormData([
                 action,
                 {
                   ...formDataState,
-                  id: event.id,
-                },
-              ]),
-            );
+                  id: event.id
+                }
+              ])
+            )
           }}
           events={calendarEventsState.calendarEvents as EventSourceInput}
           eventOrder="-start"
           eventTimeFormat={{
             hour: 'numeric',
-            minute: '2-digit',
+            minute: '2-digit'
           }}
           loading={(state: boolean) => {
             if (loadEventsRef.current)
-              loadEventsRef.current.style.display = state ? 'block' : 'none';
+              loadEventsRef.current.style.display = state ? 'block' : 'none'
           }}
         />
       </div>
     </TableContainer>
-  );
+  )
 }
 
-export default FullCalendarScheduling;
+export default FullCalendarScheduling

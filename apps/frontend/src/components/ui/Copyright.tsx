@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material';
+import { Link, Typography } from '@mui/material'
 
 function Copyright(props: any): React.ReactNode {
   return (
@@ -15,7 +15,7 @@ function Copyright(props: any): React.ReactNode {
       {new Date().getFullYear()}
       {'.'}
     </Typography>
-  );
+  )
 }
 
-export default Copyright;
+export default Copyright

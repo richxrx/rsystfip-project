@@ -1,28 +1,28 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Container,
   Grid,
-  Typography,
-} from '@mui/material';
-import { useState } from 'react';
-import { Helmet } from 'react-helmet';
+  Typography
+} from '@mui/material'
+import { useState } from 'react'
+import { Helmet } from 'react-helmet'
 
 function PageFaqs(): React.ReactNode {
-  const [expandedSec1, setExpandedSec1] = useState<string | false>(false);
-  const [expandedSec2, setExpandedSec2] = useState<string | false>(false);
+  const [expandedSec1, setExpandedSec1] = useState<string | false>(false)
+  const [expandedSec2, setExpandedSec2] = useState<string | false>(false)
 
   const handleChangeSec1 =
     (panel: string) => (_e: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpandedSec1(isExpanded ? panel : false);
-    };
+      setExpandedSec1(isExpanded ? panel : false)
+    }
 
   const handleChangeSec2 =
     (panel: string) => (_e: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpandedSec2(isExpanded ? panel : false);
-    };
+      setExpandedSec2(isExpanded ? panel : false)
+    }
 
   return (
     <>
@@ -258,7 +258,7 @@ function PageFaqs(): React.ReactNode {
         </Grid>
       </Container>
     </>
-  );
+  )
 }
 
-export default PageFaqs;
+export default PageFaqs

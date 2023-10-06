@@ -1,17 +1,17 @@
-import { Grid } from '@mui/material';
-import React from 'react';
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice';
-import Ctx from './Ctx';
-import ListerStatistics from './ListerStatistics';
+import { Grid } from '@mui/material'
+import React from 'react'
+import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
+import Ctx from './Ctx'
+import ListerStatistics from './ListerStatistics'
 
 interface IProps {
-  ctxRef: React.RefObject<HTMLCanvasElement>;
-  appointment_status: AppointmentStatus;
+  ctxRef: React.RefObject<HTMLCanvasElement>
+  appointment_status: AppointmentStatus
 }
 
 function StatisticsData({
   ctxRef,
-  appointment_status,
+  appointment_status
 }: IProps): React.ReactNode {
   return (
     <Grid
@@ -27,7 +27,7 @@ function StatisticsData({
         <ListerStatistics appointment_status={appointment_status} />
       </Grid>
     </Grid>
-  );
+  )
 }
 
-export default StatisticsData;
+export default StatisticsData

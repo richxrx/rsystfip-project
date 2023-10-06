@@ -1,9 +1,9 @@
-import DownloadIcon from '@mui/icons-material/Download';
-import { Fab } from '@mui/material';
-import { TCreatedPdf } from 'pdfmake/build/pdfmake';
+import DownloadIcon from '@mui/icons-material/Download'
+import { Fab } from '@mui/material'
+import { TCreatedPdf } from 'pdfmake/build/pdfmake'
 
 interface IProps {
-  pdf: TCreatedPdf;
+  pdf: TCreatedPdf
 }
 
 function Downloader({ pdf }: IProps): React.ReactNode {
@@ -20,7 +20,7 @@ function Downloader({ pdf }: IProps): React.ReactNode {
     >
       <DownloadIcon />
     </Fab>
-  );
+  )
 }
 
-export default Downloader;
+export default Downloader

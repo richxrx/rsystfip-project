@@ -1,28 +1,28 @@
-import LoadingButton from '@mui/lab/LoadingButton';
+import LoadingButton from '@mui/lab/LoadingButton'
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
-} from '@mui/material';
-import React, { useState } from 'react';
-import FormCancellPerson from './FormCancellPerson';
+  DialogTitle
+} from '@mui/material'
+import React, { useState } from 'react'
+import FormCancellPerson from './FormCancellPerson'
 
 interface IProps {
-  stateModalCancell: boolean;
-  closeModalCancell: () => void;
+  stateModalCancell: boolean
+  closeModalCancell: () => void
 }
 
 function ModalCancellPersonConfirmation({
   stateModalCancell,
-  closeModalCancell,
+  closeModalCancell
 }: IProps): React.ReactNode {
-  const [isLoadingCancellPerson, setIsLoadingCancellPerson] = useState(false);
+  const [isLoadingCancellPerson, setIsLoadingCancellPerson] = useState(false)
 
   const changeIsLoadingCancellPerson = (value: boolean) =>
-    setIsLoadingCancellPerson(value);
+    setIsLoadingCancellPerson(value)
 
   return (
     <Dialog open={stateModalCancell} onClose={closeModalCancell}>
@@ -51,7 +51,7 @@ function ModalCancellPersonConfirmation({
         </LoadingButton>
       </DialogActions>
     </Dialog>
-  );
+  )
 }
 
-export default ModalCancellPersonConfirmation;
+export default ModalCancellPersonConfirmation

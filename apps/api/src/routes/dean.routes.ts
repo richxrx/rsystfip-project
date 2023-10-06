@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import * as deanCtrl from '../controllers/dean.controller';
+import { Router } from 'express'
+import * as deanCtrl from '../controllers/dean.controller'
 
-const router = Router();
+const router = Router()
 
-router.route('/').get(deanCtrl.getDeans).post(deanCtrl.createDean);
+router.route('/').get(deanCtrl.getDeans).post(deanCtrl.createDean)
 
-export default router;
+export default router
