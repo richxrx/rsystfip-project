@@ -47,7 +47,7 @@ function AppRoutes(): React.ReactNode {
       />
 
       <Route element={<ProtectedRoute isAllowed={authState.auth} />}>
-        <Route path="/home" element={<PageHome permissions={permissions} />} />
+        <Route path="/home" element={<PageHome />} />
 
         <Route
           path="/users/change-password/:role"

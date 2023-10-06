@@ -5,12 +5,10 @@ import { useAppSelector } from '../app/hooks'
 import ProtectedElement from '../components/ui/ProtectedElement'
 import { AuthState } from '../features/auth/authSlice'
 
-interface IProps {
-  permissions: Array<string>
-}
-
-function PageHome({ permissions }: IProps): React.ReactNode {
+function PageHome(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth)
+
+  const permissions = authState.userAuth.permissions
 
   return (
     <>
