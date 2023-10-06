@@ -2,6 +2,7 @@
   "name": "rsystfip-project",
   "version": "1.0.0",
   "description": "Scheduling System RSystfip",
+  "private": true,
   "scripts": {
     "build": "turbo build",
     "format": "turbo format",
@@ -17,8 +18,27 @@
     "application",
     "rsystfip"
   ],
-  "author": "",
+  "author": {
+    "name": "Richard A. Rich",
+    "email": "rojasricor@gmail.com"
+  },
   "license": "ISC",
+  "repository": {
+    "url": "github.com/rojasricor/rsystfip-project",
+    "directory": "./"
+  },
+  "contributors": [
+    {
+      "name": "unknow69code",
+      "email": "unknow69007@gmail.com"
+    }
+  ],
+  "prettier": {
+    "semi": false,
+    "trailingComma": "none",
+    "singleQuote": true
+  },
+  "packageManager": "pnpm@8.8.0",
   "devDependencies": {
     "turbo": "^1.10.13"
   }
