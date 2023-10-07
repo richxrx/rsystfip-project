@@ -10,7 +10,11 @@ function Ctx({ ctxRef }: IProps): React.ReactNode {
     <Box
       component="canvas"
       ref={ctxRef}
-      sx={{ width: 700, height: 400, marginY: 5 }}
+      sx={{
+        marginY: 5,
+        width: { xs: '50%' },
+        height: 400
+      }}
     />
   )
 }

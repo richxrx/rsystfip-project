@@ -52,57 +52,55 @@ function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
   }
 
   return (
-    <>
-      <Grid
-        container
-        spacing={2}
-        marginY={{ xs: '1rem', sm: '2rem', md: '3rem' }}
-        alignItems="center"
-      >
-        <Grid item>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="Start time"
-              value={parse(queryDataState.start_time, 'yyyy-MM-dd', new Date())}
-              onChange={(value) => {
-                handleChangeDatePicker('start_time', value!)
-              }}
-            />
-          </LocalizationProvider>
-        </Grid>
-
-        <Grid item>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="End time"
-              value={parse(queryDataState.end_time, 'yyyy-MM-dd', new Date())}
-              onChange={(value) => {
-                handleChangeDatePicker('end_time', value!)
-              }}
-            />
-          </LocalizationProvider>
-        </Grid>
-
-        <Grid item>
-          <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel>Chart type</InputLabel>
-
-            <Select
-              name="chart_type"
-              label="Chart type"
-              value={queryDataState.chart_type}
-              onChange={handleChangeSelect}
-            >
-              {queryDataState.chart_types.map((chart_type) => (
-                <MenuItem key={v4()} value={chart_type}>
-                  {chart_type[0].toUpperCase().concat(chart_type.slice(1))}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
+    <Grid
+      container
+      spacing={2}
+      marginY={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+      alignItems="center"
+    >
+      <Grid item>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="Start time"
+            value={parse(queryDataState.start_time, 'yyyy-MM-dd', new Date())}
+            onChange={(value) => {
+              handleChangeDatePicker('start_time', value!)
+            }}
+          />
+        </LocalizationProvider>
       </Grid>
-    </>
+
+      <Grid item>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DatePicker
+            label="End time"
+            value={parse(queryDataState.end_time, 'yyyy-MM-dd', new Date())}
+            onChange={(value) => {
+              handleChangeDatePicker('end_time', value!)
+            }}
+          />
+        </LocalizationProvider>
+      </Grid>
+
+      <Grid item>
+        <FormControl sx={{ minWidth: 120 }}>
+          <InputLabel>Chart type</InputLabel>
+
+          <Select
+            name="chart_type"
+            label="Chart type"
+            value={queryDataState.chart_type}
+            onChange={handleChangeSelect}
+          >
+            {queryDataState.chart_types.map((chart_type) => (
+              <MenuItem key={v4()} value={chart_type}>
+                {chart_type[0].toUpperCase().concat(chart_type.slice(1))}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
+    </Grid>
   )
 }
 
