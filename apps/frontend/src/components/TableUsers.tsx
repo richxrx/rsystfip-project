@@ -1,27 +1,88 @@
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow
-} from '@mui/material'
-import { useEffect } from 'react'
-import { useQuery } from 'react-query'
-import { v4 } from 'uuid'
+import { Delete as DeleteIcon, Key as KeyIcon } from '@mui/icons-material'
+import { CircularProgress, IconButton, Paper } from '@mui/material'
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import { AxiosError } from 'axios'
+import { useEffect, useState } from 'react'
+import { useMutation, useQuery } from 'react-query'
+import { Link as RouterLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { User, setUsers } from '../features/users/usersSlice'
+import { IUserBase } from '../interfaces/IUserBase'
 import { notify } from '../libs/notify'
+import { createColumn } from '../libs/utils'
 import * as userService from '../services/user.service'
-import RowTableUsers from './ui/RowTableUsers'
 
 function TableUsers(): React.ReactNode {
+  const [loadingButtons, setLoadingButtons] = useState<Set<number>>(new Set())
+
   const dispatch = useAppDispatch()
 
   const usersState: Array<User> = useAppSelector(({ users }) => users.users)
 
-  const { data, error } = useQuery<[], any>('users', userService.getUsers)
+  const mutationDeleteUser = useMutation(userService.deleteUser)
+
+  const handleClick = async (roleId: IUserBase['id']) => {
+    if (!confirm('Seguro(a) de eliminar ese usuario?')) return
+
+    setLoadingButtons((prevSet) => new Set(prevSet).add(roleId))
+
+    try {
+      const data = await mutationDeleteUser.mutateAsync(roleId)
+
+      const updatedRows = usersState.filter((row) => row.id !== roleId)
+
+      dispatch(setUsers(updatedRows))
+
+      notify(data.ok, { type: 'success', position: 'top-left' })
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        notify(error.response?.data.error, { type: 'error' })
+      }
+    }
+  }
+
+  const columns: GridColDef[] = [
+    {
+      ...createColumn('email', 'Institutional ITFIP Email', 700),
+      description: 'This column has a value getter and is not sortable.',
+      sortable: false,
+      valueGetter: ({ row: { email, role_name } }: GridValueGetterParams) =>
+        `${email} (${role_name[0].toUpperCase().concat(role_name.slice(1))})`
+    },
+    {
+      ...createColumn('actions', 'Actions', 150),
+      align: 'center',
+      renderCell: ({ row: { id, email } }) => (
+        <>
+          <IconButton
+            component={RouterLink}
+            to={`/users/change-password/${id}`}
+            title={`Change password for user ${email}`}
+          >
+            <KeyIcon />
+          </IconButton>
+
+          <IconButton
+            color="error"
+            onClick={() => handleClick(id)}
+            disabled={id === 3}
+            title={`Delete user ${email} (Requires confirmation)`}
+          >
+            {loadingButtons.has(id) ? (
+              <CircularProgress size={24} />
+            ) : (
+              <DeleteIcon />
+            )}
+          </IconButton>
+        </>
+      )
+    }
+  ]
+
+  const { data, error, isLoading } = useQuery<[], any>(
+    'users',
+    userService.getUsers
+  )
 
   useEffect(() => {
     if (data) dispatch(setUsers(data))
@@ -29,25 +90,25 @@ function TableUsers(): React.ReactNode {
   }, [data, error])
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Institutional Itfip Email</TableCell>
-
-            <TableCell width={170} align="center">
-              Actions
-            </TableCell>
-          </TableRow>
-        </TableHead>
-
-        <TableBody>
-          {usersState.map((user) => (
-            <RowTableUsers key={v4()} user={user} />
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div style={{ height: 400, width: '100%' }}>
+      <Paper>
+        <DataGrid
+          rows={usersState}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                page: 0,
+                pageSize: 5
+              }
+            }
+          }}
+          pageSizeOptions={[5, 10]}
+          loading={isLoading}
+          sx={{ border: 'none' }}
+        />
+      </Paper>
+    </div>
   )
 }
 

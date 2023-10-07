@@ -313,7 +313,7 @@ function FormSchedulePeople({
             label="Document number"
             onChange={handleChange}
             value={formDataState.document_number}
-            type="number"
+            type="text"
             autoComplete="off"
             spellCheck={false}
             inputProps={{ minLength: 8, maxLength: 10 }}
@@ -374,7 +374,7 @@ function FormSchedulePeople({
             label="Phone number"
             onChange={handleChange}
             value={formDataState.phone_number}
-            type="number"
+            type="text"
             autoComplete="off"
             spellCheck={false}
             inputProps={{ minLength: 10, maxLength: 10 }}

@@ -11,7 +11,7 @@ interface IProps {
 }
 
 const columns: GridColDef[] = [
-  createColumn('id', 'ID', 70),
+  createColumn('id', 'ID', 85),
   {
     ...createColumn('full_name', 'Full name', 250),
     description: 'This column has a value getter and is not sortable.',
@@ -49,9 +49,9 @@ const columns: GridColDef[] = [
       locale: esLocale
     })}`
   },
-  createColumn('scheduling_count', 'Scheduling count', 130),
-  createColumn('daily_count', 'Daily count', 90),
-  createColumn('category_name', 'Category name', 160)
+  createColumn('scheduling_count', 'Scheduling count', 180),
+  createColumn('daily_count', 'Daily count', 180),
+  createColumn('category_name', 'Category name', 170)
 ]
 
 function TableReports({ isLoading }: IProps): React.ReactNode {

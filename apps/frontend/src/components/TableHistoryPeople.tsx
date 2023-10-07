@@ -11,7 +11,7 @@ import { createColumn } from '../libs/utils'
 import * as peopleService from '../services/people.service'
 
 const columns: GridColDef[] = [
-  createColumn('id', 'ID', 70),
+  createColumn('id', 'ID', 85),
   {
     ...createColumn('full_name', 'Full name', 250),
     description: 'This column has a value getter and is not sortable.',
@@ -26,11 +26,11 @@ const columns: GridColDef[] = [
     valueGetter: (params: GridValueGetterParams) =>
       `${params.row.document_name || ''} ${params.row.document_number || ''}`
   },
-  createColumn('category_name', 'Category Name', 120),
+  createColumn('category_name', 'Category', 130),
   createColumn('faculty_name', 'Faculty Name', 300),
   createColumn('visit_subject', 'Visit Subject', 530),
   {
-    ...createColumn('actions', 'Actions', 75),
+    ...createColumn('actions', 'Actions', 120),
     align: 'center',
     renderCell: (params) => (
       <IconButton
