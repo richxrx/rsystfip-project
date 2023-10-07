@@ -6,9 +6,9 @@ import {
   ListItemText,
   Typography
 } from '@mui/material'
-import format from 'date-fns/format'
+import { format, parseISO } from 'date-fns'
 import esLocale from 'date-fns/locale/es'
-import parseISO from 'date-fns/parseISO'
+import { memo } from 'react'
 import { v4 } from 'uuid'
 import { ICounts } from '../../interfaces/ICounts'
 import ProtectedElement from './ProtectedElement'
@@ -49,4 +49,4 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
   )
 }
 
-export default Listgroup
+export default memo(Listgroup)

@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogTitle
 } from '@mui/material'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import FormSchedulePeople, { propsAction } from './FormSchedulePeople'
 
 interface IProps {
@@ -20,8 +20,10 @@ function ModalSchedulePeopleForm({
 }: IProps): React.ReactNode {
   const [isLoadingScheduleAction, setIsLoadingScheduleAction] = useState(false)
 
-  const changeIsLoadingScheduleAction = (value: boolean) =>
-    setIsLoadingScheduleAction(value)
+  const changeIsLoadingScheduleAction = useCallback(
+    (value: boolean) => setIsLoadingScheduleAction(value),
+    []
+  )
 
   return (
     <Dialog open={stateModalScheduling} onClose={closeModalScheduling}>

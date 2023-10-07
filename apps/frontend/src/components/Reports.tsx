@@ -9,8 +9,7 @@ import {
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
-import format from 'date-fns/format'
-import parse from 'date-fns/parse'
+import { format, parse } from 'date-fns'
 import { useEffect } from 'react'
 import { UseQueryResult, useQueries } from 'react-query'
 import { v4 } from 'uuid'
@@ -126,7 +125,7 @@ function Reports(): React.ReactNode {
               label="Start time"
               value={parse(queryDataState.start_time, 'yyyy-MM-dd', new Date())}
               onChange={(value) => {
-                handleChangeDatePicker('start_time', value as Date)
+                handleChangeDatePicker('start_time', value!)
               }}
             />
           </LocalizationProvider>
@@ -138,7 +137,7 @@ function Reports(): React.ReactNode {
               label="End time"
               value={parse(queryDataState.end_time, 'yyyy-MM-dd', new Date())}
               onChange={(value) => {
-                handleChangeDatePicker('end_time', value as Date)
+                handleChangeDatePicker('end_time', value!)
               }}
             />
           </LocalizationProvider>

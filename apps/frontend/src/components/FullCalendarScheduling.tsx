@@ -2,8 +2,8 @@ import { EventSourceInput, PluginDef } from '@fullcalendar/core'
 import esLocale from '@fullcalendar/core/locales/es'
 import FullCalendar from '@fullcalendar/react'
 import { TableContainer } from '@mui/material'
-import format from 'date-fns/format'
-import { useEffect, useRef, useState } from 'react'
+import { format } from 'date-fns'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
@@ -50,10 +50,13 @@ function FullCalendarScheduling({
   const [stateModalScheduling, setStateModalScheduling] = useState(false)
 
   // Modal methods
-  const closeModalCancell = (): void => setStateModalCancell(false)
-  const showModalCancell = (): void => setStateModalCancell(true)
-  const closeModalScheduling = (): void => setStateModalScheduling(false)
-  const showModalScheduling = (): void => setStateModalScheduling(true)
+  const closeModalCancell = useCallback(() => setStateModalCancell(false), [])
+  const showModalCancell = () => setStateModalCancell(true)
+  const closeModalScheduling = useCallback(
+    () => setStateModalScheduling(false),
+    []
+  )
+  const showModalScheduling = () => setStateModalScheduling(true)
 
   const loadEventsRef = useRef<HTMLDivElement>(null)
 

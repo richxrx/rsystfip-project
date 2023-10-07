@@ -1,4 +1,5 @@
 import { Box } from '@mui/material'
+import { memo } from 'react'
 
 interface IProps {
   ctxRef: React.RefObject<HTMLCanvasElement>
@@ -14,4 +15,4 @@ function Ctx({ ctxRef }: IProps): React.ReactNode {
   )
 }
 
-export default Ctx
+export default memo(Ctx)

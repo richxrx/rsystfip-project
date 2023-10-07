@@ -9,7 +9,7 @@ import {
   TextField
 } from '@mui/material'
 import { green } from '@mui/material/colors'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { notify } from '../libs/notify'
 import * as accountService from '../services/account.service'

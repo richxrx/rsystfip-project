@@ -1,6 +1,5 @@
-import format from 'date-fns/format'
+import { format, parseISO } from 'date-fns'
 import esLocale from 'date-fns/locale/es'
-import parseISO from 'date-fns/parseISO'
 import * as pdfMake from 'pdfmake/build/pdfmake'
 import { TDocumentDefinitions } from 'pdfmake/interfaces'
 import { useAppSelector } from '../app/hooks'

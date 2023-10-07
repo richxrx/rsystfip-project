@@ -16,7 +16,7 @@ import {
   Tooltip
 } from 'chart.js'
 import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { UseQueryResult, useQueries } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
@@ -71,7 +71,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
   const refreshChart = (labels: Array<string>, data: Array<string>) => {
     if (chartJS) chartJS.destroy()
 
-    const newChart = new ChartJS(ctxRef.current as HTMLCanvasElement, {
+    const newChart = new ChartJS(ctxRef.current!, {
       type: queryDataState.chart_type as keyof ChartTypeRegistry,
       data: {
         labels,
@@ -224,4 +224,4 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
   )
 }
 
-export default Statistics
+export default memo(Statistics)

@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material'
-import React from 'react'
+import { memo } from 'react'
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
 import Ctx from './Ctx'
 import ListerStatistics from './ListerStatistics'
@@ -30,4 +30,4 @@ function StatisticsData({
   )
 }
 
-export default StatisticsData
+export default memo(StatisticsData)

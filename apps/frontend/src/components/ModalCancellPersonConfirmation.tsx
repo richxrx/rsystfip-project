@@ -7,7 +7,7 @@ import {
   DialogContentText,
   DialogTitle
 } from '@mui/material'
-import React, { useState } from 'react'
+import { useCallback, useState } from 'react'
 import FormCancellPerson from './FormCancellPerson'
 
 interface IProps {
@@ -21,8 +21,10 @@ function ModalCancellPersonConfirmation({
 }: IProps): React.ReactNode {
   const [isLoadingCancellPerson, setIsLoadingCancellPerson] = useState(false)
 
-  const changeIsLoadingCancellPerson = (value: boolean) =>
-    setIsLoadingCancellPerson(value)
+  const changeIsLoadingCancellPerson = useCallback(
+    (value: boolean) => setIsLoadingCancellPerson(value),
+    []
+  )
 
   return (
     <Dialog open={stateModalCancell} onClose={closeModalCancell}>
