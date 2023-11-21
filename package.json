@@ -1,7 +1,7 @@
 {
   "name": "rsystfip-project",
   "version": "1.0.0",
-  "description": "Scheduling System RSystfip",
+  "description": "Sistema de agendamiento de citas para la rectoría del INSTITUTO TOLIMENSE DE FORMACIÓN TÉCNICA PROFESIONAL (ITFIP).",
   "private": true,
   "scripts": {
     "build": "turbo build",
@@ -10,39 +10,30 @@
     "start": "node ./apps/api/dist/index.js"
   },
   "keywords": [
-    "rest",
-    "api",
-    "backend",
-    "front",
-    "interface",
-    "application",
-    "rsystfip"
+    "itfip",
+    "rectoría",
+    "rsystfip",
+    "sistema",
+    "agendamiento",
+    "citas",
+    "cancelación",
+    "notificación"
   ],
-  "author": {
-    "name": "Richard A. Rich",
-    "email": "rojasricor@gmail.com"
-  },
-  "license": "ISC",
   "repository": {
     "url": "github.com/rojasricor/rsystfip-project",
     "directory": "./"
   },
   "contributors": [
     {
+      "name": "Ricardo Rojas",
+      "email": "rojasricor@gmail.com"
+    },
+    {
       "name": "unknow69code",
       "email": "unknow69007@gmail.com"
     }
   ],
-  "bugs": {
-    "email": "rojasricor@gmail.com"
-  },
-  "prettier": {
-    "semi": false,
-    "trailingComma": "none",
-    "singleQuote": true
-  },
-  "packageManager": "pnpm@8.8.0",
   "devDependencies": {
-    "turbo": "^1.10.13"
+    "turbo": "^1.10.16"
   }
 }
