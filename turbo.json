@@ -10,6 +10,9 @@
     },
     "format": {
       "cache": false
+    },
+    "ncu": {
+      "cache": false
     }
   }
 }

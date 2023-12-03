@@ -7,7 +7,8 @@
     "build": "turbo build",
     "format": "turbo format",
     "dev": "turbo dev",
-    "start": "node ./apps/api/dist/index.js"
+    "start": "node ./apps/api/dist/index.js",
+    "ncu": "turbo ncu"
   },
   "keywords": [
     "itfip",
@@ -35,6 +36,7 @@
   ],
   "packageManager": "pnpm@8.11.0",
   "devDependencies": {
+    "npm-check-updates": "^16.14.11",
     "turbo": "^1.10.16"
   }
 }
