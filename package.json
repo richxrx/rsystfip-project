@@ -23,11 +23,11 @@
     "url": "github.com/rojasricor/rsystfip-project",
     "directory": "./"
   },
+  "author": {
+    "name": "Ricardo Rojas",
+    "email": "rojasricor@gmail.com"
+  },
   "contributors": [
-    {
-      "name": "Ricardo Rojas",
-      "email": "rojasricor@gmail.com"
-    },
     {
       "name": "unknow69code",
       "email": "unknow69007@gmail.com"
