@@ -33,6 +33,7 @@
       "email": "unknow69007@gmail.com"
     }
   ],
+  "packageManager": "pnpm@8.11.0",
   "devDependencies": {
     "turbo": "^1.10.16"
   }
