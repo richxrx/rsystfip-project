@@ -2,7 +2,7 @@
   "name": "api",
   "private": true,
   "version": "1.0.0",
-  "description": "This is an rest api for rsystfip project build with express + TS",
+  "description": "This is an rest api for rsystfip project build with Express.js + TS",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write ./src",
