@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import { AUTH_KEY } from '../../constants'
 import { objEquals } from '../../libs/utils'
 

@@ -1,6 +1,6 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import * as bcryptHelper from '../helpers/bcrypt.helper'
-import { IUser } from '../interfaces/IUser'
+import type { IUser } from '../interfaces/IUser'
 import * as UserService from '../services/User.service'
 import { idSchema, userSchema } from '../validation/schemas'
 

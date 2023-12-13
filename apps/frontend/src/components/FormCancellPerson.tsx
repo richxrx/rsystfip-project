@@ -1,16 +1,16 @@
 import { Box, TextField } from '@mui/material'
+import { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
 import { useMutation } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { FormDataState } from '../features/appointments/appointmentsSlice'
+import type { FormDataState } from '../features/appointments/appointmentsSlice'
 import { registerAChange } from '../features/calendar/calendarSlice'
 import { notify } from '../libs/notify'
 import * as cancellationService from '../services/cancellation.service'
 import * as scheduleService from '../services/schedule.service'
 import * as sgService from '../services/sendgrid.service'
-import { THandleChangeI } from '../types/THandleChanges'
-import { THandleSubmit } from '../types/THandleSubmits'
-import { AxiosError } from 'axios'
+import type { THandleChangeI } from '../types/THandleChanges'
+import type { THandleSubmit } from '../types/THandleSubmits'
 
 interface IProps {
   closeModalCancell: () => void

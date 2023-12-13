@@ -1,6 +1,6 @@
-import { ResultSetHeader, RowDataPacket } from 'mysql2'
+import type { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import { IDean } from '../interfaces/IDean'
+import type { IDean } from '../interfaces/IDean'
 
 export async function getDean(id: IDean['id']): Promise<IDean | null> {
   const conn = connect()

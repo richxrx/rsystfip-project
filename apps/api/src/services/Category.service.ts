@@ -1,6 +1,6 @@
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import { ICategory } from '../interfaces/ICategory'
+import type { ICategory } from '../interfaces/ICategory'
 
 export async function getCategories(): Promise<Array<ICategory> | null> {
   const conn = connect()

@@ -1,5 +1,5 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { IKeyBool } from '../../interfaces/IKeyBool'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import type { IKeyBool } from '../../interfaces/IKeyBool'
 import { updateFormDataByAction } from './functions'
 
 export enum AppointmentStatus {

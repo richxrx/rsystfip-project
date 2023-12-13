@@ -1,7 +1,7 @@
 import LoadingButton from '@mui/lab/LoadingButton'
 import { Box, Button } from '@mui/material'
-import { NavigateFunction, useNavigate } from 'react-router-dom'
-import { THandleClick } from '../types/THandleClicks'
+import { useNavigate, type NavigateFunction } from 'react-router-dom'
+import type { THandleClick } from '../types/THandleClicks'
 import ProtectedElement from './ui/ProtectedElement'
 
 interface IProps {

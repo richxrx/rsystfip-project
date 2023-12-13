@@ -13,8 +13,11 @@ import { format, parse } from 'date-fns'
 import { memo } from 'react'
 import { v4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
-import { QueryData, setQueryData } from '../features/statistics/statisticsSlice'
+import type { AppointmentStatus } from '../features/appointments/appointmentsSlice'
+import {
+  setQueryData,
+  type QueryData
+} from '../features/statistics/statisticsSlice'
 
 interface IProps {
   appointment_status: AppointmentStatus
@@ -63,7 +66,7 @@ function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
           <DatePicker
             label="Start time"
             value={parse(queryDataState.start_time, 'yyyy-MM-dd', new Date())}
-            onChange={(value) => {
+            onChange={value => {
               handleChangeDatePicker('start_time', value!)
             }}
           />
@@ -75,7 +78,7 @@ function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
           <DatePicker
             label="End time"
             value={parse(queryDataState.end_time, 'yyyy-MM-dd', new Date())}
-            onChange={(value) => {
+            onChange={value => {
               handleChangeDatePicker('end_time', value!)
             }}
           />
@@ -92,7 +95,7 @@ function DaterStatistics({ appointment_status }: IProps): React.ReactNode {
             value={queryDataState.chart_type}
             onChange={handleChangeSelect}
           >
-            {queryDataState.chart_types.map((chart_type) => (
+            {queryDataState.chart_types.map(chart_type => (
               <MenuItem key={v4()} value={chart_type}>
                 {chart_type[0].toUpperCase().concat(chart_type.slice(1))}
               </MenuItem>

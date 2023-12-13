@@ -1,11 +1,15 @@
 import { Paper } from '@mui/material'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  type GridColDef,
+  type GridValueGetterParams
+} from '@mui/x-data-grid'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
-  PeopleCancellation,
-  setCancelledPeople
+  setCancelledPeople,
+  type PeopleCancellation
 } from '../features/cancellations/cancellationsSlice'
 import { notify } from '../libs/notify'
 import { createColumn } from '../libs/utils'

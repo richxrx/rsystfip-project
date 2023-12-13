@@ -1,9 +1,9 @@
-import { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Request, Response } from 'express'
 import Jwt from 'jsonwebtoken'
 import { SECRET_KEY } from '../config'
 import * as bcryptHelper from '../helpers/bcrypt.helper'
-import { IPayload } from '../interfaces/IPayload'
-import { IUser } from '../interfaces/IUser'
+import type { IPayload } from '../interfaces/IPayload'
+import type { IUser } from '../interfaces/IUser'
 import * as UserService from '../services/User.service'
 import {
   changePswSchema,

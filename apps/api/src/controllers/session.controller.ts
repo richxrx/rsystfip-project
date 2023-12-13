@@ -1,7 +1,7 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import Jwt from 'jsonwebtoken'
 import { SECRET_KEY } from '../config'
-import { IPayload } from '../interfaces/IPayload'
+import type { IPayload } from '../interfaces/IPayload'
 
 export async function verifyJwtOfSession(
   req: Request,

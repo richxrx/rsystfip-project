@@ -1,11 +1,15 @@
 import EditIcon from '@mui/icons-material/Edit'
 import { IconButton, Paper } from '@mui/material'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  type GridColDef,
+  type GridValueGetterParams
+} from '@mui/x-data-grid'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { Link as RouterLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { People, setPeople } from '../features/people/peopleSlice'
+import { setPeople, type People } from '../features/people/peopleSlice'
 import { notify } from '../libs/notify'
 import { createColumn } from '../libs/utils'
 import * as peopleService from '../services/people.service'
@@ -32,7 +36,7 @@ const columns: GridColDef[] = [
   {
     ...createColumn('actions', 'Actions', 120),
     align: 'center',
-    renderCell: (params) => (
+    renderCell: params => (
       <IconButton
         component={RouterLink}
         to={`/history/general/update/${params.row.id}`}

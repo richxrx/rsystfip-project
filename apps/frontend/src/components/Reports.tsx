@@ -4,25 +4,25 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent
+  type SelectChangeEvent
 } from '@mui/material'
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { format, parse } from 'date-fns'
 import { useEffect } from 'react'
-import { UseQueryResult, useQueries } from 'react-query'
+import { type UseQueryResult, useQueries } from 'react-query'
 import { v4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
-  QueryData,
-  Reports,
   setQueryData,
   setReports,
-  setReportsOrigen
+  setReportsOrigen,
+  type QueryData,
+  type Reports
 } from '../features/reports/reportsSlice'
 import { setCategories } from '../features/resources/resourcesSlice'
-import { ICategory } from '../interfaces/IResources'
+import type { ICategory } from '../interfaces/IResources'
 import { notify } from '../libs/notify'
 import * as categoryService from '../services/category.service'
 import * as reportService from '../services/report.service'
@@ -124,7 +124,7 @@ function Reports(): React.ReactNode {
             <DatePicker
               label="Start time"
               value={parse(queryDataState.start_time, 'yyyy-MM-dd', new Date())}
-              onChange={(value) => {
+              onChange={value => {
                 handleChangeDatePicker('start_time', value!)
               }}
             />
@@ -136,7 +136,7 @@ function Reports(): React.ReactNode {
             <DatePicker
               label="End time"
               value={parse(queryDataState.end_time, 'yyyy-MM-dd', new Date())}
-              onChange={(value) => {
+              onChange={value => {
                 handleChangeDatePicker('end_time', value!)
               }}
             />

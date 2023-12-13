@@ -15,15 +15,15 @@ import {
   RadialLinearScale,
   Tooltip
 } from 'chart.js'
-import ChartDataLabels, { Context } from 'chartjs-plugin-datalabels'
+import ChartDataLabels, { type Context } from 'chartjs-plugin-datalabels'
 import { memo, useEffect, useRef, useState } from 'react'
-import { UseQueryResult, useQueries } from 'react-query'
+import { useQueries, type UseQueryResult } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
 import {
-  QueryData,
   setMostAgendatedAllTime,
-  setMostAgendatedOnRange
+  setMostAgendatedOnRange,
+  type QueryData
 } from '../features/statistics/statisticsSlice'
 import { notify } from '../libs/notify'
 import * as statisticService from '../services/statistic.service'
@@ -124,7 +124,7 @@ function Statistics({ appointment_status }: IProps): React.ReactNode {
             formatter(value: number, ctx: Context): string {
               let sum = 0
               const data = ctx.dataset.data
-              data.forEach((n) => (sum += Number(n)))
+              data.forEach(n => (sum += Number(n)))
               const percent = Math.round((value / sum) * 100)
               return (isNaN(percent) ? 0 : percent).toString().concat('%')
             },

@@ -3,15 +3,15 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent
+  type SelectChangeEvent
 } from '@mui/material'
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { v4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { FormDataState } from '../features/appointments/appointmentsSlice'
+import type { FormDataState } from '../features/appointments/appointmentsSlice'
 import { setDocuments } from '../features/resources/resourcesSlice'
-import { IDocument } from '../interfaces/IResources'
+import type { IDocument } from '../interfaces/IResources'
 import { notify } from '../libs/notify'
 import * as documentService from '../services/document.service'
 import { actionFormSchedule } from './FormSchedulePeople'

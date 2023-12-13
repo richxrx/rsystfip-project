@@ -11,8 +11,8 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent,
-  TextField
+  TextField,
+  type SelectChangeEvent
 } from '@mui/material'
 import { useEffect } from 'react'
 import { useMutation, useQuery } from 'react-query'
@@ -20,18 +20,18 @@ import { v4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { setDocuments } from '../features/resources/resourcesSlice'
 import {
-  FormData,
-  Temps,
   resetFormDataAdmin,
   setFormData,
-  setTemps
+  setTemps,
+  type FormData,
+  type Temps
 } from '../features/users/usersSlice'
-import { IDocument } from '../interfaces/IResources'
+import type { IDocument } from '../interfaces/IResources'
 import { notify } from '../libs/notify'
 import * as documentService from '../services/document.service'
 import * as userService from '../services/user.service'
-import { THandleChangeITS } from '../types/THandleChanges'
-import { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeITS } from '../types/THandleChanges'
+import type { THandleSubmit } from '../types/THandleSubmits'
 import PasswordMeter from './ui/PasswordMeter'
 
 function FormUserAdd(): React.ReactNode {

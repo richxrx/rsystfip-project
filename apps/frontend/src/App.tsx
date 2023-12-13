@@ -14,12 +14,12 @@ import { BrowserRouter } from 'react-router-dom'
 import './App.scss'
 import { useAppSelector } from './app/hooks'
 import AppRoutes from './components/AppRoutes'
-import NavBar from './components/ui/NavBar'
 import SessionValidator from './components/SessionValidator'
 import ContainerToast from './components/ui/ContainerToast'
 import Footer from './components/ui/Footer'
+import NavBar from './components/ui/NavBar'
 import ProtectedElement from './components/ui/ProtectedElement'
-import { AuthState } from './features/auth/authSlice'
+import type { AuthState } from './features/auth/authSlice'
 
 const queryClient = new QueryClient()
 

@@ -1,5 +1,8 @@
-import { Request, Response } from 'express'
-import { AppointmentStatus, IAppointment } from '../interfaces/IAppointment'
+import type { Request, Response } from 'express'
+import {
+  AppointmentStatus,
+  type IAppointment
+} from '../interfaces/IAppointment'
 import * as ScheduleService from '../services/Schedule.service'
 import { idSchema, scheduleSchema } from '../validation/schemas'
 

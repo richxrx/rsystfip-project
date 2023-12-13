@@ -1,8 +1,8 @@
-import { ICount } from 'interfaces/ICount'
-import { RowDataPacket } from 'mysql2'
+import type { ICount } from 'interfaces/ICount'
+import type { RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import { IAppointment } from '../interfaces/IAppointment'
-import { IStatistic } from '../interfaces/IStatistic'
+import type { IAppointment } from '../interfaces/IAppointment'
+import type { IStatistic } from '../interfaces/IStatistic'
 
 export async function getStatistics(
   status: IAppointment['status'],

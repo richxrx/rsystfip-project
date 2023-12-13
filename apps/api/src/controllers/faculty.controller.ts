@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import * as FacultyService from '../services/Faculty.service'
 
 export async function getFaculties(

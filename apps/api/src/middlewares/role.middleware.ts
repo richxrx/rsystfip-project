@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from 'express'
-import { IPayload } from '../interfaces/IPayload'
+import type { NextFunction, Request, Response } from 'express'
+import type { IPayload } from '../interfaces/IPayload'
 
 export default function watchRole(...allowedRoles: Array<string>) {
   return (req: Request, res: Response, next: NextFunction): Response | void => {

@@ -1,8 +1,8 @@
 import { memo } from 'react'
 import { useAppSelector } from '../app/hooks'
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
-import { QueryData } from '../features/statistics/statisticsSlice'
-import { ICounts } from '../interfaces/ICounts'
+import type { QueryData } from '../features/statistics/statisticsSlice'
+import type { ICounts } from '../interfaces/ICounts'
 import Listgroup from './ui/Listgroup'
 
 interface IProps {

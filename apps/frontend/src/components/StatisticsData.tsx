@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material'
 import { memo } from 'react'
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
+import type { AppointmentStatus } from '../features/appointments/appointmentsSlice'
 import Ctx from './Ctx'
 import ListerStatistics from './ListerStatistics'
 

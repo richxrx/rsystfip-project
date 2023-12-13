@@ -1,7 +1,7 @@
-import { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Request, Response } from 'express'
 import Jwt from 'jsonwebtoken'
 import { SECRET_KEY } from '../config'
-import { IPayload } from '../interfaces/IPayload'
+import type { IPayload } from '../interfaces/IPayload'
 
 export default function validateAuth() {
   return (req: Request, res: Response, next: NextFunction): Response | void => {

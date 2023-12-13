@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { ICanceledAppointment } from 'interfaces/ICanceledAppointment'
+import type { Request, Response } from 'express'
+import type { ICanceledAppointment } from 'interfaces/ICanceledAppointment'
 import * as CancellationService from '../services/Cancellation.service'
 import { cancellSchema } from '../validation/schemas'
 

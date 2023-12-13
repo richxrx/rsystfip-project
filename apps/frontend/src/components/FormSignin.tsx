@@ -15,18 +15,21 @@ import {
 import { useState } from 'react'
 import { useMutation } from 'react-query'
 import {
-  NavigateFunction,
   Link as RouterLink,
-  useNavigate
+  useNavigate,
+  type NavigateFunction
 } from 'react-router-dom'
 import { useAppDispatch } from '../app/hooks'
-import Copyright from './ui/Copyright'
 import { AUTH_KEY } from '../constants'
-import { AuthState, setAuthenticatedUser } from '../features/auth/authSlice'
+import {
+  setAuthenticatedUser,
+  type AuthState
+} from '../features/auth/authSlice'
 import { notify } from '../libs/notify'
 import * as authService from '../services/auth.service'
-import { THandleChangeI } from '../types/THandleChanges'
-import { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeI } from '../types/THandleChanges'
+import type { THandleSubmit } from '../types/THandleSubmits'
+import Copyright from './ui/Copyright'
 
 function FormSignin() {
   const formDataInitialState = {

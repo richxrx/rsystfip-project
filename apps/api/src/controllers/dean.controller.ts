@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { IDean } from '../interfaces/IDean'
+import type { Request, Response } from 'express'
+import type { IDean } from '../interfaces/IDean'
 import * as DeanService from '../services/Dean.service'
 import { deanSchema } from '../validation/schemas'
 

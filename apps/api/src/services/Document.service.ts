@@ -1,6 +1,6 @@
-import { RowDataPacket } from 'mysql2'
+import type { RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import { IDocument } from '../interfaces/IDocument'
+import type { IDocument } from '../interfaces/IDocument'
 
 export async function getDocuments(): Promise<Array<IDocument> | null> {
   const conn = connect()

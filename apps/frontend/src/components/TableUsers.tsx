@@ -1,13 +1,17 @@
 import { Delete as DeleteIcon, Key as KeyIcon } from '@mui/icons-material'
 import { CircularProgress, IconButton, Paper } from '@mui/material'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  type GridColDef,
+  type GridValueGetterParams
+} from '@mui/x-data-grid'
 import { AxiosError } from 'axios'
 import { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { Link as RouterLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { User, setUsers } from '../features/users/usersSlice'
-import { IUserBase } from '../interfaces/IUserBase'
+import { setUsers, type User } from '../features/users/usersSlice'
+import type { IUserBase } from '../interfaces/IUserBase'
 import { notify } from '../libs/notify'
 import { createColumn } from '../libs/utils'
 import * as userService from '../services/user.service'
@@ -24,12 +28,12 @@ function TableUsers(): React.ReactNode {
   const handleClick = async (roleId: IUserBase['id']) => {
     if (!confirm('Seguro(a) de eliminar ese usuario?')) return
 
-    setLoadingButtons((prevSet) => new Set(prevSet).add(roleId))
+    setLoadingButtons(prevSet => new Set(prevSet).add(roleId))
 
     try {
       const data = await mutationDeleteUser.mutateAsync(roleId)
 
-      const updatedRows = usersState.filter((row) => row.id !== roleId)
+      const updatedRows = usersState.filter(row => row.id !== roleId)
 
       dispatch(setUsers(updatedRows))
 

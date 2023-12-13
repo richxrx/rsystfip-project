@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import * as ReportService from '../services/Report.service'
 import { filterSchema } from '../validation/schemas'
 

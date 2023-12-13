@@ -1,8 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { useMutation } from 'react-query'
-import { NavigateFunction, useNavigate } from 'react-router-dom'
-import { AuthState, resetUserAuthenticated } from '../features/auth/authSlice'
+import { useNavigate, type NavigateFunction } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
+import {
+  resetUserAuthenticated,
+  type AuthState
+} from '../features/auth/authSlice'
 import { notify } from '../libs/notify'
 import api from '../services/api.service'
 import * as sessionService from '../services/session.service'

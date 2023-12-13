@@ -20,4 +20,4 @@ const createColumn = (field: string, headerName: string, width: number) => ({
   width
 })
 
-export { objEquals, createColumn }
+export { createColumn, objEquals }

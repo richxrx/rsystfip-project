@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
-import { UseQueryResult, useQueries } from 'react-query'
+import { useQueries, type UseQueryResult } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { setPeople } from '../features/people/peopleSlice'
 import {
-  QueryData,
   setPngBase64,
   setReportsCountAllTime,
-  setReportsCountOnRange
+  setReportsCountOnRange,
+  type QueryData
 } from '../features/reports/reportsSlice'
 import { notify } from '../libs/notify'
 import * as peopleService from '../services/people.service'

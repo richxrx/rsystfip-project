@@ -3,19 +3,19 @@ import {
   InputLabel,
   MenuItem,
   Select,
-  SelectChangeEvent
+  type SelectChangeEvent
 } from '@mui/material'
 import { useEffect } from 'react'
-import { UseQueryResult, useQueries } from 'react-query'
+import { type UseQueryResult, useQueries } from 'react-query'
 import { v4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
-  FormDataState,
   setDeans,
-  setFormData
+  setFormData,
+  type FormDataState
 } from '../features/appointments/appointmentsSlice'
 import { setCategories } from '../features/resources/resourcesSlice'
-import { ICategory } from '../interfaces/IResources'
+import type { ICategory } from '../interfaces/IResources'
 import { notify } from '../libs/notify'
 import * as categoryService from '../services/category.service'
 import * as deanService from '../services/dean.service'

@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { IPeople } from '../interfaces/IPeople'
+import type { Request, Response } from 'express'
+import type { IPeople } from '../interfaces/IPeople'
 import * as PeopleService from '../services/People.service'
 import {
   idSchema,

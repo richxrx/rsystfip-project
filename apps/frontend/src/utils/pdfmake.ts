@@ -1,4 +1,8 @@
-import { Content, StyleDictionary, TFontDictionary } from 'pdfmake/interfaces'
+import type {
+  Content,
+  StyleDictionary,
+  TFontDictionary
+} from 'pdfmake/interfaces'
 
 const createHeader = (
   image: string,
@@ -66,4 +70,4 @@ const myFonts: TFontDictionary = {
   }
 }
 
-export { createHeader, footer, styles, myFonts }
+export { createHeader, footer, myFonts, styles }

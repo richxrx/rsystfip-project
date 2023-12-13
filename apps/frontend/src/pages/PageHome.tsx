@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Link as RouterLink } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
 import ProtectedElement from '../components/ui/ProtectedElement'
-import { AuthState } from '../features/auth/authSlice'
+import type { AuthState } from '../features/auth/authSlice'
 
 function PageHome(): React.ReactNode {
   const authState: AuthState = useAppSelector(({ auth }) => auth)
@@ -23,9 +23,7 @@ function PageHome(): React.ReactNode {
           gutterBottom
           marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
         >
-          {`${'Bienvenido(a)'} ${authState.userAuth.role_name}: ${
-            authState.userAuth.first_name
-          } ${authState.userAuth.last_name}`}
+          {`${'Bienvenido(a)'} ${authState.userAuth.role_name}: ${authState.userAuth.first_name} ${authState.userAuth.last_name}`}
         </Typography>
 
         <ButtonGroup variant="outlined">

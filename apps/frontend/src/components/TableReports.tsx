@@ -1,9 +1,13 @@
 import { Paper } from '@mui/material'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid'
+import {
+  DataGrid,
+  type GridColDef,
+  type GridValueGetterParams
+} from '@mui/x-data-grid'
 import { format, parseISO } from 'date-fns'
 import esLocale from 'date-fns/locale/es'
 import { useAppSelector } from '../app/hooks'
-import { Reports } from '../features/reports/reportsSlice'
+import type { Reports } from '../features/reports/reportsSlice'
 import { createColumn } from '../libs/utils'
 
 interface IProps {

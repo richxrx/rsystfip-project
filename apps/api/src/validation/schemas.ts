@@ -1,7 +1,7 @@
 import { AppointmentStatus } from '../interfaces/IAppointment'
 import Joi from 'joi'
 
-const JoiDefaults = Joi.defaults((scheme) =>
+const JoiDefaults = Joi.defaults(scheme =>
   scheme.options({ abortEarly: false })
 )
 

@@ -1,4 +1,4 @@
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import * as StatisticService from '../services/Statistic.service'
 import { statisticfilterSchema, statusSchema } from '../validation/schemas'
 

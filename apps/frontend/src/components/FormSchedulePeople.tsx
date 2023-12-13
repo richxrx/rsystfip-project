@@ -1,27 +1,27 @@
-import { Box, Grid, SelectChangeEvent, TextField } from '@mui/material'
+import { Box, Grid, TextField, type SelectChangeEvent } from '@mui/material'
+import { AxiosError } from 'axios'
 import { useEffect, useRef } from 'react'
 import { useMutation, useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   AppointmentStatus,
-  Deans,
-  FormDataState,
-  setFormData
+  setFormData,
+  type Deans,
+  type FormDataState
 } from '../features/appointments/appointmentsSlice'
 import { registerAChange } from '../features/calendar/calendarSlice'
 import { notify } from '../libs/notify'
 import * as deanService from '../services/dean.service'
 import * as peopleService from '../services/people.service'
 import * as scheduleService from '../services/schedule.service'
-import { THandleChangeITS } from '../types/THandleChanges'
-import { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeITS } from '../types/THandleChanges'
+import type { THandleSubmit } from '../types/THandleSubmits'
 import FooterFormPeople from './FooterFormPeople'
-import ProtectedElement from './ui/ProtectedElement'
 import SelectDocument from './SelectDocument'
 import SelectFaculties from './SelectFaculties'
 import SelectPerson from './SelectPerson'
-import { AxiosError } from 'axios'
+import ProtectedElement from './ui/ProtectedElement'
 
 export enum propsAction {
   add = 'add',

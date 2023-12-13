@@ -21,7 +21,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { resetAllFormDataProgramming } from '../../features/appointments/appointmentsSlice'
 import {
-  AuthState,
+  type AuthState,
   resetUserAuthenticated
 } from '../../features/auth/authSlice'
 import { resetQueryDataReports } from '../../features/reports/reportsSlice'

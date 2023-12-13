@@ -1,4 +1,4 @@
-import { AuthState } from '../features/auth/authSlice'
+import type { AuthState } from '../features/auth/authSlice'
 import api from './api.service'
 
 export const verifySession = async ({ token }: AuthState) =>

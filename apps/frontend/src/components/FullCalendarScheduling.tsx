@@ -1,4 +1,4 @@
-import { EventSourceInput, PluginDef } from '@fullcalendar/core'
+import type { EventSourceInput, PluginDef } from '@fullcalendar/core'
 import esLocale from '@fullcalendar/core/locales/es'
 import FullCalendar from '@fullcalendar/react'
 import { TableContainer } from '@mui/material'
@@ -8,12 +8,12 @@ import { useQuery } from 'react-query'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   AppointmentStatus,
-  FormDataState,
-  setFormData
+  setFormData,
+  type FormDataState
 } from '../features/appointments/appointmentsSlice'
 import {
-  ICalendarState,
-  setCalendarEvents
+  setCalendarEvents,
+  type ICalendarState
 } from '../features/calendar/calendarSlice'
 import { notify } from '../libs/notify'
 import * as scheduleService from '../services/schedule.service'

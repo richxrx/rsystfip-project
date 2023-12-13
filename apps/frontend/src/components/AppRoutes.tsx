@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { useAppSelector } from '../app/hooks'
-import { AuthState } from '../features/auth/authSlice'
+import type { AuthState } from '../features/auth/authSlice'
 import PageAppointments from '../pages/PageAppointments'
 import PageChangePassword from '../pages/PageChangePassword'
 import PageDailyScheduling from '../pages/PageDailyScheduling'

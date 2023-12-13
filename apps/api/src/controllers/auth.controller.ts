@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
-import { IPayload } from 'interfaces/IPayload'
+import type { Request, Response } from 'express'
+import type { IPayload } from 'interfaces/IPayload'
 import Jwt from 'jsonwebtoken'
 import { SECRET_KEY } from '../config'
 import * as bcryptHelper from '../helpers/bcrypt.helper'

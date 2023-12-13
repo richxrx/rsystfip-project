@@ -8,8 +8,8 @@ import { useMutation } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { notify } from '../libs/notify'
 import * as accountService from '../services/account.service'
-import { THandleChangeI } from '../types/THandleChanges'
-import { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeI } from '../types/THandleChanges'
+import type { THandleSubmit } from '../types/THandleSubmits'
 import PasswordMeter from './ui/PasswordMeter'
 
 function FormChangePswForget(): React.ReactNode {

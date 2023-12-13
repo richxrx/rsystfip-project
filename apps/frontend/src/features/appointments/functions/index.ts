@@ -1,8 +1,8 @@
 import {
-  FormDataState,
-  AppointmentState,
   formDataInitialState,
-  validFormDataAction
+  validFormDataAction,
+  type AppointmentState,
+  type FormDataState
 } from '../appointmentsSlice'
 
 export const updateFormDataByAction = (

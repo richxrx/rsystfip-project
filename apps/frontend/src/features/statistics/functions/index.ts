@@ -1,4 +1,8 @@
-import { Data, StatisticsState, validSchedulingTypes } from '../statisticsSlice'
+import {
+  validSchedulingTypes,
+  type Data,
+  type StatisticsState
+} from '../statisticsSlice'
 
 export const updateDataBySchedulingType = (
   state: StatisticsState,
