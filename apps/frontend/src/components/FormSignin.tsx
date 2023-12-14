@@ -26,7 +26,7 @@ import {
   type AuthState
 } from '../features/auth/authSlice'
 import { notify } from '../libs/notify'
-import * as authService from '../services/auth.service'
+import { authService } from '../services'
 import type { THandleChangeI, THandleSubmit } from '../types'
 import { Copyright } from './ui'
 

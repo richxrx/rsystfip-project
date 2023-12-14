@@ -1,4 +1,4 @@
-import api from './api.service'
+import api from '.'
 
 export const verifyJwtForRecoverPsw = async (resetToken: string) => {
   const { data } = await api.get('/account/verify-jwt-for-recover-password', {

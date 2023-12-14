@@ -1,4 +1,4 @@
-import api from './api.service'
+import api from '.'
 
 export const getEvents = async () => {
   const { data } = await api('/schedule')

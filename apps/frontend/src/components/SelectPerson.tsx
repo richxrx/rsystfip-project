@@ -18,8 +18,7 @@ import {
 import { setCategories } from '../features/resources/resourcesSlice'
 import type { ICategory } from '../interfaces'
 import { notify } from '../libs/notify'
-import * as categoryService from '../services/category.service'
-import * as deanService from '../services/dean.service'
+import { categoryService, deanService } from '../services'
 
 interface IProps {
   action: actionFormSchedule

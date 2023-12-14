@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import * as FacultyService from '../services/Faculty.service'
+import { FacultyService } from '../services'
 
 export async function getFaculties(
   req: Request,

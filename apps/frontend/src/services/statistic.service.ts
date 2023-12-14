@@ -1,4 +1,4 @@
-import api from './api.service'
+import api from '.'
 import { QueryData } from '../features/statistics/statisticsSlice'
 
 export const getStatistics = async (

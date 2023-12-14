@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
-import * as StatisticService from '../services/Statistic.service'
-import { statisticfilterSchema, statusSchema } from '../validation'
+import { StatisticService } from '../services'
+import { statisticfilterSchema, statusSchema } from '../validation/schemas'
 
 export async function getStatistics(
   req: Request,

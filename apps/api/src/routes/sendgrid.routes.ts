@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as sgCtrl from '../controllers/sendgrid.controller'
+import { sgCtrl } from '../controllers'
 
 const router = Router()
 

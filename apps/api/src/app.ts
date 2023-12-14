@@ -4,20 +4,22 @@ import path from 'path'
 import { PORT } from './config'
 import authMiddleware from './middlewares/auth.middleware'
 import roleMiddleware from './middlewares/role.middleware'
-import accountRoutes from './routes/account.routes'
-import authRoutes from './routes/auth.routes'
-import cancellationRoutes from './routes/cancellation.routes'
-import categoryRoutes from './routes/category.routes'
-import deanRoutes from './routes/dean.routes'
-import documentRoutes from './routes/document.routes'
-import facultyRoutes from './routes/faculty.routes'
-import peopleRoutes from './routes/people.routes'
-import reportRoutes from './routes/report.routes'
-import scheduleRoutes from './routes/schedule.routes'
-import sgRoutes from './routes/sendgrid.routes'
-import sessionRoutes from './routes/session.routes'
-import statisticRoutes from './routes/statistic.routes'
-import userRoutes from './routes/user.routes'
+import {
+  accountRoutes,
+  authRoutes,
+  cancellationRoutes,
+  categoryRoutes,
+  deanRoutes,
+  documentRoutes,
+  facultyRoutes,
+  peopleRoutes,
+  reportRoutes,
+  scheduleRoutes,
+  sessionRoutes,
+  sgRoutes,
+  statisticRoutes,
+  userRoutes
+} from './routes'
 
 export class App {
   private app: express.Application

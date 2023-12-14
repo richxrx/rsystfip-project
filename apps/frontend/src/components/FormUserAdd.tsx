@@ -28,8 +28,7 @@ import {
 } from '../features/users/usersSlice'
 import type { IDocument } from '../interfaces'
 import { notify } from '../libs/notify'
-import * as documentService from '../services/document.service'
-import * as userService from '../services/user.service'
+import { documentService, userService } from '../services'
 import type { THandleChangeITS, THandleSubmit } from '../types'
 import { PasswordMeter } from './ui'
 

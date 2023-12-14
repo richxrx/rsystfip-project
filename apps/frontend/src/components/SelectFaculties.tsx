@@ -14,7 +14,7 @@ import type { FormDataState } from '../features/appointments/appointmentsSlice'
 import { setFaculties } from '../features/resources/resourcesSlice'
 import type { IFacultie } from '../interfaces'
 import { notify } from '../libs/notify'
-import * as facultieService from '../services/facultie.service'
+import { facultieService } from '../services'
 
 interface IProps {
   action: actionFormSchedule

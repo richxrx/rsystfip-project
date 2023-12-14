@@ -26,7 +26,7 @@ import {
   type QueryData
 } from '../features/statistics/statisticsSlice'
 import { notify } from '../libs/notify'
-import * as statisticService from '../services/statistic.service'
+import { statisticService } from '../services'
 import DaterStatistics from './DaterStatistics'
 import StatisticsData from './StatisticsData'
 

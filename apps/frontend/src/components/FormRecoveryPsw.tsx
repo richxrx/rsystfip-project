@@ -12,7 +12,7 @@ import { green } from '@mui/material/colors'
 import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { notify } from '../libs/notify'
-import * as accountService from '../services/account.service'
+import { accountService } from '../services'
 import type { THandleChangeI, THandleSubmit } from '../types'
 
 function FormRecoveryPsw(): React.ReactNode {

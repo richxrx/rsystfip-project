@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as cancellationCtrl from '../controllers/cancellation.controller'
+import { cancellationCtrl } from '../controllers'
 
 const router = Router()
 

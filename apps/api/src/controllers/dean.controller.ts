@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
 import type { IDean } from '../interfaces'
-import * as DeanService from '../services/Dean.service'
-import { deanSchema } from '../validation'
+import { DeanService } from '../services'
+import { deanSchema } from '../validation/schemas'
 
 export async function getDeans(req: Request, res: Response): Promise<Response> {
   const deans = await DeanService.getDeans()

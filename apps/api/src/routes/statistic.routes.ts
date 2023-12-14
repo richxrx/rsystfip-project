@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as statisticCtrl from '../controllers/statistic.controller'
+import { statisticCtrl } from '../controllers'
 
 const router = Router()
 

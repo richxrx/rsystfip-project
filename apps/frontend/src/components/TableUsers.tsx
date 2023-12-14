@@ -14,7 +14,7 @@ import { setUsers, type User } from '../features/users/usersSlice'
 import type { IUserBase } from '../interfaces'
 import { notify } from '../libs/notify'
 import { createColumn } from '../libs/utils'
-import * as userService from '../services/user.service'
+import { userService } from '../services'
 
 function TableUsers(): React.ReactNode {
   const [loadingButtons, setLoadingButtons] = useState<Set<number>>(new Set())

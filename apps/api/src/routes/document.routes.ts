@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as documentCtrl from '../controllers/document.controller'
+import { documentCtrl } from '../controllers'
 
 const router = Router()
 

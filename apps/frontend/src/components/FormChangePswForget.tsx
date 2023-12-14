@@ -7,7 +7,7 @@ import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { notify } from '../libs/notify'
-import * as accountService from '../services/account.service'
+import { accountService } from '../services'
 import type { THandleChangeI, THandleSubmit } from '../types'
 import { PasswordMeter } from './ui'
 

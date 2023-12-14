@@ -1,4 +1,4 @@
-import api from './api.service'
+import api from '.'
 
 export const getDeans = async () => {
   const { data } = await api('/deans')

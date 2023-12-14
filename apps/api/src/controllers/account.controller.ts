@@ -3,12 +3,12 @@ import Jwt from 'jsonwebtoken'
 import { SECRET_KEY } from '../config'
 import * as bcryptHelper from '../helpers/bcrypt.helper'
 import type { IPayload, IUser } from '../interfaces'
-import * as UserService from '../services/User.service'
+import { UserService } from '../services'
 import {
   changePswSchema,
   emailItfipSchema,
   forgetPswSchema
-} from '../validation'
+} from '../validation/schemas'
 
 export async function verifyJwtForRecoverPassword(
   req: Request,

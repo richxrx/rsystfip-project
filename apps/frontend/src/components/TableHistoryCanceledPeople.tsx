@@ -13,7 +13,7 @@ import {
 } from '../features/cancellations/cancellationsSlice'
 import { notify } from '../libs/notify'
 import { createColumn } from '../libs/utils'
-import * as peopleService from '../services/people.service'
+import { peopleService } from '../services'
 
 const columns: GridColDef[] = [
   createColumn('id', 'ID', 85),

@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import * as DocumentService from '../services/Document.service'
+import { DocumentService } from '../services'
 
 export async function getDocuments(
   req: Request,

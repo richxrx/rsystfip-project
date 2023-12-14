@@ -24,8 +24,7 @@ import {
 import { setCategories } from '../features/resources/resourcesSlice'
 import type { ICategory } from '../interfaces'
 import { notify } from '../libs/notify'
-import * as categoryService from '../services/category.service'
-import * as reportService from '../services/report.service'
+import { categoryService, reportService } from '../services'
 import FetcherReports from './FetcherReports'
 import TableReports from './TableReports'
 

@@ -7,8 +7,7 @@ import {
   type AuthState
 } from '../features/auth/authSlice'
 import { notify } from '../libs/notify'
-import api from '../services/api.service'
-import * as sessionService from '../services/session.service'
+import api, { sessionService } from '../services'
 
 function SessionValidator(): React.ReactNode | undefined {
   const dispatch = useAppDispatch()

@@ -6,9 +6,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import type { FormDataState } from '../features/appointments/appointmentsSlice'
 import { registerAChange } from '../features/calendar/calendarSlice'
 import { notify } from '../libs/notify'
-import * as cancellationService from '../services/cancellation.service'
-import * as scheduleService from '../services/schedule.service'
-import * as sgService from '../services/sendgrid.service'
+import { cancellationService, scheduleService, sgService } from '../services'
 import type { THandleChangeI, THandleSubmit } from '../types'
 
 interface IProps {

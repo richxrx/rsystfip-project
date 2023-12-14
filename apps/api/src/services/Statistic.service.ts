@@ -1,4 +1,4 @@
-import type { ICount } from 'interfaces'
+import type { ICount } from '../interfaces'
 import type { RowDataPacket } from 'mysql2'
 import { connect } from '../db'
 import type { IAppointment, IStatistic } from '../interfaces'

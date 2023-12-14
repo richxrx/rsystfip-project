@@ -9,9 +9,7 @@ import {
   type QueryData
 } from '../features/reports/reportsSlice'
 import { notify } from '../libs/notify'
-import * as peopleService from '../services/people.service'
-import * as reportService from '../services/report.service'
-import * as resService from '../services/res.service'
+import { peopleService, reportService, resService } from '../services'
 import PdfCreator from './PdfCreator'
 
 function FetcherReports(): React.ReactNode {

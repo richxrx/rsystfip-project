@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import * as CategoryService from '../services/Category.service'
+import { CategoryService } from '../services'
 
 export async function getCategories(
   req: Request,

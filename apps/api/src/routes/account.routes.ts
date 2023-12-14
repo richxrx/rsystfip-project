@@ -1,7 +1,6 @@
 import { Router } from 'express'
-import * as accountCtrl from '../controllers/account.controller'
-import * as sgCtrl from '../controllers/sendgrid.controller'
-import authMiddleware from '../middlewares/auth.middleware'
+import { accountCtrl, sgCtrl } from '../controllers'
+import { authMiddleware } from '../middlewares'
 
 const router = Router()
 

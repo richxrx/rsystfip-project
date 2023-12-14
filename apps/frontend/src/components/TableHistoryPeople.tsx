@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { setPeople, type People } from '../features/people/peopleSlice'
 import { notify } from '../libs/notify'
 import { createColumn } from '../libs/utils'
-import * as peopleService from '../services/people.service'
+import { peopleService } from '../services'
 
 const columns: GridColDef[] = [
   createColumn('id', 'ID', 85),

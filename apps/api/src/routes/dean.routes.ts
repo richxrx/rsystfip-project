@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import * as deanCtrl from '../controllers/dean.controller'
+import { deanCtrl } from '../controllers'
 
 const router = Router()
 

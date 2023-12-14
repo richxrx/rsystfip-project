@@ -16,7 +16,7 @@ import {
   type ICalendarState
 } from '../features/calendar/calendarSlice'
 import { notify } from '../libs/notify'
-import * as scheduleService from '../services/schedule.service'
+import { scheduleService } from '../services'
 import { propsAction } from './FormSchedulePeople'
 import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation'
 import ModalSchedulePeopleForm from './ModalSchedulePeopleForm'

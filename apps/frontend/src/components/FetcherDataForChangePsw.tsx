@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../app/hooks'
 import { setTempDataForChangePsw } from '../features/temp/tempSlice'
 import type { IUserBase } from '../interfaces'
 import { notify } from '../libs/notify'
-import * as userService from '../services/user.service'
+import { userService } from '../services'
 import FormChangePsw from './FormChangePsw'
 
 function FetcherDataForChangePsw(): React.ReactNode {
