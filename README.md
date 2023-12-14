@@ -66,8 +66,6 @@ RSystfip Project includes the following scripts defined in the package.json file
 
 - [RSystfip Project Restapi ExpressJS.](apps/api/README.md)
 
-- [RSystfip Project Restapi NestJS.](apps/restapi/README.md)
-
 - [RSystfip Project Frontend React + Vite.](apps/frontend/README.md)
 
 ## Keywords
