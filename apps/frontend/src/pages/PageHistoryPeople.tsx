@@ -1,6 +1,6 @@
 import { Container, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import TableHistoryPeople from '../components/TableHistoryPeople'
+import { TableHistoryPeople } from '../components'
 
 function PageHistoryPeople(): React.ReactNode {
   return (

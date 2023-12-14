@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express'
-import type { ICanceledAppointment } from 'interfaces/ICanceledAppointment'
+import type { ICanceledAppointment } from 'interfaces'
 import * as CancellationService from '../services/Cancellation.service'
-import { cancellSchema } from '../validation/schemas'
+import { cancellSchema } from '../validation'
 
 export async function createCancellation(
   req: Request,

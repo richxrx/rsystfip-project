@@ -1,6 +1,6 @@
 import type { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import type { IPeople } from '../interfaces/IPeople'
+import type { IPeople } from '../interfaces'
 
 export async function createPerson(person: IPeople): Promise<IPeople | null> {
   const conn = connect()

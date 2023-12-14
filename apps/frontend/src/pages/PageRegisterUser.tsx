@@ -1,6 +1,6 @@
 import { Container, Paper, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import FormUserAdd from '../components/FormUserAdd'
+import { FormUserAdd } from '../components'
 
 function PageRegisterUser(): React.ReactNode {
   return (

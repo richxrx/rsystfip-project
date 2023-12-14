@@ -1,6 +1,6 @@
 import { Container } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import RecoveryLinkPassword from '../components/RecoveryLinkPassword'
+import { RecoveryLinkPassword } from '../components'
 
 function PageLinkRecoveryPsw(): React.ReactNode {
   return (

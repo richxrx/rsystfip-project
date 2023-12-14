@@ -6,8 +6,9 @@ import {
   type SelectChangeEvent
 } from '@mui/material'
 import { useEffect } from 'react'
-import { type UseQueryResult, useQueries } from 'react-query'
+import { useQueries, type UseQueryResult } from 'react-query'
 import { v4 } from 'uuid'
+import { actionFormSchedule } from '.'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
   setDeans,
@@ -15,11 +16,10 @@ import {
   type FormDataState
 } from '../features/appointments/appointmentsSlice'
 import { setCategories } from '../features/resources/resourcesSlice'
-import type { ICategory } from '../interfaces/IResources'
+import type { ICategory } from '../interfaces'
 import { notify } from '../libs/notify'
 import * as categoryService from '../services/category.service'
 import * as deanService from '../services/dean.service'
-import { actionFormSchedule } from './FormSchedulePeople'
 
 interface IProps {
   action: actionFormSchedule

@@ -13,8 +13,7 @@ import { useState } from 'react'
 import { useMutation } from 'react-query'
 import { notify } from '../libs/notify'
 import * as accountService from '../services/account.service'
-import type { THandleChangeI } from '../types/THandleChanges'
-import type { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeI, THandleSubmit } from '../types'
 
 function FormRecoveryPsw(): React.ReactNode {
   const formDataInitialState = { email: '' }

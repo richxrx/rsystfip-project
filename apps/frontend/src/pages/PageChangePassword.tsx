@@ -1,6 +1,6 @@
 import { Container } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import FetcherDataForChangePsw from '../components/FetcherDataForChangePsw'
+import { FetcherDataForChangePsw } from '../components'
 
 function PageChangePassword(): React.ReactNode {
   return (

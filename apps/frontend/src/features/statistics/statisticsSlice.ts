@@ -1,8 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
 import endOfMonth from 'date-fns/endOfMonth'
 import format from 'date-fns/format'
-import type { ICounts } from '../../interfaces/ICounts'
-import type { IKeyBool } from '../../interfaces/IKeyBool'
+import type { ICounts, IKeyBool } from '../../interfaces'
 import { updateDataBySchedulingType } from './functions'
 
 export interface QueryData {

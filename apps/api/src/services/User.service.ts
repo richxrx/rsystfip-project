@@ -1,6 +1,6 @@
 import type { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import type { IUser } from '../interfaces/IUser'
+import type { IUser } from '../interfaces'
 
 export async function getUser(
   id?: IUser['id'],

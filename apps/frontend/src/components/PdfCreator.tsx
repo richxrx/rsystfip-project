@@ -5,7 +5,7 @@ import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import { useAppSelector } from '../app/hooks'
 import type { People } from '../features/people/peopleSlice'
 import type { QueryData, Reports } from '../features/reports/reportsSlice'
-import type { ICounts } from '../interfaces/ICounts'
+import type { ICounts } from '../interfaces'
 import { createHeader, footer, myFonts, styles } from '../utils/pdfmake'
 import Downloader from './Downloader'
 

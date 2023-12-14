@@ -1,7 +1,7 @@
 import { Container } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import RecoveryPassword from '../components/RecoveryPassword'
-import Copyright from '../components/ui/Copyright'
+import { RecoveryPassword } from '../components'
+import { Copyright } from '../components/ui'
 
 function PageRecoverPassword(): React.ReactNode {
   return (

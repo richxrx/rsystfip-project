@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import * as ReportService from '../services/Report.service'
-import { filterSchema } from '../validation/schemas'
+import { filterSchema } from '../validation'
 
 export async function getReports(
   req: Request,

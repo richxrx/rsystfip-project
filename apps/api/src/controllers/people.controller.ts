@@ -1,11 +1,7 @@
 import type { Request, Response } from 'express'
-import type { IPeople } from '../interfaces/IPeople'
+import type { IPeople } from '../interfaces'
 import * as PeopleService from '../services/People.service'
-import {
-  idSchema,
-  peopleEditSchema,
-  schedulerSchema
-} from '../validation/schemas'
+import { idSchema, peopleEditSchema, schedulerSchema } from '../validation'
 
 export async function createPerson(
   req: Request,

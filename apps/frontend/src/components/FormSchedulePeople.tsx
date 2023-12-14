@@ -15,13 +15,12 @@ import { notify } from '../libs/notify'
 import * as deanService from '../services/dean.service'
 import * as peopleService from '../services/people.service'
 import * as scheduleService from '../services/schedule.service'
-import type { THandleChangeITS } from '../types/THandleChanges'
-import type { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeITS, THandleSubmit } from '../types'
 import FooterFormPeople from './FooterFormPeople'
 import SelectDocument from './SelectDocument'
 import SelectFaculties from './SelectFaculties'
 import SelectPerson from './SelectPerson'
-import ProtectedElement from './ui/ProtectedElement'
+import { ProtectedElement } from './ui'
 
 export enum propsAction {
   add = 'add',

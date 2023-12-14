@@ -2,7 +2,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
 import { Container, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import FullCalendarScheduling from '../components/FullCalendarScheduling'
+import { FullCalendarScheduling } from '../components'
 
 function PageAppointments(): React.ReactNode {
   const plugins = [dayGridPlugin, listPlugin]

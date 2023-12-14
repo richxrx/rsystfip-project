@@ -1,6 +1,6 @@
 import type { ResultSetHeader } from 'mysql2'
 import { connect } from '../db'
-import type { ICanceledAppointment } from '../interfaces/ICanceledAppointment'
+import type { ICanceledAppointment } from '../interfaces'
 
 export async function createCancellation(
   cancellation: ICanceledAppointment

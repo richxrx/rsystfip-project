@@ -1,8 +1,6 @@
 import type { ResultSetHeader, RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import type { IAppointment } from '../interfaces/IAppointment'
-import type { ICalendar } from '../interfaces/ICalendar'
-import type { IPeople } from '../interfaces/IPeople'
+import type { IAppointment, ICalendar, IPeople } from '../interfaces'
 
 export async function createSchedule(
   scheduleData: IAppointment

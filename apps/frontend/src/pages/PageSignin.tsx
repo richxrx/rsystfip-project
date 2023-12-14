@@ -1,6 +1,6 @@
 import { Box, Grid, Paper, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import FormSignin from '../components/FormSignin'
+import { FormSignin } from '../components'
 
 function PageSignin(): React.ReactNode {
   return (
@@ -18,7 +18,7 @@ function PageSignin(): React.ReactNode {
           sx={{
             backgroundImage: 'url("/PHOTO-ENTRY-ITFIP-1.jpg")',
             backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
+            backgroundColor: t =>
               t.palette.mode === 'light'
                 ? t.palette.grey[50]
                 : t.palette.grey[900],

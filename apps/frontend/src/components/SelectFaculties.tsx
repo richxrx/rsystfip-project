@@ -8,13 +8,13 @@ import {
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
 import { v4 } from 'uuid'
+import { actionFormSchedule } from '.'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import type { FormDataState } from '../features/appointments/appointmentsSlice'
 import { setFaculties } from '../features/resources/resourcesSlice'
-import type { IFacultie } from '../interfaces/IResources'
+import type { IFacultie } from '../interfaces'
 import { notify } from '../libs/notify'
 import * as facultieService from '../services/facultie.service'
-import { actionFormSchedule } from './FormSchedulePeople'
 
 interface IProps {
   action: actionFormSchedule

@@ -13,12 +13,13 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { BrowserRouter } from 'react-router-dom'
 import './App.scss'
 import { useAppSelector } from './app/hooks'
-import AppRoutes from './components/AppRoutes'
-import SessionValidator from './components/SessionValidator'
-import ContainerToast from './components/ui/ContainerToast'
-import Footer from './components/ui/Footer'
-import NavBar from './components/ui/NavBar'
-import ProtectedElement from './components/ui/ProtectedElement'
+import { AppRoutes, SessionValidator } from './components'
+import {
+  ContainerToast,
+  Footer,
+  NavBar,
+  ProtectedElement
+} from './components/ui'
 import type { AuthState } from './features/auth/authSlice'
 
 const queryClient = new QueryClient()

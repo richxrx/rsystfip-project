@@ -20,7 +20,7 @@ import * as scheduleService from '../services/schedule.service'
 import { propsAction } from './FormSchedulePeople'
 import ModalCancellPersonConfirmation from './ModalCancellPersonConfirmation'
 import ModalSchedulePeopleForm from './ModalSchedulePeopleForm'
-import LoadCalendar from './ui/LoadCalendar'
+import { LoadCalendar } from './ui'
 
 import interactionPlugin from '@fullcalendar/interaction'
 

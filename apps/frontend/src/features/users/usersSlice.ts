@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import type { IUserBase } from '../../interfaces/IUserBase'
+import type { IUserBase } from '../../interfaces'
 
 export interface User extends IUserBase {
   first_name: string

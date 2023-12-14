@@ -1,10 +1,7 @@
 import type { Request, Response } from 'express'
-import {
-  AppointmentStatus,
-  type IAppointment
-} from '../interfaces/IAppointment'
+import { AppointmentStatus, type IAppointment } from 'interfaces'
 import * as ScheduleService from '../services/Schedule.service'
-import { idSchema, scheduleSchema } from '../validation/schemas'
+import { idSchema, scheduleSchema } from '../validation'
 
 export async function getSchedule(
   req: Request,

@@ -2,14 +2,13 @@ import type { NextFunction, Request, Response } from 'express'
 import Jwt from 'jsonwebtoken'
 import { SECRET_KEY } from '../config'
 import * as bcryptHelper from '../helpers/bcrypt.helper'
-import type { IPayload } from '../interfaces/IPayload'
-import type { IUser } from '../interfaces/IUser'
+import type { IPayload, IUser } from '../interfaces'
 import * as UserService from '../services/User.service'
 import {
   changePswSchema,
   emailItfipSchema,
   forgetPswSchema
-} from '../validation/schemas'
+} from '../validation'
 
 export async function verifyJwtForRecoverPassword(
   req: Request,

@@ -1,8 +1,6 @@
 import { Container, Paper, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import FormSchedulePeople, {
-  propsAction
-} from '../components/FormSchedulePeople'
+import { FormSchedulePeople, propsAction } from '../components'
 
 function PageDailyScheduling(): React.ReactNode {
   return (

@@ -5,12 +5,11 @@ import LoadingButton from '@mui/lab/LoadingButton'
 import { Box, IconButton, InputAdornment, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useMutation } from 'react-query'
-import type { IUserBase } from '../interfaces/IUserBase'
+import type { IUserBase } from '../interfaces'
 import { notify } from '../libs/notify'
 import * as accountService from '../services/account.service'
-import type { THandleChangeI } from '../types/THandleChanges'
-import type { THandleSubmit } from '../types/THandleSubmits'
-import PasswordMeter from './ui/PasswordMeter'
+import type { THandleChangeI, THandleSubmit } from '../types'
+import { PasswordMeter } from './ui'
 
 interface IProps {
   userId: IUserBase['id']

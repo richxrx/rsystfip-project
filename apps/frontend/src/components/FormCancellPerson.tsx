@@ -9,8 +9,7 @@ import { notify } from '../libs/notify'
 import * as cancellationService from '../services/cancellation.service'
 import * as scheduleService from '../services/schedule.service'
 import * as sgService from '../services/sendgrid.service'
-import type { THandleChangeI } from '../types/THandleChanges'
-import type { THandleSubmit } from '../types/THandleSubmits'
+import type { THandleChangeI, THandleSubmit } from '../types'
 
 interface IProps {
   closeModalCancell: () => void

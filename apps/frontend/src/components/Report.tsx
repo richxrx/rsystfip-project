@@ -11,7 +11,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { format, parse } from 'date-fns'
 import { useEffect } from 'react'
-import { type UseQueryResult, useQueries } from 'react-query'
+import { useQueries, type UseQueryResult } from 'react-query'
 import { v4 } from 'uuid'
 import { useAppDispatch, useAppSelector } from '../app/hooks'
 import {
@@ -22,14 +22,14 @@ import {
   type Reports
 } from '../features/reports/reportsSlice'
 import { setCategories } from '../features/resources/resourcesSlice'
-import type { ICategory } from '../interfaces/IResources'
+import type { ICategory } from '../interfaces'
 import { notify } from '../libs/notify'
 import * as categoryService from '../services/category.service'
 import * as reportService from '../services/report.service'
 import FetcherReports from './FetcherReports'
 import TableReports from './TableReports'
 
-function Reports(): React.ReactNode {
+function Report(): React.ReactNode {
   const dispatch = useAppDispatch()
 
   const categoriesState: Array<ICategory> = useAppSelector(
@@ -174,4 +174,4 @@ function Reports(): React.ReactNode {
   )
 }
 
-export default Reports
+export default Report

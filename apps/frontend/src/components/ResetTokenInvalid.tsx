@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from '@mui/material'
-import GoHome from './ui/GoHome'
+import { GoHome } from './ui'
 
 function ResetTokenInvalid(): React.ReactNode {
   return (

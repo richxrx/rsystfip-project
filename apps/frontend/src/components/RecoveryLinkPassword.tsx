@@ -6,7 +6,7 @@ import { notify } from '../libs/notify'
 import * as accountService from '../services/account.service'
 import FormChangePswForget from './FormChangePswForget'
 import ResetTokenInvalid from './ResetTokenInvalid'
-import Loader from './ui/Loader'
+import { Loader } from './ui'
 
 function RecoveryLinkPassword(): React.ReactNode {
   const { resetToken } = useParams<{ resetToken: string }>()

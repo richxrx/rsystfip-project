@@ -10,7 +10,7 @@ import { format, parseISO } from 'date-fns'
 import esLocale from 'date-fns/locale/es'
 import { memo } from 'react'
 import { v4 } from 'uuid'
-import type { ICounts } from '../../interfaces/ICounts'
+import type { ICounts } from '../../interfaces'
 import ProtectedElement from './ProtectedElement'
 
 interface IProps {

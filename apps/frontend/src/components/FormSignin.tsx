@@ -27,9 +27,8 @@ import {
 } from '../features/auth/authSlice'
 import { notify } from '../libs/notify'
 import * as authService from '../services/auth.service'
-import type { THandleChangeI } from '../types/THandleChanges'
-import type { THandleSubmit } from '../types/THandleSubmits'
-import Copyright from './ui/Copyright'
+import type { THandleChangeI, THandleSubmit } from '../types'
+import { Copyright } from './ui'
 
 function FormSignin() {
   const formDataInitialState = {

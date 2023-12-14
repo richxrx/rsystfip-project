@@ -1,8 +1,6 @@
 import type { RowDataPacket } from 'mysql2'
 import { connect } from '../db'
-import type { IAppointment } from '../interfaces/IAppointment'
-import type { ICount } from '../interfaces/ICount'
-import type { IReport } from '../interfaces/IReport'
+import type { IAppointment, ICount, IReport } from '../interfaces'
 
 export async function getReports(
   start_time: IAppointment['start_time'],

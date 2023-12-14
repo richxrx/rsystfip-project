@@ -26,13 +26,12 @@ import {
   type FormData,
   type Temps
 } from '../features/users/usersSlice'
-import type { IDocument } from '../interfaces/IResources'
+import type { IDocument } from '../interfaces'
 import { notify } from '../libs/notify'
 import * as documentService from '../services/document.service'
 import * as userService from '../services/user.service'
-import type { THandleChangeITS } from '../types/THandleChanges'
-import type { THandleSubmit } from '../types/THandleSubmits'
-import PasswordMeter from './ui/PasswordMeter'
+import type { THandleChangeITS, THandleSubmit } from '../types'
+import { PasswordMeter } from './ui'
 
 function FormUserAdd(): React.ReactNode {
   const formDataState: FormData = useAppSelector(({ users }) => users.formData)

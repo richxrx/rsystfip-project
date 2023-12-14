@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
 import * as sgHelper from '../helpers/sg.helper'
-import { sendEmailSchema } from '../validation/schemas'
+import { sendEmailSchema } from '../validation'
 
 export async function sendEmail(
   req: Request,

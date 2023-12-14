@@ -1,6 +1,6 @@
 import { Container } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import Statistics from '../components/Statistics'
+import { Statistics } from '../components'
 import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
 
 function PageStcsDaily(): React.ReactNode {

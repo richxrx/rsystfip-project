@@ -1,6 +1,6 @@
 import { Box, Container, Typography } from '@mui/material'
 import { Helmet } from 'react-helmet'
-import GoHome from '../components/ui/GoHome'
+import { GoHome } from '../components/ui'
 
 function PageNotFound(): React.ReactNode {
   return (
