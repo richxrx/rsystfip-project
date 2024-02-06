@@ -1,6 +1,6 @@
-import { Container, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { TableHistoryCanceledPeople } from '../components'
+import { Container, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { TableHistoryCanceledPeople } from "../components";
 
 function PageHistoryCancelledPeople(): React.ReactNode {
   return (
@@ -14,7 +14,7 @@ function PageHistoryCancelledPeople(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Citas canceladas
         </Typography>
@@ -22,7 +22,7 @@ function PageHistoryCancelledPeople(): React.ReactNode {
         <TableHistoryCanceledPeople />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageHistoryCancelledPeople
+export default PageHistoryCancelledPeople;

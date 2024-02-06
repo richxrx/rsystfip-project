@@ -1,7 +1,7 @@
 export interface ICalendar {
-  id: number
-  title: string
-  start: string
-  end: string
-  color: string
+  id: number;
+  title: string;
+  start: string;
+  end: string;
+  color: string;
 }

@@ -1,11 +1,11 @@
-import dayGridPlugin from '@fullcalendar/daygrid'
-import listPlugin from '@fullcalendar/list'
-import { Container, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { FullCalendarScheduling } from '../components'
+import dayGridPlugin from "@fullcalendar/daygrid";
+import listPlugin from "@fullcalendar/list";
+import { Container, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { FullCalendarScheduling } from "../components";
 
 function PageAppointments(): React.ReactNode {
-  const plugins = [dayGridPlugin, listPlugin]
+  const plugins = [dayGridPlugin, listPlugin];
 
   return (
     <>
@@ -18,7 +18,7 @@ function PageAppointments(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Ver agendamientos programados
         </Typography>
@@ -30,7 +30,7 @@ function PageAppointments(): React.ReactNode {
         />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageAppointments
+export default PageAppointments;

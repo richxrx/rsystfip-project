@@ -1,7 +1,7 @@
-import { Container } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { Statistics } from '../components'
-import { AppointmentStatus } from '../features/appointments/appointmentsSlice'
+import { Container } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { Statistics } from "../components";
+import { AppointmentStatus } from "../features/appointments/appointmentsSlice";
 
 function PageStcsSchedule(): React.ReactNode {
   return (
@@ -14,7 +14,7 @@ function PageStcsSchedule(): React.ReactNode {
         <Statistics appointment_status={AppointmentStatus.scheduled} />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageStcsSchedule
+export default PageStcsSchedule;

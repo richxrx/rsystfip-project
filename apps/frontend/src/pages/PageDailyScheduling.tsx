@@ -1,6 +1,6 @@
-import { Container, Paper, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { FormSchedulePeople, propsAction } from '../components'
+import { Container, Paper, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { FormSchedulePeople, propsAction } from "../components";
 
 function PageDailyScheduling(): React.ReactNode {
   return (
@@ -19,7 +19,7 @@ function PageDailyScheduling(): React.ReactNode {
         </Paper>
       </Container>
     </>
-  )
+  );
 }
 
-export default PageDailyScheduling
+export default PageDailyScheduling;

@@ -1,8 +1,8 @@
-import AddIcon from '@mui/icons-material/Add'
-import { Container, Fab, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { Link as RouterLink } from 'react-router-dom'
-import { TableUsers } from '../components'
+import AddIcon from "@mui/icons-material/Add";
+import { Container, Fab, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { Link as RouterLink } from "react-router-dom";
+import { TableUsers } from "../components";
 
 function PageUsers(): React.ReactNode {
   return (
@@ -16,7 +16,7 @@ function PageUsers(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginY={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginY={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Administrar usuarios
         </Typography>
@@ -35,7 +35,7 @@ function PageUsers(): React.ReactNode {
         <TableUsers />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageUsers
+export default PageUsers;

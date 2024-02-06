@@ -34,7 +34,9 @@
       "email": "unknow69007@gmail.com"
     }
   ],
-  "packageManager": "pnpm@8.11.0",
+  "workspaces": [
+    "apps/*"
+  ],
   "devDependencies": {
     "npm-check-updates": "^16.14.14",
     "prettier": "^3.2.5",

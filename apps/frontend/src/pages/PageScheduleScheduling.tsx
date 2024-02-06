@@ -1,10 +1,10 @@
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import { Container, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { FullCalendarScheduling } from '../components'
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import { Container, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { FullCalendarScheduling } from "../components";
 
-const plugins = [dayGridPlugin, timeGridPlugin]
+const plugins = [dayGridPlugin, timeGridPlugin];
 
 function PageScheduleScheduling(): React.ReactNode {
   return (
@@ -18,7 +18,7 @@ function PageScheduleScheduling(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Agendamiento programado
         </Typography>
@@ -30,7 +30,7 @@ function PageScheduleScheduling(): React.ReactNode {
         />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageScheduleScheduling
+export default PageScheduleScheduling;

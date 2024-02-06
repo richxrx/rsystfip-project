@@ -1,6 +1,6 @@
-import { Container, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { TableHistoryPeople } from '../components'
+import { Container, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { TableHistoryPeople } from "../components";
 
 function PageHistoryPeople(): React.ReactNode {
   return (
@@ -14,7 +14,7 @@ function PageHistoryPeople(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Personas agendadas
         </Typography>
@@ -22,7 +22,7 @@ function PageHistoryPeople(): React.ReactNode {
         <TableHistoryPeople />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageHistoryPeople
+export default PageHistoryPeople;

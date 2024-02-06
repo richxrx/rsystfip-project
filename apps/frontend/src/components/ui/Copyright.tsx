@@ -1,4 +1,4 @@
-import { Link, Typography } from '@mui/material'
+import { Link, Typography } from "@mui/material";
 
 function Copyright(props: any): React.ReactNode {
   return (
@@ -8,14 +8,14 @@ function Copyright(props: any): React.ReactNode {
       align="center"
       {...props}
     >
-      {'Copyright © '}
+      {"Copyright © "}
       <Link color="inherit" href="https://itfip.edu.co/">
         RSystfip
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
-  )
+  );
 }
 
-export default Copyright
+export default Copyright;

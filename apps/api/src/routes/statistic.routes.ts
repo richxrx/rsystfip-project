@@ -1,12 +1,12 @@
-import { Router } from 'express'
-import { statisticCtrl } from '../controllers'
+import { Router } from "express";
+import { statisticCtrl } from "../controllers";
 
-const router = Router()
+const router = Router();
 
-router.route('/:status').get(statisticCtrl.getStatistics)
+router.route("/:status").get(statisticCtrl.getStatistics);
 
-router.route('/onrange/:status').get(statisticCtrl.getMostAgendatedOnRange)
+router.route("/onrange/:status").get(statisticCtrl.getMostAgendatedOnRange);
 
-router.route('/alltime/:status').get(statisticCtrl.getMostAgendatedAllTime)
+router.route("/alltime/:status").get(statisticCtrl.getMostAgendatedAllTime);
 
-export default router
+export default router;

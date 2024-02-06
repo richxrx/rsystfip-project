@@ -1,9 +1,9 @@
-import { Flip, ToastContainer } from 'react-toastify'
+import { Flip, ToastContainer } from "react-toastify";
 
 function ContainerToast(): React.ReactNode {
   return (
     <ToastContainer
-      position={'top-right'}
+      position={"top-right"}
       autoClose={3000}
       hideProgressBar
       newestOnTop
@@ -16,7 +16,7 @@ function ContainerToast(): React.ReactNode {
       limit={4}
       theme="dark"
     />
-  )
+  );
 }
 
-export default ContainerToast
+export default ContainerToast;

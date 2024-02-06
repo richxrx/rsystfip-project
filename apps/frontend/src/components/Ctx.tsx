@@ -1,8 +1,8 @@
-import { Box } from '@mui/material'
-import { memo } from 'react'
+import { Box } from "@mui/material";
+import { memo } from "react";
 
 interface IProps {
-  ctxRef: React.RefObject<HTMLCanvasElement>
+  ctxRef: React.RefObject<HTMLCanvasElement>;
 }
 
 function Ctx({ ctxRef }: IProps): React.ReactNode {
@@ -12,11 +12,11 @@ function Ctx({ ctxRef }: IProps): React.ReactNode {
       ref={ctxRef}
       sx={{
         marginY: 5,
-        width: { xs: '50%' },
-        height: 400
+        width: { xs: "50%" },
+        height: 400,
       }}
     />
-  )
+  );
 }
 
-export default memo(Ctx)
+export default memo(Ctx);

@@ -1,6 +1,6 @@
-import { Box, Grid, Paper, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { FormSignin } from '../components'
+import { Box, Grid, Paper, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { FormSignin } from "../components";
 
 function PageSignin(): React.ReactNode {
   return (
@@ -9,7 +9,7 @@ function PageSignin(): React.ReactNode {
         <title>RSystfip | Sign in</title>
       </Helmet>
 
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <Grid
           item
           xs={false}
@@ -17,13 +17,13 @@ function PageSignin(): React.ReactNode {
           md={7}
           sx={{
             backgroundImage: 'url("/PHOTO-ENTRY-ITFIP-1.jpg")',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: t =>
-              t.palette.mode === 'light'
+            backgroundRepeat: "no-repeat",
+            backgroundColor: (t) =>
+              t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
 
@@ -41,15 +41,15 @@ function PageSignin(): React.ReactNode {
             sx={{
               my: 8,
               mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
             <Box
               component="img"
               alt="RSystfip logotype"
-              src={'/rsystfip.svg'}
+              src={"/rsystfip.svg"}
               width={40}
               height={32}
               sx={{ m: 1 }}
@@ -68,7 +68,7 @@ function PageSignin(): React.ReactNode {
         </Grid>
       </Grid>
     </>
-  )
+  );
 }
 
-export default PageSignin
+export default PageSignin;

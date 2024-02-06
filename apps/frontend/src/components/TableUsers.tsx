@@ -1,61 +1,61 @@
-import { Delete as DeleteIcon, Key as KeyIcon } from '@mui/icons-material'
-import { CircularProgress, IconButton, Paper } from '@mui/material'
+import { Delete as DeleteIcon, Key as KeyIcon } from "@mui/icons-material";
+import { CircularProgress, IconButton, Paper } from "@mui/material";
 import {
   DataGrid,
   type GridColDef,
-  type GridValueGetterParams
-} from '@mui/x-data-grid'
-import { AxiosError } from 'axios'
-import { useEffect, useState } from 'react'
-import { useMutation, useQuery } from 'react-query'
-import { Link as RouterLink } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { setUsers, type User } from '../features/users/usersSlice'
-import type { IUserBase } from '../interfaces'
-import { notify } from '../libs/notify'
-import { createColumn } from '../libs/utils'
-import { userService } from '../services'
+  type GridValueGetterParams,
+} from "@mui/x-data-grid";
+import { AxiosError } from "axios";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "react-query";
+import { Link as RouterLink } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setUsers, type User } from "../features/users/usersSlice";
+import type { IUserBase } from "../interfaces";
+import { notify } from "../libs/notify";
+import { createColumn } from "../libs/utils";
+import { userService } from "../services";
 
 function TableUsers(): React.ReactNode {
-  const [loadingButtons, setLoadingButtons] = useState<Set<number>>(new Set())
+  const [loadingButtons, setLoadingButtons] = useState<Set<number>>(new Set());
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const usersState: Array<User> = useAppSelector(({ users }) => users.users)
+  const usersState: Array<User> = useAppSelector(({ users }) => users.users);
 
-  const mutationDeleteUser = useMutation(userService.deleteUser)
+  const mutationDeleteUser = useMutation(userService.deleteUser);
 
-  const handleClick = async (roleId: IUserBase['id']) => {
-    if (!confirm('Seguro(a) de eliminar ese usuario?')) return
+  const handleClick = async (roleId: IUserBase["id"]) => {
+    if (!confirm("Seguro(a) de eliminar ese usuario?")) return;
 
-    setLoadingButtons(prevSet => new Set(prevSet).add(roleId))
+    setLoadingButtons((prevSet) => new Set(prevSet).add(roleId));
 
     try {
-      const data = await mutationDeleteUser.mutateAsync(roleId)
+      const data = await mutationDeleteUser.mutateAsync(roleId);
 
-      const updatedRows = usersState.filter(row => row.id !== roleId)
+      const updatedRows = usersState.filter((row) => row.id !== roleId);
 
-      dispatch(setUsers(updatedRows))
+      dispatch(setUsers(updatedRows));
 
-      notify(data.ok, { type: 'success', position: 'top-left' })
+      notify(data.ok, { type: "success", position: "top-left" });
     } catch (error) {
       if (error instanceof AxiosError) {
-        notify(error.response?.data.error, { type: 'error' })
+        notify(error.response?.data.error, { type: "error" });
       }
     }
-  }
+  };
 
   const columns: GridColDef[] = [
     {
-      ...createColumn('email', 'Institutional ITFIP Email', 700),
-      description: 'This column has a value getter and is not sortable.',
+      ...createColumn("email", "Institutional ITFIP Email", 700),
+      description: "This column has a value getter and is not sortable.",
       sortable: false,
       valueGetter: ({ row: { email, role_name } }: GridValueGetterParams) =>
-        `${email} (${role_name[0].toUpperCase().concat(role_name.slice(1))})`
+        `${email} (${role_name[0].toUpperCase().concat(role_name.slice(1))})`,
     },
     {
-      ...createColumn('actions', 'Actions', 150),
-      align: 'center',
+      ...createColumn("actions", "Actions", 150),
+      align: "center",
       renderCell: ({ row: { id, email } }) => (
         <>
           <IconButton
@@ -79,22 +79,22 @@ function TableUsers(): React.ReactNode {
             )}
           </IconButton>
         </>
-      )
-    }
-  ]
+      ),
+    },
+  ];
 
   const { data, error, isLoading } = useQuery<[], any>(
-    'users',
-    userService.getUsers
-  )
+    "users",
+    userService.getUsers,
+  );
 
   useEffect(() => {
-    if (data) dispatch(setUsers(data))
-    if (error) notify(error.response.data.error, { type: 'error' })
-  }, [data, error])
+    if (data) dispatch(setUsers(data));
+    if (error) notify(error.response.data.error, { type: "error" });
+  }, [data, error]);
 
   return (
-    <div style={{ height: 400, width: '100%' }}>
+    <div style={{ height: 400, width: "100%" }}>
       <Paper>
         <DataGrid
           rows={usersState}
@@ -103,17 +103,17 @@ function TableUsers(): React.ReactNode {
             pagination: {
               paginationModel: {
                 page: 0,
-                pageSize: 5
-              }
-            }
+                pageSize: 5,
+              },
+            },
           }}
           pageSizeOptions={[5, 10]}
           loading={isLoading}
-          sx={{ border: 'none' }}
+          sx={{ border: "none" }}
         />
       </Paper>
     </div>
-  )
+  );
 }
 
-export default TableUsers
+export default TableUsers;

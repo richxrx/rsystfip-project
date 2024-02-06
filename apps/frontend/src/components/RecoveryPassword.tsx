@@ -1,6 +1,6 @@
-import { Box, Button, Paper, Typography } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
-import FormRecoveryPsw from './FormRecoveryPsw'
+import { Box, Button, Paper, Typography } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import FormRecoveryPsw from "./FormRecoveryPsw";
 
 function RecoveryPassword(): React.ReactNode {
   return (
@@ -12,14 +12,14 @@ function RecoveryPassword(): React.ReactNode {
 
         <FormRecoveryPsw />
 
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-start" }}>
           <Button component={RouterLink} to="/signin" sx={{ mt: 3, ml: 1 }}>
             Back
           </Button>
         </Box>
       </Paper>
     </>
-  )
+  );
 }
 
-export default RecoveryPassword
+export default RecoveryPassword;

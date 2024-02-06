@@ -4,19 +4,19 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography
-} from '@mui/material'
-import { format, parseISO } from 'date-fns'
-import { es } from 'date-fns/locale'
-import { memo } from 'react'
-import { v4 } from 'uuid'
-import type { ICounts } from '../../interfaces'
-import ProtectedElement from './ProtectedElement'
+  Typography,
+} from "@mui/material";
+import { format, parseISO } from "date-fns";
+import { es } from "date-fns/locale";
+import { memo } from "react";
+import { v4 } from "uuid";
+import type { ICounts } from "../../interfaces";
+import ProtectedElement from "./ProtectedElement";
 
 interface IProps {
-  title: string
-  data: Array<ICounts>
-  end_time: string
+  title: string;
+  data: Array<ICounts>;
+  end_time: string;
 }
 
 function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
@@ -34,19 +34,19 @@ function Listgroup({ title, data, end_time }: IProps): React.ReactNode {
           secondaryAction={<IconButton edge="end">{counts}</IconButton>}
         >
           <ListItemAvatar>
-            <Avatar src={'/rsystfip.svg'} alt="RSystfip logotype" />
+            <Avatar src={"/rsystfip.svg"} alt="RSystfip logotype" />
           </ListItemAvatar>
 
           <ListItemText
             primary={category_name}
-            secondary={format(parseISO(end_time), 'MMM d, yyyy', {
-              locale: es
+            secondary={format(parseISO(end_time), "MMM d, yyyy", {
+              locale: es,
             })}
           />
         </ListItem>
       ))}
     </>
-  )
+  );
 }
 
-export default memo(Listgroup)
+export default memo(Listgroup);

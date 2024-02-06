@@ -1,28 +1,28 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Container,
   Grid,
-  Typography
-} from '@mui/material'
-import { useState } from 'react'
-import { Helmet } from 'react-helmet'
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 function PageFaqs(): React.ReactNode {
-  const [expandedSec1, setExpandedSec1] = useState<string | false>(false)
-  const [expandedSec2, setExpandedSec2] = useState<string | false>(false)
+  const [expandedSec1, setExpandedSec1] = useState<string | false>(false);
+  const [expandedSec2, setExpandedSec2] = useState<string | false>(false);
 
   const handleChangeSec1 =
     (panel: string) => (_e: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpandedSec1(isExpanded ? panel : false)
-    }
+      setExpandedSec1(isExpanded ? panel : false);
+    };
 
   const handleChangeSec2 =
     (panel: string) => (_e: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpandedSec2(isExpanded ? panel : false)
-    }
+      setExpandedSec2(isExpanded ? panel : false);
+    };
 
   return (
     <>
@@ -35,7 +35,7 @@ function PageFaqs(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Preguntas más frecuentes
         </Typography>
@@ -43,23 +43,23 @@ function PageFaqs(): React.ReactNode {
         <Grid
           container
           spacing={2}
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
-          marginBottom={{ xs: '4rem', sm: '5rem', md: '6rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
+          marginBottom={{ xs: "4rem", sm: "5rem", md: "6rem" }}
         >
           <Grid item md>
             <Accordion
-              expanded={expandedSec1 === 'panel1'}
-              onChange={handleChangeSec1('panel1')}
+              expanded={expandedSec1 === "panel1"}
+              onChange={handleChangeSec1("panel1")}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography
-                  alignSelf={'center'}
-                  sx={{ width: '13%', flexShrink: 0 }}
+                  alignSelf={"center"}
+                  sx={{ width: "13%", flexShrink: 0 }}
                 >
                   #1
                 </Typography>
 
-                <Typography sx={{ color: 'text.secondary' }}>
+                <Typography sx={{ color: "text.secondary" }}>
                   ¿Cómo puedo ver una lista de todas las personas que han
                   visitado la rectoría hasta el día de hoy?
                 </Typography>
@@ -78,13 +78,13 @@ function PageFaqs(): React.ReactNode {
             </Accordion>
 
             <Accordion
-              expanded={expandedSec1 === 'panel2'}
-              onChange={handleChangeSec1('panel2')}
+              expanded={expandedSec1 === "panel2"}
+              onChange={handleChangeSec1("panel2")}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography sx={{ width: '13%', flexShrink: 0 }}>#2</Typography>
+                <Typography sx={{ width: "13%", flexShrink: 0 }}>#2</Typography>
 
-                <Typography sx={{ color: 'text.secondary' }}>
+                <Typography sx={{ color: "text.secondary" }}>
                   ¿Cómo hacer un agendamiento programado para una fecha o día y
                   hora en específico?
                 </Typography>
@@ -124,13 +124,13 @@ function PageFaqs(): React.ReactNode {
             </Accordion>
 
             <Accordion
-              expanded={expandedSec1 === 'panel3'}
-              onChange={handleChangeSec1('panel3')}
+              expanded={expandedSec1 === "panel3"}
+              onChange={handleChangeSec1("panel3")}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography sx={{ width: '13%', flexShrink: 0 }}>#3</Typography>
+                <Typography sx={{ width: "13%", flexShrink: 0 }}>#3</Typography>
 
-                <Typography sx={{ color: 'text.secondary' }}>
+                <Typography sx={{ color: "text.secondary" }}>
                   ¿Cómo hacer un agendamiento rápido del día a día, de una
                   persona que llega inmediatamente a la rectoría?
                 </Typography>
@@ -154,18 +154,18 @@ function PageFaqs(): React.ReactNode {
 
           <Grid item md>
             <Accordion
-              expanded={expandedSec2 === 'panel1'}
-              onChange={handleChangeSec2('panel1')}
+              expanded={expandedSec2 === "panel1"}
+              onChange={handleChangeSec2("panel1")}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography
-                  alignSelf={'center'}
-                  sx={{ width: '13%', flexShrink: 0 }}
+                  alignSelf={"center"}
+                  sx={{ width: "13%", flexShrink: 0 }}
                 >
                   #4
                 </Typography>
 
-                <Typography sx={{ color: 'text.secondary' }}>
+                <Typography sx={{ color: "text.secondary" }}>
                   ¿Cómo ver estadísticas e informes gráficos de las personas que
                   visitaron la rectoría en determinada fecha ó mes a mes?
                 </Typography>
@@ -190,13 +190,13 @@ function PageFaqs(): React.ReactNode {
             </Accordion>
 
             <Accordion
-              expanded={expandedSec2 === 'panel2'}
-              onChange={handleChangeSec2('panel2')}
+              expanded={expandedSec2 === "panel2"}
+              onChange={handleChangeSec2("panel2")}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography sx={{ width: '13%', flexShrink: 0 }}>#5</Typography>
+                <Typography sx={{ width: "13%", flexShrink: 0 }}>#5</Typography>
 
-                <Typography sx={{ color: 'text.secondary' }}>
+                <Typography sx={{ color: "text.secondary" }}>
                   ¿Cómo generar reportes y ver un listado detallado con la
                   información de fecha y hora de agendamiento?
                 </Typography>
@@ -218,13 +218,13 @@ function PageFaqs(): React.ReactNode {
             </Accordion>
 
             <Accordion
-              expanded={expandedSec2 === 'panel3'}
-              onChange={handleChangeSec2('panel3')}
+              expanded={expandedSec2 === "panel3"}
+              onChange={handleChangeSec2("panel3")}
             >
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography sx={{ width: '13%', flexShrink: 0 }}>#6</Typography>
+                <Typography sx={{ width: "13%", flexShrink: 0 }}>#6</Typography>
 
-                <Typography sx={{ color: 'text.secondary' }}>
+                <Typography sx={{ color: "text.secondary" }}>
                   ¿Cómo generar un reporte PDF con la información de las
                   personas que visitaron la rectoría en determinado lapso de
                   tiempo o hasta el día de hoy?
@@ -258,7 +258,7 @@ function PageFaqs(): React.ReactNode {
         </Grid>
       </Container>
     </>
-  )
+  );
 }
 
-export default PageFaqs
+export default PageFaqs;

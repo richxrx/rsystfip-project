@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import { cancellationCtrl } from '../controllers'
+import { Router } from "express";
+import { cancellationCtrl } from "../controllers";
 
-const router = Router()
+const router = Router();
 
-router.route('/').post(cancellationCtrl.createCancellation)
+router.route("/").post(cancellationCtrl.createCancellation);
 
-export default router
+export default router;

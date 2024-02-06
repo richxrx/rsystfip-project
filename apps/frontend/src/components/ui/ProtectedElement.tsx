@@ -1,13 +1,13 @@
 interface IProps {
-  children?: React.ReactNode
-  isAllowed: boolean
+  children?: React.ReactNode;
+  isAllowed: boolean;
 }
 
 function ProtectedElement({
   children,
-  isAllowed
+  isAllowed,
 }: IProps): React.ReactNode | undefined {
-  return isAllowed ? children : undefined
+  return isAllowed ? children : undefined;
 }
 
-export default ProtectedElement
+export default ProtectedElement;

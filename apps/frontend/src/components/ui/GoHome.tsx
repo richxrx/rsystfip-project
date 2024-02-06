@@ -1,6 +1,6 @@
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import { Button } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Button } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 function GoHome(): React.ReactNode {
   return (
@@ -14,7 +14,7 @@ function GoHome(): React.ReactNode {
     >
       Go Back Home
     </Button>
-  )
+  );
 }
 
-export default GoHome
+export default GoHome;

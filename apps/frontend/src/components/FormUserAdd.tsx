@@ -1,7 +1,7 @@
-import KeyIcon from '@mui/icons-material/Key'
-import VisibilityIcon from '@mui/icons-material/Visibility'
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
-import LoadingButton from '@mui/lab/LoadingButton'
+import KeyIcon from "@mui/icons-material/Key";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Box,
   FormControl,
@@ -12,83 +12,83 @@ import {
   MenuItem,
   Select,
   TextField,
-  type SelectChangeEvent
-} from '@mui/material'
-import { useEffect } from 'react'
-import { useMutation, useQuery } from 'react-query'
-import { v4 } from 'uuid'
-import { useAppDispatch, useAppSelector } from '../app/hooks'
-import { setDocuments } from '../features/resources/resourcesSlice'
+  type SelectChangeEvent,
+} from "@mui/material";
+import { useEffect } from "react";
+import { useMutation, useQuery } from "react-query";
+import { v4 } from "uuid";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { setDocuments } from "../features/resources/resourcesSlice";
 import {
   resetFormDataAdmin,
   setFormData,
   setTemps,
   type FormData,
-  type Temps
-} from '../features/users/usersSlice'
-import type { IDocument } from '../interfaces'
-import { notify } from '../libs/notify'
-import { documentService, userService } from '../services'
-import type { THandleChangeITS, THandleSubmit } from '../types'
-import { PasswordMeter } from './ui'
+  type Temps,
+} from "../features/users/usersSlice";
+import type { IDocument } from "../interfaces";
+import { notify } from "../libs/notify";
+import { documentService, userService } from "../services";
+import type { THandleChangeITS, THandleSubmit } from "../types";
+import { PasswordMeter } from "./ui";
 
 function FormUserAdd(): React.ReactNode {
-  const formDataState: FormData = useAppSelector(({ users }) => users.formData)
-  const tempsData: Temps = useAppSelector(({ users }) => users.temps)
+  const formDataState: FormData = useAppSelector(({ users }) => users.formData);
+  const tempsData: Temps = useAppSelector(({ users }) => users.temps);
   const documentsState: Array<IDocument> = useAppSelector(
-    ({ resources }) => resources.documents
-  )
+    ({ resources }) => resources.documents,
+  );
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const handleClickTogglePassword = () => {
     dispatch(
       setTemps({
         ...tempsData,
-        passwordVisible: !tempsData.passwordVisible
-      })
-    )
-  }
+        passwordVisible: !tempsData.passwordVisible,
+      }),
+    );
+  };
 
   const handleChange = (e: THandleChangeITS | SelectChangeEvent) => {
     dispatch(
       setFormData({
         ...formDataState,
-        [e.target.name]: e.target.value
-      })
-    )
-  }
+        [e.target.name]: e.target.value,
+      }),
+    );
+  };
 
   const { mutate, isLoading } = useMutation(userService.saveUser, {
     onSuccess(data) {
       notify(data.ok, {
-        type: 'success',
-        position: 'top-left'
-      })
+        type: "success",
+        position: "top-left",
+      });
 
-      dispatch(resetFormDataAdmin())
+      dispatch(resetFormDataAdmin());
     },
     onError(error: any) {
-      notify(error.response.data.error, { type: 'error' })
-    }
-  })
+      notify(error.response.data.error, { type: "error" });
+    },
+  });
 
   const handleSubmit = (e: THandleSubmit) => {
-    e.preventDefault()
-    const payload = formDataState
-    mutate(payload)
-  }
+    e.preventDefault();
+    const payload = formDataState;
+    mutate(payload);
+  };
 
   const { data, error } = useQuery<[], any>(
-    'documents',
-    documentService.getDocuments
-  )
+    "documents",
+    documentService.getDocuments,
+  );
 
   useEffect(() => {
-    if (data) dispatch(setDocuments(data))
+    if (data) dispatch(setDocuments(data));
 
-    if (error) notify(error.response.data.error, { type: 'error' })
-  }, [data, error])
+    if (error) notify(error.response.data.error, { type: "error" });
+  }, [data, error]);
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
@@ -224,7 +224,7 @@ function FormUserAdd(): React.ReactNode {
             label="Password"
             onChange={handleChange}
             value={formDataState.password}
-            type={tempsData.passwordVisible ? 'text' : 'password'}
+            type={tempsData.passwordVisible ? "text" : "password"}
             autoComplete="off"
             spellCheck={false}
             inputProps={{ minLength: 8, maxLength: 30 }}
@@ -244,14 +244,14 @@ function FormUserAdd(): React.ReactNode {
                     )}
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
           />
 
           <PasswordMeter
             valueLength={formDataState.password.length}
             LinearProgressProps={{
-              variant: 'determinate'
+              variant: "determinate",
             }}
           />
         </Grid>
@@ -265,7 +265,7 @@ function FormUserAdd(): React.ReactNode {
             label="Password confirm"
             onChange={handleChange}
             value={formDataState.password2}
-            type={tempsData.passwordVisible ? 'text' : 'password'}
+            type={tempsData.passwordVisible ? "text" : "password"}
             autoComplete="off"
             spellCheck={false}
             inputProps={{ minLength: 8, maxLength: 30 }}
@@ -285,26 +285,26 @@ function FormUserAdd(): React.ReactNode {
                     )}
                   </IconButton>
                 </InputAdornment>
-              )
+              ),
             }}
           />
 
           <PasswordMeter
             valueLength={formDataState.password2.length}
             LinearProgressProps={{
-              variant: 'determinate'
+              variant: "determinate",
             }}
           />
         </Grid>
       </Grid>
 
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <LoadingButton type="submit" loading={isLoading} sx={{ mt: 3, ml: 1 }}>
           Registrar
         </LoadingButton>
       </Box>
     </Box>
-  )
+  );
 }
 
-export default FormUserAdd
+export default FormUserAdd;

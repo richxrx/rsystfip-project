@@ -1,44 +1,44 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import type { ICategory, IDocument, IFacultie } from '../../interfaces'
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { ICategory, IDocument, IFacultie } from "../../interfaces";
 
 interface ResourcesState {
-  categories: Array<ICategory>
-  documents: Array<IDocument>
-  faculties: Array<IFacultie>
+  categories: Array<ICategory>;
+  documents: Array<IDocument>;
+  faculties: Array<IFacultie>;
 }
 
 const initialState: ResourcesState = {
   categories: [],
   documents: [],
-  faculties: []
-}
+  faculties: [],
+};
 
 const resourcesSlice = createSlice({
-  name: 'resources',
+  name: "resources",
   initialState,
   reducers: {
     setCategories(
       state,
-      { payload }: PayloadAction<Array<ICategory>>
+      { payload }: PayloadAction<Array<ICategory>>,
     ): ResourcesState {
-      return { ...state, categories: payload }
+      return { ...state, categories: payload };
     },
     setDocuments(
       state,
-      { payload }: PayloadAction<Array<IDocument>>
+      { payload }: PayloadAction<Array<IDocument>>,
     ): ResourcesState {
-      return { ...state, documents: payload }
+      return { ...state, documents: payload };
     },
     setFaculties(
       state,
-      { payload }: PayloadAction<Array<IFacultie>>
+      { payload }: PayloadAction<Array<IFacultie>>,
     ): ResourcesState {
-      return { ...state, faculties: payload }
-    }
-  }
-})
+      return { ...state, faculties: payload };
+    },
+  },
+});
 
 export const { setCategories, setDocuments, setFaculties } =
-  resourcesSlice.actions
+  resourcesSlice.actions;
 
-export default resourcesSlice.reducer
+export default resourcesSlice.reducer;

@@ -1,6 +1,6 @@
-import { Container, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { Report } from '../components'
+import { Container, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { Report } from "../components";
 
 function PageReportsPeople(): React.ReactNode {
   return (
@@ -14,7 +14,7 @@ function PageReportsPeople(): React.ReactNode {
           component="h1"
           variant="h4"
           gutterBottom
-          marginTop={{ xs: '1rem', sm: '2rem', md: '3rem' }}
+          marginTop={{ xs: "1rem", sm: "2rem", md: "3rem" }}
         >
           Reportes por mes
         </Typography>
@@ -22,7 +22,7 @@ function PageReportsPeople(): React.ReactNode {
         <Report />
       </Container>
     </>
-  )
+  );
 }
 
-export default PageReportsPeople
+export default PageReportsPeople;

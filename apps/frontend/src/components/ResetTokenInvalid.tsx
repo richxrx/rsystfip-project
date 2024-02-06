@@ -1,5 +1,5 @@
-import { Box, Container, Typography } from '@mui/material'
-import { GoHome } from './ui'
+import { Box, Container, Typography } from "@mui/material";
+import { GoHome } from "./ui";
 
 function ResetTokenInvalid(): React.ReactNode {
   return (
@@ -8,14 +8,14 @@ function ResetTokenInvalid(): React.ReactNode {
         <Box
           sx={{
             marginTop: 10,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center'
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
           <Box
             component="img"
-            src={'/rsystfip.svg'}
+            src={"/rsystfip.svg"}
             alt="RSystfip logotype"
             width={72}
             height={57}
@@ -33,7 +33,7 @@ function ResetTokenInvalid(): React.ReactNode {
         </Box>
       </Container>
     </>
-  )
+  );
 }
 
-export default ResetTokenInvalid
+export default ResetTokenInvalid;

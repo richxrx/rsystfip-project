@@ -1,29 +1,29 @@
-import LoadingButton from '@mui/lab/LoadingButton'
+import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle
-} from '@mui/material'
-import { useCallback, useState } from 'react'
-import FormSchedulePeople, { propsAction } from './FormSchedulePeople'
+  DialogTitle,
+} from "@mui/material";
+import { useCallback, useState } from "react";
+import FormSchedulePeople, { propsAction } from "./FormSchedulePeople";
 
 interface IProps {
-  stateModalScheduling: boolean
-  closeModalScheduling: () => void
+  stateModalScheduling: boolean;
+  closeModalScheduling: () => void;
 }
 
 function ModalSchedulePeopleForm({
   stateModalScheduling,
-  closeModalScheduling
+  closeModalScheduling,
 }: IProps): React.ReactNode {
-  const [isLoadingScheduleAction, setIsLoadingScheduleAction] = useState(false)
+  const [isLoadingScheduleAction, setIsLoadingScheduleAction] = useState(false);
 
   const changeIsLoadingScheduleAction = useCallback(
     (value: boolean) => setIsLoadingScheduleAction(value),
-    []
-  )
+    [],
+  );
 
   return (
     <Dialog open={stateModalScheduling} onClose={closeModalScheduling}>
@@ -49,7 +49,7 @@ function ModalSchedulePeopleForm({
         </LoadingButton>
       </DialogActions>
     </Dialog>
-  )
+  );
 }
 
-export default ModalSchedulePeopleForm
+export default ModalSchedulePeopleForm;

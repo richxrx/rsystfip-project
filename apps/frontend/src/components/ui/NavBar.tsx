@@ -1,5 +1,5 @@
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
-import MenuIcon from '@mui/icons-material/Menu'
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Avatar,
@@ -10,93 +10,93 @@ import {
   MenuItem,
   Toolbar,
   Tooltip,
-  Typography
-} from '@mui/material'
-import { useState } from 'react'
+  Typography,
+} from "@mui/material";
+import { useState } from "react";
 import {
   NavigateFunction,
   Link as RouterLink,
-  useNavigate
-} from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../../app/hooks'
-import { resetAllFormDataProgramming } from '../../features/appointments/appointmentsSlice'
+  useNavigate,
+} from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { resetAllFormDataProgramming } from "../../features/appointments/appointmentsSlice";
 import {
   type AuthState,
-  resetUserAuthenticated
-} from '../../features/auth/authSlice'
-import { resetQueryDataReports } from '../../features/reports/reportsSlice'
-import { resetQueryDataStatistics } from '../../features/statistics/statisticsSlice'
-import { destroyTemporals } from '../../features/temp/tempSlice'
-import { resetFormDataAdmin } from '../../features/users/usersSlice'
-import ProtectedElement from './ProtectedElement'
+  resetUserAuthenticated,
+} from "../../features/auth/authSlice";
+import { resetQueryDataReports } from "../../features/reports/reportsSlice";
+import { resetQueryDataStatistics } from "../../features/statistics/statisticsSlice";
+import { destroyTemporals } from "../../features/temp/tempSlice";
+import { resetFormDataAdmin } from "../../features/users/usersSlice";
+import ProtectedElement from "./ProtectedElement";
 
 interface IProps {
-  permissions: Array<string>
+  permissions: Array<string>;
 }
 
 function NavBar({ permissions }: IProps): React.ReactNode {
-  const authState: AuthState = useAppSelector(({ auth }) => auth)
+  const authState: AuthState = useAppSelector(({ auth }) => auth);
 
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const navigate: NavigateFunction = useNavigate()
+  const navigate: NavigateFunction = useNavigate();
 
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null)
-  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null)
-  const [anchorElMenu1, setAnchorElMenu1] = useState<null | HTMLElement>(null)
-  const [anchorElMenu2, setAnchorElMenu2] = useState<null | HTMLElement>(null)
-  const [anchorElMenu3, setAnchorElMenu3] = useState<null | HTMLElement>(null)
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [anchorElMenu1, setAnchorElMenu1] = useState<null | HTMLElement>(null);
+  const [anchorElMenu2, setAnchorElMenu2] = useState<null | HTMLElement>(null);
+  const [anchorElMenu3, setAnchorElMenu3] = useState<null | HTMLElement>(null);
 
   const handleOpenMenu1 = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
+    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>,
   ) => {
-    setAnchorElMenu1(event.currentTarget)
-  }
+    setAnchorElMenu1(event.currentTarget);
+  };
   const handleCloseMenu1 = () => {
-    setAnchorElMenu1(null)
-  }
+    setAnchorElMenu1(null);
+  };
 
   const handleOpenMenu2 = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
+    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>,
   ) => {
-    setAnchorElMenu2(event.currentTarget)
-  }
+    setAnchorElMenu2(event.currentTarget);
+  };
   const handleCloseMenu2 = () => {
-    setAnchorElMenu2(null)
-  }
+    setAnchorElMenu2(null);
+  };
 
   const handleOpenMenu3 = (
-    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>
+    event: React.MouseEvent<HTMLButtonElement | HTMLLIElement>,
   ) => {
-    setAnchorElMenu3(event.currentTarget)
-  }
+    setAnchorElMenu3(event.currentTarget);
+  };
   const handleCloseMenu3 = () => {
-    setAnchorElMenu3(null)
-  }
+    setAnchorElMenu3(null);
+  };
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget)
-  }
+    setAnchorElNav(event.currentTarget);
+  };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget)
-  }
+    setAnchorElUser(event.currentTarget);
+  };
   const handleCloseNavMenu = () => {
-    setAnchorElNav(null)
-  }
+    setAnchorElNav(null);
+  };
   const handleCloseUserMenu = () => {
-    setAnchorElUser(null)
-  }
+    setAnchorElUser(null);
+  };
 
   const handleClickLogout = () => {
-    handleCloseUserMenu()
-    dispatch(resetUserAuthenticated())
-    dispatch(resetFormDataAdmin())
-    dispatch(resetQueryDataReports())
-    dispatch(resetQueryDataStatistics())
-    dispatch(resetAllFormDataProgramming())
-    dispatch(destroyTemporals())
-    navigate('/signin')
-  }
+    handleCloseUserMenu();
+    dispatch(resetUserAuthenticated());
+    dispatch(resetFormDataAdmin());
+    dispatch(resetQueryDataReports());
+    dispatch(resetQueryDataStatistics());
+    dispatch(resetAllFormDataProgramming());
+    dispatch(destroyTemporals());
+    navigate("/signin");
+  };
 
   return (
     <AppBar position="static">
@@ -104,13 +104,13 @@ function NavBar({ permissions }: IProps): React.ReactNode {
         <Box
           component="img"
           alt="RSystfip logotype"
-          src={'/rsystfip.svg'}
+          src={"/rsystfip.svg"}
           width={40}
           height={32}
-          sx={{ display: { xs: 'none', md: 'flex' }, mr: 3 }}
+          sx={{ display: { xs: "none", md: "flex" }, mr: 3 }}
         />
 
-        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
           <IconButton size="large" onClick={handleOpenNavMenu} color="inherit">
             <MenuIcon />
           </IconButton>
@@ -118,18 +118,18 @@ function NavBar({ permissions }: IProps): React.ReactNode {
           <Menu
             anchorEl={anchorElNav}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left'
+              vertical: "bottom",
+              horizontal: "left",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left'
+              vertical: "top",
+              horizontal: "left",
             }}
             open={Boolean(anchorElNav)}
             onClose={handleCloseNavMenu}
             sx={{
-              display: { xs: 'block', md: 'none' }
+              display: { xs: "block", md: "none" },
             }}
           >
             <MenuItem
@@ -180,22 +180,22 @@ function NavBar({ permissions }: IProps): React.ReactNode {
           </Menu>
         </Box>
 
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           <Button
             component={RouterLink}
             to="/home"
             onClick={handleCloseNavMenu}
-            sx={{ my: 2, color: 'white' }}
+            sx={{ my: 2, color: "white" }}
           >
             Inicio
           </Button>
 
-          <ProtectedElement isAllowed={permissions.includes('admin')}>
+          <ProtectedElement isAllowed={permissions.includes("admin")}>
             <Button
               component={RouterLink}
               to="/users"
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white' }}
+              sx={{ my: 2, color: "white" }}
             >
               Usuarios
             </Button>
@@ -203,7 +203,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
 
           <Button
             onClick={handleOpenMenu1}
-            sx={{ my: 2, color: 'white' }}
+            sx={{ my: 2, color: "white" }}
             disableElevation
             endIcon={<KeyboardArrowDownIcon />}
           >
@@ -213,11 +213,11 @@ function NavBar({ permissions }: IProps): React.ReactNode {
           <Menu
             anchorEl={anchorElMenu1}
             open={Boolean(anchorElMenu1)}
-            sx={{ marginLeft: { xs: '45px', md: '0px' } }}
+            sx={{ marginLeft: { xs: "45px", md: "0px" } }}
             onClose={handleCloseMenu1}
             onClick={() => handleCloseNavMenu()}
           >
-            <ProtectedElement isAllowed={permissions.includes('add')}>
+            <ProtectedElement isAllowed={permissions.includes("add")}>
               <MenuItem
                 component={RouterLink}
                 to="/people/create"
@@ -227,7 +227,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
               </MenuItem>
             </ProtectedElement>
 
-            <ProtectedElement isAllowed={permissions.includes('schedule')}>
+            <ProtectedElement isAllowed={permissions.includes("schedule")}>
               <MenuItem
                 component={RouterLink}
                 to="/people/create-schedule"
@@ -238,21 +238,21 @@ function NavBar({ permissions }: IProps): React.ReactNode {
             </ProtectedElement>
           </Menu>
 
-          <ProtectedElement isAllowed={permissions.includes('schedule')}>
+          <ProtectedElement isAllowed={permissions.includes("schedule")}>
             <Button
               component={RouterLink}
               to="/appointments"
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white' }}
+              sx={{ my: 2, color: "white" }}
             >
               Agendamientos
             </Button>
           </ProtectedElement>
 
-          <ProtectedElement isAllowed={permissions.includes('statistics')}>
+          <ProtectedElement isAllowed={permissions.includes("statistics")}>
             <Button
               onClick={handleOpenMenu2}
-              sx={{ my: 2, color: 'white' }}
+              sx={{ my: 2, color: "white" }}
               endIcon={<KeyboardArrowDownIcon />}
             >
               Estadísticas
@@ -262,7 +262,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
           <Menu
             anchorEl={anchorElMenu2}
             open={Boolean(anchorElMenu2)}
-            sx={{ marginLeft: { xs: '45px', md: '0px' } }}
+            sx={{ marginLeft: { xs: "45px", md: "0px" } }}
             onClose={handleCloseMenu2}
             onClick={() => handleCloseNavMenu()}
           >
@@ -283,12 +283,12 @@ function NavBar({ permissions }: IProps): React.ReactNode {
             </MenuItem>
           </Menu>
 
-          <ProtectedElement isAllowed={permissions.includes('reports')}>
+          <ProtectedElement isAllowed={permissions.includes("reports")}>
             <Button
               component={RouterLink}
               to="/reports"
               onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: 'white' }}
+              sx={{ my: 2, color: "white" }}
             >
               Reportes
             </Button>
@@ -296,7 +296,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
 
           <Button
             onClick={handleOpenMenu3}
-            sx={{ my: 2, color: 'white' }}
+            sx={{ my: 2, color: "white" }}
             endIcon={<KeyboardArrowDownIcon />}
           >
             Historial
@@ -305,7 +305,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
           <Menu
             anchorEl={anchorElMenu3}
             open={Boolean(anchorElMenu3)}
-            sx={{ marginLeft: { xs: '45px', md: '0px' } }}
+            sx={{ marginLeft: { xs: "45px", md: "0px" } }}
             onClose={handleCloseMenu3}
             onClick={() => handleCloseNavMenu()}
           >
@@ -330,7 +330,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
             component={RouterLink}
             to="/faqs"
             onClick={handleCloseNavMenu}
-            sx={{ my: 2, color: 'white' }}
+            sx={{ my: 2, color: "white" }}
           >
             Faqs
           </Button>
@@ -348,16 +348,16 @@ function NavBar({ permissions }: IProps): React.ReactNode {
           </Tooltip>
 
           <Menu
-            sx={{ mt: '45px' }}
+            sx={{ mt: "45px" }}
             anchorEl={anchorElUser}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
+              vertical: "top",
+              horizontal: "right",
             }}
             keepMounted
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'right'
+              vertical: "top",
+              horizontal: "right",
             }}
             open={Boolean(anchorElUser)}
             onClose={handleCloseUserMenu}
@@ -385,7 +385,7 @@ function NavBar({ permissions }: IProps): React.ReactNode {
         </Box>
       </Toolbar>
     </AppBar>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

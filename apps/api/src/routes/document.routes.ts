@@ -1,8 +1,8 @@
-import { Router } from 'express'
-import { documentCtrl } from '../controllers'
+import { Router } from "express";
+import { documentCtrl } from "../controllers";
 
-const router = Router()
+const router = Router();
 
-router.route('/').get(documentCtrl.getDocuments)
+router.route("/").get(documentCtrl.getDocuments);
 
-export default router
+export default router;

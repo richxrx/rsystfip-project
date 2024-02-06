@@ -1,1 +1,1 @@
-export type THandleSubmit = React.FormEvent<HTMLFormElement>
+export type THandleSubmit = React.FormEvent<HTMLFormElement>;

@@ -1,22 +1,22 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
-import { AUTH_KEY } from '../../constants'
-import { objEquals } from '../../libs/utils'
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { AUTH_KEY } from "../../constants";
+import { objEquals } from "../../libs/utils";
 
 interface UserAuth {
-  iat: number
-  exp: number
-  id: number
-  role_name: string
-  first_name: string
-  last_name: string
-  email: string
-  permissions: Array<string>
+  iat: number;
+  exp: number;
+  id: number;
+  role_name: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  permissions: Array<string>;
 }
 
 export interface AuthState {
-  auth: boolean
-  userAuth: UserAuth
-  token: string
+  auth: boolean;
+  userAuth: UserAuth;
+  token: string;
 }
 
 const initialState: AuthState = {
@@ -25,39 +25,39 @@ const initialState: AuthState = {
     iat: 0,
     exp: 0,
     id: 0,
-    role_name: '',
-    first_name: '',
-    last_name: '',
-    email: '',
-    permissions: []
+    role_name: "",
+    first_name: "",
+    last_name: "",
+    email: "",
+    permissions: [],
   },
-  token: ''
-}
+  token: "",
+};
 
 const userSessionSaved: AuthState = JSON.parse(
-  window.localStorage.getItem(AUTH_KEY) || JSON.stringify({})
-)
+  window.localStorage.getItem(AUTH_KEY) || JSON.stringify({}),
+);
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: objEquals(userSessionSaved, initialState)
     ? userSessionSaved
     : initialState,
   reducers: {
     setAuthenticatedUser(
       _state,
-      { payload }: PayloadAction<AuthState>
+      { payload }: PayloadAction<AuthState>,
     ): AuthState {
-      return payload
+      return payload;
     },
     resetUserAuthenticated(): AuthState {
-      window.localStorage.removeItem(AUTH_KEY)
-      return initialState
-    }
-  }
-})
+      window.localStorage.removeItem(AUTH_KEY);
+      return initialState;
+    },
+  },
+});
 
 export const { setAuthenticatedUser, resetUserAuthenticated } =
-  authSlice.actions
+  authSlice.actions;
 
-export default authSlice.reducer
+export default authSlice.reducer;

@@ -1,1 +1,1 @@
-export type THandleClick = React.MouseEvent<HTMLButtonElement>
+export type THandleClick = React.MouseEvent<HTMLButtonElement>;

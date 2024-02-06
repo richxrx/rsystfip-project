@@ -1,6 +1,6 @@
-import { Route, Routes } from 'react-router-dom'
-import { useAppSelector } from '../app/hooks'
-import type { AuthState } from '../features/auth/authSlice'
+import { Route, Routes } from "react-router-dom";
+import { useAppSelector } from "../app/hooks";
+import type { AuthState } from "../features/auth/authSlice";
 import {
   PageAppointments,
   PageChangePassword,
@@ -19,14 +19,14 @@ import {
   PageSignin,
   PageStcsDaily,
   PageStcsSchedule,
-  PageUsers
-} from '../pages'
-import { ProtectedRoute } from './ui'
+  PageUsers,
+} from "../pages";
+import { ProtectedRoute } from "./ui";
 
 function AppRoutes(): React.ReactNode {
-  const authState: AuthState = useAppSelector(({ auth }) => auth)
+  const authState: AuthState = useAppSelector(({ auth }) => auth);
 
-  const permissions = authState.userAuth.permissions
+  const permissions = authState.userAuth.permissions;
 
   return (
     <Routes>
@@ -72,7 +72,7 @@ function AppRoutes(): React.ReactNode {
       <Route
         element={
           <ProtectedRoute
-            isAllowed={authState.auth && permissions.includes('admin')}
+            isAllowed={authState.auth && permissions.includes("admin")}
             navigateTo="/home"
           />
         }
@@ -88,7 +88,7 @@ function AppRoutes(): React.ReactNode {
         path="/people/create"
         element={
           <ProtectedRoute
-            isAllowed={authState.auth && permissions.includes('add')}
+            isAllowed={authState.auth && permissions.includes("add")}
             navigateTo="/home"
           >
             <PageDailyScheduling />
@@ -100,7 +100,7 @@ function AppRoutes(): React.ReactNode {
         path="/people/create-schedule"
         element={
           <ProtectedRoute
-            isAllowed={authState.auth && permissions.includes('schedule')}
+            isAllowed={authState.auth && permissions.includes("schedule")}
             navigateTo="/home"
           >
             <PageScheduleScheduling />
@@ -121,7 +121,7 @@ function AppRoutes(): React.ReactNode {
         path="/reports"
         element={
           <ProtectedRoute
-            isAllowed={authState.auth && permissions.includes('reports')}
+            isAllowed={authState.auth && permissions.includes("reports")}
             navigateTo="/home"
           >
             <PageReportsPeople />
@@ -133,7 +133,7 @@ function AppRoutes(): React.ReactNode {
         path="/statistics/daily"
         element={
           <ProtectedRoute
-            isAllowed={authState.auth && permissions.includes('statistics')}
+            isAllowed={authState.auth && permissions.includes("statistics")}
             navigateTo="/home"
           >
             <PageStcsDaily />
@@ -145,7 +145,7 @@ function AppRoutes(): React.ReactNode {
         path="/statistics/scheduled"
         element={
           <ProtectedRoute
-            isAllowed={authState.auth && permissions.includes('statistics')}
+            isAllowed={authState.auth && permissions.includes("statistics")}
             navigateTo="/home"
           >
             <PageStcsSchedule />
@@ -164,7 +164,7 @@ function AppRoutes(): React.ReactNode {
 
       <Route path="*" element={<PageNotFound />} />
     </Routes>
-  )
+  );
 }
 
-export default AppRoutes
+export default AppRoutes;

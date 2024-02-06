@@ -1,13 +1,13 @@
-import type { Request, Response } from 'express'
-import { DocumentService } from '../services'
+import type { Request, Response } from "express";
+import { DocumentService } from "../services";
 
 export async function getDocuments(
   req: Request,
-  res: Response
+  res: Response,
 ): Promise<Response> {
-  const documents = await DocumentService.getDocuments()
+  const documents = await DocumentService.getDocuments();
   if (!documents)
-    return res.status(500).json({ error: 'Error getting documents' })
+    return res.status(500).json({ error: "Error getting documents" });
 
-  return res.status(200).json(documents)
+  return res.status(200).json(documents);
 }

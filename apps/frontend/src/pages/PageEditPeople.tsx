@@ -1,6 +1,6 @@
-import { Container, Paper, Typography } from '@mui/material'
-import { Helmet } from 'react-helmet'
-import { FormSchedulePeople, propsAction } from '../components'
+import { Container, Paper, Typography } from "@mui/material";
+import { Helmet } from "react-helmet";
+import { FormSchedulePeople, propsAction } from "../components";
 
 function PageEditPeople(): React.ReactNode {
   return (
@@ -19,7 +19,7 @@ function PageEditPeople(): React.ReactNode {
         </Paper>
       </Container>
     </>
-  )
+  );
 }
 
-export default PageEditPeople
+export default PageEditPeople;
