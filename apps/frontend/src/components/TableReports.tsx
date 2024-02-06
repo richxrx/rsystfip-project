@@ -5,7 +5,7 @@ import {
   type GridValueGetterParams
 } from '@mui/x-data-grid'
 import { format, parseISO } from 'date-fns'
-import esLocale from 'date-fns/locale/es'
+import { es } from 'date-fns/locale'
 import { useAppSelector } from '../app/hooks'
 import type { Reports } from '../features/reports/reportsSlice'
 import { createColumn } from '../libs/utils'
@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
     sortable: false,
     valueGetter: (params: GridValueGetterParams) =>
       format(parseISO(params.row.created_at), "MMM d, yyyy 'a las' h:mm a", {
-        locale: esLocale
+        locale: es
       })
   },
   {
@@ -38,7 +38,7 @@ const columns: GridColDef[] = [
     sortable: false,
     valueGetter: (params: GridValueGetterParams) =>
       format(parseISO(params.row.updated_at), "MMM d, yyyy 'a las' h:mm a", {
-        locale: esLocale
+        locale: es
       })
   },
   {
@@ -47,10 +47,10 @@ const columns: GridColDef[] = [
     sortable: false,
     valueGetter: (params: GridValueGetterParams) =>
       `${format(parseISO(params.row.start_time), "MMM d, yyyy 'a las' h:mm a", {
-        locale: esLocale
+        locale: es
       })}${' - '}
     ${format(parseISO(params.row.start_time), "MMM d, yyyy 'a las' h:mm a", {
-      locale: esLocale
+      locale: es
     })}`
   },
   createColumn('scheduling_count', 'Scheduling count', 180),

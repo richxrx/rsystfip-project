@@ -1,5 +1,5 @@
 import { format, parseISO } from 'date-fns'
-import esLocale from 'date-fns/locale/es'
+import { es } from 'date-fns/locale'
 import * as pdfMake from 'pdfmake/build/pdfmake'
 import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import { useAppSelector } from '../app/hooks'
@@ -144,7 +144,7 @@ function PdfCreator(): React.ReactNode {
                   }) => [
                     `${first_name} ${last_name}`,
                     format(parseISO(start_time), "MMM d, yyyy 'a las' h:mm a", {
-                      locale: esLocale
+                      locale: es
                     }),
                     scheduling_count,
                     daily_count,
