@@ -1,3 +1,4 @@
+import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 import path from "path";
@@ -36,6 +37,7 @@ export class App {
   }
 
   middlewares() {
+    this.app.use(cors());
     this.app.use(morgan("dev"));
     this.app.use(express.json());
     this.app.use(
